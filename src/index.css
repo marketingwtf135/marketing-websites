@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/InterTight-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/InterTight-Medium-Latin-ext.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF;
+}
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/InterTight-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/InterTight-Medium-Latin-ext.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF;
+}
+
+:root {
+  /* Figma color tokens as CSS variables for use in inline styles */
+  --page-bg:         #080808;
+  --nav-bg:          #0a0a0a;
+  --phone-bg:        #060606;
+  --surface-edge:    #0e0e0e;
+  --surface-0:       #141414;
+  --surface-1:       #151515;
+  --surface-2:       #1a1a1a;
+  --surface-mid:     #1d1f20;
+  --surface-3:       #2a2a2a;
+  --surface-4:       #2b2b2b;
+  --surface-dark:    #484b4e;
+  --border-subtle:   #1b1b1b;
+  --neutral-00:      #ffffff;
+  --neutral-30:      #b7b7b7;
+  --neutral-35:      #8f8f8f;
+  --neutral-40:      #717171;
+  --status-open:     #4dba79;
+  --status-closed:   #990003;
+  --status-soon:     #a15e00;
+  --accent-teal:     #175e6e;
+  --accent-teal-lt:  #d7ffff;
+  --accent-blue:     #546fef;
+  --btn-label:       #2b2b2b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--page-bg);
+  color: #ffffff;
+  font-family: 'Inter Tight', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,7 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="slider-buttons-left">
+<rect x="1" y="1" width="62" height="62" rx="15" fill="var(--fill-0, #141414)"/>
+<rect x="1" y="1" width="62" height="62" rx="15" stroke="var(--stroke-0, #1D1D1D)" stroke-width="2"/>
+<path id="Arrow 2" d="M40 33C40.5523 33 41 32.5523 41 32C41 31.4477 40.5523 31 40 31V32V33ZM23.2929 31.2929C22.9024 31.6834 22.9024 32.3166 23.2929 32.7071L29.6569 39.0711C30.0474 39.4616 30.6805 39.4616 31.0711 39.0711C31.4616 38.6805 31.4616 38.0474 31.0711 37.6569L25.4142 32L31.0711 26.3431C31.4616 25.9526 31.4616 25.3195 31.0711 24.9289C30.6805 24.5384 30.0474 24.5384 29.6569 24.9289L23.2929 31.2929ZM40 32V31L24 31V32V33H40V32Z" fill="var(--stroke-0, white)"/>
+</g>
+</svg>
