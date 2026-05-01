@@ -30,24 +30,68 @@ export default function Block05Mobile() {
           </div>
         </div>
 
-        {/* Phone mockup — centered, clipped at bottom by section */}
+        {/* Phone mockup — bezel + coded deal cards (Figma 64:4088), centered */}
         <div
-          className="absolute pointer-events-none"
-          style={{
-            left: '50%',
-            top: '180px',
-            transform: 'translateX(-50%)',
-            width: '390px',
-            height: '844px',
-          }}
+          className="absolute pointer-events-none overflow-hidden"
+          style={{ left: '50%', top: '180px', transform: 'translateX(-50%)', width: '390px', height: '844px' }}
         >
+          {/* iPhone bezel */}
           <img
-            alt="Axevil mobile app — deal feed"
-            src="/img/mobile-app-sbs.png"
-            width={390}
-            height={844}
-            className="absolute inset-0 w-full h-full object-contain"
-            loading="lazy"
+            alt=""
+            src="/img/block04/iphone-bezel.png"
+            className="absolute inset-0 w-full h-full object-contain object-top"
+            style={{ zIndex: 2 }}
+          />
+          {/* Cards — scaled 1.114 from Figma (390/350), starting below ios-items area */}
+          <div
+            className="absolute overflow-hidden"
+            style={{ left: '18px', top: '91px', width: '358px', height: '753px', zIndex: 1 }}
+          >
+            {([
+              { company: 'Space',     category: 'Growth Equity' },
+              { company: 'Space',     category: 'Growth Equity' },
+              { company: 'Space',     category: 'Growth Equity' },
+            ] as const).map((item, i) => (
+              <div
+                key={i}
+                style={{
+                  background: '#151515',
+                  borderRadius: '27px',
+                  padding: '18px',
+                  height: '233px',
+                  marginBottom: i < 2 ? '27px' : 0,
+                  boxSizing: 'border-box',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '16px',
+                }}
+              >
+                <img
+                  alt={item.company}
+                  src="/img/block04/spacex-logo.svg"
+                  style={{ width: '127px', height: '18px', objectFit: 'contain', objectPosition: 'left' }}
+                />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                  <span style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 600, fontSize: '26px', letterSpacing: '-0.02em', color: '#ffffff', lineHeight: 1.25 }}>
+                    {item.company}
+                  </span>
+                  <span style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 500, fontSize: '18px', letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.6)', lineHeight: 1.25 }}>
+                    {item.category}
+                  </span>
+                </div>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgba(77,186,121,0.1)', border: '1px solid rgba(77,186,121,0.25)', borderRadius: '100px', padding: '12px 16px' }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '3px', background: '#4dba79', flexShrink: 0 }} />
+                  <span style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 600, fontSize: '15px', color: '#ffffff', whiteSpace: 'nowrap' }}>
+                    Accepting allocations
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Bottom fade — matches Figma shadow element */}
+          <div
+            className="absolute inset-x-0 bottom-0"
+            style={{ height: '180px', background: 'linear-gradient(to top, #151515 0%, rgba(21,21,21,0) 100%)', zIndex: 3 }}
           />
         </div>
       </section>

@@ -58,70 +58,16 @@ export default function Block04Features() {
               </div>
             </div>
 
-            {/* Phone mockup — bezel + coded cards inside (Figma 64:4088) */}
-            <div className="absolute pointer-events-none overflow-hidden" style={{ left: '499px', top: '111px', width: '211px', height: '435px' }}>
-              {/* iPhone bezel frame */}
-              <img
-                alt=""
-                src="/img/block04/iphone-bezel.png"
-                className="absolute inset-0 w-full h-full object-contain object-top"
-                style={{ zIndex: 2 }}
-              />
-              {/* Cards content — positioned within screen area, scaled 0.603 from Figma */}
-              <div
-                className="absolute overflow-hidden"
-                style={{ left: '10px', top: '46px', width: '193px', height: '385px', zIndex: 1 }}
-              >
-                {([
-                  { company: 'SpaceX', category: 'Growth Equity' },
-                  { company: 'Anthropic', category: 'Series E' },
-                  { company: 'OpenAI', category: 'Late Stage' },
-                ] as const).map((item, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      background: '#151515',
-                      borderRadius: '14px',
-                      padding: '10px',
-                      height: '126px',
-                      marginBottom: i < 2 ? '14px' : 0,
-                      boxSizing: 'border-box',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '14px',
-                    }}
-                  >
-                    {/* Company logo */}
-                    <img
-                      alt={item.company}
-                      src="/img/block04/spacex-logo.svg"
-                      style={{ width: '69px', height: '10px', objectFit: 'contain', objectPosition: 'left' }}
-                    />
-                    {/* Title + category */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
-                      <span style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 600, fontSize: '14px', letterSpacing: '-0.02em', color: '#ffffff', lineHeight: 1.25 }}>
-                        {item.company}
-                      </span>
-                      <span style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 500, fontSize: '10px', letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.6)', lineHeight: 1.25 }}>
-                        {item.category}
-                      </span>
-                    </div>
-                    {/* Status badge */}
-                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(77,186,121,0.1)', border: '1px solid rgba(77,186,121,0.25)', borderRadius: '100px', padding: '6px 10px' }}>
-                      <div style={{ width: '5px', height: '5px', borderRadius: '2px', background: '#4dba79', flexShrink: 0 }} />
-                      <span style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 600, fontSize: '8px', color: '#ffffff', whiteSpace: 'nowrap' }}>
-                        Accepting allocations
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              {/* Bottom fade shadow */}
-              <div
-                className="absolute inset-x-0 bottom-0 pointer-events-none"
-                style={{ height: '100px', background: 'linear-gradient(to top, #151515 0%, rgba(21,21,21,0) 100%)', zIndex: 3 }}
-              />
-            </div>
+            {/* Phone content — 111px top, 499px left */}
+            <img
+              alt=""
+              src="/img/mobile-app-image-01.png"
+              width={226}
+              height={443}
+              className="absolute pointer-events-none"
+              style={{ top: '111px', left: '499px' }}
+              loading="lazy"
+            />
           </div>
 
           {/* Right card — Axevil Pro (wealth managers) */}
