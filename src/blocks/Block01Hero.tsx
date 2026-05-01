@@ -2,7 +2,7 @@ import CtaButton from '../components/CtaButton'
 
 export default function Block01Hero() {
   return (
-    <section className="relative w-full bg-page-bg overflow-clip" style={{ height: '1080px' }}>
+    <section className="relative w-full bg-page-bg overflow-clip" style={{ height: '100vh', minHeight: '600px' }}>
 
       {/* Nav — bg full-width, inner content capped at 1440px */}
       <nav className="absolute top-0 left-0 w-full z-10 border-b border-nav-border bg-nav-bg" style={{ height: '80px' }}>
@@ -58,8 +58,8 @@ export default function Block01Hero() {
         />
       </div>
 
-      {/* Copy + CTA — aligned to same 1440px container as the nav */}
-      <div className="absolute w-full" style={{ top: '662px' }}>
+      {/* Copy + CTA — anchored to bottom so button is always visible */}
+      <div className="absolute w-full" style={{ bottom: '80px' }}>
         <div className="mx-auto w-full max-w-content">
           <div className="flex flex-col gap-12 items-start">
             <div className="flex flex-col gap-6 items-start">
