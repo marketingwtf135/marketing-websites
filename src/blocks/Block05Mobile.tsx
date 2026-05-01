@@ -43,27 +43,36 @@ export default function Block05Mobile() {
             className="absolute overflow-hidden"
             style={{
               left: '7px', top: '7px', width: '376px', height: '783px',
-              borderRadius: '52px',
+              borderRadius: '80px',
               background: '#060606',
               zIndex: 1,
             }}
           >
-            {/* iOS status bar */}
-            <div id="block05-ios-statusbar" style={{ height: '54px', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', padding: '0 24px 10px', flexShrink: 0 }}>
-              <span style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 600, fontSize: '15px', color: '#ffffff', letterSpacing: '-0.02em' }}>9:41</span>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                {/* Signal bars */}
-                <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><rect x="0" y="6" width="3" height="6" rx="1" fill="white"/><rect x="4.5" y="4" width="3" height="8" rx="1" fill="white"/><rect x="9" y="2" width="3" height="10" rx="1" fill="white"/><rect x="13.5" y="0" width="3" height="12" rx="1" fill="white"/></svg>
-                {/* WiFi */}
-                <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M8 9.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" fill="white"/><path d="M3.5 7C5 5.2 6.4 4.3 8 4.3s3 .9 4.5 2.7" stroke="white" strokeWidth="1.5" strokeLinecap="round"/><path d="M1 4.5C3.2 2 5.5.8 8 .8s4.8 1.2 7 3.7" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                {/* Battery */}
-                <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="white" strokeOpacity="0.35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="white"/><path d="M23 4v4a2 2 0 0 0 0-4Z" fill="white" fillOpacity="0.4"/></svg>
+            {/* iOS Navigation Bar — Figma 87:182, scaled ×1.074 (376/350) */}
+            <div id="block05-ios-navbar" style={{ width: '100%', flexShrink: 0 }}>
+              {/* Status Bar row: 47px × 1.074 = ~50px */}
+              <div style={{ height: '50px', paddingTop: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                {/* Time — left */}
+                <div style={{ flex: 1, display: 'flex', justifyContent: 'center', paddingLeft: '15px', paddingRight: '6px' }}>
+                  <span style={{ fontFamily: '"SF Pro", -apple-system, sans-serif', fontWeight: 590, fontSize: '15.9px', color: '#ffffff', lineHeight: '20.6px', whiteSpace: 'nowrap' }}>
+                    9:41
+                  </span>
+                </div>
+                {/* Dynamic Island spacer — 108px × 1.074 = ~116px */}
+                <div style={{ width: '116px', height: '9px', flexShrink: 0 }} />
+                {/* Icons — right */}
+                <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6.5px', paddingLeft: '6px', paddingRight: '15px' }}>
+                  <img alt="" src="/img/block05/ios-cellular.svg" style={{ width: '17.9px', height: '11.4px', display: 'block' }} />
+                  <img alt="" src="/img/block05/ios-wifi.svg"     style={{ width: '16px',   height: '11.5px', display: 'block' }} />
+                  <img alt="" src="/img/block05/ios-battery.svg"  style={{ width: '25.5px', height: '12.1px', display: 'block' }} />
+                </div>
               </div>
-            </div>
-
-            {/* Dynamic island */}
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '-8px', marginBottom: '8px' }}>
-              <div style={{ width: '120px', height: '34px', background: '#000000', borderRadius: '20px' }} />
+              {/* Dynamic Island pill */}
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '-6px', marginBottom: '6px' }}>
+                <div style={{ width: '116px', height: '36px', background: '#000', borderRadius: '22px' }} />
+              </div>
+              {/* Nav Contents area — empty title row: 38px × 1.074 = ~41px */}
+              <div style={{ height: '41px' }} />
             </div>
 
             {/* Cards */}
