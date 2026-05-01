@@ -30,69 +30,93 @@ export default function Block05Mobile() {
           </div>
         </div>
 
-        {/* Phone mockup — bezel + coded deal cards (Figma 64:4088), centered */}
+        {/* Phone mockup — SVG frame + coded deal cards, animation-ready */}
         <div
+          id="block05-phone"
           className="absolute pointer-events-none overflow-hidden"
-          style={{ left: '50%', top: '180px', transform: 'translateX(-50%)', width: '390px', height: '844px' }}
+          style={{ left: '50%', top: '180px', transform: 'translateX(-50%)', width: '390px', height: '797px' }}
         >
-          {/* iPhone bezel */}
+          {/* SVG iPhone frame — vector, animatable (see public/img/block05/iphone-frame.svg) */}
           <img
+            id="block05-phone-frame"
             alt=""
-            src="/img/block04/iphone-bezel.png"
-            className="absolute inset-0 w-full h-full object-contain object-top"
+            src="/img/block05/iphone-frame.svg"
+            className="absolute inset-0 w-full h-full"
             style={{ zIndex: 2 }}
           />
-          {/* Cards — scaled 1.114 from Figma (390/350), starting below ios-items area */}
+
+          {/* Screen area — #060606 background clipped to screen bounds */}
           <div
+            id="block05-screen"
             className="absolute overflow-hidden"
-            style={{ left: '18px', top: '91px', width: '358px', height: '753px', zIndex: 1 }}
+            style={{
+              /* map iphone-frame.svg screen rect: x=6,y=6 at 350×761 → scale 390/350=1.114 → x=7,y=7, w=376,h=834 capped to container */
+              left: '7px', top: '7px', width: '376px', height: '784px',
+              borderRadius: '52px',
+              background: '#060606',
+              zIndex: 1,
+            }}
           >
-            {([
-              { company: 'Space',     category: 'Growth Equity' },
-              { company: 'Space',     category: 'Growth Equity' },
-              { company: 'Space',     category: 'Growth Equity' },
-            ] as const).map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  background: '#151515',
-                  borderRadius: '27px',
-                  padding: '18px',
-                  height: '233px',
-                  marginBottom: i < 2 ? '27px' : 0,
-                  boxSizing: 'border-box',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '16px',
-                }}
-              >
-                <img
-                  alt={item.company}
-                  src="/img/block04/spacex-logo.svg"
-                  style={{ width: '127px', height: '18px', objectFit: 'contain', objectPosition: 'left' }}
-                />
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                  <span style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 600, fontSize: '26px', letterSpacing: '-0.02em', color: '#ffffff', lineHeight: 1.25 }}>
-                    {item.company}
-                  </span>
-                  <span style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 500, fontSize: '18px', letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.6)', lineHeight: 1.25 }}>
-                    {item.category}
-                  </span>
+            {/* Cards list — starts below dynamic island (~58px), SVG-logo + HTML cards */}
+            <div
+              id="block05-cards"
+              style={{ padding: '58px 16px 0', display: 'flex', flexDirection: 'column', gap: '14px' }}
+            >
+              {([
+                { id: 'card-0', company: 'Space', category: 'Growth Equity' },
+                { id: 'card-1', company: 'Space', category: 'Growth Equity' },
+                { id: 'card-2', company: 'Space', category: 'Growth Equity' },
+              ] as const).map((item) => (
+                <div
+                  id={`block05-${item.id}`}
+                  key={item.id}
+                  style={{
+                    background: '#151515',
+                    borderRadius: '24px',
+                    padding: '16px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '14px',
+                    flexShrink: 0,
+                  }}
+                >
+                  {/* Logo — SVG for animation */}
+                  <img
+                    id={`block05-${item.id}-logo`}
+                    alt={item.company}
+                    src="/img/block04/spacex-logo.svg"
+                    style={{ width: '114px', height: '16px', objectFit: 'contain', objectPosition: 'left' }}
+                  />
+                  {/* Text */}
+                  <div id={`block05-${item.id}-text`} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <span id={`block05-${item.id}-name`} style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 600, fontSize: '24px', letterSpacing: '-0.02em', color: '#ffffff', lineHeight: 1.25 }}>
+                      {item.company}
+                    </span>
+                    <span id={`block05-${item.id}-category`} style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 500, fontSize: '16px', letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.6)', lineHeight: 1.25 }}>
+                      {item.category}
+                    </span>
+                  </div>
+                  {/* Status badge */}
+                  <div
+                    id={`block05-${item.id}-badge`}
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgba(77,186,121,0.1)', border: '1px solid rgba(77,186,121,0.25)', borderRadius: '160px', padding: '12px 16px', alignSelf: 'flex-start' }}
+                  >
+                    <div id={`block05-${item.id}-dot`} style={{ width: '8px', height: '8px', borderRadius: '8px', background: '#4dba79', flexShrink: 0 }} />
+                    <span style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 600, fontSize: '14px', color: '#ffffff', whiteSpace: 'nowrap' }}>
+                      Accepting allocations
+                    </span>
+                  </div>
                 </div>
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgba(77,186,121,0.1)', border: '1px solid rgba(77,186,121,0.25)', borderRadius: '100px', padding: '12px 16px' }}>
-                  <div style={{ width: '8px', height: '8px', borderRadius: '3px', background: '#4dba79', flexShrink: 0 }} />
-                  <span style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 600, fontSize: '15px', color: '#ffffff', whiteSpace: 'nowrap' }}>
-                    Accepting allocations
-                  </span>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Bottom fade — masks card overflow */}
+            <div
+              id="block05-screen-fade"
+              className="absolute inset-x-0 bottom-0"
+              style={{ height: '160px', background: 'linear-gradient(to top, #060606 0%, transparent 100%)', pointerEvents: 'none' }}
+            />
           </div>
-          {/* Bottom fade — matches Figma shadow element */}
-          <div
-            className="absolute inset-x-0 bottom-0"
-            style={{ height: '180px', background: 'linear-gradient(to top, #151515 0%, rgba(21,21,21,0) 100%)', zIndex: 3 }}
-          />
         </div>
       </section>
     </div>
