@@ -67,12 +67,9 @@ export default function Block05Mobile() {
                   <img alt="" src="/img/block05/ios-battery.svg"  style={{ width: '25.5px', height: '12.1px', display: 'block' }} />
                 </div>
               </div>
-              {/* Dynamic Island pill */}
-              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '-6px', marginBottom: '6px' }}>
-                <div style={{ width: '116px', height: '36px', background: '#000', borderRadius: '22px' }} />
-              </div>
-              {/* Nav Contents area — empty title row: 38px × 1.074 = ~41px */}
-              <div style={{ height: '41px' }} />
+              {/* Dynamic Island area — NOT rendered here, already visible in iphone-bezel.png */}
+              {/* Spacer replaces the removed pill + nav contents row: keeps status bar but moves cards up ~60px */}
+              <div style={{ height: '8px' }} />
             </div>
 
             {/* Cards */}
