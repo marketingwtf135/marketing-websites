@@ -69,7 +69,7 @@ export default function Block05Mobile() {
               </div>
               {/* Dynamic Island area — NOT rendered here, already visible in iphone-bezel.png */}
               {/* Spacer replaces the removed pill + nav contents row: keeps status bar but moves cards up ~60px */}
-              <div style={{ height: '8px' }} />
+              <div style={{ height: '24px' }} />
             </div>
 
             {/* Cards */}
