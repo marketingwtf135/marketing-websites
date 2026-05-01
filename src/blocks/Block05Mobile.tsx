@@ -36,21 +36,11 @@ export default function Block05Mobile() {
           className="absolute pointer-events-none overflow-hidden"
           style={{ left: '50%', top: '180px', transform: 'translateX(-50%)', width: '390px', height: '797px' }}
         >
-          {/* SVG iPhone frame — vector, animatable (see public/img/block05/iphone-frame.svg) */}
-          <img
-            id="block05-phone-frame"
-            alt=""
-            src="/img/block05/iphone-frame.svg"
-            className="absolute inset-0 w-full h-full"
-            style={{ zIndex: 2 }}
-          />
-
-          {/* Screen area — #060606 background clipped to screen bounds */}
+          {/* Screen area — #060606 background, BELOW frame */}
           <div
             id="block05-screen"
             className="absolute overflow-hidden"
             style={{
-              /* map iphone-frame.svg screen rect: x=6,y=6 at 350×761 → scale 390/350=1.114 → x=7,y=7, w=376,h=834 capped to container */
               left: '7px', top: '7px', width: '376px', height: '784px',
               borderRadius: '52px',
               background: '#060606',
@@ -117,6 +107,15 @@ export default function Block05Mobile() {
               style={{ height: '160px', background: 'linear-gradient(to top, #060606 0%, transparent 100%)', pointerEvents: 'none' }}
             />
           </div>
+
+          {/* SVG iPhone frame — on TOP of screen content, screen rect is transparent */}
+          <img
+            id="block05-phone-frame"
+            alt=""
+            src="/img/block05/iphone-frame.svg"
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            style={{ zIndex: 3 }}
+          />
         </div>
       </section>
     </div>
