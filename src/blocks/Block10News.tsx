@@ -36,7 +36,7 @@ const NEWS = [
 export default function Block10News() {
   return (
     <section className="w-full bg-page-bg">
-      <div className="mx-auto w-full max-w-content py-[120px] flex flex-col gap-12 items-start">
+      <div className="mx-auto w-full max-w-content pt-[120px] pb-0 flex flex-col gap-12 items-start">
 
         {/* Heading row */}
         <div className="flex items-end justify-between w-full">

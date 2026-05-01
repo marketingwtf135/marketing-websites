@@ -69,6 +69,21 @@
   --btn-label:       #2b2b2b;
 }
 
+/* Explicit layout tokens that Tailwind's JIT doesn't compile from spacing keys */
+@layer utilities {
+  .px-content-edge {
+    padding-left: 240px;
+    padding-right: 240px;
+  }
+  .py-section-y {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+  .pt-section-y {
+    padding-top: 120px;
+  }
+}
+
 * {
   box-sizing: border-box;
 }

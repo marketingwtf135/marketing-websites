@@ -34,7 +34,7 @@ export default function Block03Cards() {
         >
           <div className="bg-white shrink-0 w-full" style={{ height: '10px' }} />
           <div className="flex flex-col flex-1 items-start justify-between p-6 relative overflow-hidden" style={STROKE_BORDER_STYLE}>
-            <img alt="" src="/img/block03/gradient-image.png" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <img alt="" src="/img/block03/gradient-image.png" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] pointer-events-none" />
             <div className="flex flex-col gap-4 items-start w-full relative">
               <p className="font-inter-tight font-medium text-h1-med text-white">150+</p>
               <p className="font-inter-tight font-medium text-text-xl text-white">WM partners</p>
@@ -50,7 +50,7 @@ export default function Block03Cards() {
         >
           <div className="bg-white shrink-0 w-full" style={{ height: '10px' }} />
           <div className="flex flex-col flex-1 items-start justify-between p-6 relative overflow-hidden" style={STROKE_BORDER_STYLE}>
-            <img alt="" src="/img/block03/gradient-image.png" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <img alt="" src="/img/block03/gradient-image.png" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] pointer-events-none" />
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
@@ -81,7 +81,7 @@ export default function Block03Cards() {
         >
           <div className="bg-white shrink-0 w-full" style={{ height: '10px' }} />
           <div className="flex flex-col flex-1 items-start justify-between p-6 relative overflow-hidden" style={STROKE_BORDER_STYLE}>
-            <img alt="" src="/img/block03/gradient-image.png" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <img alt="" src="/img/block03/gradient-image.png" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] pointer-events-none" />
             <div className="flex flex-col gap-4 items-start w-full relative">
               <p className="font-inter-tight font-medium text-h1-med text-white">33</p>
               <p className="font-inter-tight font-medium text-text-xl text-white">Portfolio companies</p>
@@ -126,7 +126,7 @@ export default function Block03Cards() {
 
           <div className="bg-white shrink-0 w-full relative z-10" style={{ height: '10px' }} />
           <div className="flex flex-col flex-1 items-start justify-between p-6 relative z-10 overflow-clip" style={STROKE_BORDER_STYLE}>
-            <img alt="" src="/img/block03/gradient-image.png" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <img alt="" src="/img/block03/gradient-image.png" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] pointer-events-none" />
             <div className="flex flex-col gap-4 items-start w-full relative">
               <p className="font-inter-tight font-medium text-h1-med text-white mix-blend-hard-light">
                 $150M

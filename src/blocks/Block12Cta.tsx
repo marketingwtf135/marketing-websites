@@ -52,7 +52,7 @@ function CtaCard({
 
 export default function Block12Cta() {
   return (
-    <section className="relative w-full bg-page-bg" style={{ marginTop: '200px', paddingBottom: '100px' }}>
+    <section className="relative w-full bg-page-bg" style={{ paddingBottom: '100px' }}>
       <div className="relative mx-auto w-full max-w-content pt-section-y flex flex-col gap-15 items-center">
 
         {/* Heading */}
