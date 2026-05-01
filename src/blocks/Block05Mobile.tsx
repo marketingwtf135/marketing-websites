@@ -30,24 +30,23 @@ export default function Block05Mobile() {
           </div>
         </div>
 
-        {/* Phone mockup — SVG frame + coded deal cards, animation-ready */}
+        {/* Phone mockup — PNG bezel (original) + coded deal cards */}
         <div
           id="block05-phone"
           className="absolute pointer-events-none overflow-hidden"
-          style={{ left: '50%', top: '180px', transform: 'translateX(-50%)', width: '390px', height: '797px' }}
+          style={{ left: '50%', top: '180px', transform: 'translateX(-50%)', width: '390px', height: '844px' }}
         >
-          {/* Screen area — #060606 background, BELOW frame */}
+          {/* Cards on #060606 bg — clipped within screen area, below bezel */}
           <div
             id="block05-screen"
             className="absolute overflow-hidden"
             style={{
-              left: '7px', top: '7px', width: '376px', height: '784px',
+              left: '7px', top: '7px', width: '376px', height: '830px',
               borderRadius: '52px',
               background: '#060606',
               zIndex: 1,
             }}
           >
-            {/* Cards list — starts below dynamic island (~58px), SVG-logo + HTML cards */}
             <div
               id="block05-cards"
               style={{ padding: '58px 16px 0', display: 'flex', flexDirection: 'column', gap: '14px' }}
@@ -66,19 +65,18 @@ export default function Block05Mobile() {
                     padding: '16px',
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '14px',
                     flexShrink: 0,
                   }}
                 >
-                  {/* Logo — SVG for animation */}
+                  {/* Logo */}
                   <img
                     id={`block05-${item.id}-logo`}
                     alt={item.company}
                     src="/img/block04/spacex-logo.svg"
                     style={{ width: '114px', height: '16px', objectFit: 'contain', objectPosition: 'left' }}
                   />
-                  {/* Text */}
-                  <div id={`block05-${item.id}-text`} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  {/* Text block — 24px gap from logo */}
+                  <div id={`block05-${item.id}-text`} style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                     <span id={`block05-${item.id}-name`} style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 600, fontSize: '24px', letterSpacing: '-0.02em', color: '#ffffff', lineHeight: 1.25 }}>
                       {item.company}
                     </span>
@@ -86,10 +84,10 @@ export default function Block05Mobile() {
                       {item.category}
                     </span>
                   </div>
-                  {/* Status badge */}
+                  {/* Badge — 40px gap from text block */}
                   <div
                     id={`block05-${item.id}-badge`}
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgba(77,186,121,0.1)', border: '1px solid rgba(77,186,121,0.25)', borderRadius: '160px', padding: '12px 16px', alignSelf: 'flex-start' }}
+                    style={{ marginTop: '40px', display: 'inline-flex', alignItems: 'center', gap: '10px', background: 'rgba(77,186,121,0.1)', border: '1px solid rgba(77,186,121,0.25)', borderRadius: '160px', padding: '12px 16px', alignSelf: 'flex-start' }}
                   >
                     <div id={`block05-${item.id}-dot`} style={{ width: '8px', height: '8px', borderRadius: '8px', background: '#4dba79', flexShrink: 0 }} />
                     <span style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 600, fontSize: '14px', color: '#ffffff', whiteSpace: 'nowrap' }}>
@@ -100,21 +98,23 @@ export default function Block05Mobile() {
               ))}
             </div>
 
-            {/* Bottom fade — masks card overflow */}
+            {/* Bottom fade for depth */}
             <div
               id="block05-screen-fade"
               className="absolute inset-x-0 bottom-0"
-              style={{ height: '160px', background: 'linear-gradient(to top, #060606 0%, transparent 100%)', pointerEvents: 'none' }}
+              style={{ height: '200px', background: 'linear-gradient(to top, #060606 30%, transparent 100%)', pointerEvents: 'none' }}
             />
           </div>
 
-          {/* SVG iPhone frame — on TOP of screen content, screen rect is transparent */}
+          {/* Original PNG bezel — on top, clips/frames the screen */}
           <img
             id="block05-phone-frame"
             alt=""
-            src="/img/block05/iphone-frame.svg"
-            className="absolute inset-0 w-full h-full pointer-events-none"
-            style={{ zIndex: 3 }}
+            src="/img/block04/iphone-bezel.png"
+            width={390}
+            height={844}
+            className="absolute inset-0 w-full h-full object-contain object-top pointer-events-none"
+            style={{ zIndex: 2 }}
           />
         </div>
       </section>
