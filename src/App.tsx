@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import Block01Hero from './blocks/Block01Hero'
 import Block02Logos from './blocks/Block02Logos'
 import Block03Cards from './blocks/Block03Cards'
@@ -11,12 +12,27 @@ import Block10News from './blocks/Block10News'
 import Block11Logos from './blocks/Block11Logos'
 import Block12Cta from './blocks/Block12Cta'
 import FadeIn from './components/FadeIn'
+import CompanyStock from './pages/CompanyStock'
 import { Agentation } from 'agentation'
 
-export default function App() {
+/** Lightweight hash-based router. Avoids adding react-router-dom for two routes. */
+function useRoute() {
+  const [hash, setHash] = useState(() => window.location.hash)
+  useEffect(() => {
+    const onHash = () => {
+      setHash(window.location.hash)
+      // Scroll to top when navigating
+      window.scrollTo({ top: 0, behavior: 'instant' })
+    }
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
+  return hash
+}
+
+function Home() {
   return (
     <main className="bg-page-bg overflow-x-clip">
-      {/* Block01 is above the fold — eager, no fade */}
       <Block01Hero />
       <FadeIn><Block02Logos /></FadeIn>
       <FadeIn><Block03Cards /></FadeIn>
@@ -29,8 +45,16 @@ export default function App() {
       <FadeIn><Block10News /></FadeIn>
       <FadeIn><Block11Logos /></FadeIn>
       <FadeIn><Block12Cta /></FadeIn>
-      {/* Agentation — visual feedback tool for AI agents (dev only) */}
-      {import.meta.env.DEV && <Agentation />}
     </main>
+  )
+}
+
+export default function App() {
+  const hash = useRoute()
+  return (
+    <>
+      {hash === '#company-stock' ? <CompanyStock /> : <Home />}
+      {import.meta.env.DEV && <Agentation />}
+    </>
   )
 }

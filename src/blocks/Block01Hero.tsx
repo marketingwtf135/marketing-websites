@@ -1,42 +1,11 @@
 import CtaButton from '../components/CtaButton'
+import Nav from '../components/Nav'
 
 export default function Block01Hero() {
   return (
     <section className="relative w-full bg-page-bg overflow-clip" style={{ height: '100vh', minHeight: '600px' }}>
 
-      {/* Nav — bg full-width, inner content capped at 1440px */}
-      <nav className="absolute top-0 left-0 w-full z-10 border-b border-nav-border bg-nav-bg" style={{ height: '80px' }}>
-        <div className="mx-auto w-full max-w-content h-full flex items-center justify-between">
-          {/* Logo */}
-          <a href="/" aria-label="AXEVIL Capital" className="shrink-0">
-            <img src="/img/block01/logo.svg" alt="AXEVIL" width={155} height={24} />
-          </a>
-
-          {/* Nav links — all identical: no fill by default, slightly grey text; bg-white/5 on hover */}
-          <div className="flex items-center gap-1">
-            {['Invest', 'Company Stock', 'Product', 'Compare', 'Resources', 'Company'].map((label) => (
-              <button
-                key={label}
-                type="button"
-                className="flex items-center gap-1 px-4 py-2 rounded-full font-inter-tight font-medium text-s-med text-white/60 hover:text-white hover:bg-white/5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-              >
-                {label}
-                <img src="/img/block01/arrow-down.svg" alt="" aria-hidden="true" width={16} height={16} />
-              </button>
-            ))}
-          </div>
-
-          {/* CTA buttons */}
-          <div className="flex items-center gap-2 shrink-0">
-            <button type="button" className="flex items-center justify-center px-4 py-2.5 rounded-full bg-white/5 font-inter-tight font-semibold text-s-semi text-white hover:bg-white/10 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white">
-              Sign In
-            </button>
-            <button type="button" className="flex items-center justify-center px-4 py-2.5 rounded-full bg-white font-inter-tight font-semibold text-s-semi text-phone-bg hover:scale-[1.02] transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-phone-bg">
-              Request access
-            </button>
-          </div>
-        </div>
-      </nav>
+      <Nav />
 
       {/* Hero illustration — top-right, max-width 1600px */}
       <div
