@@ -1,88 +1,7 @@
 import { useState } from 'react'
 import Nav from '../components/Nav'
+import CSHero from './cs-sections/CSHero'
 
-/** Hero — left copy + right price card */
-function Hero() {
-  return (
-    <section className="relative w-full bg-page-bg" style={{ paddingTop: '160px', paddingBottom: '120px' }}>
-      <div className="mx-auto w-full max-w-content flex items-start justify-between gap-12">
-        {/* Left: heading + description */}
-        <div className="flex flex-col gap-6 items-start" style={{ maxWidth: '604px' }}>
-          <div className="flex gap-2 items-center font-inter-tight font-medium text-text-l text-neutral-30">
-            <span className="opacity-50">1.0</span>
-            <span className="opacity-80">Invest</span>
-          </div>
-          <h1 className="font-inter-tight font-semibold text-h1-semi text-white whitespace-pre-line">
-            {'Invest in\nAnthropic Stock'}
-          </h1>
-          <p className="font-inter-tight font-medium text-text-xl text-white/60">
-            Anthropic is a frontier-AI company building safer, steerable AI systems. Invest in Anthropic stock to participate in the growth of one of the most important companies of the decade.
-          </p>
-        </div>
-
-        {/* Right: stock price card */}
-        <PriceCard />
-      </div>
-    </section>
-  )
-}
-
-function PriceCard() {
-  const [tab, setTab] = useState<'buy' | 'sell'>('buy')
-  return (
-    <div className="rounded-3xl border border-white/10 bg-surface-1" style={{ width: '430px', padding: '24px' }}>
-      {/* Buy / Sell tabs */}
-      <div className="flex gap-2 p-1 rounded-2xl bg-surface-2 mb-6">
-        {(['buy', 'sell'] as const).map((id) => (
-          <button
-            key={id}
-            type="button"
-            onClick={() => setTab(id)}
-            className={[
-              'flex-1 py-3 rounded-xl font-inter-tight font-semibold text-s-semi transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white',
-              tab === id ? 'bg-white text-phone-bg' : 'text-white/60 hover:text-white',
-            ].join(' ')}
-          >
-            {id === 'buy' ? 'Buy ANTH' : 'Sell ANTH'}
-          </button>
-        ))}
-      </div>
-
-      {/* Big price */}
-      <div className="flex flex-col gap-1 mb-6">
-        <span className="font-inter-tight font-medium text-s-med text-white/50">Anthropic consensus price</span>
-        <div className="flex items-baseline gap-3">
-          <span className="font-inter-tight font-semibold text-h2 text-white">$262.34</span>
-          <span className="font-inter-tight font-medium text-text-l text-status-open">+5.2%</span>
-        </div>
-      </div>
-
-      {/* Stats grid */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
-        <Stat label="Market cap" value="$61.5B" />
-        <Stat label="Last raised" value="$3.5B" />
-        <Stat label="Investors" value="350+" />
-        <Stat label="Status" value="Series E (Active)" />
-      </div>
-
-      <button
-        type="button"
-        className="w-full h-14 rounded-2xl bg-white font-inter-tight font-semibold text-text-btn text-phone-bg hover:scale-[1.01] transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-      >
-        Request access
-      </button>
-    </div>
-  )
-}
-
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex flex-col gap-1.5 p-4 rounded-2xl border border-white/10 bg-surface-2">
-      <span className="font-inter-tight font-medium text-s-med text-white/50">{label}</span>
-      <span className="font-inter-tight font-semibold text-text-l text-white">{value}</span>
-    </div>
-  )
-}
 
 /** Track stock price chart section */
 function TrackPrice() {
@@ -421,7 +340,7 @@ export default function CompanyStock() {
   return (
     <main className="bg-page-bg overflow-x-clip">
       <Nav active="Company Stock" />
-      <Hero />
+      <CSHero />
       <TrackPrice />
       <CompanyInfo />
       <YearlyPerformance />
