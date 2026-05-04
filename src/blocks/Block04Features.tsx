@@ -1,9 +1,19 @@
+/**
+ * FeatureBadge — supports two icon formats:
+ * - /icons/*.svg  (44×44 self-contained with circle bg) → render at 44px directly
+ * - /img/block04/*.svg (24px icon only) → render inside dark circle wrapper
+ */
 function FeatureBadge({ icon, label }: { icon: string; label: string }) {
+  const isSelfContained = icon.startsWith('/icons/')
   return (
     <div className="border border-white/10 flex gap-2.5 h-13 items-center justify-center pl-1 pr-4 py-1 rounded-full shrink-0">
-      <div className="bg-[#1a1a1a] rounded-full size-11 shrink-0 flex items-center justify-center">
-        <img alt="" src={icon} aria-hidden="true" width={24} height={24} />
-      </div>
+      {isSelfContained ? (
+        <img alt="" src={icon} aria-hidden="true" width={44} height={44} className="shrink-0 rounded-full" />
+      ) : (
+        <div className="bg-[#1a1a1a] rounded-full size-11 shrink-0 flex items-center justify-center">
+          <img alt="" src={icon} aria-hidden="true" width={24} height={24} />
+        </div>
+      )}
       <span className="font-inter-tight font-medium text-text-m text-white whitespace-nowrap">
         {label}
       </span>
@@ -52,9 +62,9 @@ export default function Block04Features() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-2 items-center" style={{ width: '445px' }}>
-                <FeatureBadge icon="/img/block04/icon-access.svg" label="Access" />
-                <FeatureBadge icon="/img/block04/icon-analyse.svg" label="Analyse" />
-                <FeatureBadge icon="/img/block04/icon-invest.svg" label="Invest" />
+                <FeatureBadge icon="/img/block04/icon-access.svg"  label="Access"  />
+                <FeatureBadge icon="/icons/icon-search.svg"        label="Analyse" />
+                <FeatureBadge icon="/icons/icon-money-case.svg"    label="Invest"  />
               </div>
             </div>
 
@@ -87,8 +97,8 @@ export default function Block04Features() {
               </div>
               <div className="flex flex-wrap gap-2 items-center" style={{ width: '445px' }}>
                 <FeatureBadge icon="/img/block04/icon-source.svg" label="Source" />
-                <FeatureBadge icon="/img/block04/icon-manage.svg" label="Manage" />
-                <FeatureBadge icon="/img/block04/icon-track.svg" label="Track" />
+                <FeatureBadge icon="/icons/icon-persons.svg"      label="Manage" />
+                <FeatureBadge icon="/icons/icon-track.svg"        label="Track"  />
               </div>
             </div>
 
