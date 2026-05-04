@@ -96,7 +96,7 @@ export default function Block04Features() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-2 items-center" style={{ width: '445px' }}>
-                <FeatureBadge icon="/img/block04/icon-source.svg" label="Source" />
+                <FeatureBadge icon="/icons/icon-source.svg"       label="Source" />
                 <FeatureBadge icon="/icons/icon-persons.svg"      label="Manage" />
                 <FeatureBadge icon="/icons/icon-track.svg"        label="Track"  />
               </div>
