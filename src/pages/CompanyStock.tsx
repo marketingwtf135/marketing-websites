@@ -14,8 +14,8 @@ export default function CompanyStock() {
       <div style={{ height: 80 }} />
       {/* Block 1 — Hero: no padding class */}
       <CSHero />
-      {/* Block 2 — Track Price: t12-b6 (200px top, 100px bottom) — overrides section's own class */}
-      <div className="padding-section-t12-b6"><CSTrackPrice /></div>
+      {/* Block 2 — Track Price: padding-section-t12-b6 lives in the section itself */}
+      <CSTrackPrice />
       {/* Remaining blocks use padding-section-t6-b6 from their own section class */}
       <CSCompanyInfo />
       <CSYearlyPerformance />

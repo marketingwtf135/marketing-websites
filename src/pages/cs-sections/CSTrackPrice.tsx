@@ -134,7 +134,7 @@ export default function CSTrackPrice() {
   const data = RANGE_DATA[activeRange]
 
   return (
-    <section className="w-full bg-page-bg padding-section-t6-b6">
+    <section className="w-full bg-page-bg padding-section-t12-b6">
       <div className="mx-auto w-full max-w-content flex flex-col gap-[60px] items-start">
 
         {/* ── Heading ── */}
