@@ -108,36 +108,22 @@ function StockChart({ pts }: { pts: PtData[] }) {
   )
 }
 
-/** ── Icon with circle bg (Figma: 44px circle + 24px icon centered) ── */
-function IconBadge({ src, alt, bg }: { src: string; alt: string; bg?: string }) {
-  return (
-    <div className="relative shrink-0" style={{ width: 44, height: 44 }}>
-      <img src={bg ?? '/img/cs/icon-circle-bg.svg'} alt="" width={44} height={44} className="absolute" style={{ left: 0, top: 0 }} />
-      <img src={src} alt={alt} width={24} height={24} className="absolute overflow-clip" style={{ left: 10, top: 11 }} />
-    </div>
-  )
-}
-
-/** ── Advantage card ─────────────────────────────────────── */
+/** ── Advantage card — single self-contained icon (44×44 with bg built-in) ── */
 function AdvCard({
-  label, value, iconSrc, iconBg, iconAlt, leftBorder,
+  label, value, iconSrc, iconAlt, leftBorder,
 }: {
-  label: string; value: string; iconSrc: string; iconBg?: string; iconAlt: string; leftBorder?: boolean
+  label: string; value: string; iconSrc: string; iconAlt: string; leftBorder?: boolean
 }) {
   return (
     <div
       className="bg-[#101010] rounded-2xl flex items-start gap-6"
-      style={{
-        padding: 16,
-        width: 345,
-        borderLeft: leftBorder ? '1px solid #151515' : undefined,
-      }}
+      style={{ padding: 16, width: 345, borderLeft: leftBorder ? '1px solid #151515' : undefined }}
     >
       <div className="flex flex-col gap-4 flex-1 min-w-0">
         <span className="font-inter-tight font-medium text-text-m text-white/60">{label}</span>
         <span className="font-inter-tight font-semibold text-h5 text-white">{value}</span>
       </div>
-      <IconBadge src={iconSrc} alt={iconAlt} bg={iconBg} />
+      <img src={iconSrc} alt={iconAlt} width={44} height={44} className="shrink-0" />
     </div>
   )
 }
@@ -257,37 +243,12 @@ export default function CSTrackPrice() {
             <StockChart key={activeRange} pts={data.pts} />
           </div>
 
-          {/* ── Advantage cards — icons from Figma 89:339/349/359/367 ── */}
+          {/* ── Advantage cards ── */}
           <div className="flex items-center justify-between w-full">
-            <AdvCard
-              label="Highest Bid"
-              value="$258.00"
-              iconBg="/img/cs/adv-bg-1.svg"
-              iconSrc="/icons/icon-arrow-down.svg"
-              iconAlt="Chart up"
-              leftBorder
-            />
-            <AdvCard
-              label="Lowest Ask"
-              value="$268.50"
-              iconBg="/img/cs/adv-bg-2.svg"
-              iconSrc="/icons/icon-arrow-top.svg"
-              iconAlt="Chart down"
-            />
-            <AdvCard
-              label="Last Transaction"
-              value="$262.34"
-              iconBg="/img/cs/adv-bg-3.svg"
-              iconSrc="/icons/icon-money-case.svg"
-              iconAlt="Money bag"
-            />
-            <AdvCard
-              label="Live Orders"
-              value="79"
-              iconBg="/img/cs/adv-bg-4.svg"
-              iconSrc="/icons/icon-profile.svg"
-              iconAlt="Live orders"
-            />
+            <AdvCard label="Highest Bid"      value="$258.00" iconSrc="/icons/icon-arrow-top.svg"   iconAlt="Highest bid"       leftBorder />
+            <AdvCard label="Lowest Ask"        value="$268.50" iconSrc="/icons/icon-arrow-down.svg"  iconAlt="Lowest ask"        />
+            <AdvCard label="Last Transaction"  value="$262.34" iconSrc="/icons/icon-money-case.svg"  iconAlt="Last transaction"  />
+            <AdvCard label="Live Orders"       value="79"      iconSrc="/icons/icon-profile.svg"     iconAlt="Live orders"       />
           </div>
         </div>
       </div>

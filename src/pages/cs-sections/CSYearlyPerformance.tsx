@@ -38,7 +38,7 @@ export default function CSYearlyPerformance() {
   const rows = tab === 'yearly' ? YEARLY_ROWS : VALUATION_ROWS
 
   return (
-    <section className="w-full bg-page-bg" style={{ paddingBottom: 0, marginBottom: 0 }}>
+    <section className="w-full bg-page-bg" style={{ paddingBottom: 0, marginTop: 100, marginBottom: 100 }}>
       <div className="mx-auto w-full max-w-content flex flex-col gap-6 items-center">
 
         {/* Heading */}

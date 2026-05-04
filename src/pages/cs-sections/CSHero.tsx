@@ -11,7 +11,7 @@ export default function CSHero() {
   return (
     <section
       className="relative w-full bg-page-bg overflow-clip"
-      style={{ height: '100vh', minHeight: '720px' }}
+      style={{ height: 'calc(100vh - 80px)', minHeight: '640px' }}
     >
       {/* bg-shine-inner-pages — centred on all axes */}
       <img
