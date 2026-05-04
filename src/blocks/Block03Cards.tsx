@@ -43,7 +43,7 @@ export default function Block03Cards() {
           </div>
         </div>
 
-        {/* Card 02 — 1000+ Investors */}
+        {/* Card 02 — 5+ Years operating in pre-IPO */}
         <div
           className="absolute flex flex-col bg-page-bg group"
           style={{ left: '355px', top: '283px', width: '375px', height: '635px' }}
@@ -67,8 +67,8 @@ export default function Block03Cards() {
               <img alt="" src="/img/block03/card02-mask-fill.png" className="absolute w-full h-full object-cover" />
             </div>
             <div className="flex flex-col gap-4 items-start w-full relative">
-              <p className="font-inter-tight font-medium text-h1-med text-white relative">1000+</p>
-              <p className="font-inter-tight font-medium text-text-xl text-white relative">Investors</p>
+              <p className="font-inter-tight font-medium text-h1-med text-white relative">5+</p>
+              <p className="font-inter-tight font-medium text-text-xl text-white relative">Years operating in pre-IPO</p>
             </div>
             <p className="font-inter-tight font-medium text-text-l text-white/60 relative">2.0</p>
           </div>
@@ -83,7 +83,7 @@ export default function Block03Cards() {
           <div className="flex flex-col flex-1 items-start justify-between p-6 relative overflow-hidden" style={STROKE_BORDER_STYLE}>
             <img alt="" src="/img/block03/gradient-image.png" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-[1000ms] pointer-events-none" />
             <div className="flex flex-col gap-4 items-start w-full relative">
-              <p className="font-inter-tight font-medium text-h1-med text-white">33</p>
+              <p className="font-inter-tight font-medium text-h1-med text-white">35</p>
               <p className="font-inter-tight font-medium text-text-xl text-white">Portfolio companies</p>
             </div>
             <p className="font-inter-tight font-medium text-text-l text-white/60 relative">3.0</p>

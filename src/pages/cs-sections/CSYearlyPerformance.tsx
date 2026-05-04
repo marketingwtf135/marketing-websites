@@ -58,11 +58,13 @@ export default function CSYearlyPerformance() {
           </h2>
         </div>
 
-        <div className="flex flex-col gap-4 items-center w-full">
-          <p className="font-inter-tight font-medium text-text-l text-white/60 text-center whitespace-pre-wrap" style={{ maxWidth: 710 }}>
-            {"Anthropic's value has grown as more businesses adopt Claude for their daily work. \nThis table shows how the estimated price has changed over the last few years."}
-          </p>
+        {/* paragraph — 32px gap to the tabs+table block below */}
+        <p className="font-inter-tight font-medium text-text-l text-white/60 text-center whitespace-pre-wrap" style={{ maxWidth: 710 }}>
+          {"Anthropic's value has grown as more businesses adopt Claude for their daily work. \nThis table shows how the estimated price has changed over the last few years."}
+        </p>
 
+        {/* Tabs + table: 16px gap between them */}
+        <div className="flex flex-col gap-4 items-center w-full" style={{ marginTop: 32 }}>
           {/* Tabs */}
           <div className="flex items-center gap-1">
             {([

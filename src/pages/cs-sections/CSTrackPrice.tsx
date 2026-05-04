@@ -121,7 +121,7 @@ function AdvCard({
     >
       <div className="flex flex-col gap-4 flex-1 min-w-0">
         <span className="font-inter-tight font-medium text-text-m text-white/60">{label}</span>
-        <span className="font-inter-tight font-semibold text-h5 text-white">{value}</span>
+        <span className="font-inter-tight font-semibold text-h5 text-white select-none" style={{ filter: 'blur(8px)' }}>{value}</span>
       </div>
       <img src={iconSrc} alt={iconAlt} width={44} height={44} className="shrink-0" />
     </div>
