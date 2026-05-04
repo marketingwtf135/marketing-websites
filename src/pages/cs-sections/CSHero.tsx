@@ -22,18 +22,19 @@ export default function CSHero() {
       />
 
       {/* Main flex container: top=120px (80+40), bottom=40px */}
+      {/* paddingTop:40px (spacer in CompanyStock handles nav 80px) */}
       <div
         className="relative mx-auto w-full max-w-content flex items-stretch gap-8"
         style={{
           zIndex: 1,
-          paddingTop: '120px',
+          paddingTop: '40px',
           paddingBottom: '40px',
           height: '100%',
           boxSizing: 'border-box',
         }}
       >
-        {/* ─ Left column: breadcrumb at top, heading at bottom (gap:auto = space-between) ─ */}
-        <div className="flex flex-col justify-between flex-1 min-w-0">
+        {/* ─ Left column: breadcrumb top, heading bottom, stretches full height ─ */}
+        <div className="flex flex-col justify-between flex-1 min-w-0 h-full">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2">
             <span className="font-inter-tight font-medium text-text-m text-neutral-30 opacity-80 whitespace-nowrap">
@@ -80,8 +81,8 @@ export default function CSHero() {
           </div>
         </div>
 
-        {/* ─ Right column: info card, aligned top, same height ─ */}
-        <div className="flex flex-col gap-4 shrink-0" style={{ width: 555 }}>
+        {/* ─ Right column: stretches full height, info card aligned top ─ */}
+        <div className="flex flex-col gap-4 shrink-0 h-full" style={{ width: 555 }}>
           {/* Tabs */}
           <div className="flex items-center gap-1">
             {[

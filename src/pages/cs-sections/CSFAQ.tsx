@@ -55,14 +55,14 @@ export default function CSFAQ() {
                 >
                   <span className="font-inter-tight font-semibold text-text-xl text-white">{item.q}</span>
 
-                  {/* Icon from Figma 89:500 — single SVG */}
+                  {/* Icons from public/icons: dd-open / dd-close */}
                   <div className="shrink-0" style={{ width: 36, height: 36 }}>
                     <img
-                      src="/img/cs/icon-faq-toggle.svg"
+                      src={isOpen ? '/icons/icon-dd-close.svg' : '/icons/icon-dd-open.svg'}
                       alt=""
                       width={36}
                       height={36}
-                      style={{ transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease-in-out' }}
+                      style={{ transition: 'opacity 0.2s ease-in-out' }}
                     />
                   </div>
                 </button>
