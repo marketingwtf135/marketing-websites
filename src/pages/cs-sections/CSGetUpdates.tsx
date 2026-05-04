@@ -16,7 +16,7 @@ export default function CSGetUpdates() {
   return (
     <section
       className="relative w-full overflow-hidden bg-page-bg padding-section-t6-b6"
-      style={{ minHeight: '700px' }}
+      style={{ minHeight: '700px', paddingTop: '50px' }}
     >
       {/* bg-shine — centered, not cropped (contain) */}
       <img

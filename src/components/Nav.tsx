@@ -40,10 +40,7 @@ export default function Nav({ active }: NavProps) {
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
-          <button type="button" className="flex items-center justify-center px-4 py-2.5 rounded-full bg-white/5 font-inter-tight font-semibold text-s-semi text-white hover:bg-white/10 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white">
-            Sign In
-          </button>
-          <button type="button" className="flex items-center justify-center px-4 py-2.5 rounded-full bg-white font-inter-tight font-semibold text-s-semi text-phone-bg hover:scale-[1.02] transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-phone-bg">
+          <button type="button" className="flex items-center justify-center px-4 py-2.5 rounded-full bg-white font-inter-tight font-semibold text-s-semi text-phone-bg hover:scale-[1.02] transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-phone-bg" onClick={() => window.dispatchEvent(new CustomEvent('open-quiz'))}>
             Request access
           </button>
         </div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import Block01Hero from './blocks/Block01Hero'
 import Block02Logos from './blocks/Block02Logos'
 import Block03Cards from './blocks/Block03Cards'
@@ -13,6 +14,7 @@ import Block11Logos from './blocks/Block11Logos'
 import Block12Cta from './blocks/Block12Cta'
 import FadeIn from './components/FadeIn'
 import Nav from './components/Nav'
+import Quiz from './components/Quiz'
 import CompanyStock from './pages/CompanyStock'
 import { Agentation } from 'agentation'
 
@@ -53,10 +55,21 @@ function Home() {
 
 export default function App() {
   const hash = useRoute()
+  const [quizOpen, setQuizOpen] = useState(false)
+
+  useEffect(() => {
+    const handler = () => setQuizOpen(true)
+    window.addEventListener('open-quiz', handler)
+    return () => window.removeEventListener('open-quiz', handler)
+  }, [])
+
   return (
     <>
       {hash === '#company-stock' ? <CompanyStock /> : <Home />}
       {import.meta.env.DEV && <Agentation />}
+      <AnimatePresence>
+        {quizOpen && <Quiz onClose={() => setQuizOpen(false)} />}
+      </AnimatePresence>
     </>
   )
 }

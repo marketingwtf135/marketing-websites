@@ -147,6 +147,14 @@ export default function CSHero() {
                 <StatItem label="Status"               value="Series G (Private)" />
               </div>
             </div>
+
+            {/* Anthropic logo — bottom right */}
+            <img
+              alt="Anthropic"
+              src="/img/cs/anthropic-symbol.svg"
+              className="absolute"
+              style={{ right: '32px', bottom: '32px', width: '26px', height: '18px', opacity: 0.6 }}
+            />
           </div>
 
           {/* Tags */}

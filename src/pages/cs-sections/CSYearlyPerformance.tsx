@@ -58,7 +58,7 @@ export default function CSYearlyPerformance() {
           </h2>
         </div>
 
-        <div className="flex flex-col gap-12 items-center w-full">
+        <div className="flex flex-col gap-4 items-center w-full">
           <p className="font-inter-tight font-medium text-text-l text-white/60 text-center whitespace-pre-wrap" style={{ maxWidth: 710 }}>
             {"Anthropic's value has grown as more businesses adopt Claude for their daily work. \nThis table shows how the estimated price has changed over the last few years."}
           </p>

@@ -78,7 +78,7 @@ export default function Block10News() {
                 <img
                   alt={item.title}
                   src={item.img}
-                  className="absolute inset-0 w-full h-full object-cover rounded-card group-hover:scale-[1.04] transition-transform duration-200 pointer-events-none"
+                  className="absolute inset-0 w-full h-full object-cover rounded-card transition-transform duration-200 pointer-events-none"
                   loading="lazy"
                 />
 

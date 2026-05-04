@@ -68,7 +68,7 @@ export default function Block09Slider() {
               disabled={atStart}
               onClick={() => scroll('prev')}
               onKeyDown={(e) => { if (e.key === 'Enter') scroll('prev') }}
-              className="size-16 rounded-full overflow-hidden disabled:opacity-30 hover:opacity-100 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              className="size-16 rounded-[16px] overflow-hidden disabled:opacity-30 hover:opacity-100 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
             >
               <img alt="" src="/img/block09/btn-left.svg" className="w-full h-full" />
             </button>
@@ -79,7 +79,7 @@ export default function Block09Slider() {
               disabled={atEnd}
               onClick={() => scroll('next')}
               onKeyDown={(e) => { if (e.key === 'Enter') scroll('next') }}
-              className="size-16 rounded-full overflow-hidden disabled:opacity-30 hover:opacity-100 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              className="size-16 rounded-[16px] overflow-hidden disabled:opacity-30 hover:opacity-100 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
             >
               <img alt="" src="/img/block09/btn-right.svg" className="w-full h-full" />
             </button>
