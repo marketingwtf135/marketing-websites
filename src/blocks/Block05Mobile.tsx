@@ -78,9 +78,9 @@ export default function Block05Mobile() {
               style={{ padding: '0 16px', display: 'flex', flexDirection: 'column', gap: '14px' }}
             >
               {([
-                { id: 'card-0', company: 'Space', category: 'Growth Equity' },
-                { id: 'card-1', company: 'Space', category: 'Growth Equity' },
-                { id: 'card-2', company: 'Space', category: 'Growth Equity' },
+                { id: 'card-0', company: 'Space',     category: 'Growth Equity', logo: '/img/block05/logo-spacex.svg',    logoW: '114px', logoH: '16px' },
+                { id: 'card-1', company: 'Anthropic',  category: 'Growth Equity', logo: '/img/block05/logo-anthropic.svg', logoW: '23px',  logoH: '16px' },
+                { id: 'card-2', company: 'Cursor',     category: 'Growth Equity', logo: '/img/block05/logo-cursor.svg',   logoW: '20px',  logoH: '20px' },
               ] as const).map((item) => (
                 <div
                   id={`block05-${item.id}`}
@@ -94,12 +94,12 @@ export default function Block05Mobile() {
                     flexShrink: 0,
                   }}
                 >
-                  {/* Logo */}
+                  {/* Logo — unique per company */}
                   <img
                     id={`block05-${item.id}-logo`}
                     alt={item.company}
-                    src="/img/block04/spacex-logo.svg"
-                    style={{ width: '114px', height: '16px', objectFit: 'contain', objectPosition: 'left' }}
+                    src={item.logo}
+                    style={{ width: item.logoW, height: item.logoH, objectFit: 'contain', objectPosition: 'left' }}
                   />
                   {/* Text block — 24px gap from logo */}
                   <div id={`block05-${item.id}-text`} style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>

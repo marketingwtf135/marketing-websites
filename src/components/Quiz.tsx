@@ -172,7 +172,7 @@ export default function Quiz({ onClose }: QuizProps) {
                   </h3>
                 )}
                 {(cur.caption || cur.body) && (
-                  <p className="font-inter-tight font-medium text-white/60 whitespace-pre-line" style={{ fontSize: '15px', lineHeight: 1.5 }}>
+                  <p className="font-inter-tight font-semibold text-white whitespace-pre-line" style={{ fontSize: '24px', fontWeight: 600, lineHeight: '120%', letterSpacing: '-0.48px', color: '#FFF' }}>
                     {cur.caption ?? cur.body}
                   </p>
                 )}

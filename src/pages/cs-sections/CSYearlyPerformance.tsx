@@ -39,7 +39,7 @@ export default function CSYearlyPerformance() {
 
   return (
     <section className="w-full bg-page-bg padding-section-t6-b6">
-      <div className="mx-auto w-full max-w-content flex flex-col gap-6 items-center">
+      <div className="mx-auto w-full max-w-content flex flex-col gap-4 items-center">
 
         {/* Heading */}
         <div className="flex flex-col gap-8 items-center text-center">

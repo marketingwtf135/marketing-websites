@@ -63,11 +63,11 @@ export default function Block08Section() {
               style={{ padding: '24px', gap: '24px', ...card.border }}
             >
               {/* Frame — illustration, no clip */}
-              <div className="w-full rounded-xl" style={{ height: '225px' }}>
+              <div className="w-full rounded-xl">
                 <img
                   alt={card.title}
                   src={card.img}
-                  className="w-full h-full object-contain"
+                  className="w-full"
                   loading="lazy"
                 />
               </div>

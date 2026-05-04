@@ -135,7 +135,7 @@ export default function CSTrackPrice() {
 
   return (
     <section className="w-full bg-page-bg padding-section-t12-b6">
-      <div className="mx-auto w-full max-w-content flex flex-col gap-[60px] items-start">
+      <div className="mx-auto w-full max-w-content flex flex-col items-start">
 
         {/* ── Heading ── */}
         <div className="flex flex-col gap-8 items-start">
