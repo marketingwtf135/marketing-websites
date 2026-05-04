@@ -62,12 +62,12 @@ export default function Block08Section() {
               className="flex flex-col"
               style={{ padding: '24px', gap: '24px', ...card.border }}
             >
-              {/* Frame — illustration */}
-              <div className="w-full overflow-hidden rounded-xl" style={{ height: '225px' }}>
+              {/* Frame — illustration, no clip */}
+              <div className="w-full rounded-xl" style={{ height: '225px' }}>
                 <img
                   alt={card.title}
                   src={card.img}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                   loading="lazy"
                 />
               </div>

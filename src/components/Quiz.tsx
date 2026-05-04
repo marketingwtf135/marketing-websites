@@ -147,15 +147,17 @@ export default function Quiz({ onClose }: QuizProps) {
             {/* 64px gap to card */}
             <div style={{ height: '64px', flexShrink: 0 }} />
 
-            {/* Content card — bg #141414 + border: none + r:24 */}
-            {/* For slides 1&2: frame + caption; for slide 3: frame + subheading + paragraph */}
+            {/* Content card — #3: 760×400, bg #141414, borderRadius 24 */}
             <div
-              className="flex flex-col rounded-3xl overflow-hidden shrink-0"
-              style={{ background: '#1a1a1a', gap: '20px', padding: '20px' }}
+              className="flex flex-col rounded-3xl shrink-0"
+              style={{ width: '760px', height: '400px', background: '#141414', gap: '20px', padding: '20px', overflow: 'hidden' }}
             >
-              {/* Frame with illustration */}
-              <div className="rounded-xl overflow-hidden" style={{ height: '200px' }}>
-                <img src={cur.img} alt="" className="w-full h-full object-cover" />
+              {/* #4: Frame with illustration — image centred both axes */}
+              <div
+                className="rounded-xl flex items-center justify-center shrink-0"
+                style={{ height: '240px', background: '#1a1a1a', overflow: 'hidden' }}
+              >
+                <img src={cur.img} alt="" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
               </div>
 
               {slide === 2 && cur.subheading ? (
@@ -205,7 +207,7 @@ export default function Quiz({ onClose }: QuizProps) {
       {/* ── RIGHT SIDE ────────────────────────────────── */}
       <div
         className="flex flex-col overflow-hidden"
-        style={{ width: '50%', height: '100%', padding: '60px 64px' }}
+        style={{ width: '50%', height: '100%', padding: '60px 64px', background: '#141414' }}
       >
         {/* Close */}
         <div className="flex justify-end mb-8 shrink-0">
