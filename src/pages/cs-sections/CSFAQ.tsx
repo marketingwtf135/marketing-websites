@@ -1,27 +1,26 @@
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const FAQ_ITEMS = [
-  { q: 'Is Anthropic publicly traded?',           a: 'No, Anthropic is a private company. You cannot buy **Anthropic stock** on a public exchange like the NYSE. You can only invest through private secondary markets or platforms like Axevil.' },
-  { q: 'Is Anthropic publicly traded?',           a: 'Anthropic remains a private company with no plans for a near-term IPO.' },
-  { q: 'How can I buy Anthropic stock?',          a: 'You can buy Anthropic stock through AXEVIL — simply request access, complete onboarding, and we will allocate shares in the next available tender window.' },
+  { q: 'Is Anthropic publicly traded?',              a: 'No, Anthropic is a private company. You cannot buy Anthropic stock on a public exchange like the NYSE. You can only invest through private secondary markets or platforms like Axevil.' },
+  { q: 'Is Anthropic publicly traded?',              a: 'Anthropic remains a private company with no plans for a near-term IPO.' },
+  { q: 'How can I buy Anthropic stock?',             a: 'You can buy Anthropic stock through AXEVIL — simply request access, complete onboarding, and we will allocate shares in the next available tender window.' },
   { q: 'What is the current Anthropic stock price?', a: 'The current consensus secondary-market price is $262.34 per share as of 2026.' },
-  { q: 'How do I exit my investment?',            a: 'You can exit through secondary tender events organized by Axevil or by requesting a transfer to a qualified buyer.' },
-  { q: 'Is Anthropic a public company?',          a: 'No. Anthropic is a private company.' },
-  { q: 'How does Axevil help me invest?',         a: 'Axevil provides a full-stack investment platform: deal flow, compliance, custody, and secondary liquidity — all in one interface.' },
-  { q: 'What are the risks?',                     a: 'Pre-IPO investing carries significant risks including illiquidity, long holding periods, dilution, and total loss of capital.' },
+  { q: 'How do I exit my investment?',               a: 'You can exit through secondary tender events organized by Axevil or by requesting a transfer to a qualified buyer.' },
+  { q: 'Is Anthropic a public company?',             a: 'No. Anthropic is a private company.' },
+  { q: 'How does Axevil help me invest?',            a: 'Axevil provides a full-stack investment platform: deal flow, compliance, custody, and secondary liquidity — all in one interface.' },
+  { q: 'What are the risks?',                        a: 'Pre-IPO investing carries significant risks including illiquidity, long holding periods, dilution, and total loss of capital.' },
 ]
 
-/** Section 6 — FAQ (Figma 89:478)
- *  #6: 64px h2 with gradient  #7: smooth 0.5s animation  #8: icon from 89:500
- */
+/** Section 6 — FAQ (padding-section-t6-b0: 100px top, 0 bottom) */
 export default function CSFAQ() {
-  const [open, setOpen] = useState<number | null>(0)
+  const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <section className="w-full bg-page-bg padding-section-t6-b6">
+    <section className="w-full bg-page-bg padding-section-t6-b0">
       <div className="mx-auto w-full max-w-content flex flex-col gap-12 items-start">
 
-        {/* Heading — 64px gradient (Figma 89:478) */}
+        {/* Heading */}
         <div className="flex flex-col gap-6 items-start">
           <div className="flex gap-2 items-center font-inter-tight font-medium text-text-l text-neutral-30">
             <span className="opacity-50">6.0</span>
@@ -46,6 +45,7 @@ export default function CSFAQ() {
             const isOpen = open === i
             return (
               <div key={i} style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : i)}
@@ -55,30 +55,42 @@ export default function CSFAQ() {
                 >
                   <span className="font-inter-tight font-semibold text-text-xl text-white">{item.q}</span>
 
-                  {/* Icons 64×64: icon-dd-open (closed) / icon-dd-close (open) */}
-                  <img
-                    src={isOpen ? '/icons/icon-dd-close.svg' : '/icons/icon-dd-open.svg'}
+                  {/* Icon:
+                    Closed → icon-dd-close (+)  at rotation 0°
+                    Open   → icon-dd-open  (×)  at rotation 45° (smooth spin)
+                    Both transitions use framer-motion for smooth 0.3s rotate
+                  */}
+                  <motion.img
+                    key={isOpen ? 'open' : 'closed'}
+                    src={isOpen ? '/icons/icon-dd-open.svg' : '/icons/icon-dd-close.svg'}
                     alt=""
                     width={64}
                     height={64}
                     className="shrink-0"
-                    style={{ transition: 'opacity 0.2s ease-in-out' }}
+                    initial={{ rotate: isOpen ? 0 : 45, opacity: 0 }}
+                    animate={{ rotate: isOpen ? 45 : 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
                   />
                 </button>
 
-                {/* Answer — smooth height animation via max-height */}
-                <div
-                  style={{
-                    overflow: 'hidden',
-                    maxHeight: isOpen ? '400px' : '0px',
-                    transition: 'max-height 0.5s ease-in-out, opacity 0.5s ease-in-out',
-                    opacity: isOpen ? 1 : 0,
-                  }}
-                >
-                  <div style={{ paddingBottom: 28, paddingRight: 60 }}>
-                    <p className="font-inter-tight font-medium text-text-l text-white/60">{item.a}</p>
-                  </div>
-                </div>
+                {/* Answer — framer-motion height animation (smooth, no jerk) */}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                      style={{ overflow: 'hidden' }}
+                    >
+                      <div style={{ paddingBottom: 28, paddingRight: 60 }}>
+                        <p className="font-inter-tight font-medium text-text-l text-white/60">{item.a}</p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
               </div>
             )
           })}

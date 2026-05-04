@@ -82,7 +82,11 @@
   .pt-section-y {
     padding-top: 120px;
   }
-  /* Section padding tokens — t6=100px, b6=100px, t12=200px */
+  /* Section padding tokens — t6=100px, b6=100px, t12=200px, b0=0px */
+  .padding-section-t6-b0 {
+    padding-top: 100px;
+    padding-bottom: 0;
+  }
   .padding-section-t6-b6 {
     padding-top: 100px;
     padding-bottom: 100px;
