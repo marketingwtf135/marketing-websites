@@ -3,47 +3,91 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 interface QuizProps { onClose: () => void }
 
+/* ── Slide data ─────────────────────────────────────────── */
 const SLIDES = [
-  { id: 0, heading: 'Pre-IPO leaders.\nNo middlemen.', body: 'The most sought-after private companies of our era —\nthe ones reshaping the technology of the next decade.', caption: 'SpaceX, xAI, Anthropic, Stripe, Cursor —\nand 30 more top companies in portfolio', img: '/img/ill-qwiz-01.png', label: 'Pre-IPO leaders' },
-  { id: 1, heading: 'Capital secured by\nregulated structure', body: 'Every deal is structured through a dedicated SPV under SEC regulation —\nfully transparent, with annual reporting from the management companies.', caption: 'You receive equity documented to the same standards as leading\nventure capital funds — institutional-grade ownership.', img: '/img/ill-qwiz-02.png', label: 'Capital secured' },
-  { id: 2, heading: 'Real access. Verified twice', body: 'Before a deal goes live on the platform, we run two independent reviews:', caption: "Actual allocation access, jurisdiction, SPV feasibility, liquidity.\nIf either side doesn't add up — no deal, no matter how attractive the company.", img: '/img/ill-qwiz-03.png', label: 'Real access' },
+  {
+    id: 0,
+    heading: 'Pre-IPO leaders.\nNo middlemen.',
+    subheading: null,
+    body: 'The most sought-after private companies of our era —\nthe ones reshaping the technology of the next decade.',
+    img: '/img/ill-qwiz-01.png',
+    caption: 'SpaceX, xAI, Anthropic, Stripe, Cursor —\nand 30 more top companies in portfolio',
+    label: 'Pre-IPO leaders',
+  },
+  {
+    id: 1,
+    heading: 'Capital secured by\nregulated structure',
+    subheading: null,
+    body: 'Every deal is structured through a dedicated SPV under SEC regulation —\nfully transparent, with annual reporting.',
+    img: '/img/ill-qwiz-02.png',
+    caption: 'You receive equity documented to the same standards as leading\nventure capital funds — institutional-grade ownership.',
+    label: 'Capital secured',
+  },
+  {
+    id: 2,
+    heading: 'Real access. Verified twice',
+    subheading: 'Structural',
+    body: 'Before a deal goes live on the platform, we run two independent reviews:\nactual allocation access, jurisdiction, SPV feasibility, liquidity.',
+    img: '/img/ill-qwiz-03.png',
+    caption: null,
+    label: 'Real access',
+  },
 ]
 
-const Q1 = ['Principal Investor (Investing personal or family capital directly)', 'Wealth advisor / RIA  (Managing capital on behalf of clients)', 'Family office (Single-family or multi-family office)', 'Other']
-const Q2 = ['Yes — actively (5+ private market transactions to date)', 'Yes — selectively (1-4 deals completed)', 'Not yet — evaluating (Building familiarity with the asset class)', 'Not yet — exploring (Early interest, gathering information)']
+/* ── Questions ─────────────────────────────────────────── */
+const Q1 = [
+  'Principal investor (Investing personal or family capital directly)',
+  'Wealth advisor / RIA  (Managing capital on behalf of clients)',
+  'Family office (Single-family or multi-family office)',
+  'Other',
+]
+const Q2 = [
+  'Yes — actively (5+ private market transactions to date)',
+  'Yes — selectively (1–4 deals completed)',
+  'Not yet — evaluating (Building familiarity with the asset class)',
+  'Not yet — exploring (Early interest, gathering information)',
+]
 
+/* ── Answer button ─────────────────────────────────────── */
 function AnswerBtn({ opt, selected, onClick }: { opt: string; selected: boolean; onClick: () => void }) {
   return (
     <motion.button
       type="button"
       onClick={onClick}
       whileTap={{ scale: 0.99 }}
-      className="flex items-center justify-between gap-4 text-left outline-none w-full"
+      className="flex items-center justify-between outline-none w-full"
       style={{
-        padding: '14px 20px',
-        borderRadius: '12px',
-        background: selected ? 'rgba(255,255,255,0.04)' : '#141414',
-        border: selected ? '1px solid rgba(255,255,255,0.3)' : '1px solid rgba(255,255,255,0.08)',
-        transition: 'border-color 0.15s, background 0.15s',
+        height: '64px',
+        padding: '20px 16px',
+        borderRadius: '16px',
+        background: '#1A1A1A',
+        border: 'none',
+        flexShrink: 0,
       }}
     >
-      <span className="font-inter-tight font-medium text-text-m" style={{ color: selected ? '#fff' : 'rgba(255,255,255,0.6)' }}>
+      <span
+        className="font-inter-tight font-medium text-text-m"
+        style={{ color: selected ? '#FFFFFF' : '#A8A8A8' }}
+      >
         {opt}
       </span>
-      {/* Circle indicator */}
+
+      {/* Icon */}
       <motion.div
-        className="shrink-0 rounded-full flex items-center justify-center"
-        style={{
-          width: 28, height: 28,
-          border: selected ? 'none' : '1.5px solid rgba(255,255,255,0.3)',
-          background: selected ? '#fff' : 'transparent',
-        }}
+        className="shrink-0 flex items-center justify-center"
         animate={{ scale: selected ? 1.05 : 1 }}
         transition={{ duration: 0.15, ease: 'easeOut' }}
+        style={{
+          width: 28, height: 28,
+          borderRadius: '160px',
+          ...(selected
+            ? { background: '#FFF', boxShadow: '-1px -1px 4px 0 rgba(0,0,0,0.50) inset' }
+            : { border: '1px dashed #A8A8A8', background: 'transparent' }),
+        }}
       >
         {selected && (
-          <svg width="13" height="11" viewBox="0 0 13 11" fill="none">
-            <path d="M1.5 5.5L5 9L11.5 1.5" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+            <path d="M1.5 5L5 8.5L11.5 1.5" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         )}
       </motion.div>
@@ -51,6 +95,7 @@ function AnswerBtn({ opt, selected, onClick }: { opt: string; selected: boolean;
   )
 }
 
+/* ── Main ──────────────────────────────────────────────── */
 export default function Quiz({ onClose }: QuizProps) {
   const [slide, setSlide] = useState(0)
   const [progress, setProgress] = useState(0)
@@ -72,10 +117,10 @@ export default function Quiz({ onClose }: QuizProps) {
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       style={{ height: '100vh', background: '#080808' }}
     >
-      {/* ── Left: animated slides, #11: color #141414 ── */}
+      {/* ── LEFT SIDE ─────────────────────────────────── */}
       <div
         className="flex flex-col overflow-hidden"
-        style={{ width: '50%', height: '100%', padding: '48px 60px', background: '#141414', position: 'relative' }}
+        style={{ width: '50%', height: '100%', padding: '60px', background: '#141414' }}
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -86,39 +131,57 @@ export default function Quiz({ onClose }: QuizProps) {
             transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
             className="flex flex-col flex-1 overflow-hidden"
           >
-            {/* #16: card with heading + illustration + caption all inside */}
-            <div
-              className="flex flex-col overflow-hidden rounded-2xl border border-white/10 flex-1"
-              style={{ background: '#1a1a1a', padding: '32px', gap: '24px' }}
-            >
-              {/* Heading + body */}
-              <div className="flex flex-col gap-3">
-                <h2
-                  className="font-inter-tight font-semibold text-white whitespace-pre-line"
-                  style={{ fontSize: '40px', lineHeight: 1.1, letterSpacing: '-0.02em' }}
-                >
-                  {cur.heading}
-                </h2>
-                <p className="font-inter-tight font-medium text-white/60 whitespace-pre-line" style={{ fontSize: '16px', lineHeight: 1.5 }}>
-                  {cur.body}
-                </p>
-              </div>
+            {/* Heading — outside the card */}
+            <div className="flex flex-col gap-4 shrink-0">
+              <h2
+                className="font-inter-tight font-semibold text-white whitespace-pre-line"
+                style={{ fontSize: '48px', lineHeight: 1.05, letterSpacing: '-0.02em' }}
+              >
+                {cur.heading}
+              </h2>
+              <p className="font-inter-tight font-medium text-white/60 whitespace-pre-line" style={{ fontSize: '18px', lineHeight: 1.5 }}>
+                {cur.body}
+              </p>
+            </div>
 
-              {/* Illustration 672×225 */}
-              <div className="rounded-xl overflow-hidden shrink-0" style={{ height: '225px' }}>
+            {/* 64px gap to card */}
+            <div style={{ height: '64px', flexShrink: 0 }} />
+
+            {/* Content card — bg #141414 + border: none + r:24 */}
+            {/* For slides 1&2: frame + caption; for slide 3: frame + subheading + paragraph */}
+            <div
+              className="flex flex-col rounded-3xl overflow-hidden shrink-0"
+              style={{ background: '#1a1a1a', gap: '20px', padding: '20px' }}
+            >
+              {/* Frame with illustration */}
+              <div className="rounded-xl overflow-hidden" style={{ height: '200px' }}>
                 <img src={cur.img} alt="" className="w-full h-full object-cover" />
               </div>
 
-              {/* Caption */}
-              <p className="font-inter-tight font-semibold text-white whitespace-pre-line" style={{ fontSize: '16px', lineHeight: 1.5 }}>
-                {cur.caption}
-              </p>
+              {slide === 2 && cur.subheading ? (
+                /* Slide 3: subheading + paragraph */
+                <div className="flex flex-col gap-2 px-2 pb-2">
+                  <h3 className="font-inter-tight font-semibold text-white" style={{ fontSize: '20px' }}>
+                    {cur.subheading}
+                  </h3>
+                  <p className="font-inter-tight font-medium text-white/60 whitespace-pre-line" style={{ fontSize: '16px', lineHeight: 1.5 }}>
+                    {cur.caption ?? cur.body}
+                  </p>
+                </div>
+              ) : (
+                /* Slides 1&2: caption */
+                cur.caption && (
+                  <p className="font-inter-tight font-semibold text-white whitespace-pre-line px-2 pb-2" style={{ fontSize: '17px', lineHeight: 1.5 }}>
+                    {cur.caption}
+                  </p>
+                )
+              )}
             </div>
           </motion.div>
         </AnimatePresence>
 
         {/* Progress bar */}
-        <div className="flex flex-col gap-2 mt-6 shrink-0">
+        <div className="flex flex-col gap-2 mt-auto pt-8 shrink-0">
           <div className="flex gap-2">
             {SLIDES.map((s, i) => (
               <div key={s.id} className="flex-1 rounded-full overflow-hidden" style={{ height: '2px', background: 'rgba(255,255,255,0.15)' }}>
@@ -139,47 +202,64 @@ export default function Quiz({ onClose }: QuizProps) {
         </div>
       </div>
 
-      {/* ── Right: fixed form, #15: overflow hidden, #14: full height ── */}
+      {/* ── RIGHT SIDE ────────────────────────────────── */}
       <div
         className="flex flex-col overflow-hidden"
-        style={{ width: '50%', height: '100%', padding: '40px 60px' }}
+        style={{ width: '50%', height: '100%', padding: '60px 64px' }}
       >
         {/* Close */}
-        <div className="flex justify-end mb-6 shrink-0">
+        <div className="flex justify-end mb-8 shrink-0">
           <button type="button" onClick={onClose} className="font-inter-tight font-medium text-text-m text-white/40 hover:text-white transition-colors outline-none">
             ✕ Close
           </button>
         </div>
 
-        {/* Form content — #15: no scroll, compact */}
-        <div className="flex flex-col flex-1 overflow-hidden gap-6">
-          <h2 className="font-inter-tight font-semibold text-white shrink-0" style={{ fontSize: '32px', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+        {/* Form */}
+        <div className="flex flex-col flex-1 overflow-hidden gap-8">
+          <h2 className="font-inter-tight font-semibold text-white shrink-0" style={{ fontSize: '36px', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
             Get an Access<br />to pre-IPO Infrastructure
           </h2>
 
           {/* Q1 */}
           <div className="flex flex-col gap-3 shrink-0">
-            <p className="font-inter-tight font-semibold text-text-m text-white">Question 1: What best describes your role?</p>
+            <p className="font-inter-tight font-semibold text-text-m text-white">
+              Question 1: What best describes your role?
+            </p>
             <div className="flex flex-col gap-2">
-              {Q1.map((opt, i) => <AnswerBtn key={i} opt={opt} selected={q1 === i} onClick={() => setQ1(i)} />)}
+              {Q1.map((opt, i) => (
+                <AnswerBtn key={i} opt={opt} selected={q1 === i} onClick={() => setQ1(q1 === i ? null : i)} />
+              ))}
             </div>
           </div>
 
           {/* Q2 */}
           <div className="flex flex-col gap-3 shrink-0">
-            <p className="font-inter-tight font-semibold text-text-m text-white">Question 2: Have you participated in private markets before?</p>
+            <p className="font-inter-tight font-semibold text-text-m text-white">
+              Question 2: Have you participated in private markets before?
+            </p>
             <div className="flex flex-col gap-2">
-              {Q2.map((opt, i) => <AnswerBtn key={i} opt={opt} selected={q2 === i} onClick={() => setQ2(i)} />)}
+              {Q2.map((opt, i) => (
+                <AnswerBtn key={i} opt={opt} selected={q2 === i} onClick={() => setQ2(q2 === i ? null : i)} />
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Buttons */}
-        <div className="flex items-center justify-between mt-6 shrink-0">
-          <button type="button" onClick={onClose} className="font-inter-tight font-semibold text-text-l text-white/50 hover:text-white transition-colors outline-none">
+        {/* Back + Next */}
+        <div className="flex items-center justify-between mt-8 shrink-0">
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex items-center justify-center font-inter-tight font-semibold text-text-m text-white outline-none hover:opacity-70 transition-opacity"
+            style={{ height: '48px', padding: '0 24px', borderRadius: '160px', border: '1px solid rgba(255,255,255,0.2)' }}
+          >
             Back
           </button>
-          <button type="button" className="flex items-center justify-center h-14 px-8 rounded-full bg-white font-inter-tight font-semibold text-text-btn text-phone-bg hover:scale-[1.02] transition-transform outline-none">
+          <button
+            type="button"
+            className="flex items-center justify-center font-inter-tight font-semibold text-text-m text-phone-bg outline-none hover:scale-[1.02] transition-transform"
+            style={{ height: '48px', padding: '0 36px', borderRadius: '160px', background: '#fff' }}
+          >
             Next
           </button>
         </div>
