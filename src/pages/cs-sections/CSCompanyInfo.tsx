@@ -1,7 +1,7 @@
 /** Section 3 — Building safer AI (Figma 89:372) */
 export default function CSCompanyInfo() {
   return (
-    <section className="w-full bg-page-bg" style={{ paddingBottom: 0, marginTop: 100, marginBottom: 100 }}>
+    <section className="w-full bg-page-bg padding-section-t6-b6">
       <div className="mx-auto w-full max-w-content flex flex-col gap-12 items-center">
 
         {/* Heading */}

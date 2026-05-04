@@ -18,7 +18,7 @@ export default function CSFAQ() {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <section className="w-full bg-page-bg" style={{ paddingBottom: 0, marginTop: 100 }}>
+    <section className="w-full bg-page-bg padding-section-t6-b6">
       <div className="mx-auto w-full max-w-content flex flex-col gap-12 items-start">
 
         {/* Heading — 64px gradient (Figma 89:478) */}
@@ -55,16 +55,15 @@ export default function CSFAQ() {
                 >
                   <span className="font-inter-tight font-semibold text-text-xl text-white">{item.q}</span>
 
-                  {/* Icons from public/icons: dd-open / dd-close */}
-                  <div className="shrink-0" style={{ width: 36, height: 36 }}>
-                    <img
-                      src={isOpen ? '/icons/icon-dd-close.svg' : '/icons/icon-dd-open.svg'}
-                      alt=""
-                      width={36}
-                      height={36}
-                      style={{ transition: 'opacity 0.2s ease-in-out' }}
-                    />
-                  </div>
+                  {/* Icons 64×64: icon-dd-open (closed) / icon-dd-close (open) */}
+                  <img
+                    src={isOpen ? '/icons/icon-dd-close.svg' : '/icons/icon-dd-open.svg'}
+                    alt=""
+                    width={64}
+                    height={64}
+                    className="shrink-0"
+                    style={{ transition: 'opacity 0.2s ease-in-out' }}
+                  />
                 </button>
 
                 {/* Answer — smooth height animation via max-height */}
