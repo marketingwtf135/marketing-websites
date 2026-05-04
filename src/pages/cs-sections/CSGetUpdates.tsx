@@ -16,7 +16,7 @@ export default function CSGetUpdates() {
   return (
     <section
       className="relative w-full overflow-hidden bg-page-bg flex items-center justify-center"
-      style={{ height: '800px' }}
+      style={{ height: '700px' }}
     >
       {/* bg-shine — centered, not cropped (contain) */}
       <img
