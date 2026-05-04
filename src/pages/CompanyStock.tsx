@@ -1,109 +1,9 @@
 import { useState } from 'react'
 import Nav from '../components/Nav'
 import CSHero from './cs-sections/CSHero'
+import CSTrackPrice from './cs-sections/CSTrackPrice'
 
 
-/** Track stock price chart section */
-function TrackPrice() {
-  const ranges = ['1W', '1M', '3M', '6M', '1Y', 'All']
-  const [range, setRange] = useState('1Y')
-  return (
-    <section className="w-full bg-page-bg" style={{ paddingBottom: '120px' }}>
-      <div className="mx-auto w-full max-w-content flex flex-col gap-12 items-start">
-        <div className="flex flex-col gap-6 items-start">
-          <div className="flex gap-2 items-center font-inter-tight font-medium text-text-l text-neutral-30">
-            <span className="opacity-50">2.0</span>
-            <span className="opacity-80">Performance</span>
-          </div>
-          <h2 className="font-inter-tight font-semibold text-h2 text-white">Track Anthropic Stock Price</h2>
-          <p className="font-inter-tight font-medium text-text-xl text-white/60" style={{ maxWidth: '604px' }}>
-            Anthropic consensus price reflects the latest secondary-market clearing price across qualified investors and tender events.
-          </p>
-        </div>
-
-        {/* Chart card */}
-        <div className="w-full rounded-3xl border border-white/10 bg-surface-1 overflow-hidden" style={{ padding: '32px' }}>
-          {/* Header row: price + range tabs */}
-          <div className="flex items-start justify-between mb-8">
-            <div className="flex flex-col gap-1">
-              <span className="font-inter-tight font-medium text-s-med text-white/50">Anthropic consensus price</span>
-              <div className="flex items-baseline gap-3">
-                <span className="font-inter-tight font-semibold text-h2 text-white">$262.34</span>
-                <span className="font-inter-tight font-medium text-text-l text-status-open">+18.4% YoY</span>
-              </div>
-            </div>
-            <div className="flex gap-1 p-1 rounded-full bg-surface-2">
-              {ranges.map((r) => (
-                <button
-                  key={r}
-                  type="button"
-                  onClick={() => setRange(r)}
-                  className={[
-                    'px-3 py-1.5 rounded-full font-inter-tight font-medium text-s-med transition-colors',
-                    range === r ? 'bg-white text-phone-bg' : 'text-white/60 hover:text-white',
-                  ].join(' ')}
-                >
-                  {r}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Chart placeholder */}
-          <ChartPlaceholder />
-
-          {/* Bottom stats row */}
-          <div className="grid grid-cols-4 gap-4 mt-8 pt-6 border-t border-white/5">
-            <BottomStat label="Open" value="$258.40" />
-            <BottomStat label="High" value="$264.10" />
-            <BottomStat label="Low" value="$257.85" />
-            <BottomStat label="Volume" value="74" />
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function BottomStat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex flex-col gap-1">
-      <span className="font-inter-tight font-medium text-s-med text-white/50">{label}</span>
-      <span className="font-inter-tight font-semibold text-text-l text-white">{value}</span>
-    </div>
-  )
-}
-
-function ChartPlaceholder() {
-  // SVG line chart with cyan glow gradient
-  return (
-    <svg viewBox="0 0 1080 320" className="w-full h-auto" preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="chart-line" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#175e6e" />
-          <stop offset="100%" stopColor="#d7ffff" />
-        </linearGradient>
-        <linearGradient id="chart-fill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#d7ffff" stopOpacity="0.25" />
-          <stop offset="100%" stopColor="#d7ffff" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      {/* Fill under line */}
-      <path
-        d="M0,260 C120,255 220,230 360,210 C480,195 600,180 720,140 C840,105 960,75 1080,40 L1080,320 L0,320 Z"
-        fill="url(#chart-fill)"
-      />
-      {/* Line */}
-      <path
-        d="M0,260 C120,255 220,230 360,210 C480,195 600,180 720,140 C840,105 960,75 1080,40"
-        fill="none"
-        stroke="url(#chart-line)"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-    </svg>
-  )
-}
 
 /** Building safer AI info section */
 function CompanyInfo() {
@@ -341,7 +241,7 @@ export default function CompanyStock() {
     <main className="bg-page-bg overflow-x-clip">
       <Nav active="Company Stock" />
       <CSHero />
-      <TrackPrice />
+      <CSTrackPrice />
       <CompanyInfo />
       <YearlyPerformance />
       <WhyInvest />
