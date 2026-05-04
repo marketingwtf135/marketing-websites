@@ -120,7 +120,7 @@ export default function Quiz({ onClose }: QuizProps) {
       {/* ── LEFT SIDE ─────────────────────────────────── */}
       <div
         className="flex flex-col overflow-hidden"
-        style={{ width: '50%', height: '100%', padding: '60px', background: '#141414' }}
+        style={{ width: '50%', height: '100%', padding: '60px', background: '#080808' }}
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -147,37 +147,36 @@ export default function Quiz({ onClose }: QuizProps) {
             {/* 64px gap to card */}
             <div style={{ height: '64px', flexShrink: 0 }} />
 
-            {/* Content card — #3: 760×400, bg #141414, borderRadius 24 */}
+            {/* Content card: 760×400, bg #141414, r:24 — flex column, image centred, text below */}
             <div
-              className="flex flex-col rounded-3xl shrink-0"
-              style={{ width: '760px', height: '400px', background: '#141414', gap: '20px', padding: '20px', overflow: 'hidden' }}
+              className="flex flex-col rounded-3xl shrink-0 overflow-hidden"
+              style={{ width: '760px', height: '400px', background: '#141414' }}
             >
-              {/* #4: Frame with illustration — image centred both axes */}
+              {/* Image frame — flex-1, centres image both axes */}
               <div
-                className="rounded-xl flex items-center justify-center shrink-0"
-                style={{ height: '240px', background: '#1a1a1a', overflow: 'hidden' }}
+                className="flex items-center justify-center flex-1"
+                style={{ overflow: 'hidden' }}
               >
-                <img src={cur.img} alt="" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+                <img
+                  src={cur.img}
+                  alt=""
+                  style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', display: 'block' }}
+                />
               </div>
 
-              {slide === 2 && cur.subheading ? (
-                /* Slide 3: subheading + paragraph */
-                <div className="flex flex-col gap-2 px-2 pb-2">
-                  <h3 className="font-inter-tight font-semibold text-white" style={{ fontSize: '20px' }}>
+              {/* Text row at bottom — always inside the card */}
+              <div className="shrink-0 flex flex-col gap-1" style={{ padding: '16px 24px' }}>
+                {cur.subheading && (
+                  <h3 className="font-inter-tight font-semibold text-white" style={{ fontSize: '18px', lineHeight: 1.3 }}>
                     {cur.subheading}
                   </h3>
-                  <p className="font-inter-tight font-medium text-white/60 whitespace-pre-line" style={{ fontSize: '16px', lineHeight: 1.5 }}>
+                )}
+                {(cur.caption || cur.body) && (
+                  <p className="font-inter-tight font-medium text-white/60 whitespace-pre-line" style={{ fontSize: '15px', lineHeight: 1.5 }}>
                     {cur.caption ?? cur.body}
                   </p>
-                </div>
-              ) : (
-                /* Slides 1&2: caption */
-                cur.caption && (
-                  <p className="font-inter-tight font-semibold text-white whitespace-pre-line px-2 pb-2" style={{ fontSize: '17px', lineHeight: 1.5 }}>
-                    {cur.caption}
-                  </p>
-                )
-              )}
+                )}
+              </div>
             </div>
           </motion.div>
         </AnimatePresence>
