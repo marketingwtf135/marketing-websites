@@ -134,26 +134,21 @@ function StockChart({ pts }: { pts: [number, number][] }) {
   )
 }
 
-/** ── Icon with circle bg (Figma pattern: 44px circle + 24px icon centred) ── */
-function IconBadge({ src, alt }: { src: string; alt: string }) {
+/** ── Icon with circle bg (Figma: 44px circle + 24px icon centered) ── */
+function IconBadge({ src, alt, bg }: { src: string; alt: string; bg?: string }) {
   return (
     <div className="relative shrink-0" style={{ width: 44, height: 44 }}>
-      <img src="/img/cs/icon-circle-bg.svg" alt="" className="absolute inset-0 w-full h-full" />
-      <img
-        src={src}
-        alt={alt}
-        className="absolute"
-        style={{ width: 24, height: 24, left: 10, top: 10 }}
-      />
+      <img src={bg ?? '/img/cs/icon-circle-bg.svg'} alt="" className="absolute inset-0 w-full h-full" />
+      <img src={src} alt={alt} className="absolute" style={{ width: 24, height: 24, left: 10, top: 10 }} />
     </div>
   )
 }
 
 /** ── Advantage card ─────────────────────────────────────── */
 function AdvCard({
-  label, value, iconSrc, iconAlt, leftBorder,
+  label, value, iconSrc, iconBg, iconAlt, leftBorder,
 }: {
-  label: string; value: string; iconSrc: string; iconAlt: string; leftBorder?: boolean
+  label: string; value: string; iconSrc: string; iconBg?: string; iconAlt: string; leftBorder?: boolean
 }) {
   return (
     <div
@@ -168,7 +163,7 @@ function AdvCard({
         <span className="font-inter-tight font-medium text-text-m text-white/60">{label}</span>
         <span className="font-inter-tight font-semibold text-h5 text-white">{value}</span>
       </div>
-      <IconBadge src={iconSrc} alt={iconAlt} />
+      <IconBadge src={iconSrc} alt={iconAlt} bg={iconBg} />
     </div>
   )
 }
@@ -179,8 +174,8 @@ export default function CSTrackPrice() {
   const data = RANGE_DATA[activeRange]
 
   return (
-    <section className="w-full bg-page-bg" style={{ paddingBottom: '120px' }}>
-      <div className="mx-auto w-full max-w-content flex flex-col gap-[60px] items-start">
+    <section className="w-full bg-page-bg" style={{ paddingBottom: '120px', marginBottom: '200px' }}>
+      <div className="mx-auto w-full max-w-content flex flex-col gap-[60px] items-start" style={{ marginTop: '200px' }}>
 
         {/* ── Heading ── */}
         <div className="flex flex-col gap-8 items-start">
@@ -288,31 +283,35 @@ export default function CSTrackPrice() {
             <StockChart key={activeRange} pts={data.pts} />
           </div>
 
-          {/* ── Advantage cards ── */}
+          {/* ── Advantage cards — icons from Figma 89:339/349/359/367 ── */}
           <div className="flex items-center justify-between w-full">
             <AdvCard
               label="Highest Bid"
               value="$258.00"
-              iconSrc="/img/cs/icon-course-up.svg"
+              iconBg="/img/cs/adv-bg-1.svg"
+              iconSrc="/img/cs/adv-course-up.svg"
               iconAlt="Chart up"
               leftBorder
             />
             <AdvCard
               label="Lowest Ask"
               value="$268.50"
-              iconSrc="/img/cs/icon-course-down.svg"
+              iconBg="/img/cs/adv-bg-2.svg"
+              iconSrc="/img/cs/adv-course-down.svg"
               iconAlt="Chart down"
             />
             <AdvCard
               label="Last Transaction"
               value="$262.34"
-              iconSrc="/img/cs/icon-money-bag.svg"
+              iconBg="/img/cs/adv-bg-3.svg"
+              iconSrc="/img/cs/adv-money-bag.svg"
               iconAlt="Money bag"
             />
             <AdvCard
               label="Live Orders"
               value="79"
-              iconSrc="/img/cs/icon-user-body.svg"
+              iconBg="/img/cs/adv-bg-4.svg"
+              iconSrc="/img/cs/adv-user-body.svg"
               iconAlt="Live orders"
             />
           </div>

@@ -12,7 +12,7 @@ function navHref(label: string) {
 
 export default function Nav({ active }: NavProps) {
   return (
-    <nav className="absolute top-0 left-0 w-full z-10 border-b border-nav-border bg-nav-bg" style={{ height: '80px' }}>
+    <nav className="sticky top-0 left-0 w-full z-50 border-b border-nav-border bg-nav-bg" style={{ height: '80px' }}>
       <div className="mx-auto w-full max-w-content h-full flex items-center justify-between">
         <a href="#" aria-label="AXEVIL Capital" className="shrink-0">
           <img src="/img/block01/logo.svg" alt="AXEVIL" width={155} height={24} />
