@@ -138,8 +138,8 @@ function StockChart({ pts }: { pts: [number, number][] }) {
 function IconBadge({ src, alt, bg }: { src: string; alt: string; bg?: string }) {
   return (
     <div className="relative shrink-0" style={{ width: 44, height: 44 }}>
-      <img src={bg ?? '/img/cs/icon-circle-bg.svg'} alt="" className="absolute inset-0 w-full h-full" />
-      <img src={src} alt={alt} className="absolute" style={{ width: 24, height: 24, left: 10, top: 10 }} />
+      <img src={bg ?? '/img/cs/icon-circle-bg.svg'} alt="" width={44} height={44} className="absolute" style={{ left: 0, top: 0 }} />
+      <img src={src} alt={alt} width={24} height={24} className="absolute overflow-clip" style={{ left: 10, top: 11 }} />
     </div>
   )
 }
@@ -174,8 +174,8 @@ export default function CSTrackPrice() {
   const data = RANGE_DATA[activeRange]
 
   return (
-    <section className="w-full bg-page-bg" style={{ paddingBottom: '120px', marginBottom: '200px' }}>
-      <div className="mx-auto w-full max-w-content flex flex-col gap-[60px] items-start" style={{ marginTop: '200px' }}>
+    <section className="w-full bg-page-bg" style={{ paddingBottom: '120px' }}>
+      <div className="mx-auto w-full max-w-content flex flex-col gap-[60px] items-start">
 
         {/* ── Heading ── */}
         <div className="flex flex-col gap-8 items-start">

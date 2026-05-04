@@ -1,6 +1,7 @@
 /** Company Stock — Hero section (Figma 89:567)
- *  #2: height 100vh  #3: bg-shine-inner-pages.png centered
- *  #4: breadcrumb arrow from 89:613  #5: no white borders
+ *  #2: 100vh  #3: bg-shine-inner-pages centered
+ *  #7: heading bottom 40px  #8/#9: top 40px from nav (=120px total)
+ *  #10: section with 40px top/bottom internal padding (+ 80px nav offset)
  */
 
 const TAGS = [
@@ -12,51 +13,42 @@ export default function CSHero() {
   return (
     <section
       className="relative w-full bg-page-bg overflow-clip"
-      style={{ height: '100vh', minHeight: '720px', outline: 'none', border: 'none' }}
+      style={{ height: '100vh', minHeight: '720px' }}
     >
-      {/* Main bg-shine */}
+      {/* bg-shine-inner-pages — centred on all axes */}
       <img
         alt=""
-        src="/img/bg-shine-company-stock.png"
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        style={{ zIndex: 0 }}
+        src="/img/bg-shine-inner-pages.png"
+        className="absolute pointer-events-none"
+        style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)', maxWidth: '100%', zIndex: 0 }}
       />
 
-      <div className="relative mx-auto w-full max-w-content h-full" style={{ zIndex: 1, outline: 'none' }}>
-
-        {/* bg-shine-inner-pages — centered on all axes */}
-        <img
-          alt=""
-          src="/img/bg-shine-inner-pages.png"
-          className="absolute pointer-events-none"
-          style={{
-            top: '50%', left: '50%',
-            transform: 'translate(-50%, -50%)',
-            maxWidth: '100%',
-            zIndex: 0,
-          }}
-        />
-
-        {/* Breadcrumb — top:120, left:0 */}
+      {/* Content container — full height, uses padding for top/bottom spacing
+          paddingTop: 80px(nav) + 40px gap = 120px; paddingBottom: 40px */}
+      <div
+        className="relative mx-auto w-full max-w-content h-full"
+        style={{ zIndex: 1, paddingTop: '120px', paddingBottom: '40px' }}
+      >
+        {/* Breadcrumb — #8: 40px below nav (top:120 from section = 80nav+40) */}
         <div className="absolute flex items-center gap-2" style={{ left: 0, top: '120px', zIndex: 2 }}>
           <span className="font-inter-tight font-medium text-text-m text-neutral-30 opacity-80 whitespace-nowrap">
             Company Stock
           </span>
-          {/* Chevron → from Figma 89:613 */}
+          {/* #1: original arrow-down.svg rotated -90° */}
           <img
-            src="/img/cs/icon-breadcrumb-arrow.svg"
+            src="/img/block01/arrow-down.svg"
             alt=""
             aria-hidden="true"
             width={16}
             height={16}
-            className="opacity-80"
+            style={{ transform: 'rotate(-90deg)', opacity: 0.8 }}
           />
           <span className="font-inter-tight font-medium text-text-m text-white whitespace-nowrap">
             Anthropic
           </span>
         </div>
 
-        {/* Info card column — right-aligned, top:120, width:555 */}
+        {/* Info card column — #9: 40px below nav (top:120) */}
         <div
           className="absolute flex flex-col gap-4"
           style={{ right: 0, top: '120px', width: '555px', zIndex: 2 }}
@@ -91,32 +83,20 @@ export default function CSHero() {
             {/* +86% YTD badge */}
             <div
               className="absolute flex items-center gap-1 rounded-full"
-              style={{
-                top: '12px', right: '12px',
-                background: 'rgba(77,186,121,0.1)',
-                border: '1px solid rgba(77,186,121,0.25)',
-                padding: '6px 12px',
-                height: '32px',
-              }}
+              style={{ top: '12px', right: '12px', background: 'rgba(77,186,121,0.1)', border: '1px solid rgba(77,186,121,0.25)', padding: '6px 12px', height: '32px' }}
             >
               <img src="/img/cs/icon-arrow-up-green.svg" alt="" width={12} height={8} />
-              <span className="font-inter-tight font-medium text-s-med text-status-open whitespace-nowrap">
-                +86% YTD
-              </span>
+              <span className="font-inter-tight font-medium text-s-med text-status-open whitespace-nowrap">+86% YTD</span>
             </div>
 
-            {/* Price */}
             <div className="flex flex-col gap-4">
               <span className="font-inter-tight font-medium text-text-l text-neutral-30">Consensus Price</span>
               <div className="flex items-end gap-2">
-                <span className="font-inter-tight font-semibold text-white leading-none" style={{ fontSize: '64px', letterSpacing: '-0.02em' }}>
-                  $262.34
-                </span>
+                <span className="font-inter-tight font-semibold text-white leading-none" style={{ fontSize: '64px', letterSpacing: '-0.02em' }}>$262.34</span>
                 <span className="font-inter-tight font-medium text-text-m text-neutral-30 mb-1">/ share</span>
               </div>
             </div>
 
-            {/* Stats 2×2 */}
             <div className="flex flex-col gap-8">
               <div className="flex gap-[73px] items-start">
                 <StatItem label="Target Price"         value="$262.34" />
@@ -132,21 +112,17 @@ export default function CSHero() {
           {/* Tags */}
           <div className="flex flex-wrap gap-2 items-center">
             {TAGS.map((tag) => (
-              <span
-                key={tag}
-                className="flex items-center justify-center font-inter-tight font-medium text-s-med text-white whitespace-nowrap opacity-80"
-                style={{ height: '40px', padding: '8px 16px', borderRadius: '160px', border: '1px solid #323232' }}
-              >
+              <span key={tag} className="flex items-center justify-center font-inter-tight font-medium text-s-med text-white whitespace-nowrap opacity-80" style={{ height: '40px', padding: '8px 16px', borderRadius: '160px', border: '1px solid #323232' }}>
                 {tag}
               </span>
             ))}
           </div>
         </div>
 
-        {/* Heading block — bottom-anchored */}
+        {/* Heading block — #7: bottom 40px */}
         <div
           className="absolute flex flex-col gap-8"
-          style={{ left: 0, bottom: '80px', width: '614px', zIndex: 2 }}
+          style={{ left: 0, bottom: '40px', width: '614px', zIndex: 2 }}
         >
           <div className="flex items-center gap-2 font-inter-tight font-medium text-text-l text-neutral-30">
             <span className="opacity-50">1.0</span>

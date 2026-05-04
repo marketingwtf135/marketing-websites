@@ -18,7 +18,7 @@ export default function CSFAQ() {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <section className="w-full bg-page-bg" style={{ paddingBottom: '120px' }}>
+    <section className="w-full bg-page-bg" style={{ paddingBottom: '0' }}>
       <div className="mx-auto w-full max-w-content flex flex-col gap-12 items-start">
 
         {/* Heading — 64px gradient (Figma 89:478) */}

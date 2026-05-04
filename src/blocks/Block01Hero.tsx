@@ -1,11 +1,8 @@
 import CtaButton from '../components/CtaButton'
-import Nav from '../components/Nav'
 
 export default function Block01Hero() {
   return (
-    <section className="relative w-full bg-page-bg overflow-clip" style={{ height: '100vh', minHeight: '600px' }}>
-
-      <Nav />
+    <section className="relative w-full bg-page-bg overflow-clip" style={{ height: '100vh', minHeight: '600px', paddingTop: '80px' }}>
 
       {/* Hero illustration — top-right, max-width 1600px */}
       <div

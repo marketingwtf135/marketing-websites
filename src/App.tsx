@@ -12,6 +12,7 @@ import Block10News from './blocks/Block10News'
 import Block11Logos from './blocks/Block11Logos'
 import Block12Cta from './blocks/Block12Cta'
 import FadeIn from './components/FadeIn'
+import Nav from './components/Nav'
 import CompanyStock from './pages/CompanyStock'
 import { Agentation } from 'agentation'
 
@@ -33,6 +34,7 @@ function useRoute() {
 function Home() {
   return (
     <main className="bg-page-bg overflow-x-clip">
+      <Nav />
       <Block01Hero />
       <FadeIn><Block02Logos /></FadeIn>
       <FadeIn><Block03Cards /></FadeIn>
