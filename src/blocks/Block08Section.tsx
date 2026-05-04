@@ -1,26 +1,37 @@
-/** Block 08 — "Best Venture Practices for Investor Capital Protection."
- *  Figma 114:466 — 2×2 grid: SPV Ownership, Delaware, SEC, Dual-Layer
+/** Block 08 — "Best Venture Practices" — Figma 114:466
+ *  2×2 grid, gap:0, border #1A1A1A
+ *  Card 1 (TL): border-top + border-left
+ *  Card 2 (TR): border-top + border-left + border-right  (no bottom)
+ *  Card 3 (BL): border-top + border-left + border-bottom (no right)
+ *  Card 4 (BR): all 4 sides
  */
+
+const B = '1px solid #1A1A1A'
+
 const CARDS = [
   {
     img: '/img/ill-legal-01.png',
     title: 'SPV-Based Ownership',
     body: 'SPV structure enables direct ownership of portfolio company shares. Each investment is isolated in a dedicated entity, protecting capital and limiting liability.',
+    border: { borderTop: B, borderLeft: B } satisfies React.CSSProperties,
   },
   {
     img: '/img/ill-legal-02.png',
     title: 'Delaware Jurisdiction',
     body: 'The fund and Axevil Capital are registered in Delaware, USA — the preferred jurisdiction for most U.S. startups and venture capital funds, known for its investor-friendly corporate law.',
+    border: { borderTop: B, borderLeft: B, borderRight: B } satisfies React.CSSProperties,
   },
   {
     img: '/img/ill-legal-03.png',
     title: 'SEC-Compliant Structure',
     body: 'Axevil Capital LLC is registered with the SEC as an Exempt Reporting Adviser (ERA), ensuring regulatory transparency and compliance with U.S. securities law.',
+    border: { borderTop: B, borderLeft: B, borderBottom: B } satisfies React.CSSProperties,
   },
   {
     img: '/img/ill-legal-04.png',
     title: 'Dual-Layer Verification',
     body: 'We verify both the investment case and transaction execution — assessing company fundamentals, deal documentation, transfer mechanics, and seller legitimacy.',
+    border: { border: B } satisfies React.CSSProperties,
   },
 ]
 
@@ -43,15 +54,16 @@ export default function Block08Section() {
           </p>
         </div>
 
-        {/* 2×2 grid */}
-        <div className="grid grid-cols-2 gap-5 w-full">
+        {/* 2×2 grid, gap:0, no fill, per-card borders */}
+        <div className="grid grid-cols-2 w-full" style={{ gap: 0 }}>
           {CARDS.map((card) => (
             <div
               key={card.title}
-              className="rounded-3xl border border-white/10 bg-surface-1 overflow-hidden flex flex-col"
+              className="flex flex-col"
+              style={{ padding: '24px', gap: '24px', ...card.border }}
             >
-              {/* Illustration: 672×225 frame */}
-              <div className="w-full overflow-hidden" style={{ height: '225px' }}>
+              {/* Frame — illustration */}
+              <div className="w-full overflow-hidden rounded-xl" style={{ height: '225px' }}>
                 <img
                   alt={card.title}
                   src={card.img}
@@ -59,14 +71,16 @@ export default function Block08Section() {
                   loading="lazy"
                 />
               </div>
-              {/* Text */}
-              <div className="p-8 flex flex-col gap-4">
+
+              {/* Text block */}
+              <div className="flex flex-col gap-3">
                 <h3 className="font-inter-tight font-semibold text-h5 text-white">{card.title}</h3>
                 <p className="font-inter-tight font-medium text-text-m text-white/60">{card.body}</p>
               </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   )
