@@ -55,21 +55,14 @@ export default function CSFAQ() {
                 >
                   <span className="font-inter-tight font-semibold text-text-xl text-white">{item.q}</span>
 
-                  {/* Icon:
-                    Closed → icon-dd-close (+)  at rotation 0°
-                    Open   → icon-dd-open  (×)  at rotation 45° (smooth spin)
-                    Both transitions use framer-motion for smooth 0.3s rotate
-                  */}
+                  {/* Single icon — rotates 45° on open, no src swap */}
                   <motion.img
-                    key={isOpen ? 'open' : 'closed'}
-                    src={isOpen ? '/icons/icon-dd-open.svg' : '/icons/icon-dd-close.svg'}
+                    src="/icons/icon-dd-close.svg"
                     alt=""
                     width={64}
                     height={64}
                     className="shrink-0"
-                    initial={{ rotate: isOpen ? 0 : 45, opacity: 0 }}
-                    animate={{ rotate: isOpen ? 45 : 0, opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                    animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                   />
                 </button>
