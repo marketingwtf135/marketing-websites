@@ -76,15 +76,14 @@ export default function Block06Tablet() {
 
         {/* Desktop interface + feature list */}
         <div className="flex flex-col gap-8 items-start w-full">
-          {/* Desktop frame — axevill-pro-desktop, fill, 837px */}
+          {/* Desktop frame — changes based on active tab */}
           <div className="relative w-full overflow-clip rounded-card-lg border border-border-subtle" style={{ height: '837px' }}>
             <img
-              alt="Axevil Pro desktop interface — Active Deals"
-              src="/img/block06/axevill-pro-desktop.png"
-              width={1660}
-              height={948}
-              className="absolute inset-0 w-full h-full object-cover"
+              alt={active === 'Portfolio' ? 'Portfolio view' : 'Axevil Pro desktop interface'}
+              src={active === 'Portfolio' ? '/img/tag-portfolio.png' : '/img/block06/axevill-pro-desktop.png'}
+              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
               loading="lazy"
+              key={active === 'Portfolio' ? 'portfolio' : 'default'}
             />
           </div>
 
