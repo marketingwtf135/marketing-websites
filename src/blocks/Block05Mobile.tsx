@@ -82,10 +82,10 @@ export default function Block05Mobile() {
             {'Mobile app \nfor investor'}
           </h2>
 
-          {/* ── Info card A — blur applied DIRECTLY (no wrapper) ── */}
+          {/* ── Info card A — z:1, blur OUT ── */}
           <div
             className="absolute bg-surface-2 border-8 border-surface-edge flex flex-col items-start p-4 rounded-3xl"
-            style={{ right: '60px', top: '60px', width: '297px', opacity: opacityA, filter: `blur(${blurA}px)`, transition: 'none' }}
+            style={{ right: '60px', top: '60px', width: '297px', opacity: opacityA, filter: `blur(${blurA}px)`, transition: 'none', zIndex: 1 }}
           >
             <div className="flex flex-col gap-12 items-start text-white w-full">
               <p className="font-inter-tight font-medium text-text-m text-white/50 whitespace-nowrap">{FRAMES[0].cardNum}</p>
@@ -96,13 +96,13 @@ export default function Block05Mobile() {
             </div>
           </div>
 
-          {/* ── Phone A — blur applied directly to the phone's root element ── */}
-          <PhoneWithCards frameIndex={0} blurPx={blurA} opacityVal={opacityA} />
+          {/* ── Phone A — z:1, blur OUT ── */}
+          <PhoneWithCards frameIndex={0} blurPx={blurA} opacityVal={opacityA} zIdx={1} />
 
-          {/* ── Info card B — blur IN ── */}
+          {/* ── Info card B — z:2 (накрывает A), blur IN ── */}
           <div
             className="absolute bg-surface-2 border-8 border-surface-edge flex flex-col items-start p-4 rounded-3xl"
-            style={{ right: '60px', top: '60px', width: '297px', opacity: opacityB, filter: `blur(${blurB}px)`, transition: 'none' }}
+            style={{ right: '60px', top: '60px', width: '297px', opacity: opacityB, filter: `blur(${blurB}px)`, transition: 'none', zIndex: 2 }}
           >
             <div className="flex flex-col gap-12 items-start text-white w-full">
               <p className="font-inter-tight font-medium text-text-m text-white/50 whitespace-nowrap">{FRAMES[1].cardNum}</p>
@@ -113,8 +113,8 @@ export default function Block05Mobile() {
             </div>
           </div>
 
-          {/* ── Phone B — same content for now ── */}
-          <PhoneWithCards frameIndex={1} blurPx={blurB} opacityVal={opacityB} />
+          {/* ── Phone B — z:2 (накрывает A сверху), blur IN ── */}
+          <PhoneWithCards frameIndex={1} blurPx={blurB} opacityVal={opacityB} zIdx={2} />
         </section>
       </div>
     </div>
@@ -122,7 +122,7 @@ export default function Block05Mobile() {
 }
 
 // ── Phone component ───────────────────────────────────────────────
-function PhoneWithCards({ frameIndex, blurPx = 0, opacityVal = 1 }: { frameIndex: number; blurPx?: number; opacityVal?: number }) {
+function PhoneWithCards({ frameIndex, blurPx = 0, opacityVal = 1, zIdx = 1 }: { frameIndex: number; blurPx?: number; opacityVal?: number; zIdx?: number }) {
   const cards = [
     { id: 'card-0', company: 'Space',     category: 'Growth Equity', logo: '/img/block05/logo-spacex.svg',    logoW: '114px', logoH: '16px' },
     { id: 'card-1', company: 'Anthropic', category: 'Growth Equity', logo: '/img/block05/logo-anthropic.svg', logoW: '23px',  logoH: '16px' },
@@ -133,7 +133,7 @@ function PhoneWithCards({ frameIndex, blurPx = 0, opacityVal = 1 }: { frameIndex
     <div
       id={`block05-phone-frame-${frameIndex}`}
       className="absolute pointer-events-none overflow-hidden"
-      style={{ left: '50%', top: '180px', transform: 'translateX(-50%)', width: '390px', height: '797px', opacity: opacityVal, filter: blurPx > 0 ? `blur(${blurPx}px)` : 'none', transition: 'none' }}
+      style={{ left: '50%', top: '180px', transform: 'translateX(-50%)', width: '390px', height: '797px', opacity: opacityVal, filter: blurPx > 0 ? `blur(${blurPx}px)` : 'none', transition: 'none', zIndex: zIdx }}
     >
       {/* Screen bg */}
       <div

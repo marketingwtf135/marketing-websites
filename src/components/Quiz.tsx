@@ -218,14 +218,14 @@ export default function Quiz({ onClose }: QuizProps) {
         </div>
 
         {/* Form */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 flex-1">
           <h2 className="font-inter-tight font-semibold text-white shrink-0" style={{ fontSize: '36px', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
             Get an Access<br />to pre-IPO Infrastructure
           </h2>
 
           {/* Q1 */}
           <div className="flex flex-col gap-3 shrink-0">
-            <p className="font-inter-tight font-semibold shrink-0" style={{ fontSize: '24px', fontWeight: 600, lineHeight: '120%', letterSpacing: '-0.48px', color: '#E5E5E5' }}>
+            <p className="font-inter-tight font-semibold shrink-0" style={{ fontSize: '20px', fontWeight: 600, lineHeight: '120%', letterSpacing: '-0.4px', color: '#E5E5E5' }}>
               Question 1: What best describes your role?
             </p>
             <div className="flex flex-col gap-2">
@@ -237,7 +237,7 @@ export default function Quiz({ onClose }: QuizProps) {
 
           {/* Q2 */}
           <div className="flex flex-col gap-3 shrink-0">
-            <p className="font-inter-tight font-semibold shrink-0" style={{ fontSize: '24px', fontWeight: 600, lineHeight: '120%', letterSpacing: '-0.48px', color: '#E5E5E5' }}>
+            <p className="font-inter-tight font-semibold shrink-0" style={{ fontSize: '20px', fontWeight: 600, lineHeight: '120%', letterSpacing: '-0.4px', color: '#E5E5E5' }}>
               Question 2: Have you participated in private markets before?
             </p>
             <div className="flex flex-col gap-2">
@@ -248,8 +248,8 @@ export default function Quiz({ onClose }: QuizProps) {
           </div>
         </div>
 
-        {/* Back + Next */}
-        <div className="flex items-center justify-between mt-8 shrink-0">
+        {/* Back + Next — fixed at bottom via mt-auto */}
+        <div className="flex items-center justify-between mt-auto pt-8 shrink-0">
           <button
             type="button"
             onClick={onClose}
