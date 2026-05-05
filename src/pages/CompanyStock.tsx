@@ -1,4 +1,5 @@
 import Nav from '../components/Nav'
+import Footer from '../components/Footer'
 import CSHero from './cs-sections/CSHero'
 import CSTrackPrice from './cs-sections/CSTrackPrice'
 import CSCompanyInfo from './cs-sections/CSCompanyInfo'
@@ -21,6 +22,7 @@ export default function CompanyStock() {
       <CSYearlyPerformance />
       <CSFAQ />
       <CSGetUpdates />
+      <Footer />
     </main>
   )
 }

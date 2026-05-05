@@ -14,6 +14,7 @@ import Block11Logos from './blocks/Block11Logos'
 import Block12Cta from './blocks/Block12Cta'
 import FadeIn from './components/FadeIn'
 import Nav from './components/Nav'
+import Footer from './components/Footer'
 import Quiz from './components/Quiz'
 import CompanyStock from './pages/CompanyStock'
 import { Agentation } from 'agentation'
@@ -49,6 +50,7 @@ function Home() {
       <FadeIn><Block10News /></FadeIn>
       <FadeIn><Block11Logos /></FadeIn>
       <FadeIn><Block12Cta /></FadeIn>
+      <Footer />
     </main>
   )
 }

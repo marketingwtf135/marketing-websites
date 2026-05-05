@@ -82,14 +82,10 @@ export default function Block05Mobile() {
             {'Mobile app \nfor investor'}
           </h2>
 
-          {/* ── Heading stays fixed (no blur) ── */}
-          {/* h2 is already rendered above */}
-
-          {/* ── Frame A objects: info card + phone — blur OUT on scroll ── */}
-          {/* Info card A */}
+          {/* ── Info card A — blur applied DIRECTLY (no wrapper) ── */}
           <div
             className="absolute bg-surface-2 border-8 border-surface-edge flex flex-col items-start p-4 rounded-3xl"
-            style={{ right: '60px', top: '60px', width: '297px', opacity: opacityA, filter: `blur(${blurA}px)`, transition: 'none', pointerEvents: opacityA < 0.05 ? 'none' : 'auto' }}
+            style={{ right: '60px', top: '60px', width: '297px', opacity: opacityA, filter: `blur(${blurA}px)`, transition: 'none' }}
           >
             <div className="flex flex-col gap-12 items-start text-white w-full">
               <p className="font-inter-tight font-medium text-text-m text-white/50 whitespace-nowrap">{FRAMES[0].cardNum}</p>
@@ -100,16 +96,13 @@ export default function Block05Mobile() {
             </div>
           </div>
 
-          {/* Phone A */}
-          <div style={{ opacity: opacityA, filter: `blur(${blurA}px)`, transition: 'none', pointerEvents: opacityA < 0.05 ? 'none' : 'auto' }}>
-            <PhoneWithCards frameIndex={0} />
-          </div>
+          {/* ── Phone A — blur applied directly to the phone's root element ── */}
+          <PhoneWithCards frameIndex={0} blurPx={blurA} opacityVal={opacityA} />
 
-          {/* ── Frame B objects: info card + phone — blur IN on scroll ── */}
-          {/* Info card B */}
+          {/* ── Info card B — blur IN ── */}
           <div
             className="absolute bg-surface-2 border-8 border-surface-edge flex flex-col items-start p-4 rounded-3xl"
-            style={{ right: '60px', top: '60px', width: '297px', opacity: opacityB, filter: `blur(${blurB}px)`, transition: 'none', pointerEvents: opacityB < 0.05 ? 'none' : 'auto' }}
+            style={{ right: '60px', top: '60px', width: '297px', opacity: opacityB, filter: `blur(${blurB}px)`, transition: 'none' }}
           >
             <div className="flex flex-col gap-12 items-start text-white w-full">
               <p className="font-inter-tight font-medium text-text-m text-white/50 whitespace-nowrap">{FRAMES[1].cardNum}</p>
@@ -120,10 +113,8 @@ export default function Block05Mobile() {
             </div>
           </div>
 
-          {/* Phone B (same content for now — duplicate to see animation principle) */}
-          <div style={{ opacity: opacityB, filter: `blur(${blurB}px)`, transition: 'none', pointerEvents: opacityB < 0.05 ? 'none' : 'auto' }}>
-            <PhoneWithCards frameIndex={1} />
-          </div>
+          {/* ── Phone B — same content for now ── */}
+          <PhoneWithCards frameIndex={1} blurPx={blurB} opacityVal={opacityB} />
         </section>
       </div>
     </div>
@@ -131,7 +122,7 @@ export default function Block05Mobile() {
 }
 
 // ── Phone component ───────────────────────────────────────────────
-function PhoneWithCards({ frameIndex }: { frameIndex: number }) {
+function PhoneWithCards({ frameIndex, blurPx = 0, opacityVal = 1 }: { frameIndex: number; blurPx?: number; opacityVal?: number }) {
   const cards = [
     { id: 'card-0', company: 'Space',     category: 'Growth Equity', logo: '/img/block05/logo-spacex.svg',    logoW: '114px', logoH: '16px' },
     { id: 'card-1', company: 'Anthropic', category: 'Growth Equity', logo: '/img/block05/logo-anthropic.svg', logoW: '23px',  logoH: '16px' },
@@ -142,7 +133,7 @@ function PhoneWithCards({ frameIndex }: { frameIndex: number }) {
     <div
       id={`block05-phone-frame-${frameIndex}`}
       className="absolute pointer-events-none overflow-hidden"
-      style={{ left: '50%', top: '180px', transform: 'translateX(-50%)', width: '390px', height: '797px' }}
+      style={{ left: '50%', top: '180px', transform: 'translateX(-50%)', width: '390px', height: '797px', opacity: opacityVal, filter: blurPx > 0 ? `blur(${blurPx}px)` : 'none', transition: 'none' }}
     >
       {/* Screen bg */}
       <div
