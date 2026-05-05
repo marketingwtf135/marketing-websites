@@ -82,43 +82,46 @@ export default function Block05Mobile() {
             {'Mobile app \nfor investor'}
           </h2>
 
-          {/* ── Frame A ── */}
+          {/* ── Heading stays fixed (no blur) ── */}
+          {/* h2 is already rendered above */}
+
+          {/* ── Frame A objects: info card + phone — blur OUT on scroll ── */}
+          {/* Info card A */}
           <div
-            className="absolute inset-0"
-            style={{ opacity: opacityA, filter: `blur(${blurA}px)`, transition: 'none', pointerEvents: opacityA < 0.05 ? 'none' : 'auto' }}
+            className="absolute bg-surface-2 border-8 border-surface-edge flex flex-col items-start p-4 rounded-3xl"
+            style={{ right: '60px', top: '60px', width: '297px', opacity: opacityA, filter: `blur(${blurA}px)`, transition: 'none', pointerEvents: opacityA < 0.05 ? 'none' : 'auto' }}
           >
-            {/* Deal-feed info card */}
-            <div className="absolute bg-surface-2 border-8 border-surface-edge flex flex-col items-start p-4 rounded-3xl" style={{ right: '60px', top: '60px', width: '297px' }}>
-              <div className="flex flex-col gap-12 items-start text-white w-full">
-                <p className="font-inter-tight font-medium text-text-m text-white/50 whitespace-nowrap">{FRAMES[0].cardNum}</p>
-                <div className="flex flex-col gap-4 items-start w-full">
-                  <p className="font-inter-tight font-semibold text-h5 whitespace-nowrap">{FRAMES[0].cardTitle}</p>
-                  <p className="font-inter-tight font-medium text-text-m text-white/50 w-full">{FRAMES[0].cardSub}</p>
-                </div>
+            <div className="flex flex-col gap-12 items-start text-white w-full">
+              <p className="font-inter-tight font-medium text-text-m text-white/50 whitespace-nowrap">{FRAMES[0].cardNum}</p>
+              <div className="flex flex-col gap-4 items-start w-full">
+                <p className="font-inter-tight font-semibold text-h5 whitespace-nowrap">{FRAMES[0].cardTitle}</p>
+                <p className="font-inter-tight font-medium text-text-m text-white/50 w-full">{FRAMES[0].cardSub}</p>
               </div>
             </div>
+          </div>
 
-            {/* Phone — Frame A */}
+          {/* Phone A */}
+          <div style={{ opacity: opacityA, filter: `blur(${blurA}px)`, transition: 'none', pointerEvents: opacityA < 0.05 ? 'none' : 'auto' }}>
             <PhoneWithCards frameIndex={0} />
           </div>
 
-          {/* ── Frame B ── */}
+          {/* ── Frame B objects: info card + phone — blur IN on scroll ── */}
+          {/* Info card B */}
           <div
-            className="absolute inset-0"
-            style={{ opacity: opacityB, filter: `blur(${blurB}px)`, transition: 'none', pointerEvents: opacityB < 0.05 ? 'none' : 'auto' }}
+            className="absolute bg-surface-2 border-8 border-surface-edge flex flex-col items-start p-4 rounded-3xl"
+            style={{ right: '60px', top: '60px', width: '297px', opacity: opacityB, filter: `blur(${blurB}px)`, transition: 'none', pointerEvents: opacityB < 0.05 ? 'none' : 'auto' }}
           >
-            {/* Deal-feed info card — Frame B (duplicated, content TBD) */}
-            <div className="absolute bg-surface-2 border-8 border-surface-edge flex flex-col items-start p-4 rounded-3xl" style={{ right: '60px', top: '60px', width: '297px' }}>
-              <div className="flex flex-col gap-12 items-start text-white w-full">
-                <p className="font-inter-tight font-medium text-text-m text-white/50 whitespace-nowrap">{FRAMES[1].cardNum}</p>
-                <div className="flex flex-col gap-4 items-start w-full">
-                  <p className="font-inter-tight font-semibold text-h5 whitespace-nowrap">{FRAMES[1].cardTitle}</p>
-                  <p className="font-inter-tight font-medium text-text-m text-white/50 w-full">{FRAMES[1].cardSub}</p>
-                </div>
+            <div className="flex flex-col gap-12 items-start text-white w-full">
+              <p className="font-inter-tight font-medium text-text-m text-white/50 whitespace-nowrap">{FRAMES[1].cardNum}</p>
+              <div className="flex flex-col gap-4 items-start w-full">
+                <p className="font-inter-tight font-semibold text-h5 whitespace-nowrap">{FRAMES[1].cardTitle}</p>
+                <p className="font-inter-tight font-medium text-text-m text-white/50 w-full">{FRAMES[1].cardSub}</p>
               </div>
             </div>
+          </div>
 
-            {/* Phone — Frame B (same phone for now, content will be replaced) */}
+          {/* Phone B (same content for now — duplicate to see animation principle) */}
+          <div style={{ opacity: opacityB, filter: `blur(${blurB}px)`, transition: 'none', pointerEvents: opacityB < 0.05 ? 'none' : 'auto' }}>
             <PhoneWithCards frameIndex={1} />
           </div>
         </section>

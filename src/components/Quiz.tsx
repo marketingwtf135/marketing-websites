@@ -207,8 +207,8 @@ export default function Quiz({ onClose }: QuizProps) {
 
       {/* ── RIGHT SIDE ────────────────────────────────── */}
       <div
-        className="flex flex-col overflow-hidden"
-        style={{ width: '50%', height: '100%', padding: '60px 64px', background: '#141414' }}
+        className="flex flex-col"
+        style={{ width: '50%', height: '100%', padding: '40px 64px', background: '#141414', overflowY: 'auto', justifyContent: 'flex-start' }}
       >
         {/* Close */}
         <div className="flex justify-end mb-8 shrink-0">
@@ -218,7 +218,7 @@ export default function Quiz({ onClose }: QuizProps) {
         </div>
 
         {/* Form */}
-        <div className="flex flex-col flex-1 overflow-hidden gap-8">
+        <div className="flex flex-col gap-6">
           <h2 className="font-inter-tight font-semibold text-white shrink-0" style={{ fontSize: '36px', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
             Get an Access<br />to pre-IPO Infrastructure
           </h2>
