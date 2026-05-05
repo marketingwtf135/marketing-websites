@@ -171,11 +171,13 @@ export default function Quiz({ onClose }: QuizProps) {
                     {cur.subheading}
                   </h3>
                 )}
-                {(cur.caption || cur.body) && (
-                  <p className="font-inter-tight font-semibold text-white whitespace-pre-line" style={{ fontSize: '24px', fontWeight: 600, lineHeight: '120%', letterSpacing: '-0.48px', color: '#FFF' }}>
-                    {cur.caption ?? cur.body}
-                  </p>
-                )}
+                {cur.caption ? (
+                  /* Slides 1&2: caption — medium 24px */
+                  <p className="font-inter-tight font-medium text-white whitespace-pre-line" style={{ fontSize: '24px', fontWeight: 500, lineHeight: '120%', letterSpacing: '-0.48px', color: '#FFF' }}>{cur.caption}</p>
+                ) : cur.body ? (
+                  /* Slide 3: body — text-L 18px 500 */
+                  <p className="font-inter-tight font-medium text-white whitespace-pre-line" style={{ fontSize: '18px', fontWeight: 500, lineHeight: '135%', letterSpacing: '-0.36px', color: '#FFF' }}>{cur.body}</p>
+                ) : null}
               </div>
             </div>
           </motion.div>
@@ -223,7 +225,7 @@ export default function Quiz({ onClose }: QuizProps) {
 
           {/* Q1 */}
           <div className="flex flex-col gap-3 shrink-0">
-            <p className="font-inter-tight font-semibold text-text-m text-white">
+            <p className="font-inter-tight font-semibold shrink-0" style={{ fontSize: '24px', fontWeight: 600, lineHeight: '120%', letterSpacing: '-0.48px', color: '#E5E5E5' }}>
               Question 1: What best describes your role?
             </p>
             <div className="flex flex-col gap-2">
@@ -235,7 +237,7 @@ export default function Quiz({ onClose }: QuizProps) {
 
           {/* Q2 */}
           <div className="flex flex-col gap-3 shrink-0">
-            <p className="font-inter-tight font-semibold text-text-m text-white">
+            <p className="font-inter-tight font-semibold shrink-0" style={{ fontSize: '24px', fontWeight: 600, lineHeight: '120%', letterSpacing: '-0.48px', color: '#E5E5E5' }}>
               Question 2: Have you participated in private markets before?
             </p>
             <div className="flex flex-col gap-2">

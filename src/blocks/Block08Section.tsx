@@ -60,10 +60,10 @@ export default function Block08Section() {
             <div
               key={card.title}
               className="flex flex-col"
-              style={{ padding: '24px', gap: '24px', ...card.border }}
+              style={{ padding: '24px', gap: '24px', alignSelf: 'stretch', ...card.border }}
             >
               {/* Frame — illustration, no clip */}
-              <div className="w-full rounded-xl">
+              <div className="rounded-xl" style={{ width: '672px', height: '225px', overflow: 'visible' }}>
                 <img
                   alt={card.title}
                   src={card.img}
