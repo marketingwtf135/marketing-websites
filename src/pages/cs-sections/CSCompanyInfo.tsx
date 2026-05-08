@@ -2,7 +2,7 @@
 export default function CSCompanyInfo() {
   return (
     <section className="w-full bg-page-bg padding-section-t6-b6">
-      <div className="mx-auto w-full max-w-content flex flex-col gap-12 items-center">
+      <div className="mx-auto w-full max-w-content flex flex-col gap-6 items-center">
 
         {/* Heading */}
         <div className="flex flex-col gap-8 items-center text-center">
@@ -11,8 +11,8 @@ export default function CSCompanyInfo() {
             <span className="opacity-80">About Anthropic</span>
           </div>
           <h2
-            className="font-inter-tight font-semibold text-h2 pb-1 text-white text-center"
-            style={{ lineHeight: 1 }}
+            className="font-inter-tight font-semibold text-h2 pb-2 text-white text-center"
+            style={{ lineHeight: 1, overflow: 'visible' }}
           >
             Building safer AI,<br />one model at a time
           </h2>
@@ -42,8 +42,8 @@ export default function CSCompanyInfo() {
           </div>
           {/* Row 2 */}
           <div className="grid grid-cols-2" style={{ padding: '24px' }}>
-            <StatCell label="Total Funding"  value="AI & Enterprise Software" />
-            <StatCell label="Focus"          value="Reliable, ethical AI systems" border />
+            <StatCell label="Industry"  value="AI & Enterprise Software" />
+            <StatCell label="Focus"     value="Reliable, ethical AI systems" border />
           </div>
         </div>
       </div>

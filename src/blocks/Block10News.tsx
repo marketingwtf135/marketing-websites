@@ -42,12 +42,12 @@ export default function Block10News() {
         <div className="flex items-end justify-between w-full">
           <div className="flex flex-col gap-6 items-start">
             <div className="flex gap-2 items-center font-inter-tight font-medium text-text-l leading-[1.35] tracking-[-0.02em] text-neutral-30 whitespace-nowrap">
-              <span className="opacity-50">10.0</span>
+              <span className="opacity-50">9.0</span>
               <span className="opacity-80">Our news</span>
             </div>
             <h2
-              className="font-inter-tight font-semibold text-h2 leading-none tracking-[-0.02em] text-transparent bg-clip-text"
-              style={{ backgroundImage: 'linear-gradient(157.333deg, var(--neutral-00) 2.4356%, var(--neutral-30) 19.927%)', width: '1075px' }}
+              className="font-inter-tight font-semibold text-h2 leading-none tracking-[-0.02em] text-transparent bg-clip-text pb-2"
+              style={{ backgroundImage: 'linear-gradient(157.333deg, var(--neutral-00) 2.4356%, var(--neutral-30) 19.927%)' }}
             >
               Market Intelligence
             </h2>
@@ -67,10 +67,10 @@ export default function Block10News() {
             <a
               key={item.id}
               href="#"
-              className="flex flex-col gap-8 items-start shrink-0 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-white rounded-card transition-transform duration-200 ease-out hover:scale-[1.02] hover:-translate-y-1"
+              className="flex flex-col gap-8 items-start shrink-0 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-white rounded-card"
               style={{ width: '345px' }}
             >
-              {/* Image */}
+              {/* Image — zoom only inside container, card stays stationary */}
               <div
                 className="border-[3px] border-border-subtle rounded-card shrink-0 w-full overflow-hidden relative"
                 style={{ height: '345px' }}
@@ -78,7 +78,7 @@ export default function Block10News() {
                 <img
                   alt={item.title}
                   src={item.img}
-                  className="absolute inset-0 w-full h-full object-cover rounded-card transition-transform duration-200 pointer-events-none"
+                  className="absolute inset-0 w-full h-full object-cover rounded-card transition-transform duration-300 ease-out group-hover:scale-[1.06] pointer-events-none"
                   loading="lazy"
                 />
 

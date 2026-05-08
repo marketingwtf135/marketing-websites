@@ -4,18 +4,21 @@ export default function Block01Hero() {
   return (
     <section className="relative w-full bg-page-bg overflow-clip" style={{ height: '100vh', minHeight: '600px', paddingTop: '80px' }}>
 
-      {/* Hero illustration — top-right, max-width 1600px */}
-      <div
-        className="absolute top-0 right-0 pointer-events-none overflow-clip"
-        style={{ width: '50%', height: '100%' }}
-      >
+      {/* shape-eclipse-left — pinned left, opacity 25% */}
+      <img
+        alt=""
+        src="/img/shape-eclipse-left.png"
+        className="absolute top-0 left-0 pointer-events-none"
+        style={{ width: '40%', height: '100%', objectFit: 'cover', objectPosition: 'left center', opacity: 0.25, zIndex: 0 }}
+      />
+
+      {/* Hero illustration — 1100×997px at 1200px+, scales below, shows fully */}
+      <div className="hero-illustration">
         <img
           alt=""
           src="/img/hero-image.png"
-          width={1597}
-          height={869}
-          className="absolute top-0 right-0 h-auto"
-          style={{ maxWidth: '1600px', width: '100%' }}
+          className="block w-full h-full object-cover"
+          loading="eager"
         />
         {/* Fade left + bottom edges */}
         <div

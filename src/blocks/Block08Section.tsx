@@ -8,7 +8,10 @@
 
 const B = '1px solid #1A1A1A'
 
-const CARDS = [
+const CARDS: {
+  img: string; title: string; body: string;
+  border: React.CSSProperties; imgStyle?: React.CSSProperties;
+}[] = [
   {
     img: '/img/ill-legal-01.png',
     title: 'SPV-Based Ownership',
@@ -20,6 +23,8 @@ const CARDS = [
     title: 'Delaware Jurisdiction',
     body: 'The fund and Axevil Capital are registered in Delaware, USA — the preferred jurisdiction for most U.S. startups and venture capital funds, known for its investor-friendly corporate law.',
     border: { borderTop: B, borderLeft: B, borderRight: B } satisfies React.CSSProperties,
+    /* Figma 142-25457: image at x=280,y=-73,w=486,h=331 within 720×400 card */
+    imgStyle: { top: '-73px', right: '-46px', width: '486px', height: '331px' },
   },
   {
     img: '/img/ill-legal-03.png',
@@ -43,7 +48,7 @@ export default function Block08Section() {
         {/* Heading */}
         <div className="flex flex-col gap-8 items-center text-center">
           <div className="flex gap-2 items-center font-inter-tight font-medium text-text-l text-neutral-30">
-            <span className="opacity-50">8.0</span>
+            <span className="opacity-50">7.0</span>
             <span className="opacity-80">Everything is legal</span>
           </div>
           <h2 className="font-inter-tight font-semibold text-h2 text-white text-center">
@@ -54,31 +59,61 @@ export default function Block08Section() {
           </p>
         </div>
 
-        {/* 2×2 grid, gap:0, no fill, per-card borders */}
+        {/* 2×2 grid, gap:0 */}
         <div className="grid grid-cols-2 w-full" style={{ gap: 0 }}>
-          {CARDS.map((card) => (
-            <div
-              key={card.title}
-              className="flex flex-col"
-              style={{ padding: '24px', gap: '24px', alignSelf: 'stretch', ...card.border }}
-            >
-              {/* Frame — illustration, no clip */}
-              <div className="rounded-xl" style={{ width: '672px', height: '225px', overflow: 'visible' }}>
-                <img
-                  alt={card.title}
-                  src={card.img}
-                  className="w-full"
-                  loading="lazy"
-                />
-              </div>
+          {CARDS.map((card) => {
+            const isDelaware = card.title === 'Delaware Jurisdiction'
 
-              {/* Text block */}
-              <div className="flex flex-col gap-3">
-                <h3 className="font-inter-tight font-semibold text-h5 text-white">{card.title}</h3>
-                <p className="font-inter-tight font-medium text-text-m text-white/60">{card.body}</p>
+            if (isDelaware) {
+              /* Delaware only — image absolute, overflow visible to match Figma 142-25457 */
+              return (
+                <div
+                  key={card.title}
+                  className="relative"
+                  style={{ height: '400px', ...card.border }}
+                >
+                  <div className="absolute inset-0" style={{ overflow: 'visible' }}>
+                    <img
+                      alt={card.title}
+                      src={card.img}
+                      className="absolute"
+                      style={{ top: '-73px', right: '-46px', width: '486px', height: '331px' }}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div
+                    className="absolute left-0 right-0 bottom-0 flex flex-col gap-3 z-10"
+                    style={{ padding: '16px 24px 24px' }}
+                  >
+                    <h3 className="font-inter-tight font-semibold text-h5 text-white">{card.title}</h3>
+                    <p className="font-inter-tight font-medium text-text-m text-white/60">{card.body}</p>
+                  </div>
+                </div>
+              )
+            }
+
+            /* All other cards — original flex layout */
+            return (
+              <div
+                key={card.title}
+                className="flex flex-col"
+                style={{ padding: '24px', gap: '24px', height: '400px', ...card.border }}
+              >
+                <div className="relative rounded-xl flex-1 overflow-hidden">
+                  <img
+                    alt={card.title}
+                    src={card.img}
+                    className="absolute top-0 right-0 h-full w-auto"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="flex flex-col gap-3">
+                  <h3 className="font-inter-tight font-semibold text-h5 text-white">{card.title}</h3>
+                  <p className="font-inter-tight font-medium text-text-m text-white/60">{card.body}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
       </div>

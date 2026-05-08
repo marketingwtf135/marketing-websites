@@ -101,6 +101,24 @@
   box-sizing: border-box;
 }
 
+/* Hero illustration — 1100×997px fixed at 1200px+, proportionally scales below */
+.hero-illustration {
+  position: absolute;
+  top: 0;
+  right: 0;
+  pointer-events: none;
+  /* proportional scale below 1200px: 1100/1200 ≈ 91.67% of viewport */
+  width: calc(100vw * (1100 / 1200));
+  height: auto;
+  aspect-ratio: 1100 / 997;
+}
+@media (min-width: 1200px) {
+  .hero-illustration {
+    width: 1100px;
+    height: 997px;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }

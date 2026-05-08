@@ -15,10 +15,10 @@ export default function CSGetUpdates() {
 
   return (
     <section
-      className="relative w-full overflow-hidden bg-page-bg"
+      className="relative w-full bg-page-bg"
       style={{ minHeight: '700px', paddingTop: '200px', paddingBottom: '100px' }}
     >
-      {/* bg-shine — centered, not cropped (contain) */}
+      {/* bg-shine — natural/default size, centered, does not overflow section */}
       <img
         alt=""
         src="/img/bg-shine-email-sub.png"
@@ -27,9 +27,8 @@ export default function CSGetUpdates() {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          maxWidth: '100%',
-          maxHeight: '100%',
-          objectFit: 'contain',
+          width: '100svw',
+          height: 'auto',
           zIndex: 0,
         }}
       />

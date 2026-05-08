@@ -63,7 +63,7 @@ export default function Block05Mobile() {
     /* 200vh outer wrapper allows scroll while content is sticky */
     <div ref={wrapperRef} className="w-full bg-page-bg" style={{ height: '200vh', marginTop: '200px' }}>
       {/* Sticky inner — sticks 32px from top */}
-      <div className="flex justify-center" style={{ position: 'sticky', top: '32px' }}>
+      <div className="flex justify-center" style={{ position: 'sticky', top: '120px' }}>
         <section
           className="relative overflow-clip w-full max-w-content"
           style={{

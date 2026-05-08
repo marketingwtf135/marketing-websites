@@ -49,7 +49,11 @@ const TABS: RangeKey[] = ['1M', '3M', 'YTD', '1Y', 'ALL']
 function StockChart({ pts }: { pts: PtData[] }) {
   const W = 1440, H = 312
   const [hovered, setHovered] = useState<number | null>(null)
-  const px = pts.map((p) => [(p.x / 100) * W, (p.y / 100) * H] as [number, number])
+  // Pull last point slightly past the right edge so fill covers the whole frame
+  const px = pts.map((p, idx) => {
+    const x = idx === pts.length - 1 ? W + 8 : (p.x / 100) * W
+    return [x, (p.y / 100) * H] as [number, number]
+  })
 
   function smoothPath(points: [number, number][]) {
     if (points.length < 2) return ''
@@ -63,48 +67,64 @@ function StockChart({ pts }: { pts: PtData[] }) {
   }
 
   const linePath = smoothPath(px)
-  const fillPath = linePath + ` L ${W},${H} L 0,${H} Z`
+  const fillPath = linePath + ` L ${W + 8},${H} L 0,${H} Z`
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ height: '312px', overflow: 'visible' }} preserveAspectRatio="none">
-      <defs>
-        <linearGradient id="cf" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#00e5b4" stopOpacity="0.35" />
-          <stop offset="100%" stopColor="#00e5b4" stopOpacity="0" />
-        </linearGradient>
-        <linearGradient id="cl" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#175e6e" />
-          <stop offset="100%" stopColor="#00f0c8" />
-        </linearGradient>
-        <radialGradient id="dg">
-          <stop offset="0%" stopColor="#00f0c8" stopOpacity="0.5" />
-          <stop offset="100%" stopColor="#00f0c8" stopOpacity="0" />
-        </radialGradient>
-      </defs>
-      <path d={fillPath} fill="url(#cf)" />
-      <path d={linePath} fill="none" stroke="url(#cl)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      {px.slice(1).map(([x, y], i) => {
-        const idx = i + 1, isHov = hovered === idx, pt = pts[idx]
-        const tw = 160, th = 56
-        const tx = Math.min(Math.max(x - tw / 2, 8), W - tw - 8)
-        const ty = y - th - 20 < 0 ? y + 20 : y - th - 20
-        return (
-          <g key={i} style={{ cursor: 'pointer' }} onMouseEnter={() => setHovered(idx)} onMouseLeave={() => setHovered(null)}>
-            <circle cx={x} cy={y} r={28} fill="transparent" />
-            <circle cx={x} cy={y} r={isHov ? 18 : 12.4} fill="url(#dg)" />
-            <circle cx={x} cy={y} r={4.655} fill="#101010" stroke="#00f0c8" strokeWidth={isHov ? 2 : 1} strokeOpacity="0.6" />
-            <circle cx={x} cy={y} r={4.655} fill="white" fillOpacity="0.9" />
-            {isHov && (
-              <g>
-                <rect x={tx} y={ty} width={tw} height={th} rx={10} fill="#1d1d1d" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
-                <text x={tx+12} y={ty+22} fill="#b7b7b7" fontSize="14" fontFamily="Inter Tight,sans-serif">{pt.label}</text>
-                <text x={tx+12} y={ty+44} fill="white" fontSize="20" fontFamily="Inter Tight,sans-serif" fontWeight="600">{pt.price}</text>
-              </g>
-            )}
-          </g>
-        )
-      })}
-    </svg>
+    <div className="relative w-full" style={{ height: '312px' }}>
+      {/* grid-bg layer, lowest */}
+      <img
+        alt=""
+        src="/img/grid-bg.png"
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full pointer-events-none object-cover"
+        style={{ opacity: 0.7 }}
+      />
+      <svg viewBox={`0 0 ${W} ${H}`} className="absolute inset-0 w-full h-full" style={{ overflow: 'visible' }} preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="cf" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#00e5b4" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#00e5b4" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="cl" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#175e6e" />
+            <stop offset="100%" stopColor="#00f0c8" />
+          </linearGradient>
+          <radialGradient id="dg">
+            <stop offset="0%" stopColor="#00f0c8" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#00f0c8" stopOpacity="0" />
+          </radialGradient>
+          <clipPath id="fillClip">
+            <path d={fillPath} />
+          </clipPath>
+        </defs>
+        {/* gradient fill — primary */}
+        <path d={fillPath} fill="url(#cf)" />
+        {/* graphic-bg image clipped to fill area, 10% opacity */}
+        <image href="/img/graphic-bg.png" x="0" y="0" width={W} height={H} clipPath="url(#fillClip)" preserveAspectRatio="none" opacity="0.1" />
+        <path d={linePath} fill="none" stroke="url(#cl)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        {px.slice(1).map(([x, y], i) => {
+          const idx = i + 1, isHov = hovered === idx, pt = pts[idx]
+          const tw = 160, th = 56
+          const tx = Math.min(Math.max(x - tw / 2, 8), W - tw - 8)
+          const ty = y - th - 20 < 0 ? y + 20 : y - th - 20
+          return (
+            <g key={i} style={{ cursor: 'pointer' }} onMouseEnter={() => setHovered(idx)} onMouseLeave={() => setHovered(null)}>
+              <circle cx={x} cy={y} r={28} fill="transparent" />
+              <circle cx={x} cy={y} r={isHov ? 18 : 12.4} fill="url(#dg)" />
+              <circle cx={x} cy={y} r={4.655} fill="#101010" stroke="#00f0c8" strokeWidth={isHov ? 2 : 1} strokeOpacity="0.6" />
+              <circle cx={x} cy={y} r={4.655} fill="white" fillOpacity="0.9" />
+              {isHov && (
+                <g>
+                  <rect x={tx} y={ty} width={tw} height={th} rx={10} fill="#1d1d1d" stroke="rgba(255,255,255,0.1)" strokeWidth="1" />
+                  <text x={tx+12} y={ty+22} fill="#b7b7b7" fontSize="14" fontFamily="Inter Tight,sans-serif">{pt.label}</text>
+                  <text x={tx+12} y={ty+44} fill="white" fontSize="20" fontFamily="Inter Tight,sans-serif" fontWeight="600">{pt.price}</text>
+                </g>
+              )}
+            </g>
+          )
+        })}
+      </svg>
+    </div>
   )
 }
 
@@ -116,7 +136,7 @@ function AdvCard({
 }) {
   return (
     <div
-      className="bg-[#101010] rounded-2xl flex items-start gap-6"
+      className="bg-[#111111] rounded-2xl flex items-start gap-6"
       style={{ padding: 16, width: 345, borderLeft: leftBorder ? '1px solid #151515' : undefined }}
     >
       <div className="flex flex-col gap-4 flex-1 min-w-0">
@@ -135,7 +155,7 @@ export default function CSTrackPrice() {
 
   return (
     <section className="w-full bg-page-bg padding-section-t12-b6">
-      <div className="mx-auto w-full max-w-content flex flex-col items-start">
+      <div className="mx-auto w-full max-w-content flex flex-col gap-[60px] items-start">
 
         {/* ── Heading ── */}
         <div className="flex flex-col gap-8 items-start">
@@ -157,13 +177,16 @@ export default function CSTrackPrice() {
           </h2>
         </div>
 
-        {/* ── Graphic + advantages ── */}
+        {/* ── Graphic + advantages — outer gap 16px between graphic block and adv row ── */}
         <div className="flex flex-col gap-4 w-full">
+
+          {/* Graphic block — sub-heading + chart, 40px gap */}
+          <div className="flex flex-col gap-10 w-full">
 
           {/* Sub-heading row */}
           <div
             className="flex items-start justify-between w-full"
-            style={{ borderTop: '1px solid #1d1d1d', paddingTop: 32 }}
+            style={{ borderTop: '1px solid #1d1d1d', paddingTop: 60 }}
           >
             <p className="font-inter-tight font-semibold text-white" style={{ fontSize: 36, lineHeight: 1.2, whiteSpace: 'nowrap' }}>
               Anthropic consensus price
@@ -176,13 +199,13 @@ export default function CSTrackPrice() {
             </p>
           </div>
 
-          {/* Chart card */}
+          {/* Chart card — advantage cards live inside */}
           <div
             className="w-full rounded-[32px] overflow-hidden flex flex-col items-center"
-            style={{ background: '#101010', paddingTop: 24, gap: 59 }}
+            style={{ background: '#111111', paddingTop: 24 }}
           >
             {/* Top row: price + tabs */}
-            <div className="flex items-start justify-between w-full" style={{ paddingLeft: 24, paddingRight: 24 }}>
+            <div className="flex items-start justify-between w-full" style={{ paddingLeft: 24, paddingRight: 24, marginBottom: 59 }}>
               {/* Price + badge */}
               <div className="flex flex-col gap-6 items-start">
                 <span className="font-inter-tight font-medium text-text-l text-neutral-30">
@@ -226,7 +249,7 @@ export default function CSTrackPrice() {
                         height: 50,
                         width: 61,
                         borderRadius: 16,
-                        background: isActive ? '#fff' : '#212121',
+                        background: isActive ? '#fff' : '#1a1a1a',
                         color: isActive ? '#000' : 'rgba(255,255,255,0.5)',
                         border: isActive ? '1px solid rgba(255,255,255,0.25)' : 'none',
                         letterSpacing: '-0.02em',
@@ -240,14 +263,17 @@ export default function CSTrackPrice() {
             </div>
 
             {/* Chart SVG */}
-            <StockChart key={activeRange} pts={data.pts} />
+            <div className="w-full" style={{ overflow: 'hidden' }}>
+              <StockChart key={activeRange} pts={data.pts} />
+            </div>
+          </div>
           </div>
 
-          {/* ── Advantage cards ── */}
+          {/* ── Advantage cards — separate row, 16px gap from chart card ── */}
           <div className="flex items-center justify-between w-full">
             <AdvCard label="Highest Bid"      value="$258.00" iconSrc="/icons/icon-arrow-top.svg"   iconAlt="Highest bid"       leftBorder />
             <AdvCard label="Lowest Ask"        value="$268.50" iconSrc="/icons/icon-arrow-down.svg"  iconAlt="Lowest ask"        />
-            <AdvCard label="Last Transaction"  value="$262.34" iconSrc="/icons/icon-money-case.svg"  iconAlt="Last transaction"  />
+            <AdvCard label="Lost Transaction"  value="$262.34" iconSrc="/icons/icon-money-case.svg"  iconAlt="Lost transaction"  />
             <AdvCard label="Live Orders"       value="79"      iconSrc="/icons/icon-profile.svg"     iconAlt="Live orders"       />
           </div>
         </div>

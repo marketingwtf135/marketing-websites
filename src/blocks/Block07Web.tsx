@@ -25,7 +25,7 @@ export default function Block07Web() {
       <div className="absolute inset-x-0 flex flex-col items-center gap-8" style={{ top: '60px' }}>
         <div className="flex flex-col gap-8 items-center">
           <div className="flex gap-2 items-center font-inter-tight font-medium text-text-l text-neutral-30 whitespace-nowrap">
-            <span className="opacity-50">7.0</span>
+            <span className="opacity-50">6.0</span>
             <span className="opacity-80">Download App</span>
           </div>
           <h2

@@ -17,7 +17,7 @@ export default function CSFAQ() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <section className="w-full bg-page-bg padding-section-t6-b0">
+    <section className="w-full bg-page-bg padding-section-t6-b0" style={{ position: 'relative', zIndex: 1 }}>
       <div className="mx-auto w-full max-w-content flex flex-col gap-12 items-start">
 
         {/* Heading */}

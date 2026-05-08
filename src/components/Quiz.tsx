@@ -29,7 +29,7 @@ const SLIDES = [
     subheading: 'Structural',
     body: 'Before a deal goes live on the platform, we run two independent reviews:\nactual allocation access, jurisdiction, SPV feasibility, liquidity.',
     img: '/img/ill-qwiz-03.png',
-    caption: null,
+    caption: 'Actual allocation access, jurisdiction, SPV feasibility, liquidity\nIf either side doesn\'t add up — no deal, no matter how attractive the company.',
     label: 'Real access',
   },
 ]
@@ -57,7 +57,7 @@ function AnswerBtn({ opt, selected, onClick }: { opt: string; selected: boolean;
       whileTap={{ scale: 0.99 }}
       className="flex items-center justify-between outline-none w-full"
       style={{
-        height: '64px',
+        height: '60px',
         padding: '20px 16px',
         borderRadius: '16px',
         background: '#1A1A1A',
@@ -72,13 +72,13 @@ function AnswerBtn({ opt, selected, onClick }: { opt: string; selected: boolean;
         {opt}
       </span>
 
-      {/* Icon */}
+      {/* Icon — 24×24 per Figma */}
       <motion.div
         className="shrink-0 flex items-center justify-center"
         animate={{ scale: selected ? 1.05 : 1 }}
         transition={{ duration: 0.15, ease: 'easeOut' }}
         style={{
-          width: 28, height: 28,
+          width: 24, height: 24,
           borderRadius: '160px',
           ...(selected
             ? { background: '#FFF', boxShadow: '-1px -1px 4px 0 rgba(0,0,0,0.50) inset' }
@@ -86,7 +86,7 @@ function AnswerBtn({ opt, selected, onClick }: { opt: string; selected: boolean;
         }}
       >
         {selected && (
-          <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+          <svg width="11" height="9" viewBox="0 0 13 10" fill="none">
             <path d="M1.5 5L5 8.5L11.5 1.5" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         )}
@@ -119,9 +119,10 @@ export default function Quiz({ onClose }: QuizProps) {
     >
       {/* ── LEFT SIDE ─────────────────────────────────── */}
       <div
-        className="flex flex-col overflow-hidden"
+        className="flex flex-col overflow-hidden items-center"
         style={{ width: '50%', height: '100%', padding: '60px', background: '#080808' }}
       >
+        <div className="flex flex-col overflow-hidden w-full h-full" style={{ maxWidth: '760px' }}>
         <AnimatePresence mode="wait">
           <motion.div
             key={slide}
@@ -132,14 +133,17 @@ export default function Quiz({ onClose }: QuizProps) {
             className="flex flex-col flex-1 overflow-hidden"
           >
             {/* Heading — outside the card */}
-            <div className="flex flex-col gap-4 shrink-0">
+            <div className="flex flex-col gap-6 shrink-0">
               <h2
-                className="font-inter-tight font-semibold text-white whitespace-pre-line"
-                style={{ fontSize: '48px', lineHeight: 1.05, letterSpacing: '-0.02em' }}
+                className="font-inter-tight font-semibold text-transparent bg-clip-text whitespace-pre-line"
+                style={{
+                  fontSize: '64px', lineHeight: 1, letterSpacing: '-0.02em',
+                  backgroundImage: 'linear-gradient(116.928deg, #ffffff 2.5635%, #8f8f8f 99.06%)',
+                }}
               >
                 {cur.heading}
               </h2>
-              <p className="font-inter-tight font-medium text-white/60 whitespace-pre-line" style={{ fontSize: '18px', lineHeight: 1.5 }}>
+              <p className="font-inter-tight font-medium whitespace-pre-line" style={{ fontSize: '20px', lineHeight: 1.3, letterSpacing: '-0.02em', color: '#9b9b9b' }}>
                 {cur.body}
               </p>
             </div>
@@ -147,15 +151,15 @@ export default function Quiz({ onClose }: QuizProps) {
             {/* 64px gap to card */}
             <div style={{ height: '64px', flexShrink: 0 }} />
 
-            {/* Content card: 760×400, bg #141414, r:24 — flex column, image centred, text below */}
+            {/* Content card — full width of the left panel content area, bg #141414, r:24 */}
             <div
-              className="flex flex-col rounded-3xl shrink-0 overflow-hidden"
-              style={{ width: '760px', height: '400px', background: '#141414' }}
+              className="flex flex-col rounded-3xl shrink-0 overflow-hidden w-full"
+              style={{ height: '400px', background: '#141414' }}
             >
-              {/* Image frame — flex-1, centres image both axes */}
+              {/* Image frame — natural proportions, centred */}
               <div
                 className="flex items-center justify-center flex-1"
-                style={{ overflow: 'hidden' }}
+                style={{ overflow: 'hidden', minHeight: 0 }}
               >
                 <img
                   src={cur.img}
@@ -164,19 +168,21 @@ export default function Quiz({ onClose }: QuizProps) {
                 />
               </div>
 
-              {/* Text row at bottom — always inside the card */}
-              <div className="shrink-0 flex flex-col gap-1" style={{ padding: '16px 24px' }}>
+              {/* Text row at bottom */}
+              <div className="shrink-0 flex flex-col gap-1" style={{ padding: '0 24px 24px' }}>
                 {cur.subheading && (
-                  <h3 className="font-inter-tight font-semibold text-white" style={{ fontSize: '18px', lineHeight: 1.3 }}>
+                  <h3 className="font-inter-tight font-semibold text-white" style={{ fontSize: '24px', lineHeight: '120%', letterSpacing: '-0.48px' }}>
                     {cur.subheading}
                   </h3>
                 )}
                 {cur.caption ? (
-                  /* Slides 1&2: caption — medium 24px */
-                  <p className="font-inter-tight font-medium text-white whitespace-pre-line" style={{ fontSize: '24px', fontWeight: 500, lineHeight: '120%', letterSpacing: '-0.48px', color: '#FFF' }}>{cur.caption}</p>
-                ) : cur.body ? (
-                  /* Slide 3: body — text-L 18px 500 */
-                  <p className="font-inter-tight font-medium text-white whitespace-pre-line" style={{ fontSize: '18px', fontWeight: 500, lineHeight: '135%', letterSpacing: '-0.36px', color: '#FFF' }}>{cur.body}</p>
+                  cur.id === 2 ? (
+                    /* Slide 3: caption — text-L 18px, #9B9B9B */
+                    <p className="font-inter-tight font-medium whitespace-pre-line" style={{ fontSize: '18px', fontWeight: 500, lineHeight: '135%', letterSpacing: '-0.36px', color: '#9B9B9B' }}>{cur.caption}</p>
+                  ) : (
+                    /* Slides 1&2: caption — 24px white */
+                    <p className="font-inter-tight font-medium whitespace-pre-line" style={{ fontSize: '24px', fontWeight: 500, lineHeight: '120%', letterSpacing: '-0.48px', color: '#FFF' }}>{cur.caption}</p>
+                  )
                 ) : null}
               </div>
             </div>
@@ -184,32 +190,30 @@ export default function Quiz({ onClose }: QuizProps) {
         </AnimatePresence>
 
         {/* Progress bar */}
-        <div className="flex flex-col gap-2 mt-auto pt-8 shrink-0">
-          <div className="flex gap-2">
-            {SLIDES.map((s, i) => (
-              <div key={s.id} className="flex-1 rounded-full overflow-hidden" style={{ height: '2px', background: 'rgba(255,255,255,0.15)' }}>
+        <div className="flex gap-5 mt-auto pt-8 shrink-0">
+          {SLIDES.map((s, i) => (
+            <div key={s.id} className="flex flex-col gap-3 flex-1">
+              <div className="rounded-full overflow-hidden" style={{ height: '3px', background: 'rgba(255,255,255,0.15)' }}>
                 {i < slide && <div className="h-full w-full bg-white" />}
                 {i === slide && (
                   <motion.div className="h-full bg-white" initial={{ width: '0%' }} animate={{ width: `${progress}%` }} transition={{ duration: 0.05, ease: 'linear' }} />
                 )}
               </div>
-            ))}
-          </div>
-          <div className="flex gap-2">
-            {SLIDES.map((s, i) => (
-              <span key={s.id} className="flex-1 font-inter-tight font-medium text-s-med" style={{ color: i <= slide ? '#fff' : 'rgba(255,255,255,0.3)' }}>
+              <span className="font-inter-tight font-medium text-s-med" style={{ color: i <= slide ? '#fff' : 'rgba(255,255,255,0.3)' }}>
                 {s.label}
               </span>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
         </div>
       </div>
 
       {/* ── RIGHT SIDE ────────────────────────────────── */}
       <div
-        className="flex flex-col"
+        className="flex flex-col items-center"
         style={{ width: '50%', height: '100%', padding: '40px 64px', background: '#141414', overflowY: 'auto', justifyContent: 'flex-start' }}
       >
+        <div className="flex flex-col w-full h-full" style={{ maxWidth: '760px' }}>
         {/* Close */}
         <div className="flex justify-end mb-8 shrink-0">
           <button type="button" onClick={onClose} className="font-inter-tight font-medium text-text-m text-white/40 hover:text-white transition-colors outline-none">
@@ -218,53 +222,57 @@ export default function Quiz({ onClose }: QuizProps) {
         </div>
 
         {/* Form */}
-        <div className="flex flex-col gap-6 flex-1">
-          <h2 className="font-inter-tight font-semibold text-white shrink-0" style={{ fontSize: '36px', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
-            Get an Access<br />to pre-IPO Infrastructure
+        <div className="flex flex-col flex-1" style={{ gap: '40px' }}>
+          <h2 className="font-inter-tight font-semibold text-white shrink-0" style={{ fontSize: '36px', lineHeight: 1.1, letterSpacing: '0' }}>
+            Get an Access{' '}
+            <br />to pre-IPO Infrastructure
           </h2>
 
-          {/* Q1 */}
-          <div className="flex flex-col gap-3 shrink-0">
-            <p className="font-inter-tight font-semibold shrink-0" style={{ fontSize: '20px', fontWeight: 600, lineHeight: '120%', letterSpacing: '-0.4px', color: '#E5E5E5' }}>
-              Question 1: What best describes your role?
-            </p>
-            <div className="flex flex-col gap-2">
-              {Q1.map((opt, i) => (
-                <AnswerBtn key={i} opt={opt} selected={q1 === i} onClick={() => setQ1(q1 === i ? null : i)} />
-              ))}
+          <div className="flex flex-col shrink-0" style={{ gap: '32px' }}>
+            {/* Q1 */}
+            <div className="flex flex-col gap-4 shrink-0">
+              <p className="font-inter-tight font-semibold shrink-0" style={{ fontSize: '24px', lineHeight: '1.2', letterSpacing: '-0.02em', color: '#E6E6E6' }}>
+                Question 1: What best describes your role?
+              </p>
+              <div className="flex flex-col gap-2">
+                {Q1.map((opt, i) => (
+                  <AnswerBtn key={i} opt={opt} selected={q1 === i} onClick={() => setQ1(q1 === i ? null : i)} />
+                ))}
+              </div>
             </div>
-          </div>
 
-          {/* Q2 */}
-          <div className="flex flex-col gap-3 shrink-0">
-            <p className="font-inter-tight font-semibold shrink-0" style={{ fontSize: '20px', fontWeight: 600, lineHeight: '120%', letterSpacing: '-0.4px', color: '#E5E5E5' }}>
-              Question 2: Have you participated in private markets before?
-            </p>
-            <div className="flex flex-col gap-2">
-              {Q2.map((opt, i) => (
-                <AnswerBtn key={i} opt={opt} selected={q2 === i} onClick={() => setQ2(q2 === i ? null : i)} />
-              ))}
+            {/* Q2 */}
+            <div className="flex flex-col gap-4 shrink-0">
+              <p className="font-inter-tight font-semibold shrink-0" style={{ fontSize: '24px', lineHeight: '1.2', letterSpacing: '-0.02em', color: '#E6E6E6' }}>
+                Question 2: Have you participated in private markets before?
+              </p>
+              <div className="flex flex-col gap-2">
+                {Q2.map((opt, i) => (
+                  <AnswerBtn key={i} opt={opt} selected={q2 === i} onClick={() => setQ2(q2 === i ? null : i)} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Back + Next � fixed at bottom via mt-auto */}
+        {/* Back + Next — anchored to bottom */}
         <div className="flex items-center justify-between mt-auto pt-8 shrink-0">
           <button
             type="button"
             onClick={onClose}
             className="flex items-center justify-center font-inter-tight font-semibold text-text-m text-white outline-none hover:opacity-70 transition-opacity"
-            style={{ height: '48px', padding: '0 24px', borderRadius: '160px', border: '1px solid rgba(255,255,255,0.2)' }}
+            style={{ height: '56px', padding: '0 32px', borderRadius: '16px', border: '1px solid #303030' }}
           >
             Back
           </button>
           <button
             type="button"
             className="flex items-center justify-center font-inter-tight font-semibold text-text-m text-phone-bg outline-none hover:scale-[1.02] transition-transform"
-            style={{ height: '48px', padding: '0 36px', borderRadius: '160px', background: '#fff' }}
+            style={{ height: '56px', padding: '0 32px', borderRadius: '16px', background: '#fff' }}
           >
             Next
           </button>
+        </div>
         </div>
       </div>
     </motion.div>

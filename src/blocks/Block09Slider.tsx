@@ -1,14 +1,15 @@
 import { useRef, useState, useEffect } from 'react'
 
 const TEAM = [
-  { id: 1, name: 'Alexander Ivanov', role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/person1.png' },
-  { id: 2, name: 'Taras Chumachenko', role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/person2.png' },
-  { id: 3, name: 'Vladislav Solovev', role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/person3.png' },
-  { id: 4, name: 'Andrey Revenko', role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/person4.png' },
-  { id: 5, name: 'Danil Yakovlev', role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/person5.png' },
-  { id: 6, name: 'Artem Duz', role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/person6.png' },
-  { id: 7, name: 'Anna Babak', role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/person7.png' },
-  { id: 8, name: 'Georgy Manasov', role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/person8.png' },
+  { id: 1, name: 'Alexander Ivanov',   role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team01.png' },
+  { id: 2, name: 'Taras Chumachenko',  role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team02.png' },
+  { id: 3, name: 'Vladislav Solovev',  role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team03.png' },
+  { id: 4, name: 'Andrey Revenko',     role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team04.png' },
+  { id: 5, name: 'Danil Yakovlev',     role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team05.png' },
+  { id: 6, name: 'Artem Duz',          role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team06.png' },
+  { id: 7, name: 'Anna Babak',         role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team07.png' },
+  { id: 8, name: 'Georgy Manasov',     role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team08.png' },
+  { id: 9, name: 'Pavel Rasputin',     role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team09.png' },
 ]
 
 const CARD_W = 465
@@ -43,7 +44,7 @@ export default function Block09Slider() {
         <div className="flex items-end justify-between w-full">
           <div className="flex flex-col gap-10 items-start" style={{ width: '820px' }}>
             <div className="flex gap-2 items-center font-inter-tight font-medium text-text-l leading-[1.35] tracking-[-0.02em] text-neutral-30 whitespace-nowrap">
-              <span className="opacity-50">9.0</span>
+              <span className="opacity-50">8.0</span>
               <span className="opacity-80">Professionals</span>
             </div>
             <div className="flex flex-col gap-6 items-start">
@@ -59,7 +60,7 @@ export default function Block09Slider() {
             </div>
           </div>
 
-          {/* Slider buttons */}
+          {/* Slider buttons — Figma 142-25383 */}
           <div className="flex gap-2 items-center shrink-0">
             <button
               type="button"
@@ -68,9 +69,12 @@ export default function Block09Slider() {
               disabled={atStart}
               onClick={() => scroll('prev')}
               onKeyDown={(e) => { if (e.key === 'Enter') scroll('prev') }}
-              className="size-16 rounded-[16px] overflow-hidden disabled:opacity-30 hover:opacity-100 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              className="flex items-center justify-center disabled:opacity-30 hover:opacity-90 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              style={{ width: 64, height: 64, borderRadius: 16, background: '#060606', border: '2px solid #1a1a1a' }}
             >
-              <img alt="" src="/img/block09/btn-left.svg" className="w-full h-full" />
+              <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true">
+                <path d="M7 1L1 7L7 13M1 7H15" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </button>
             <button
               type="button"
@@ -79,9 +83,12 @@ export default function Block09Slider() {
               disabled={atEnd}
               onClick={() => scroll('next')}
               onKeyDown={(e) => { if (e.key === 'Enter') scroll('next') }}
-              className="size-16 rounded-[16px] overflow-hidden disabled:opacity-30 hover:opacity-100 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              className="flex items-center justify-center disabled:opacity-30 hover:opacity-90 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              style={{ width: 64, height: 64, borderRadius: 16, background: '#060606', border: '2px solid #1a1a1a' }}
             >
-              <img alt="" src="/img/block09/btn-right.svg" className="w-full h-full" />
+              <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true">
+                <path d="M9 1L15 7L9 13M15 7H1" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </button>
           </div>
         </div>
@@ -120,7 +127,7 @@ export default function Block09Slider() {
                 <img
                   alt={member.name}
                   src={member.photo}
-                  className="absolute inset-0 w-full h-full object-cover rounded-card"
+                  className="absolute inset-0 w-full h-full object-contain object-top rounded-card"
                   loading="lazy"
                 />
                 {/* Role tag */}

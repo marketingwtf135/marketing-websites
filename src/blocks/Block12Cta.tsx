@@ -52,13 +52,13 @@ function CtaCard({
 
 export default function Block12Cta() {
   return (
-    <section className="relative w-full bg-page-bg" style={{ paddingBottom: '100px', marginTop: '200px' }}>
+    <section className="relative w-full bg-page-bg" style={{ paddingBottom: '200px', marginTop: '200px' }}>
       <div className="relative mx-auto w-full max-w-content flex flex-col gap-15 items-center">
 
         {/* Heading */}
         <div className="flex flex-col gap-6 items-center">
           <div className="flex gap-2 items-center font-inter-tight font-medium text-text-l text-neutral-30">
-            <span className="opacity-50">12.0</span>
+            <span className="opacity-50">11.0</span>
             <span className="opacity-80">Products</span>
           </div>
           <h2
@@ -77,7 +77,7 @@ export default function Block12Cta() {
             ctaLabel="Request a Demo"
             device={
               <div className="absolute pointer-events-none" style={{ left: '394px', top: '168px', width: '360px', height: '772px', zIndex: 2 }}>
-                <img alt="" src="/img/mobile-app-image-02.png" className="w-full h-full object-contain object-top" loading="lazy" />
+                <img alt="" src="/img/block10/mobile-app-image.png" className="w-full h-full object-contain object-top" loading="lazy" />
               </div>
             }
           />
@@ -87,7 +87,7 @@ export default function Block12Cta() {
             ctaLabel="Request a Demo"
             device={
               <div className="absolute pointer-events-none" style={{ left: '315px', top: '173px', width: '779px', height: '545px', zIndex: 2 }}>
-                <img alt="" src="/img/laptop-app-image-02.png" className="w-full h-full object-contain object-left-top" loading="lazy" />
+                <img alt="" src="/img/block10/laptop-app-image.png" className="w-full h-full object-contain object-left-top" loading="lazy" />
               </div>
             }
           />

@@ -13,12 +13,19 @@ export default function CSHero() {
       className="relative w-full bg-page-bg overflow-clip"
       style={{ height: 'calc(100vh - 80px)', minHeight: '640px' }}
     >
-      {/* bg-shine-inner-pages — centred on all axes */}
+      {/* shape-eclipse-left — pinned left, opacity 25% */}
       <img
         alt=""
-        src="/img/bg-shine-inner-pages.png"
-        className="absolute pointer-events-none"
-        style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)', maxWidth: '100%', zIndex: 0 }}
+        src="/img/shape-eclipse-left.png"
+        className="absolute top-0 left-0 pointer-events-none"
+        style={{ width: '40%', height: '100%', objectFit: 'cover', objectPosition: 'left center', opacity: 0.25, zIndex: 0 }}
+      />
+      {/* shape-eclipse-right — pinned right, opacity 25% */}
+      <img
+        alt=""
+        src="/img/shape-eclipse-right.png"
+        className="absolute top-0 right-0 pointer-events-none"
+        style={{ width: '40%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.25, zIndex: 0 }}
       />
 
       {/* Main flex container: top=120px (80+40), bottom=40px */}
@@ -28,7 +35,7 @@ export default function CSHero() {
         style={{
           zIndex: 1,
           paddingTop: '40px',
-          paddingBottom: '40px',
+          paddingBottom: '60px',
           height: '100%',
           boxSizing: 'border-box',
         }}
@@ -65,7 +72,7 @@ export default function CSHero() {
                 style={{
                   fontSize: '88px',
                   letterSpacing: '-0.02em',
-                  backgroundImage: 'linear-gradient(106.618deg, #ffffff 2.5635%, #d7fffc 99.06%)',
+                  backgroundImage: 'linear-gradient(95deg, #FFF -2.56%, #8F8F8F 99.06%)',
                 }}
               >
                 {'Invest in \nAnthropic Stock'}
