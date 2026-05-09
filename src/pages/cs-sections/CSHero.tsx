@@ -10,38 +10,34 @@ const TAGS = [
 export default function CSHero() {
   return (
     <section
-      className="relative w-full bg-page-bg overflow-clip"
-      style={{ height: 'calc(100vh - 80px)', minHeight: '640px' }}
+      className="relative w-full overflow-clip"
+      style={{ minHeight: '640px', background: 'transparent' }}
     >
-      {/* shape-eclipse-left — pinned left, opacity 25% */}
-      <img
-        alt=""
-        src="/img/shape-eclipse-left.png"
-        className="absolute top-0 left-0 pointer-events-none"
-        style={{ width: '40%', height: '100%', objectFit: 'cover', objectPosition: 'left center', opacity: 0.25, zIndex: 0 }}
-      />
-      {/* shape-eclipse-right — pinned right, opacity 25% */}
-      <img
-        alt=""
-        src="/img/shape-eclipse-right.png"
-        className="absolute top-0 right-0 pointer-events-none"
-        style={{ width: '40%', height: '100%', objectFit: 'cover', objectPosition: 'right center', opacity: 0.25, zIndex: 0 }}
+      {/* Background video — full-width fullscreen, opacity 60% (matches home page), hidden on mobile */}
+      <video
+        src="/ostracized_remix_scene.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-hidden="true"
+        className="hidden md:block absolute top-0 left-0 pointer-events-none"
+        style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', opacity: 0.6, zIndex: 0 }}
       />
 
-      {/* Main flex container: top=120px (80+40), bottom=40px */}
-      {/* paddingTop:40px (spacer in CompanyStock handles nav 80px) */}
+      {/* Main flex container — column on mobile/tablet, row on desktop */}
       <div
-        className="relative mx-auto w-full max-w-content flex items-stretch gap-8"
+        className="relative mx-auto w-full max-w-content flex flex-col lg:flex-row lg:items-stretch gap-8"
         style={{
           zIndex: 1,
           paddingTop: '40px',
           paddingBottom: '60px',
-          height: '100%',
+          minHeight: 'calc(100vh - 80px)',
           boxSizing: 'border-box',
         }}
       >
-        {/* ─ Left column: breadcrumb top, heading bottom, stretches full height ─ */}
-        <div className="flex flex-col justify-between flex-1 min-w-0 h-full">
+        {/* ─ Left column — heading anchored to bottom on desktop ─ */}
+        <div className="flex flex-col gap-8 lg:gap-0 lg:justify-between flex-1 min-w-0 lg:h-auto lg:self-stretch">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2">
             <span className="font-inter-tight font-medium text-text-m text-neutral-30 opacity-80 whitespace-nowrap">
@@ -60,17 +56,17 @@ export default function CSHero() {
             </span>
           </div>
 
-          {/* Heading — anchored to bottom via justify-between */}
-          <div className="flex flex-col gap-8" style={{ maxWidth: 614 }}>
+          {/* Heading — anchored to bottom on desktop via mt-auto */}
+          <div className="flex flex-col gap-6 lg:gap-8 lg:mt-auto" style={{ maxWidth: 614 }}>
             <div className="flex items-center gap-2 font-inter-tight font-medium text-text-l text-neutral-30">
               <span className="opacity-50">1.0</span>
               <span className="opacity-80">Overview</span>
             </div>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4 sm:gap-6">
               <h1
-                className="font-inter-tight font-semibold leading-none text-transparent bg-clip-text whitespace-pre-line"
+                className="font-inter-tight font-semibold leading-[1.05] lg:leading-none text-transparent bg-clip-text whitespace-pre-line"
                 style={{
-                  fontSize: '88px',
+                  fontSize: 'clamp(40px, 9vw, 88px)',
                   letterSpacing: '-0.02em',
                   backgroundImage: 'linear-gradient(95deg, #FFF -2.56%, #8F8F8F 99.06%)',
                 }}
@@ -79,7 +75,7 @@ export default function CSHero() {
               </h1>
               <p
                 className="font-inter-tight font-medium text-white/60"
-                style={{ fontSize: '20px', lineHeight: 1.3, letterSpacing: '-0.02em', maxWidth: 604 }}
+                style={{ fontSize: 'clamp(16px, 1.6vw, 20px)', lineHeight: 1.4, letterSpacing: '-0.02em', maxWidth: 604 }}
               >
                 Get early access to invest in Anthropic before its IPO. A leader in safe AI and creator of Claude,
                 Anthropic is still private. Invest today via our platform. Current valuation: ~$380B.
@@ -88,10 +84,10 @@ export default function CSHero() {
           </div>
         </div>
 
-        {/* ─ Right column: stretches full height, info card aligned top ─ */}
-        <div className="flex flex-col gap-4 shrink-0 h-full" style={{ width: 555 }}>
-          {/* Tabs */}
-          <div className="flex items-center gap-1">
+        {/* ─ Right column — full-width on mobile, fixed 555px on desktop ─ */}
+        <div className="flex flex-col gap-4 lg:shrink-0 lg:h-full w-full lg:w-[555px]">
+          {/* Tabs — horizontal scroll on mobile if needed */}
+          <div className="flex items-center gap-1 overflow-x-auto -mx-5 px-5 sm:mx-0 sm:px-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {[
               { label: 'Invest in Anthropic', active: true  },
               { label: 'Talk to an Advisor',  active: false },
@@ -100,7 +96,7 @@ export default function CSHero() {
               <button
                 key={label}
                 type="button"
-                className="flex items-center justify-center h-13 px-6 rounded-full font-inter-tight font-medium text-text-l whitespace-nowrap outline-none transition-colors"
+                className="flex items-center justify-center h-13 px-4 sm:px-6 rounded-full font-inter-tight font-medium text-text-m sm:text-text-l whitespace-nowrap outline-none transition-colors shrink-0"
                 style={{
                   background: active ? '#fff' : 'rgba(255,255,255,0.05)',
                   color: active ? '#000' : 'rgba(255,255,255,0.5)',
@@ -115,7 +111,7 @@ export default function CSHero() {
           {/* Price card */}
           <div
             className="relative flex flex-col w-full rounded-3xl"
-            style={{ background: '#151515', padding: '32px', gap: '48px' }}
+            style={{ background: '#151515', padding: 'clamp(20px, 3vw, 32px)', gap: 'clamp(28px, 4vw, 48px)' }}
           >
             {/* +86% YTD badge */}
             <div
@@ -137,19 +133,19 @@ export default function CSHero() {
             <div className="flex flex-col gap-4">
               <span className="font-inter-tight font-medium text-text-l text-neutral-30">Consensus Price</span>
               <div className="flex items-end gap-2">
-                <span className="font-inter-tight font-semibold text-white leading-none" style={{ fontSize: '64px', letterSpacing: '-0.02em' }}>
+                <span className="font-inter-tight font-semibold text-white leading-none" style={{ fontSize: 'clamp(40px, 7vw, 64px)', letterSpacing: '-0.02em' }}>
                   $262.34
                 </span>
                 <span className="font-inter-tight font-medium text-text-m text-neutral-30 mb-1">/ share</span>
               </div>
             </div>
 
-            <div className="flex flex-col gap-8">
-              <div className="flex gap-[73px] items-start">
+            <div className="flex flex-col gap-6 sm:gap-8">
+              <div className="grid grid-cols-2 gap-0 items-start">
                 <StatItem label="Target Price"         value="$262.34" />
                 <StatItem label="Last Round Valuation" value="$380B"   />
               </div>
-              <div className="flex gap-[73px] items-start">
+              <div className="grid grid-cols-2 gap-0 items-start">
                 <StatItem label="Total Funding"        value="$53.15B"            />
                 <StatItem label="Status"               value="Series G (Private)" />
               </div>
@@ -160,7 +156,7 @@ export default function CSHero() {
               alt="Anthropic"
               src="/img/cs/anthropic-symbol.svg"
               className="absolute"
-              style={{ right: '32px', bottom: '32px', width: '26px', height: '18px', opacity: 0.6 }}
+              style={{ right: '24px', bottom: '24px', width: '26px', height: '18px', opacity: 0.6 }}
             />
           </div>
 

@@ -72,25 +72,17 @@ function AnswerBtn({ opt, selected, onClick }: { opt: string; selected: boolean;
         {opt}
       </span>
 
-      {/* Icon — 24×24 per Figma */}
-      <motion.div
-        className="shrink-0 flex items-center justify-center"
+      {/* Icon — new self-contained 24×24 True/True-innactive SVGs */}
+      <motion.img
+        src={selected ? '/icons/True.svg' : '/icons/True-innactive.svg'}
+        alt=""
+        aria-hidden="true"
+        className="shrink-0"
+        width={24}
+        height={24}
         animate={{ scale: selected ? 1.05 : 1 }}
         transition={{ duration: 0.15, ease: 'easeOut' }}
-        style={{
-          width: 24, height: 24,
-          borderRadius: '160px',
-          ...(selected
-            ? { background: '#FFF', boxShadow: '-1px -1px 4px 0 rgba(0,0,0,0.50) inset' }
-            : { border: '1px dashed #A8A8A8', background: 'transparent' }),
-        }}
-      >
-        {selected && (
-          <svg width="11" height="9" viewBox="0 0 13 10" fill="none">
-            <path d="M1.5 5L5 8.5L11.5 1.5" stroke="#000" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        )}
-      </motion.div>
+      />
     </motion.button>
   )
 }

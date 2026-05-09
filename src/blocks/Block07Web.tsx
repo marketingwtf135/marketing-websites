@@ -59,7 +59,7 @@ export default function Block07Web() {
         >
           <div className="absolute inset-0 rounded-2xl bg-white pointer-events-none" />
           <img alt="" src="/img/block01/btn-overlay.png" className="absolute inset-0 w-full h-full rounded-2xl object-bottom mix-blend-overlay pointer-events-none" />
-          <img src="/img/block07/lock-keyhole-icon.svg" alt="" aria-hidden="true" width={18} height={18} className="relative z-10" />
+          <img src="/icons/Lock.svg" alt="" aria-hidden="true" width={24} height={24} className="relative z-10" style={{ filter: 'brightness(0)' }} />
           <span className="relative z-10">Request access</span>
         </button>
       </div>

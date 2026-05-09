@@ -60,7 +60,7 @@ export default function Block09Slider() {
             </div>
           </div>
 
-          {/* Slider buttons — Figma 142-25383 */}
+          {/* Slider buttons — new self-contained 64×64 SVGs */}
           <div className="flex gap-2 items-center shrink-0">
             <button
               type="button"
@@ -70,11 +70,8 @@ export default function Block09Slider() {
               onClick={() => scroll('prev')}
               onKeyDown={(e) => { if (e.key === 'Enter') scroll('prev') }}
               className="flex items-center justify-center disabled:opacity-30 hover:opacity-90 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-              style={{ width: 64, height: 64, borderRadius: 16, background: '#060606', border: '2px solid #1a1a1a' }}
             >
-              <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true">
-                <path d="M7 1L1 7L7 13M1 7H15" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <img src="/icons/slider-buttons-left.svg" alt="" aria-hidden="true" width={64} height={64} />
             </button>
             <button
               type="button"
@@ -84,11 +81,8 @@ export default function Block09Slider() {
               onClick={() => scroll('next')}
               onKeyDown={(e) => { if (e.key === 'Enter') scroll('next') }}
               className="flex items-center justify-center disabled:opacity-30 hover:opacity-90 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-              style={{ width: 64, height: 64, borderRadius: 16, background: '#060606', border: '2px solid #1a1a1a' }}
             >
-              <svg width="16" height="14" viewBox="0 0 16 14" fill="none" aria-hidden="true">
-                <path d="M9 1L15 7L9 13M15 7H1" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <img src="/icons/slider-buttons-right.svg" alt="" aria-hidden="true" width={64} height={64} />
             </button>
           </div>
         </div>

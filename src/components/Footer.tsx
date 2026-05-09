@@ -13,13 +13,13 @@ const NAV_COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-page-bg" style={{ borderTop: '1px solid #222' }}>
+    <footer className="w-full bg-page-bg" style={{ borderTop: '1px solid #222', position: 'relative', zIndex: 1 }}>
       <div
-        className="mx-auto w-full max-w-content flex items-start justify-between"
-        style={{ padding: '63px 0 80px' }}
+        className="mx-auto w-full max-w-content flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10 lg:gap-8"
+        style={{ paddingTop: 'clamp(40px, 6vw, 60px)', paddingBottom: 'clamp(40px, 6vw, 80px)' }}
       >
         {/* ── Left: logo + address + social ── */}
-        <div className="flex flex-col items-start justify-between shrink-0" style={{ width: '238px', alignSelf: 'stretch' }}>
+        <div className="flex flex-col items-start gap-8 lg:justify-between lg:shrink-0 lg:w-[238px] lg:self-stretch">
           {/* Logo */}
           <img
             src="/img/footer-logo.svg"
@@ -49,17 +49,15 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ── Right: nav columns ── */}
-        <div className="flex items-start gap-20 font-inter-tight font-medium text-white">
+        {/* ── Right: nav columns — 2col mobile, 3col tablet, 6col desktop ── */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:items-start gap-x-6 sm:gap-x-10 lg:gap-x-20 gap-y-8 font-inter-tight font-medium text-white w-full lg:w-auto">
           {NAV_COLUMNS.map((col) => (
-            <div key={col.heading} className="flex flex-col gap-8 items-start shrink-0">
-              {/* Section heading */}
+            <div key={col.heading} className="flex flex-col gap-4 sm:gap-6 lg:gap-8 items-start shrink-0">
               <span className="text-text-l whitespace-nowrap" style={{ letterSpacing: '-0.02em' }}>
                 {col.heading}
               </span>
 
-              {/* Nav items */}
-              <div className="flex flex-col gap-4 items-start text-text-m text-white/50" style={{ letterSpacing: '-0.02em' }}>
+              <div className="flex flex-col gap-3 lg:gap-4 items-start text-text-m text-white/50" style={{ letterSpacing: '-0.02em' }}>
                 {col.items.map((item, i) => (
                   <a
                     key={i}

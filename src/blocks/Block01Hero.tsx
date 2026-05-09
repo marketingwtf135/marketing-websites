@@ -2,33 +2,59 @@ import CtaButton from '../components/CtaButton'
 
 export default function Block01Hero() {
   return (
-    <section className="relative w-full bg-page-bg overflow-clip" style={{ height: '100vh', minHeight: '600px', paddingTop: '80px' }}>
+    <section
+      className="w-full overflow-clip"
+      style={{
+        position: 'sticky',
+        top: 0,
+        height: '100vh',
+        minHeight: '600px',
+        paddingTop: '80px',
+        zIndex: 0,
+      }}
+    >
 
-      {/* shape-eclipse-left — pinned left, opacity 25% */}
-      <img
-        alt=""
-        src="/img/shape-eclipse-left.png"
+      {/* Background video — fills section, doesn't overlap right-side hero illustration */}
+      <video
+        src="/ostracized_remix_scene.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-hidden="true"
         className="absolute top-0 left-0 pointer-events-none"
-        style={{ width: '40%', height: '100%', objectFit: 'cover', objectPosition: 'left center', opacity: 0.25, zIndex: 0 }}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'left center',
+          zIndex: 10,
+          opacity: 0.6,
+        }}
+      />
+      {/* Right-side fade so video doesn't overlap the hero interface on the right */}
+      <div
+        className="absolute top-0 right-0 pointer-events-none"
+        style={{
+          width: '60%',
+          height: '100%',
+          background: 'linear-gradient(90deg, rgba(8,8,8,0) 0%, var(--page-bg) 60%)',
+          zIndex: 0,
+        }}
       />
 
       {/* Hero illustration — 1100×997px at 1200px+, scales below, shows fully */}
-      <div className="hero-illustration">
+      <div className="hero-illustration" style={{ zIndex: 11 }}>
         <img
           alt=""
           src="/img/hero-image.png"
-          className="block w-full h-full object-cover"
+          className="block w-full h-full object-contain"
           loading="eager"
-        />
-        {/* Fade left + bottom edges */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ background: 'linear-gradient(90deg, var(--page-bg) 0%, rgba(8,8,8,0) 35%), linear-gradient(0deg, var(--page-bg) 0%, rgba(8,8,8,0) 35%)' }}
         />
       </div>
 
       {/* Copy + CTA — anchored to bottom so button is always visible */}
-      <div className="absolute w-full" style={{ bottom: '80px' }}>
+      <div className="absolute w-full" style={{ bottom: '80px', zIndex: 15 }}>
         <div className="mx-auto w-full max-w-content">
           <div className="flex flex-col gap-12 items-start">
             <div className="flex flex-col gap-6 items-start">

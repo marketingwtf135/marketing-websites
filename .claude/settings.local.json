@@ -75,7 +75,8 @@
       "WebSearch",
       "WebFetch(domain:github.com)",
       "mcp__79b1f00d-7716-4404-b493-6ccf9b4fa7b4__get_metadata",
-      "Bash(curl -s http://localhost:5174)"
+      "Bash(curl -s http://localhost:5174)",
+      "Bash(cp \"/c/Users/singa/Desktop/Claude/.claude/worktrees/dazzling-wing-c0fe6d/public/img/shape-eclipse-left.png\" \"/c/Users/singa/Desktop/Claude/.claude/worktrees/dazzling-wing-c0fe6d/.claude/worktrees/laughing-shockley-7c5169/public/img/shape-eclipse-left.png\" && echo \"copied\")"
     ]
   }
 }

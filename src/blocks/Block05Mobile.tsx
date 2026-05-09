@@ -34,7 +34,7 @@ function useScrollProgress(ref: React.RefObject<HTMLDivElement>) {
       const { top, height } = el.getBoundingClientRect()
       // Progress goes 0→1 as the sticky section scrolls through its extra height
       // We have 100vh extra scrollable space inside the 200vh wrapper
-      const extra = height / 2 // half of 200vh wrapper = 100vh extra scroll space
+      const extra = Math.max(1, height / 2) // guard against division by zero
       // top is negative once we've scrolled past the section top
       const scrolled = Math.max(0, -top)
       setProgress(Math.min(1, scrolled / extra))

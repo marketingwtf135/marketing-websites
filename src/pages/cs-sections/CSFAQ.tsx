@@ -17,11 +17,11 @@ export default function CSFAQ() {
   const [open, setOpen] = useState<number | null>(null)
 
   return (
-    <section className="w-full bg-page-bg padding-section-t6-b0" style={{ position: 'relative', zIndex: 1 }}>
-      <div className="mx-auto w-full max-w-content flex flex-col gap-12 items-start">
+    <section className="w-full bg-page-bg" style={{ position: 'relative', zIndex: 1, paddingTop: 'clamp(60px, 10vw, 100px)', paddingBottom: 0 }}>
+      <div className="mx-auto w-full max-w-content flex flex-col gap-8 sm:gap-12 items-start">
 
         {/* Heading */}
-        <div className="flex flex-col gap-6 items-start">
+        <div className="flex flex-col gap-4 sm:gap-6 items-start">
           <div className="flex gap-2 items-center font-inter-tight font-medium text-text-l text-neutral-30">
             <span className="opacity-50">6.0</span>
             <span className="opacity-80">FAQ</span>
@@ -29,8 +29,8 @@ export default function CSFAQ() {
           <h2
             className="font-inter-tight font-semibold text-transparent bg-clip-text pb-1"
             style={{
-              fontSize: 64,
-              lineHeight: 1,
+              fontSize: 'clamp(32px, 5.5vw, 64px)',
+              lineHeight: 1.05,
               letterSpacing: '-0.02em',
               backgroundImage: 'linear-gradient(93.581deg, #ffffff 0.176%, #b7b7b7 98.822%)',
             }}
@@ -50,24 +50,21 @@ export default function CSFAQ() {
                   type="button"
                   onClick={() => setOpen(isOpen ? null : i)}
                   aria-expanded={isOpen}
-                  className="w-full flex items-center justify-between gap-8 text-left outline-none"
-                  style={{ padding: '28px 0' }}
+                  className="w-full flex items-center justify-between gap-4 sm:gap-8 text-left outline-none"
+                  style={{ padding: 'clamp(20px, 3vw, 28px) 0', minHeight: 56 }}
                 >
-                  <span className="font-inter-tight font-semibold text-text-xl text-white">{item.q}</span>
+                  <span className="font-inter-tight font-semibold text-white" style={{ fontSize: 'clamp(16px, 2vw, 20px)', lineHeight: 1.3 }}>{item.q}</span>
 
-                  {/* Single icon — rotates 45° on open, no src swap */}
+                  {/* Icon — smaller on mobile */}
                   <motion.img
-                    src="/icons/icon-dd-close.svg"
+                    src="/icons/Plus.svg"
                     alt=""
-                    width={64}
-                    height={64}
-                    className="shrink-0"
+                    className="shrink-0 w-10 h-10 sm:w-14 sm:h-14 lg:w-16 lg:h-16"
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                   />
                 </button>
 
-                {/* Answer — framer-motion height animation (smooth, no jerk) */}
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
@@ -77,8 +74,8 @@ export default function CSFAQ() {
                       transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                       style={{ overflow: 'hidden' }}
                     >
-                      <div style={{ paddingBottom: 28, paddingRight: 60 }}>
-                        <p className="font-inter-tight font-medium text-text-l text-white/60">{item.a}</p>
+                      <div className="pb-7 pr-0 sm:pr-12 lg:pr-[60px]">
+                        <p className="font-inter-tight font-medium text-text-m sm:text-text-l text-white/60">{item.a}</p>
                       </div>
                     </motion.div>
                   )}

@@ -65,22 +65,20 @@ export default function Block08Section() {
             const isDelaware = card.title === 'Delaware Jurisdiction'
 
             if (isDelaware) {
-              /* Delaware only — image absolute, overflow visible to match Figma 142-25457 */
+              /* Card 2 — image position:absolute, 100% width, 400px height fills the card */
               return (
                 <div
                   key={card.title}
-                  className="relative"
+                  className="relative overflow-hidden"
                   style={{ height: '400px', ...card.border }}
                 >
-                  <div className="absolute inset-0" style={{ overflow: 'visible' }}>
-                    <img
-                      alt={card.title}
-                      src={card.img}
-                      className="absolute"
-                      style={{ top: '-73px', right: '-46px', width: '486px', height: '331px' }}
-                      loading="lazy"
-                    />
-                  </div>
+                  <img
+                    alt={card.title}
+                    src={card.img}
+                    className="absolute top-0 left-0 object-cover"
+                    style={{ width: '100%', height: '400px' }}
+                    loading="lazy"
+                  />
                   <div
                     className="absolute left-0 right-0 bottom-0 flex flex-col gap-3 z-10"
                     style={{ padding: '16px 24px 24px' }}
@@ -92,21 +90,20 @@ export default function Block08Section() {
               )
             }
 
-            /* All other cards — original flex layout */
+            /* Cards 1, 3, 4 — image 100% width, 225px fixed height */
             return (
               <div
                 key={card.title}
                 className="flex flex-col"
                 style={{ padding: '24px', gap: '24px', height: '400px', ...card.border }}
               >
-                <div className="relative rounded-xl flex-1 overflow-hidden">
-                  <img
-                    alt={card.title}
-                    src={card.img}
-                    className="absolute top-0 right-0 h-full w-auto"
-                    loading="lazy"
-                  />
-                </div>
+                <img
+                  alt={card.title}
+                  src={card.img}
+                  className="rounded-xl object-cover w-full shrink-0"
+                  style={{ height: '225px' }}
+                  loading="lazy"
+                />
                 <div className="flex flex-col gap-3">
                   <h3 className="font-inter-tight font-semibold text-h5 text-white">{card.title}</h3>
                   <p className="font-inter-tight font-medium text-text-m text-white/60">{card.body}</p>

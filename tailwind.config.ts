@@ -44,6 +44,7 @@ const config: Config = {
         'accent-teal':       '#175e6e',
         'accent-teal-light': '#d7ffff',
         'accent-blue':       '#546fef',
+        'lime-accent':       '#F5FD5A',
         // Gradients
         'gradient-end':   '#717171',
       },

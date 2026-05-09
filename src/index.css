@@ -101,10 +101,26 @@
   box-sizing: border-box;
 }
 
+/* CtaButton — small idle shadow, big white glow + 4px lift on hover */
+.cta-button-glow {
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
+}
+.cta-button-glow:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    32px 32px 32px rgba(255, 255, 255, 0.25),
+    12px 12px 16px rgba(255, 255, 255, 0.25),
+    2px 2px 8px rgba(255, 255, 255, 0.5);
+}
+.cta-button-glow:active {
+  transform: translateY(-1px);
+  box-shadow: 0 1px 4px rgba(255, 255, 255, 0.06);
+}
+
 /* Hero illustration — 1100×997px fixed at 1200px+, proportionally scales below */
 .hero-illustration {
   position: absolute;
-  top: 0;
+  top: 80px;
   right: 0;
   pointer-events: none;
   /* proportional scale below 1200px: 1100/1200 ≈ 91.67% of viewport */
@@ -125,7 +141,7 @@ html {
 
 body {
   margin: 0;
-  background-color: var(--page-bg);
+  background-color: #000000;
   color: #ffffff;
   font-family: 'Inter Tight', sans-serif;
   -webkit-font-smoothing: antialiased;

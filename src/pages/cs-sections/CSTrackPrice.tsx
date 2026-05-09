@@ -82,16 +82,16 @@ function StockChart({ pts }: { pts: PtData[] }) {
       <svg viewBox={`0 0 ${W} ${H}`} className="absolute inset-0 w-full h-full" style={{ overflow: 'visible' }} preserveAspectRatio="none">
         <defs>
           <linearGradient id="cf" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#00e5b4" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="#00e5b4" stopOpacity="0" />
+            <stop offset="0%" stopColor="#4EA3BF" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#4EA3BF" stopOpacity="0" />
           </linearGradient>
           <linearGradient id="cl" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#175e6e" />
-            <stop offset="100%" stopColor="#00f0c8" />
+            <stop offset="0%" stopColor="#2a6e82" />
+            <stop offset="100%" stopColor="#4EA3BF" />
           </linearGradient>
           <radialGradient id="dg">
-            <stop offset="0%" stopColor="#00f0c8" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#00f0c8" stopOpacity="0" />
+            <stop offset="0%" stopColor="#4EA3BF" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#4EA3BF" stopOpacity="0" />
           </radialGradient>
           <clipPath id="fillClip">
             <path d={fillPath} />
@@ -111,7 +111,7 @@ function StockChart({ pts }: { pts: PtData[] }) {
             <g key={i} style={{ cursor: 'pointer' }} onMouseEnter={() => setHovered(idx)} onMouseLeave={() => setHovered(null)}>
               <circle cx={x} cy={y} r={28} fill="transparent" />
               <circle cx={x} cy={y} r={isHov ? 18 : 12.4} fill="url(#dg)" />
-              <circle cx={x} cy={y} r={4.655} fill="#101010" stroke="#00f0c8" strokeWidth={isHov ? 2 : 1} strokeOpacity="0.6" />
+              <circle cx={x} cy={y} r={4.655} fill="#101010" stroke="#4EA3BF" strokeWidth={isHov ? 2 : 1} strokeOpacity="0.6" />
               <circle cx={x} cy={y} r={4.655} fill="white" fillOpacity="0.9" />
               {isHov && (
                 <g>
@@ -136,14 +136,17 @@ function AdvCard({
 }) {
   return (
     <div
-      className="bg-[#111111] rounded-2xl flex items-start gap-6"
-      style={{ padding: 16, width: 345, borderLeft: leftBorder ? '1px solid #151515' : undefined }}
+      className="bg-[#111111] rounded-2xl flex items-start gap-4 sm:gap-6 w-full"
+      style={{ padding: 16, borderLeft: leftBorder ? '1px solid #151515' : undefined }}
     >
       <div className="flex flex-col gap-4 flex-1 min-w-0">
         <span className="font-inter-tight font-medium text-text-m text-white/60">{label}</span>
         <span className="font-inter-tight font-semibold text-h5 text-white select-none" style={{ filter: 'blur(8px)' }}>{value}</span>
       </div>
-      <img src={iconSrc} alt={iconAlt} width={44} height={44} className="shrink-0" />
+      {/* Icon — wrapped in dark circle (44×44) for new 24×24 raw icons */}
+      <div className="shrink-0 flex items-center justify-center rounded-full" style={{ width: 44, height: 44, background: '#1a1a1a' }}>
+        <img src={iconSrc} alt={iconAlt} width={24} height={24} />
+      </div>
     </div>
   )
 }
@@ -154,11 +157,11 @@ export default function CSTrackPrice() {
   const data = RANGE_DATA[activeRange]
 
   return (
-    <section className="w-full bg-page-bg padding-section-t12-b6">
-      <div className="mx-auto w-full max-w-content flex flex-col gap-[60px] items-start">
+    <section className="w-full bg-page-bg" style={{ paddingTop: 'clamp(80px, 14vw, 200px)', paddingBottom: 'clamp(60px, 8vw, 100px)' }}>
+      <div className="mx-auto w-full max-w-content flex flex-col gap-10 lg:gap-[60px] items-start">
 
         {/* ── Heading ── */}
-        <div className="flex flex-col gap-8 items-start">
+        <div className="flex flex-col gap-6 sm:gap-8 items-start">
           <div className="flex gap-2 items-center font-inter-tight font-medium text-text-l text-neutral-30">
             <span className="opacity-50">2.0</span>
             <span className="opacity-80">Analytics</span>
@@ -166,8 +169,8 @@ export default function CSTrackPrice() {
           <h2
             className="font-inter-tight font-semibold text-transparent bg-clip-text whitespace-pre"
             style={{
-              fontSize: '64px',
-              lineHeight: 1,
+              fontSize: 'clamp(36px, 6vw, 64px)',
+              lineHeight: 1.05,
               letterSpacing: '-0.02em',
               backgroundImage:
                 'linear-gradient(93.581deg, #ffffff 0.176%, #b7b7b7 98.822%)',
@@ -177,18 +180,17 @@ export default function CSTrackPrice() {
           </h2>
         </div>
 
-        {/* ── Graphic + advantages — outer gap 16px between graphic block and adv row ── */}
+        {/* Graphic + advantages */}
         <div className="flex flex-col gap-4 w-full">
 
-          {/* Graphic block — sub-heading + chart, 40px gap */}
-          <div className="flex flex-col gap-10 w-full">
+          <div className="flex flex-col gap-6 lg:gap-10 w-full">
 
-          {/* Sub-heading row */}
+          {/* Sub-heading row — stack on mobile/tablet */}
           <div
-            className="flex items-start justify-between w-full"
-            style={{ borderTop: '1px solid #1d1d1d', paddingTop: 60 }}
+            className="flex flex-col lg:flex-row lg:items-start lg:justify-between w-full gap-4 lg:gap-8"
+            style={{ borderTop: '1px solid #1d1d1d', paddingTop: 'clamp(24px, 4vw, 60px)' }}
           >
-            <p className="font-inter-tight font-semibold text-white" style={{ fontSize: 36, lineHeight: 1.2, whiteSpace: 'nowrap' }}>
+            <p className="font-inter-tight font-semibold text-white" style={{ fontSize: 'clamp(24px, 3.5vw, 36px)', lineHeight: 1.2 }}>
               Anthropic consensus price
             </p>
             <p className="font-inter-tight font-medium text-white/60 text-text-l" style={{ maxWidth: 710 }}>
@@ -199,22 +201,25 @@ export default function CSTrackPrice() {
             </p>
           </div>
 
-          {/* Chart card — advantage cards live inside */}
+          {/* Chart card */}
           <div
-            className="w-full rounded-[32px] overflow-hidden flex flex-col items-center"
+            className="w-full rounded-[24px] sm:rounded-[32px] overflow-hidden flex flex-col items-center"
             style={{ background: '#111111', paddingTop: 24 }}
           >
-            {/* Top row: price + tabs */}
-            <div className="flex items-start justify-between w-full" style={{ paddingLeft: 24, paddingRight: 24, marginBottom: 59 }}>
+            {/* Top row: price + tabs — stack on mobile */}
+            <div
+              className="flex flex-col sm:flex-row sm:items-start sm:justify-between w-full gap-6 sm:gap-4"
+              style={{ paddingLeft: 24, paddingRight: 24, marginBottom: 'clamp(32px, 6vw, 59px)' }}
+            >
               {/* Price + badge */}
-              <div className="flex flex-col gap-6 items-start">
+              <div className="flex flex-col gap-4 sm:gap-6 items-start">
                 <span className="font-inter-tight font-medium text-text-l text-neutral-30">
                   Consensus Price
                 </span>
                 <div className="flex flex-col gap-3 items-start">
                   <span
                     className="font-inter-tight font-semibold text-white"
-                    style={{ fontSize: 64, lineHeight: 1, letterSpacing: '-0.02em' }}
+                    style={{ fontSize: 'clamp(40px, 7vw, 64px)', lineHeight: 1, letterSpacing: '-0.02em' }}
                   >
                     {data.price}
                   </span>
@@ -235,8 +240,11 @@ export default function CSTrackPrice() {
                 </div>
               </div>
 
-              {/* Time range tabs */}
-              <div className="flex items-center gap-1">
+              {/* Time range tabs — horizontal scroll on small screens */}
+              <div
+                className="flex items-center gap-1 overflow-x-auto -mx-1 px-1"
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
                 {TABS.map((tab) => {
                   const isActive = tab === activeRange
                   return (
@@ -244,11 +252,11 @@ export default function CSTrackPrice() {
                       key={tab}
                       type="button"
                       onClick={() => setActiveRange(tab)}
-                      className="font-inter-tight font-medium text-text-m transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                      className="font-inter-tight font-medium text-text-m transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white shrink-0"
                       style={{
-                        height: 50,
-                        width: 61,
-                        borderRadius: 16,
+                        height: 44,
+                        width: 56,
+                        borderRadius: 12,
                         background: isActive ? '#fff' : '#1a1a1a',
                         color: isActive ? '#000' : 'rgba(255,255,255,0.5)',
                         border: isActive ? '1px solid rgba(255,255,255,0.25)' : 'none',
@@ -269,12 +277,12 @@ export default function CSTrackPrice() {
           </div>
           </div>
 
-          {/* ── Advantage cards — separate row, 16px gap from chart card ── */}
-          <div className="flex items-center justify-between w-full">
-            <AdvCard label="Highest Bid"      value="$258.00" iconSrc="/icons/icon-arrow-top.svg"   iconAlt="Highest bid"       leftBorder />
-            <AdvCard label="Lowest Ask"        value="$268.50" iconSrc="/icons/icon-arrow-down.svg"  iconAlt="Lowest ask"        />
-            <AdvCard label="Lost Transaction"  value="$262.34" iconSrc="/icons/icon-money-case.svg"  iconAlt="Lost transaction"  />
-            <AdvCard label="Live Orders"       value="79"      iconSrc="/icons/icon-profile.svg"     iconAlt="Live orders"       />
+          {/* ── Advantage cards — 1col mobile, 2col tablet, 4col desktop ── */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 w-full">
+            <AdvCard label="Highest Bid"      value="$258.00" iconSrc="/icons/Arrow-up.svg"    iconAlt="Highest bid"       leftBorder />
+            <AdvCard label="Lowest Ask"        value="$268.50" iconSrc="/icons/Arrow-down-1.svg"  iconAlt="Lowest ask"        />
+            <AdvCard label="Lost Transaction"  value="$262.34" iconSrc="/icons/Money.svg"       iconAlt="Lost transaction"  />
+            <AdvCard label="Live Orders"       value="79"      iconSrc="/icons/User.svg"        iconAlt="Live orders"       />
           </div>
         </div>
       </div>

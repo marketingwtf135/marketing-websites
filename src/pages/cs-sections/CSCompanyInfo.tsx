@@ -1,18 +1,18 @@
 /** Section 3 — Building safer AI (Figma 89:372) */
 export default function CSCompanyInfo() {
   return (
-    <section className="w-full bg-page-bg padding-section-t6-b6">
+    <section className="w-full bg-page-bg" style={{ paddingTop: 'clamp(60px, 10vw, 100px)', paddingBottom: 'clamp(60px, 10vw, 100px)' }}>
       <div className="mx-auto w-full max-w-content flex flex-col gap-6 items-center">
 
         {/* Heading */}
-        <div className="flex flex-col gap-8 items-center text-center">
+        <div className="flex flex-col gap-6 sm:gap-8 items-center text-center">
           <div className="flex gap-2 items-center font-inter-tight font-medium text-text-l text-neutral-30">
             <span className="opacity-50">3.0</span>
             <span className="opacity-80">About Anthropic</span>
           </div>
           <h2
-            className="font-inter-tight font-semibold text-h2 pb-2 text-white text-center"
-            style={{ lineHeight: 1, overflow: 'visible' }}
+            className="font-inter-tight font-semibold pb-2 text-white text-center"
+            style={{ fontSize: 'clamp(32px, 5vw, 64px)', lineHeight: 1.05, letterSpacing: '-0.02em', overflow: 'visible' }}
           >
             Building safer AI,<br />one model at a time
           </h2>
@@ -27,21 +27,21 @@ export default function CSCompanyInfo() {
           </p>
         </div>
 
-        {/* Stats card */}
+        {/* Stats card — fluid width, stack on mobile */}
         <div
-          className="rounded-2xl"
-          style={{ background: '#101010', border: '1px solid #151515', width: 900 }}
+          className="rounded-2xl w-full"
+          style={{ background: '#101010', border: '1px solid #151515', maxWidth: 900 }}
         >
-          {/* Row 1 */}
+          {/* Row 1 — 2-col always */}
           <div
             className="grid grid-cols-2"
-            style={{ borderBottom: '1px solid #1d1d1d', padding: '24px' }}
+            style={{ borderBottom: '1px solid #1d1d1d', padding: 'clamp(16px, 3vw, 24px)' }}
           >
             <StatCell label="Founded"        value="2021" />
             <StatCell label="HQ"             value="San Francisco, CA" border />
           </div>
           {/* Row 2 */}
-          <div className="grid grid-cols-2" style={{ padding: '24px' }}>
+          <div className="grid grid-cols-2" style={{ padding: 'clamp(16px, 3vw, 24px)' }}>
             <StatCell label="Industry"  value="AI & Enterprise Software" />
             <StatCell label="Focus"     value="Reliable, ethical AI systems" border />
           </div>
@@ -54,11 +54,11 @@ export default function CSCompanyInfo() {
 function StatCell({ label, value, border }: { label: string; value: string; border?: boolean }) {
   return (
     <div
-      className="flex flex-col gap-4"
-      style={border ? { borderLeft: '1px solid #1d1d1d', paddingLeft: 24 } : undefined}
+      className="flex flex-col gap-2 sm:gap-4 min-w-0"
+      style={border ? { borderLeft: '1px solid #1d1d1d', paddingLeft: 'clamp(12px, 2.5vw, 24px)' } : undefined}
     >
       <span className="font-inter-tight font-medium text-text-m text-white/60">{label}</span>
-      <span className="font-inter-tight font-semibold text-h5 text-white">{value}</span>
+      <span className="font-inter-tight font-semibold text-white" style={{ fontSize: 'clamp(16px, 2.5vw, 24px)', lineHeight: 1.2, letterSpacing: '-0.02em' }}>{value}</span>
     </div>
   )
 }
