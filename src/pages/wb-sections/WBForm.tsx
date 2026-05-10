@@ -1,27 +1,40 @@
-﻿import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { analytics } from '../../lib/analytics'
 import { getUtmParams } from '../../lib/useUtm'
 
 interface FormData {
-  email: string
   name: string
-  position: string
+  email: string
   company: string
-  phone: string
-  contactMe: boolean
+  role: string
 }
 
-const AMOCRM_WEBHOOK = 'https://your-amocrm-webhook-url.com/webinar' // TODO: replace with real URL
+const AMOCRM_WEBHOOK = 'https://your-amocrm-webhook-url.com/webinar'
+
+const ROLE_OPTIONS = [
+  'Wealth manager / RIA',
+  'Family office',
+  'Independent IFA / EAM',
+  'Private banker',
+  'Other',
+]
 
 export default function WBForm() {
-  const [form, setForm] = useState<FormData>({
-    email: '', name: '', position: '', company: '', phone: '', contactMe: false,
-  })
+  const [form, setForm] = useState<FormData>({ name: '', email: '', company: '', role: '' })
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
   const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [roleOpen, setRoleOpen] = useState(false)
   const hasStarted = useRef(false)
   const sectionRef = useRef<HTMLElement>(null)
+
+  // Section's own border-radius: 16px → 64px as it enters viewport (same as WBWhyAxevil)
+  const { scrollYProgress: radiusProgress } = useScroll({
+    target: sectionRef as React.RefObject<HTMLElement>,
+    offset: ['start 1', 'start 0.4'],
+  })
+  const sectionRadius = useTransform(radiusProgress, [0, 1], [64, 0])
 
   useEffect(() => {
     const el = sectionRef.current
@@ -35,18 +48,14 @@ export default function WBForm() {
   }, [])
 
   function onInput() {
-    if (!hasStarted.current) {
-      hasStarted.current = true
-      analytics.formStart()
-    }
+    if (!hasStarted.current) { hasStarted.current = true; analytics.formStart() }
   }
 
   function validate() {
     const e: typeof errors = {}
+    if (!form.name.trim()) e.name = 'Required'
     if (!form.email.trim()) e.email = 'Required'
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Invalid email'
-    if (!form.name.trim()) e.name = 'Required'
-    if (form.contactMe && !form.phone.trim()) e.phone = 'Required when "Contact me" is selected'
     return e
   }
 
@@ -61,12 +70,11 @@ export default function WBForm() {
     setErrors({})
     setLoading(true)
     const utm = getUtmParams()
-    const payload = { ...form, ...utm, page: 'webinar', ts: new Date().toISOString() }
     try {
       await fetch(AMOCRM_WEBHOOK, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...form, ...utm, page: 'webinar', ts: new Date().toISOString() }),
       })
       analytics.formSubmit({ email: form.email })
       setSubmitted(true)
@@ -78,154 +86,174 @@ export default function WBForm() {
   }
 
   return (
-    <section
+    <motion.section
       id="wb-form"
       ref={sectionRef}
-      className="relative w-full"
-      style={{ background: '#0a0a0a', borderTop: '1px solid rgba(255,255,255,0.06)' }}
+      className="relative w-full overflow-clip flex items-center"
+      style={{
+        minHeight: '100vh',
+        background: '#000000',
+        borderTopLeftRadius: sectionRadius,
+        borderTopRightRadius: sectionRadius,
+      }}
     >
-      {/* Subtle white glow */}
-      <div
-        className="absolute top-0 left-1/2 pointer-events-none"
-        style={{
-          transform: 'translateX(-50%)',
-          width: '700px',
-          height: '300px',
-          background: 'radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.04) 0%, transparent 65%)',
-        }}
+      {/* Left shine - 1000px x 100vh, contain */}
+      <img
+        src="/img/reg-left-shine.png"
+        alt=""
+        aria-hidden="true"
+        className="hidden lg:block absolute top-0 left-0 pointer-events-none select-none"
+        style={{ width: 1000, height: '100vh', objectFit: 'fill' }}
+      />
+      {/* Right shine */}
+      <img
+        src="/img/reg-right-shine.png"
+        alt=""
+        aria-hidden="true"
+        className="hidden lg:block absolute top-0 right-0 pointer-events-none select-none"
+        style={{ width: 1000, height: '100vh', objectFit: 'fill' }}
       />
 
-      <div className="relative mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-[80px] pt-[64px] pb-[100px] sm:pt-[80px] sm:pb-[120px] lg:pt-[100px] lg:pb-[160px]">
-        <div className="max-w-[600px] mx-auto">
+      <div className="relative mx-auto w-full max-w-[1440px] px-5 py-[80px] sm:py-[100px] lg:py-[120px]">
+        <div className="max-w-[520px] mx-auto">
 
-          <div className="mb-8 sm:mb-10 text-center">
-            <div className="flex items-center justify-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30 mb-4">
+          <div className="flex flex-col items-center text-center gap-4 mb-8 sm:mb-10">
+            <div className="flex items-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30">
               <span className="opacity-50">7.0</span>
               <span className="opacity-80">Registration</span>
             </div>
             <h2
-              className="font-inter-tight font-semibold text-transparent bg-clip-text mb-4"
-              style={{
-                fontSize: 'clamp(36px, 3.5vw, 48px)',
-                lineHeight: 1.1,
-                letterSpacing: '-0.02em',
-                backgroundImage: 'linear-gradient(95deg, #ffffff -2.56%, #8f8f8f 99.06%)',
-                overflow: 'visible',
-              }}
+              className="font-inter-tight font-semibold text-center text-white"
+              style={{ fontSize: 'clamp(2.25rem, 5vw, 4rem)', fontWeight: 600, lineHeight: '100%', letterSpacing: '-1.28px', overflow: 'visible' }}
             >
               Register for the webinar
             </h2>
-            <p className="font-inter-tight font-medium text-white/50 text-text-m leading-[1.5]">
-              Leave your details вЂ” we'll send registration confirmation and a calendar link.
+            <p className="font-inter-tight font-medium text-white/55" style={{ fontSize: 15 }}>
+              200 seats &middot; By registration &middot; Recording included
             </p>
           </div>
 
           {submitted ? (
             <SuccessState />
           ) : (
-            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-2">
-              <Field label="Email *" error={errors.email} input={
-                <input type="email" required autoComplete="email" inputMode="email" placeholder="your@email.com" value={form.email}
-                  onChange={e => { setForm(f => ({ ...f, email: e.target.value })); onInput() }}
-                  className={fieldClass(!!errors.email)} />
-              } />
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="flex flex-col" style={{ gap: 8 }}>
+                <FieldInput
+                  placeholder="Your name"
+                  value={form.name}
+                  error={errors.name}
+                  onChange={v => { setForm(f => ({ ...f, name: v })); onInput() }}
+                />
+                <FieldInput
+                  type="email"
+                  placeholder="your@email.com"
+                  value={form.email}
+                  error={errors.email}
+                  onChange={v => { setForm(f => ({ ...f, email: v })); onInput() }}
+                />
+                <FieldInput
+                  placeholder="Company name"
+                  value={form.company}
+                  onChange={v => { setForm(f => ({ ...f, company: v })); onInput() }}
+                />
 
-              <Field label="Name *" error={errors.name} input={
-                <input type="text" required autoComplete="name" placeholder="First Last" value={form.name}
-                  onChange={e => { setForm(f => ({ ...f, name: e.target.value })); onInput() }}
-                  className={fieldClass(!!errors.name)} />
-              } />
-
-              <div className="flex flex-col gap-4">
-                <Field label="Position" input={
-                  <input type="text" autoComplete="organization-title" placeholder="e.g. Wealth Manager, Family Office Director" value={form.position}
-                    onChange={e => { setForm(f => ({ ...f, position: e.target.value })); onInput() }}
-                    className={fieldClass(false)} />
-                } />
-                <Field label="Company / Family Office" input={
-                  <input type="text" autoComplete="organization" placeholder="Company name" value={form.company}
-                    onChange={e => { setForm(f => ({ ...f, company: e.target.value })); onInput() }}
-                    className={fieldClass(false)} />
-                } />
-              </div>
-
-              <label className="flex items-start gap-3 cursor-pointer">
-                <div className="relative mt-0.5 shrink-0">
-                  <input type="checkbox" checked={form.contactMe}
-                    onChange={e => setForm(f => ({ ...f, contactMe: e.target.checked }))}
-                    className="sr-only" />
-                  <div
-                    className="w-5 h-5 rounded-[5px] flex items-center justify-center transition-colors"
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setRoleOpen(o => !o)}
+                    className="w-full flex items-center justify-between text-left font-inter-tight font-medium text-[15px] focus:outline-none"
                     style={{
-                      background: form.contactMe ? '#ffffff' : 'transparent',
-                      border: form.contactMe ? '1px solid rgba(255,255,255,0.8)' : '1px solid rgba(255,255,255,0.2)',
+                      height: 'clamp(3rem, 4vw, 3.75rem)',
+                      padding: '20px 16px',
+                      borderRadius: 16,
+                      background: '#1A1A1A',
+                      border: 'none',
+                      color: form.role ? '#fff' : 'rgba(255,255,255,0.4)',
                     }}
                   >
-                    {form.contactMe && (
-                      <svg width="11" height="8" viewBox="0 0 11 8" fill="none">
-                        <path d="M1 4L4 7L10 1" stroke="#0a0a0a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
+                    {form.role || 'Role'}
+                    <svg
+                      width="16" height="16" viewBox="0 0 16 16" fill="none"
+                      aria-hidden="true"
+                      className={`transition-transform ${roleOpen ? 'rotate-180' : ''}`}
+                    >
+                      <path d="M3 6L8 11L13 6" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                  <AnimatePresence>
+                    {roleOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute left-0 right-0 top-full mt-2 z-10 rounded-[14px] overflow-hidden"
+                        style={{ background: '#1a1a1a', border: '1px solid rgba(255,255,255,0.08)' }}
+                      >
+                        {ROLE_OPTIONS.map(opt => (
+                          <button
+                            key={opt}
+                            type="button"
+                            onClick={() => { setForm(f => ({ ...f, role: opt })); setRoleOpen(false); onInput() }}
+                            className="w-full text-left px-4 py-3 font-inter-tight font-medium text-[14px] text-white/80 hover:bg-white/5 hover:text-white transition-colors"
+                          >
+                            {opt}
+                          </button>
+                        ))}
+                      </motion.div>
                     )}
-                  </div>
+                  </AnimatePresence>
                 </div>
-                <span className="font-inter-tight font-medium text-white/60 text-[14px] leading-[1.4]">
-                  Contact me personally to discuss investment opportunities
-                </span>
-              </label>
-
-              {form.contactMe && (
-                <Field label="Phone *" error={errors.phone} input={
-                  <input type="tel" autoComplete="tel" inputMode="tel" placeholder="+1 (555) 000-0000" value={form.phone}
-                    onChange={e => { setForm(f => ({ ...f, phone: e.target.value })); onInput() }}
-                    className={fieldClass(!!errors.phone)} />
-                } />
-              )}
+              </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex items-center justify-center font-inter-tight font-semibold text-text-m text-phone-bg bg-white rounded-2xl transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-white mt-2 disabled:opacity-60"
-                style={{ height: '56px' }}
+                className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-[15px] text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white disabled:opacity-60"
+                style={{ height: 'clamp(3rem, 4vw, 3.75rem)', marginTop: 24 }}
               >
-                {loading ? 'SendingвЂ¦' : 'Register'}
+                <span className="rounded-full" style={{ width: 8, height: 8, background: '#2b2b2b' }} />
+                {loading ? 'Sending...' : 'Register'}
               </button>
 
-              <p className="font-inter-tight font-medium text-white/25 text-text-s-med text-center">
-                By registering you agree to our Privacy Policy. No spam вЂ” only the webinar link.
+              <p className="font-inter-tight font-medium text-white/40 text-[12px] text-center mt-4">
+                By registering you agree to receive the recording and related Axevil Capital communications. Unsubscribe anytime.
               </p>
             </form>
           )}
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 
-function fieldClass(hasError: boolean) {
-  return [
-    'w-full bg-transparent font-inter-tight font-medium text-white placeholder:text-white/30',
-    'text-[16px]', // 16px prevents iOS auto-zoom on focus
-    'focus:outline-none transition-colors',
-    hasError ? 'border-red-500/60' : 'border-white/10 focus:border-white/25',
-  ].join(' ')
-}
-
-function Field({ label, error, input }: { label: string; error?: string; input: React.ReactNode }) {
+function FieldInput({
+  placeholder, value, onChange, error, type = 'text',
+}: {
+  placeholder: string
+  value: string
+  onChange: (v: string) => void
+  error?: string
+  type?: string
+}) {
   return (
-    <div className="flex flex-col gap-2">
-      <label className="font-inter-tight font-medium text-white/50 text-text-s-med">{label}</label>
-      <div
-        className="rounded-[14px] px-4 transition-colors h-14 sm:h-[52px]"
+    <div>
+      <input
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        className="w-full font-inter-tight font-medium text-[15px] text-white placeholder:text-white/40 focus:outline-none bg-transparent"
         style={{
-          background: 'rgba(255,255,255,0.04)',
-          border: `1px solid ${error ? 'rgba(239,68,68,0.5)' : 'rgba(255,255,255,0.1)'}`,
           display: 'flex',
-          alignItems: 'center',
+          height: 'clamp(3rem, 4vw, 3.75rem)',
+          padding: '20px 16px',
+          borderRadius: 16,
+          background: '#1A1A1A',
+          border: error ? '1px solid rgba(239,68,68,0.5)' : 'none',
         }}
-      >
-        {input}
-      </div>
-      {error && <p className="font-inter-tight font-medium text-red-400 text-text-s-med">{error}</p>}
+      />
+      {error && <p className="font-inter-tight font-medium text-red-400 text-[12px] mt-1.5 ml-1">{error}</p>}
     </div>
   )
 }
@@ -242,20 +270,10 @@ function SuccessState() {
         </svg>
       </div>
       <div className="flex flex-col gap-2">
-        <h3 className="font-inter-tight font-semibold text-white text-text-xl">Registration confirmed</h3>
-        <p className="font-inter-tight font-medium text-white/50 text-text-m">
-          Add the webinar to your calendar to not miss it.
+        <h3 className="font-inter-tight font-semibold text-white text-[22px]">You&#39;re in.</h3>
+        <p className="font-inter-tight font-medium text-white/55 text-[15px]">
+          Confirmation and calendar invite sent to your inbox.
         </p>
-      </div>
-      <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-        {['Google Calendar', 'Apple Calendar', '.ics file'].map(label => (
-          <a key={label} href="#"
-            className="flex items-center justify-center font-inter-tight font-medium text-text-m text-white rounded-[12px] hover:bg-white/10 transition-colors"
-            style={{ height: '44px', padding: '0 20px', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}
-          >
-            {label}
-          </a>
-        ))}
       </div>
     </div>
   )
