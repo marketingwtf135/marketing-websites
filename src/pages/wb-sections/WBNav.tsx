@@ -17,6 +17,10 @@ const NAV_LINKS = [
   { label: 'Schedule',   id: 'wb-schedule' },
 ]
 
+const NAV_IDS = NAV_LINKS.map(l => l.id)
+
+const NAV_HEIGHT = '4rem' // 64px nav bar height
+
 /**
  * Tracks which section is currently in view to highlight active nav link.
  * Uses IntersectionObserver — fires when section's top crosses 30% from top.
@@ -50,13 +54,22 @@ function useActiveSection(ids: string[]) {
 
 export default function WBNav() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const active = useActiveSection(NAV_LINKS.map(l => l.id))
+  const active = useActiveSection(NAV_IDS)
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const first = document.querySelector<HTMLButtonElement>('#wb-mobile-menu button')
+    first?.focus()
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMenuOpen(false) }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [menuOpen])
 
   return (
     <>
       <nav
         className="fixed top-0 left-0 w-full z-50 border-b border-nav-border bg-nav-bg"
-        style={{ height: '4rem' }}
+        style={{ height: NAV_HEIGHT }}
       >
         <div className="mx-auto w-full max-w-[1440px] h-full flex items-center justify-between px-5 lg:px-20">
           {/* Logo */}
@@ -100,6 +113,8 @@ export default function WBNav() {
               onClick={() => setMenuOpen(o => !o)}
               className="lg:hidden flex flex-col justify-center gap-[5px] w-8 h-8 focus-visible:outline-none"
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              aria-controls="wb-mobile-menu"
             >
               <span className={`block h-px bg-white transition-all duration-200 origin-center ${menuOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
               <span className={`block h-px bg-white transition-all duration-200 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`} />
@@ -113,12 +128,15 @@ export default function WBNav() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
+            id="wb-mobile-menu"
+            role="navigation"
+            aria-label="Mobile navigation"
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="fixed left-0 right-0 z-40 lg:hidden flex flex-col py-2 bg-nav-bg border-b border-nav-border"
-            style={{ top: '4rem' }}
+            style={{ top: NAV_HEIGHT }}
           >
             {NAV_LINKS.map(({ label, id }) => (
               <button
