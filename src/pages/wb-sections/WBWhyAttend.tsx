@@ -1,121 +1,158 @@
 import WBCtaButton from './WBCtaButton'
 
-const INSIGHTS = [
+// Symbols as variables to keep file encoding clean
+const SYM_ARR = '→'
+const SYM_BULL = '·'
+const SYM_DASH = '—'
+const SYM_TIMES = '×'
+const SYM_NDASH = '–'
+
+const CARDS = [
   {
-    title: 'Private markets are the fastest-growing asset class of 2020–2030',
-    benefit: 'In the webinar, you\'ll understand why capital is shifting from public markets into private markets — and how to participate in this trend rather than watch it from the sidelines.',
-    metric: '$4.5T → $13T → $20T',
-    description: 'Private markets AUM grew from $4.5T in 2020 to $13T in 2025. The forecast for 2030 is $20T, with a 9–11% CAGR.',
-    source: 'Preqin · McKinsey · Bain',
+    photo: '/img/why-attend-01.png',
+    metric: '$13T ' + SYM_ARR + ' $20T',
+    metricSub: 'AUM 2025 ' + SYM_ARR + ' 2030F ' + SYM_BULL + ' Preqin',
+    title: 'How private markets are evolving in 2026',
+    body: "What's actually happening on the market " + SYM_DASH + " and what wealth managers should expect through the rest of the year.",
   },
   {
-    title: 'HNWI portfolios with pre-IPO exposure have historically outperformed public markets',
-    benefit: 'We\'ll explain what private markets allocation makes sense for portfolios starting from $1M and how to build it step by step.',
-    metric: '+10–15% annualized excess return',
-    description: 'Hamilton Lane Private Markets Index shows 10–15% annualized excess return vs S&P 500. Cambridge Associates US Private Equity Index shows 14.2% net IRR vs 12.1% for the S&P 500 over 20 years.',
-    source: 'Hamilton Lane · Cambridge Associates',
-  },
-  {
-    title: '2026 mega-rounds create a window for HNWI investors',
-    benefit: 'We\'ll show how HNWI investors access rounds in companies like SpaceX, Anthropic, Databricks, and OpenAI: minimum tickets, fund structures, timing, and SPV mechanics.',
-    metric: 'SpaceX ~$1.25T',
-    description: 'SpaceX, Anthropic, Databricks, OpenAI, and xAI are shaping a new cycle of late-stage private market opportunities.',
-    source: 'Pitchbook · Bloomberg · TechCrunch',
-  },
-  {
-    title: 'Exit events begin 12–18 months before the public news cycle',
-    benefit: 'We\'ll show which signals Axevil tracks in advance — so clients can enter positions before public attention spikes instead of chasing the market after the fact.',
-    metric: '2.4×–3.1× median TVPI',
-    description: 'Late-stage venture funds from 2018–2020 vintages show a median TVPI of 2.4×–3.1×. In Axevil\'s watchlist, 6 out of 22 companies completed an IPO or M&A event within 12 months.',
-    source: 'PitchBook · Cambridge Associates · Pre-IPO Insider',
-  },
-  {
-    title: 'Information edge: see market movement earlier',
-    benefit: '9 out of 10 wealth managers do not track private market events systematically and learn about them too late. The webinar shows how to build a 3-month research edge.',
+    photo: '/img/why-attend-02.png',
     metric: '89%',
-    description: '89% of surveyed Axevil WM partners learn about private market events from public media or clients, not from systematic research.',
-    source: 'Axevil WM Survey · March 2026 · N=147',
+    metricSub: 'of WMs learn private deals from media ' + SYM_BULL + ' Axevil survey, 2026',
+    title: 'Access to private markets',
+    body: 'What to watch for when entering a deal, and how competition for the best companies is reshaping who gets allocation.',
+  },
+  {
+    photo: '/img/why-attend-03.png',
+    metric: '2.4' + SYM_NDASH + '3.1' + SYM_TIMES,
+    metricSub: 'Late-stage venture TVPI ' + SYM_BULL + ' vintage 2018' + SYM_NDASH + '2020 ' + SYM_BULL + ' Pitchbook NVCA',
+    title: 'Sectors with hidden alpha ' + SYM_DASH + ' AI, fintech, deep tech',
+    body: 'Where the real opportunities are this year, and which segments are crowded out or overpriced.',
+  },
+  {
+    photo: '/img/why-attend-04.png',
+    metric: '2' + SYM_TIMES,
+    metricSub: 'Secondary volume growth 2020 ' + SYM_ARR + ' 2024 ' + SYM_BULL + ' Jefferies',
+    title: 'How secondary markets make private companies liquid.',
+    body: 'Why secondaries are rewriting the liquidity picture for private holdings ' + SYM_DASH + ' with real cases from the Axevil Capital portfolio.',
   },
 ]
 
 export default function WBWhyAttend() {
   return (
     <section id="wb-why" className="relative w-full bg-page-bg">
-      <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-[80px] py-[64px] sm:py-[80px] lg:py-[100px]">
-
-        <div className="mb-10 sm:mb-14">
-          <div className="flex items-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30 mb-4">
-            <span className="opacity-50">2.0</span>
+      <div
+        className="mx-auto w-full max-w-[1440px]"
+        style={{ paddingTop: 'clamp(5rem, 10vw, 12.5rem)', paddingBottom: 0 }}
+      >
+        {/* Heading */}
+        <div className="flex flex-col items-center text-center mb-10 sm:mb-12 gap-4">
+          <div className="flex items-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30">
+            <span className="opacity-50">3.0</span>
             <span className="opacity-80">Why attend</span>
           </div>
           <h2
-            className="font-inter-tight font-semibold text-transparent bg-clip-text mb-5"
+            className="font-inter-tight font-semibold text-transparent bg-clip-text"
             style={{
-              fontSize: 'clamp(36px, 3.5vw, 48px)',
-              lineHeight: 1.1,
+              fontSize: 'clamp(2.25rem, 5vw, 4.5rem)',
+              lineHeight: 1.05,
               letterSpacing: '-0.02em',
-              backgroundImage: 'linear-gradient(95deg, #ffffff -2.56%, #8f8f8f 99.06%)',
+              backgroundImage: 'linear-gradient(95deg, #ffffff -2.56%, #b7b7b7 99.06%)',
               overflow: 'visible',
             }}
           >
-            Why attend the webinar
+            What you&#39;ll learn
           </h2>
-          <p
-            className="font-inter-tight font-medium text-white/50 text-text-m sm:text-text-l leading-[1.5]"
-            style={{ maxWidth: '710px' }}
-          >
-            We'll break down private markets in plain language: where capital is moving, which opportunities are available to HNWI clients, and how wealth managers can avoid being late to key market events.
-          </p>
         </div>
 
-        <div className="flex flex-col gap-4">
-          {INSIGHTS.map((ins) => (
+        {/* 2x2 grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10 sm:mb-12">
+          {CARDS.map((card, i) => (
             <div
-              key={ins.title}
-              className="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-8 p-6 sm:p-7 lg:p-8 rounded-[24px]"
-              style={{ background: '#0d0d0d', border: '1px solid rgba(255,255,255,0.07)' }}
+              key={i}
+              className="flex flex-col items-start"
+              style={{
+                width: '100%',
+                maxWidth: '100%',
+                padding: '4px 4px 24px 4px',
+                gap: 24,
+                borderRadius: 16,
+                background: '#111111',
+              }}
             >
-              <div className="flex flex-col gap-3 flex-1 min-w-0">
-                <h3
-                  className="font-inter-tight font-semibold text-white"
-                  style={{ fontSize: '20px', lineHeight: '120%', letterSpacing: '-0.4px', maxWidth: '600px' }}
+              {/* Photo: height 280px, border-radius 16px */}
+              <div
+                className="relative w-full overflow-hidden flex items-center justify-center"
+                style={{
+                  height: 'clamp(12rem, 20vw, 17.5rem)',
+                  alignSelf: 'stretch',
+                  borderRadius: 16,
+                }}
+              >
+                <img
+                  src={card.photo}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ filter: 'blur(2px)', transform: 'scale(1.05)' }}
+                  loading="lazy"
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{ background: 'rgba(0,0,0,0.35)' }}
+                />
+                {/* Metric pill: width 260px, padding 20px, flex-col, items-center, gap 12px */}
+                <div
+                  className="relative flex flex-col items-center text-center"
+                  style={{
+                    width: 260,
+                    padding: 20,
+                    gap: 12,
+                    borderRadius: 12,
+                    background: 'rgba(18,18,18,0.75)',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    backdropFilter: 'blur(10px)',
+                    WebkitBackdropFilter: 'blur(10px)',
+                  }}
                 >
-                  {ins.title}
-                </h3>
-                <p
-                  className="font-inter-tight font-medium text-white/50 text-text-m leading-[1.55]"
-                  style={{ maxWidth: '600px' }}
-                >
-                  {ins.benefit}
-                </p>
+                  <span
+                    className="font-inter-tight font-semibold text-center"
+                    style={{ color: '#ffffff', fontSize: 'clamp(1.125rem, 2vw, 1.5rem)', fontWeight: 600, lineHeight: '110%', letterSpacing: '-0.48px' }}
+                  >
+                    {card.metric}
+                  </span>
+                  <span
+                    className="font-inter-tight font-medium text-center"
+                    style={{ color: '#9B9B9B', fontSize: 14, lineHeight: '130%' }}
+                  >
+                    {card.metricSub}
+                  </span>
+                </div>
               </div>
 
-              {/* Metric box — 4px outer, 16px inner */}
+              {/* Caption */}
               <div
-                className="lg:w-[408px] shrink-0 rounded-[16px]"
-                style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', padding: '4px' }}
+                className="flex flex-col items-start"
+                style={{ padding: '0 20px', gap: 12, alignSelf: 'stretch' }}
               >
-                <div className="flex flex-col gap-3 rounded-[13px] h-full" style={{ padding: '16px' }}>
-                  <div
-                    className="font-inter-tight font-semibold leading-tight tracking-[-0.02em] text-white"
-                    style={{ fontSize: 'clamp(18px, 2vw, 26px)' }}
-                  >
-                    {ins.metric}
-                  </div>
-                  <p className="font-inter-tight font-medium text-white/50 text-text-m leading-[1.5]">
-                    {ins.description}
-                  </p>
-                  <p className="font-inter-tight font-medium text-white/25 text-text-m">
-                    {ins.source}
-                  </p>
-                </div>
+                <h3
+                  className="font-inter-tight font-semibold text-white"
+                  style={{ fontSize: 'clamp(1rem, 1.5vw, 1.25rem)', lineHeight: 1.25, letterSpacing: '-0.02em' }}
+                >
+                  {card.title}
+                </h3>
+                <p
+                  className="font-inter-tight font-medium text-white/55"
+                  style={{ fontSize: 15, lineHeight: 1.5 }}
+                >
+                  {card.body}
+                </p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-10 sm:mt-12 flex justify-center">
-          <WBCtaButton />
+        <div className="flex justify-center pb-[80px] sm:pb-[100px]">
+          <WBCtaButton label="Reserve your seat" />
         </div>
       </div>
     </section>
