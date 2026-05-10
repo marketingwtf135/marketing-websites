@@ -35,13 +35,13 @@ export default function WBWhyAxevil() {
         src="/img/reg-right-shine.png"
         alt=""
         aria-hidden="true"
-        className="absolute top-0 right-0 h-full pointer-events-none select-none"
+        className="hidden lg:block absolute top-0 right-0 h-full pointer-events-none select-none"
         style={{ objectFit: 'cover', objectPosition: 'right center' }}
       />
 
       <div
         className="relative mx-auto w-full max-w-[1440px] flex flex-col h-full"
-        style={{ minHeight: 'inherit', paddingTop: 100, paddingBottom: 100 }}
+        style={{ minHeight: 'inherit', paddingTop: '5rem', paddingBottom: '5rem' }}
       >
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 lg:mb-20">
           <div className="flex flex-col gap-4">
@@ -52,7 +52,7 @@ export default function WBWhyAxevil() {
             <h2
               className="font-inter-tight font-semibold text-transparent bg-clip-text"
               style={{
-                fontSize: 'clamp(28px, 3.5vw, 48px)',
+                fontSize: 'clamp(1.75rem, 3.5vw, 3rem)',
                 lineHeight: 1.1,
                 letterSpacing: '-0.02em',
                 backgroundImage: 'linear-gradient(95deg, #ffffff -2.56%, #b7b7b7 99.06%)',
@@ -87,11 +87,11 @@ export default function WBWhyAxevil() {
             >
               <span
                 className="font-inter-tight font-medium text-white"
-                style={{ fontSize: 88, lineHeight: '110%', letterSpacing: '-2.64px' }}
+                style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', lineHeight: '110%', letterSpacing: '-2.64px' }}
               >
                 {s.value}
               </span>
-              <span className="font-inter-tight font-medium text-white/45 text-[14px] sm:text-[15px]">
+              <span className="font-inter-tight font-medium text-white/45" style={{ fontSize: '0.875rem' }}>
                 {s.label}
               </span>
             </div>
