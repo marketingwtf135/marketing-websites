@@ -115,7 +115,7 @@ export default function WBForm() {
       />
 
       <div className="relative mx-auto w-full max-w-[1440px] px-5 py-[80px] sm:py-[100px] lg:py-[120px]">
-        <div className="max-w-[520px] mx-auto">
+        <div style={{ maxWidth: 'min(100%, 32.5rem)', marginLeft: 'auto', marginRight: 'auto' }}>
 
           <div className="flex flex-col items-center text-center gap-4 mb-8 sm:mb-10">
             <div className="flex items-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30">
@@ -128,7 +128,7 @@ export default function WBForm() {
             >
               Register for the webinar
             </h2>
-            <p className="font-inter-tight font-medium text-white/55" style={{ fontSize: 15 }}>
+            <p className="font-inter-tight font-medium text-white/55" style={{ fontSize: '0.9375rem' }}>
               200 seats &middot; By registration &middot; Recording included
             </p>
           </div>

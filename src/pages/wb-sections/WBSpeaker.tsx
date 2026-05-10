@@ -63,7 +63,7 @@ export default function WBSpeaker() {
               >
                 Taras Chumachenko
               </h3>
-              <p className="font-inter-tight font-medium text-white/55" style={{ fontSize: 15 }}>
+              <p className="font-inter-tight font-medium text-white/55" style={{ fontSize: '0.9375rem' }}>
                 Co-founder &amp; Managing Partner, Axevil Capital
               </p>
             </div>

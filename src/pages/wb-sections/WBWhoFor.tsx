@@ -63,7 +63,7 @@ export default function WBWhoFor() {
               {/* Number — text-align center */}
               <span
                 className="font-inter-tight font-medium tabular-nums text-center w-full"
-                style={{ fontSize: 18, lineHeight: '135%', letterSpacing: '-0.36px', color: '#303030' }}
+                style={{ fontSize: '1.125rem', lineHeight: '135%', letterSpacing: '-0.36px', color: '#303030' }}
               >
                 {card.n}
               </span>

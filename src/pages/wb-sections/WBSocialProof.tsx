@@ -1,4 +1,4 @@
-const QUOTES = [
+﻿const QUOTES = [
   {
     text: 'Pre-IPO Insider gives me in 2 minutes what used to take 4 hours across Bloomberg, Crunchbase, and LinkedIn.',
     caption: 'Family office · $80M AUM · Dubai',
@@ -16,7 +16,7 @@ const QUOTES = [
 export default function WBSocialProof() {
   return (
     <section id="wb-proof" className="relative w-full bg-page-bg">
-      <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-[80px] py-[64px] sm:py-[80px] lg:py-[100px]">
+      <div className="mx-auto w-full max-w-[1440px] py-[64px] sm:py-[80px] lg:py-[100px]">
 
         {/* mb-6 = 24px before cards */}
         <div className="mb-6">
@@ -27,7 +27,7 @@ export default function WBSocialProof() {
           <h2
             className="font-inter-tight font-semibold text-transparent bg-clip-text"
             style={{
-              fontSize: 'clamp(36px, 3.5vw, 48px)',
+              fontSize: 'clamp(2.25rem, 3.5vw, 3rem)',
               lineHeight: 1.1,
               letterSpacing: '-0.02em',
               backgroundImage: 'linear-gradient(95deg, #ffffff -2.56%, #8f8f8f 99.06%)',

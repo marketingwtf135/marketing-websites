@@ -122,7 +122,7 @@ export default function WBWhyAttend() {
                   </span>
                   <span
                     className="font-inter-tight font-medium text-center"
-                    style={{ color: '#9B9B9B', fontSize: 14, lineHeight: '130%' }}
+                    style={{ color: '#9B9B9B', fontSize: '0.875rem', lineHeight: '130%' }}
                   >
                     {card.metricSub}
                   </span>
@@ -142,7 +142,7 @@ export default function WBWhyAttend() {
                 </h3>
                 <p
                   className="font-inter-tight font-medium text-white/55"
-                  style={{ fontSize: 15, lineHeight: 1.5 }}
+                  style={{ fontSize: '0.9375rem', lineHeight: 1.5 }}
                 >
                   {card.body}
                 </p>
