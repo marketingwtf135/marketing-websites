@@ -74,7 +74,7 @@ function StockChart({ pts }: { pts: PtData[] }) {
       {/* grid-bg layer, lowest */}
       <img
         alt=""
-        src="/img/grid-bg.png"
+        src="/img/bg/grid-bg.png"
         aria-hidden="true"
         className="absolute inset-0 w-full h-full pointer-events-none object-cover"
         style={{ opacity: 0.7 }}
@@ -100,7 +100,7 @@ function StockChart({ pts }: { pts: PtData[] }) {
         {/* gradient fill — primary */}
         <path d={fillPath} fill="url(#cf)" />
         {/* graphic-bg image clipped to fill area, 10% opacity */}
-        <image href="/img/graphic-bg.png" x="0" y="0" width={W} height={H} clipPath="url(#fillClip)" preserveAspectRatio="none" opacity="0.1" />
+        <image href="/img/bg/graphic-bg.png" x="0" y="0" width={W} height={H} clipPath="url(#fillClip)" preserveAspectRatio="none" opacity="0.1" />
         <path d={linePath} fill="none" stroke="url(#cl)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
         {px.slice(1).map(([x, y], i) => {
           const idx = i + 1, isHov = hovered === idx, pt = pts[idx]
@@ -136,16 +136,25 @@ function AdvCard({
 }) {
   return (
     <div
-      className="bg-[#111111] rounded-2xl flex items-start gap-4 sm:gap-6 w-full"
-      style={{ padding: 16, borderLeft: leftBorder ? '1px solid #151515' : undefined }}
+      className="group relative bg-[#111111] rounded-2xl flex items-start gap-6 w-full overflow-hidden"
+      style={{ height: 124, padding: 16, borderLeft: leftBorder ? '1px solid #151515' : undefined }}
     >
-      <div className="flex flex-col gap-4 flex-1 min-w-0">
-        <span className="font-inter-tight font-medium text-text-m text-white/60">{label}</span>
-        <span className="font-inter-tight font-semibold text-h5 text-white select-none" style={{ filter: 'blur(8px)' }}>{value}</span>
+      {/* Text column — justify-between: label top, value bottom */}
+      <div className="flex flex-col flex-1 h-full min-w-0" style={{ gap: 42 }}>
+        <span className="shrink-0 font-inter-tight font-medium text-text-m text-white/60 leading-[1.3]">{label}</span>
+        <span className="shrink-0 font-inter-tight font-semibold text-h5 text-white select-none leading-[1.2]" style={{ filter: 'blur(6px)' }}>{value}</span>
       </div>
-      {/* Icon — wrapped in dark circle (44×44) for new 24×24 raw icons */}
       <div className="shrink-0 flex items-center justify-center rounded-full" style={{ width: 44, height: 44, background: '#1a1a1a' }}>
         <img src={iconSrc} alt={iconAlt} width={24} height={24} />
+      </div>
+      {/* Sign up pill — bottom right, ease-in-out, 0.15s delay */}
+      <div
+        className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+        style={{ bottom: 16, right: 16, transitionTimingFunction: 'ease-in-out', transitionDelay: '0.15s' }}
+      >
+        <span className="font-inter-tight font-semibold text-[14px] text-[#202020] bg-white flex items-center justify-center px-4 rounded-2xl whitespace-nowrap" style={{ height: 32 }}>
+          Sign up to view
+        </span>
       </div>
     </div>
   )

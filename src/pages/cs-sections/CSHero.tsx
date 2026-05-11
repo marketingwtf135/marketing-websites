@@ -27,7 +27,7 @@ export default function CSHero() {
 
       {/* Main flex container — column on mobile/tablet, row on desktop */}
       <div
-        className="relative mx-auto w-full max-w-content flex flex-col lg:flex-row lg:items-stretch gap-8"
+        className="relative mx-auto w-full max-w-content container-px flex flex-col lg:flex-row lg:items-stretch gap-8"
         style={{
           zIndex: 1,
           paddingTop: '40px',

@@ -24,8 +24,8 @@ export default function WBWhoFor() {
     <section id="wb-who" className="relative w-full bg-page-bg">
       {/* py 200px top/bottom, 0 horizontal padding removed from inner */}
       <div
-        className="mx-auto w-full max-w-[1440px]"
-        style={{ paddingTop: '8rem', paddingBottom: '8rem' }}
+        className="mx-auto w-full max-w-[1440px] container-px"
+        style={{ padding: 'clamp(6rem, 16vw, 15rem) 1rem' }}
       >
         {/* Heading — centered */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-12 gap-4">
@@ -48,14 +48,14 @@ export default function WBWhoFor() {
         </div>
 
         {/* 3 cards — height 450px, items centered, gap auto (justify-between) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {CARDS.map(card => (
             <div
               key={card.title}
-              className="flex flex-col items-center text-center justify-between md:h-[450px]"
+              className="flex flex-col items-center text-center justify-between md:h-[450px] gap-8 md:gap-0"
               style={{
                 padding: '1.25rem',
-                borderRadius: 24,
+                borderRadius: '1.5rem',
                 background: '#0d0d0d',
                 border: '1px solid rgba(255,255,255,0.06)',
               }}

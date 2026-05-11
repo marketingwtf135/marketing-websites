@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 const STATS = [
@@ -10,8 +10,17 @@ const STATS = [
 ]
 
 export default function WBWhyAxevil() {
-  // Section's own border-radius: animates 16px → 64px as it enters viewport
   const sectionRef = useRef<HTMLDivElement>(null)
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
+  // Desktop: section's own border-radius animates 64 → 0 as it enters viewport
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start 1', 'start 0.4'],
@@ -26,22 +35,22 @@ export default function WBWhyAxevil() {
       style={{
         minHeight: '100vh',
         background: '#000000',
-        borderTopLeftRadius: sectionRadius,
-        borderTopRightRadius: sectionRadius,
+        borderTopLeftRadius: isMobile ? 0 : sectionRadius,
+        borderTopRightRadius: isMobile ? 0 : sectionRadius,
       }}
     >
-      {/* reg-right-shine pinned to right edge */}
+      {/* reg-right-shine: desktop right-pinned, mobile centered */}
       <img
         src="/img/reg-right-shine.png"
         alt=""
         aria-hidden="true"
-        className="hidden lg:block absolute top-0 right-0 h-full pointer-events-none select-none"
-        style={{ objectFit: 'cover', objectPosition: 'right center' }}
+        className="absolute top-0 h-full pointer-events-none select-none left-1/2 -translate-x-1/2 lg:left-auto lg:right-0 lg:translate-x-0 opacity-60 lg:opacity-100"
+        style={{ objectFit: 'cover', objectPosition: 'center center' }}
       />
 
       <div
-        className="relative mx-auto w-full max-w-[1440px] flex flex-col h-full"
-        style={{ minHeight: 'inherit', paddingTop: '5rem', paddingBottom: '5rem' }}
+        className="relative mx-auto w-full max-w-[1440px] flex flex-col h-full container-px"
+        style={{ minHeight: '100vh', paddingTop: isMobile ? '1.5rem' : 'clamp(3rem, 8vw, 7.5rem)', paddingBottom: 'clamp(3rem, 8vw, 7.5rem)' }}
       >
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 lg:mb-20">
           <div className="flex flex-col gap-4">
@@ -56,7 +65,7 @@ export default function WBWhyAxevil() {
                 lineHeight: 1.1,
                 letterSpacing: '-0.02em',
                 backgroundImage: 'linear-gradient(95deg, #ffffff -2.56%, #b7b7b7 99.06%)',
-                maxWidth: 720,
+                maxWidth: '45rem',
                 overflow: 'visible',
               }}
             >
@@ -68,8 +77,7 @@ export default function WBWhyAxevil() {
             href="https://axevil.com"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 font-inter-tight font-medium text-white/70 hover:text-white transition-colors text-[14px] underline underline-offset-4 self-start lg:self-end"
-            style={{ mixBlendMode: 'difference' }}
+            className="inline-flex items-center gap-2 font-inter-tight font-medium text-white hover:text-white/80 transition-colors text-[14px] underline underline-offset-4 self-start lg:self-end"
           >
             See the Axevil platform
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -78,16 +86,16 @@ export default function WBWhyAxevil() {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-10 sm:gap-y-12 mt-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8 sm:gap-y-10 mt-auto">
           {STATS.map(s => (
             <div
               key={s.label}
               className="flex flex-col gap-3 items-start"
-              style={{ borderLeft: '1px solid #202020', paddingLeft: 24, mixBlendMode: 'difference' }}
+              style={{ borderLeft: '1px solid #202020', paddingLeft: '1.5rem' }}
             >
               <span
                 className="font-inter-tight font-medium text-white"
-                style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', lineHeight: '110%', letterSpacing: '-2.64px' }}
+                style={{ fontSize: 'clamp(2.5rem, 7vw, 5.5rem)', lineHeight: '110%', letterSpacing: '-0.165rem' }}
               >
                 {s.value}
               </span>

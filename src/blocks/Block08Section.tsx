@@ -13,13 +13,13 @@ const CARDS: {
   border: React.CSSProperties; imgStyle?: React.CSSProperties;
 }[] = [
   {
-    img: '/img/ill-legal-01.png',
+    img: '/img/ill/ill-legal-01.png',
     title: 'SPV-Based Ownership',
     body: 'SPV structure enables direct ownership of portfolio company shares. Each investment is isolated in a dedicated entity, protecting capital and limiting liability.',
     border: { borderTop: B, borderLeft: B } satisfies React.CSSProperties,
   },
   {
-    img: '/img/ill-legal-02.png',
+    img: '/img/ill/ill-legal-02.png',
     title: 'Delaware Jurisdiction',
     body: 'The fund and Axevil Capital are registered in Delaware, USA — the preferred jurisdiction for most U.S. startups and venture capital funds, known for its investor-friendly corporate law.',
     border: { borderTop: B, borderLeft: B, borderRight: B } satisfies React.CSSProperties,
@@ -27,13 +27,13 @@ const CARDS: {
     imgStyle: { top: '-73px', right: '-46px', width: '486px', height: '331px' },
   },
   {
-    img: '/img/ill-legal-03.png',
+    img: '/img/ill/ill-legal-03.png',
     title: 'SEC-Compliant Structure',
     body: 'Axevil Capital LLC is registered with the SEC as an Exempt Reporting Adviser (ERA), ensuring regulatory transparency and compliance with U.S. securities law.',
     border: { borderTop: B, borderLeft: B, borderBottom: B } satisfies React.CSSProperties,
   },
   {
-    img: '/img/ill-legal-04.png',
+    img: '/img/ill/ill-legal-04.png',
     title: 'Dual-Layer Verification',
     body: 'We verify both the investment case and transaction execution — assessing company fundamentals, deal documentation, transfer mechanics, and seller legitimacy.',
     border: { border: B } satisfies React.CSSProperties,
@@ -43,7 +43,7 @@ const CARDS: {
 export default function Block08Section() {
   return (
     <section className="w-full bg-page-bg" style={{ paddingTop: '120px', paddingBottom: '120px' }}>
-      <div className="mx-auto w-full max-w-content flex flex-col gap-16 items-center">
+      <div className="mx-auto w-full max-w-content container-px flex flex-col gap-16 items-center">
 
         {/* Heading */}
         <div className="flex flex-col gap-8 items-center text-center">

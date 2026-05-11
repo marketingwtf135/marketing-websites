@@ -1,15 +1,15 @@
 import { useRef, useState, useEffect } from 'react'
 
 const TEAM = [
-  { id: 1, name: 'Alexander Ivanov',   role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team01.png' },
-  { id: 2, name: 'Taras Chumachenko',  role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team02.png' },
-  { id: 3, name: 'Vladislav Solovev',  role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team03.png' },
-  { id: 4, name: 'Andrey Revenko',     role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team04.png' },
-  { id: 5, name: 'Danil Yakovlev',     role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team05.png' },
-  { id: 6, name: 'Artem Duz',          role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team06.png' },
-  { id: 7, name: 'Anna Babak',         role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team07.png' },
-  { id: 8, name: 'Georgy Manasov',     role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team08.png' },
-  { id: 9, name: 'Pavel Rasputin',     role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence Two line sentence', ex: 'ex. Name companies ex. Name companies', photo: '/img/block09/team09.png' },
+  { id: 1, name: 'Alexander Ivanov',   role: 'Co-founder & Managing Partner', desc: '12+ years of investment banking and private markets across Russia and Europe.', ex: 'ex-Finam, ex-Otkritie, ex-Aton.', photo: '/img/block09/team09.png' },
+  { id: 2, name: 'Taras Chumachenko',  role: 'Co-founder & Managing Partner', desc: '10+ years in alternative investments and structured products across global markets.', ex: 'ex-Societe Generale', photo: '/img/block09/team08.png' },
+  { id: 3, name: 'Vladislav Solovev',  role: 'Head of Research', desc: '5+ years analyzing late-stage venture companies and private market dynamics.', ex: 'Member of Angel Squad', photo: '/img/block09/team07.png' },
+  { id: 4, name: 'Andrey Revenko',     role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence.', ex: 'ex. Name companies', photo: '/img/block09/team06.png' },
+  { id: 5, name: 'Danil Yakovlev',     role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence.', ex: 'ex. Name companies', photo: '/img/block09/team05.png' },
+  { id: 6, name: 'Artem Duz',          role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence.', ex: 'ex. Name companies', photo: '/img/block09/team04.png' },
+  { id: 7, name: 'Anna Babak',         role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence.', ex: 'ex. Name companies', photo: '/img/block09/team03.png' },
+  { id: 8, name: 'Georgy Manasov',     role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence.', ex: 'ex. Name companies', photo: '/img/block09/team02.png' },
+  { id: 9, name: 'Pavel Rasputin',     role: 'Co-founder & Managing Partner', desc: 'Two line sentence Two line sentence Two line sentence.', ex: 'ex. Name companies', photo: '/img/block09/team01.png' },
 ]
 
 const CARD_W = 465
@@ -38,7 +38,7 @@ export default function Block09Slider() {
 
   return (
     <section className="w-full bg-page-bg">
-      <div className="mx-auto w-full max-w-content py-[120px] flex flex-col gap-12 items-start">
+      <div className="mx-auto w-full max-w-content container-px py-[120px] flex flex-col gap-12 items-start">
 
         {/* Heading row */}
         <div className="flex items-end justify-between w-full">
@@ -49,13 +49,13 @@ export default function Block09Slider() {
             </div>
             <div className="flex flex-col gap-6 items-start">
               <h2
-                className="font-inter-tight font-semibold text-h2 leading-none tracking-[-0.02em] text-transparent bg-clip-text whitespace-nowrap"
-                style={{ backgroundImage: 'linear-gradient(88.856deg, var(--neutral-00) 0.414%, var(--neutral-30) 99.509%)' }}
+                className="font-inter-tight font-semibold text-h2 leading-none tracking-[-0.02em] text-transparent bg-clip-text"
+                style={{ backgroundImage: 'linear-gradient(88.856deg, var(--neutral-00) 0.414%, var(--neutral-30) 99.509%)', width: '710px' }}
               >
-                Our team
+                Industry leading experts, at your side
               </h2>
-              <p className="font-inter-tight font-medium text-text-xl leading-[1.3] tracking-[-0.02em] text-white/50 whitespace-pre-wrap" style={{ width: '490px' }}>
-                {'Founded by professionals with deep roots \nin institutional finance and frontier technology.'}
+              <p className="font-inter-tight font-medium tracking-[-0.02em] text-white/50" style={{ width: '710px', fontSize: '20px', lineHeight: '130%' }}>
+                Axevil's team brings institutional-grade judgment and a curated pre-IPO network — equipping you to navigate late-stage venture with confidence
               </p>
             </div>
           </div>
@@ -69,7 +69,7 @@ export default function Block09Slider() {
               disabled={atStart}
               onClick={() => scroll('prev')}
               onKeyDown={(e) => { if (e.key === 'Enter') scroll('prev') }}
-              className="flex items-center justify-center disabled:opacity-30 hover:opacity-90 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              className="flex items-center justify-center disabled:opacity-30 hover:scale-110 hover:opacity-100 opacity-70 transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
             >
               <img src="/icons/slider-buttons-left.svg" alt="" aria-hidden="true" width={64} height={64} />
             </button>
@@ -80,7 +80,7 @@ export default function Block09Slider() {
               disabled={atEnd}
               onClick={() => scroll('next')}
               onKeyDown={(e) => { if (e.key === 'Enter') scroll('next') }}
-              className="flex items-center justify-center disabled:opacity-30 hover:opacity-90 transition-opacity duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              className="flex items-center justify-center disabled:opacity-30 hover:scale-110 hover:opacity-100 opacity-70 transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
             >
               <img src="/icons/slider-buttons-right.svg" alt="" aria-hidden="true" width={64} height={64} />
             </button>

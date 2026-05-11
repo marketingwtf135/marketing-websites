@@ -30,7 +30,7 @@ export default function Nav({ active }: NavProps) {
   return (
     <>
       <nav className="fixed top-0 left-0 w-full z-50 border-b border-nav-border bg-nav-bg" style={{ height: '80px' }}>
-        <div className="mx-auto w-full max-w-content h-full flex items-center justify-between">
+        <div className="mx-auto w-full max-w-content container-px h-full flex items-center justify-between">
           <a href="#" aria-label="AXEVIL Capital" className="shrink-0">
             <img src="/img/block01/logo.svg" alt="AXEVIL" width={155} height={24} className="w-[120px] sm:w-[155px] h-auto" />
           </a>
@@ -60,7 +60,7 @@ export default function Nav({ active }: NavProps) {
           <div className="flex items-center gap-2 shrink-0">
             <button
               type="button"
-              className="hidden sm:flex items-center justify-center px-4 py-2.5 rounded-full bg-white font-inter-tight font-semibold text-s-semi text-phone-bg hover:scale-[1.02] transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-phone-bg"
+              className="nav-cta-glow hidden sm:flex items-center justify-center px-4 py-2.5 rounded-full bg-white font-inter-tight font-semibold text-s-semi text-phone-bg hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-phone-bg"
               onClick={() => window.dispatchEvent(new CustomEvent('open-quiz'))}
             >
               Request access

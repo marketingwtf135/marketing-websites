@@ -12,7 +12,7 @@ export default function WBCtaButton({ className = '', fullWidthMobile: _fullWidt
       type="button"
       onClick={scrollToForm}
       className={`relative flex items-center justify-center gap-2
-  w-full sm:w-auto
+  w-auto
   h-14 md:h-16
   px-6 sm:px-8
   rounded-2xl font-inter-tight font-semibold

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import WBCtaButton from './WBCtaButton'
 
 // Symbols as variables to keep file encoding clean
@@ -39,11 +40,20 @@ const CARDS = [
 ]
 
 export default function WBWhyAttend() {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
   return (
     <section id="wb-why" className="relative w-full bg-page-bg">
       <div
-        className="mx-auto w-full max-w-[1440px]"
-        style={{ paddingTop: 'clamp(5rem, 10vw, 12.5rem)', paddingBottom: 0 }}
+        className="mx-auto w-full max-w-[1440px] container-px"
+        style={{ paddingTop: 'clamp(4rem, 8vw, 7.5rem)', paddingBottom: 'clamp(3rem, 8vw, 7.5rem)' }}
       >
         {/* Heading */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-12 gap-4">
@@ -74,9 +84,9 @@ export default function WBWhyAttend() {
               style={{
                 width: '100%',
                 maxWidth: '100%',
-                padding: '4px 4px 24px 4px',
-                gap: 24,
-                borderRadius: 16,
+                padding: isMobile ? '0.25rem 0.25rem 1rem 0.25rem' : 'clamp(1rem, 2vw, 2rem)',
+                gap: '1.5rem',
+                borderRadius: '1rem',
                 background: '#111111',
               }}
             >
@@ -84,9 +94,12 @@ export default function WBWhyAttend() {
               <div
                 className="relative w-full overflow-hidden flex items-center justify-center"
                 style={{
-                  height: 'clamp(12rem, 20vw, 17.5rem)',
+                  height: isMobile ? 'clamp(15rem, 30vw, 26.25rem)' : 'clamp(10rem, 20vw, 17.5rem)',
                   alignSelf: 'stretch',
-                  borderRadius: 16,
+                  borderRadius: '1rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
                 <img
@@ -104,10 +117,10 @@ export default function WBWhyAttend() {
                 <div
                   className="relative flex flex-col items-center text-center"
                   style={{
-                    width: 260,
-                    padding: 20,
-                    gap: 12,
-                    borderRadius: 12,
+                    width: '16.25rem',
+                    padding: '1.25rem',
+                    gap: '0.75rem',
+                    borderRadius: '0.75rem',
                     background: 'rgba(18,18,18,0.75)',
                     border: '1px solid rgba(255,255,255,0.12)',
                     backdropFilter: 'blur(10px)',
@@ -132,7 +145,7 @@ export default function WBWhyAttend() {
               {/* Caption */}
               <div
                 className="flex flex-col items-start"
-                style={{ padding: '0 20px', gap: 12, alignSelf: 'stretch' }}
+                style={{ padding: '0 1.25rem', gap: '0.75rem', alignSelf: 'stretch' }}
               >
                 <h3
                   className="font-inter-tight font-semibold text-white"
@@ -151,7 +164,7 @@ export default function WBWhyAttend() {
           ))}
         </div>
 
-        <div className="flex justify-center pb-[80px] sm:pb-[100px]">
+        <div className="flex justify-center">
           <WBCtaButton label="Reserve your seat" />
         </div>
       </div>

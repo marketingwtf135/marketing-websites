@@ -50,49 +50,49 @@ const config: Config = {
       },
       // --- Figma font families ---
       fontFamily: {
-        'inter-tight': ['"Inter Tight"', 'sans-serif'],
+        'inter-tight': ['Raleway', 'sans-serif'],
       },
-      // --- Figma font sizes (site-1920 scale) ---
+      // --- Figma font sizes in rem (1rem = 16px) ---
       fontSize: {
-        'text-s-med':   ['14px', { lineHeight: '1', letterSpacing: '0' }],
-        'text-s-semi':  ['14px', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
-        'text-m':       ['16px', { lineHeight: '1.3', letterSpacing: '-0.02em' }],
-        'text-l':       ['18px', { lineHeight: '1.35', letterSpacing: '-0.02em' }],
-        'text-btn':     ['18px', { lineHeight: '1.1', letterSpacing: '0' }],
-        'text-xl':      ['20px', { lineHeight: '1.3', letterSpacing: '-0.02em' }],
-        'h5':           ['24px', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-        'h4':           ['36px', { lineHeight: '1.2', letterSpacing: '0' }],
-        'h3':           ['48px', { lineHeight: '1', letterSpacing: '-0.02em' }],
-        'h2':           ['64px', { lineHeight: '1', letterSpacing: '-0.02em' }],
-        'h1-med':       ['88px', { lineHeight: '1', letterSpacing: '-0.02em' }],
-        'h1-semi':      ['88px', { lineHeight: '1', letterSpacing: '-0.02em' }],
+        'text-s-med':   ['0.875rem', { lineHeight: '1', letterSpacing: '0' }],
+        'text-s-semi':  ['0.875rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
+        'text-m':       ['1rem',     { lineHeight: '1.3', letterSpacing: '-0.02em' }],
+        'text-l':       ['1.125rem', { lineHeight: '1.35', letterSpacing: '-0.02em' }],
+        'text-btn':     ['1.125rem', { lineHeight: '1.1', letterSpacing: '0' }],
+        'text-xl':      ['1.25rem',  { lineHeight: '1.3', letterSpacing: '-0.02em' }],
+        'h5':           ['1.5rem',   { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+        'h4':           ['2.25rem',  { lineHeight: '1.2', letterSpacing: '0' }],
+        'h3':           ['3rem',     { lineHeight: '1', letterSpacing: '-0.02em' }],
+        'h2':           ['4rem',     { lineHeight: '1', letterSpacing: '-0.02em' }],
+        'h1-med':       ['5.5rem',   { lineHeight: '1', letterSpacing: '-0.02em' }],
+        'h1-semi':      ['5.5rem',   { lineHeight: '1', letterSpacing: '-0.02em' }],
       },
       // --- Figma font weights ---
       fontWeight: {
         'medium':    '500',
         'semibold':  '600',
       },
-      // --- Border radius tokens (Figma values) ---
+      // --- Border radius tokens in rem ---
       borderRadius: {
-        'dot':          '4px',    // status dot, tiny badge radius
-        'card':         '2rem',   // 32px — card inner radius
-        'card-lg':      '3rem',   // 48px — logo card, photo card
-        'section':      '4rem',   // 64px — section outer rounded border
-        'phone':        '42px',   // phone outer dark body
-        'phone-inner':  '31px',   // phone screen content clip
+        'dot':          '0.25rem',  // 4px
+        'card':         '2rem',     // 32px
+        'card-lg':      '3rem',     // 48px
+        'section':      '4rem',     // 64px
+        'phone':        '2.625rem', // 42px
+        'phone-inner':  '1.9375rem',// 31px
       },
-      // --- Design width ---
+      // --- Design width in rem ---
       maxWidth: {
-        'canvas': '1920px',
-        'content': '1440px',
+        'canvas':  '120rem',  // 1920px
+        'content': '90rem',   // 1440px
       },
-      // --- Spacing tokens ---
+      // --- Spacing tokens in rem ---
       spacing: {
-        'logo-gap': '36px',
-        '13': '3.25rem',     // 52px — feature badge / tab height
-        '15': '3.75rem',     // 60px — used in Block12 gap
-        'section-y': '120px', // section vertical padding (Figma auto-layout)
-        'content-edge': '240px', // canvas-to-content gutter (1920 frame)
+        'logo-gap':     '2.25rem',  // 36px
+        '13':           '3.25rem',  // 52px
+        '15':           '3.75rem',  // 60px
+        'section-y':    '7.5rem',   // 120px
+        'content-edge': '15rem',    // 240px
       },
       // --- Border widths (Figma) ---
       borderWidth: {

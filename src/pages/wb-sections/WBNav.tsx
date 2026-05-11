@@ -71,7 +71,7 @@ export default function WBNav() {
         className="fixed top-0 left-0 w-full z-50 border-b border-nav-border bg-nav-bg"
         style={{ height: NAV_HEIGHT }}
       >
-        <div className="mx-auto w-full max-w-[1440px] h-full flex items-center justify-between px-5 lg:px-20">
+        <div className="mx-auto w-full max-w-[90rem] h-full flex items-center justify-between container-px">
           {/* Logo */}
           <a href="#" aria-label="AXEVIL Capital" className="shrink-0">
             <img src="/img/block01/logo.svg" alt="AXEVIL Capital" width={110} height={17} />
@@ -96,11 +96,11 @@ export default function WBNav() {
             })}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             {/* Reserve a seat — always visible */}
             <button
               type="button"
-              onClick={scrollToForm}
+              onClick={() => document.getElementById('wb-footer')?.scrollIntoView({ behavior: 'smooth' })}
               className="flex items-center justify-center font-inter-tight font-semibold text-phone-bg bg-white hover:scale-[1.02] transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-white shrink-0"
               style={{ height: '2.25rem', padding: '0 1.25rem', borderRadius: '1rem', fontSize: '0.875rem' }}
             >
@@ -111,14 +111,13 @@ export default function WBNav() {
             <button
               type="button"
               onClick={() => setMenuOpen(o => !o)}
-              className="lg:hidden flex flex-col justify-center gap-[5px] w-8 h-8 focus-visible:outline-none"
+              className="lg:hidden flex flex-col items-center justify-center gap-[5px] w-11 h-11 rounded-full hover:bg-white/5 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
               aria-controls="wb-mobile-menu"
             >
-              <span className={`block h-px bg-white transition-all duration-200 origin-center ${menuOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
-              <span className={`block h-px bg-white transition-all duration-200 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`} />
-              <span className={`block h-px bg-white transition-all duration-200 origin-center ${menuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`} />
+              <span className={`block w-5 h-[2px] bg-white transition-transform ${menuOpen ? 'translate-y-[3.5px] rotate-45' : ''}`} />
+              <span className={`block w-5 h-[2px] bg-white transition-transform ${menuOpen ? '-translate-y-[3.5px] -rotate-45' : ''}`} />
             </button>
           </div>
         </div>

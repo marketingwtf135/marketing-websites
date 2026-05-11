@@ -3,10 +3,11 @@
 export default function WBFooter() {
   return (
     <footer
+      id="wb-footer"
       className="relative w-full"
       style={{ background: '#000000', borderTop: '1px solid rgba(255,255,255,0.08)' }}
     >
-      <div className="mx-auto w-full max-w-[1440px] py-[40px] sm:py-[48px]">
+      <div className="mx-auto w-full max-w-[1440px] container-px py-10 sm:py-12">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 
           {/* Logo */}

@@ -19,7 +19,7 @@ function AgendaCard({
         padding: '1.5rem',
         gap: '2rem',
         flex: flex ?? '1 0 0',
-        borderRadius: 24,
+        borderRadius: '1.5rem',
         background: '#0d0d0d',
         height: height ?? 'auto',
       }}
@@ -37,7 +37,7 @@ function AgendaCard({
           lineHeight: '130%',
           letterSpacing: '-0.4px',
           color: '#ffffff',
-          maxWidth: bodyFill ? 'none' : '50%',
+          maxWidth: bodyFill ? 'none' : (typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches ? 'none' : '50%'),
         }}
       >
         {body}
@@ -50,8 +50,8 @@ export default function WBWhatCover() {
   return (
     <section id="wb-agenda" className="relative w-full bg-page-bg">
       <div
-        className="mx-auto w-full max-w-[1440px]"
-        style={{ paddingTop: '6.25rem', paddingBottom: '6.25rem' }}
+        className="mx-auto w-full max-w-[1440px] container-px"
+        style={{ paddingTop: 'clamp(3rem, 8vw, 7.5rem)', paddingBottom: 'clamp(3rem, 8vw, 7.5rem)' }}
       >
         {/* Heading */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-12 gap-4">

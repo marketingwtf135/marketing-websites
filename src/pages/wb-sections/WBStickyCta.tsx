@@ -30,15 +30,15 @@ export default function WBStickyCta() {
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         borderTop: '1px solid rgba(255,255,255,0.08)',
-        padding: '12px 20px',
-        paddingBottom: 'max(12px, env(safe-area-inset-bottom))',
+        padding: '0.75rem 1.25rem',
+        paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))',
       }}
     >
       <button
         type="button"
         onClick={scrollToForm}
-        className="w-full flex items-center justify-center font-inter-tight font-semibold text-[16px] text-phone-bg bg-white hover:scale-[1.01] active:scale-[0.99] transition-transform rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-        style={{ height: '56px', minHeight: 56 }}
+        className="w-auto px-8 flex items-center justify-center font-inter-tight font-semibold text-[16px] text-phone-bg bg-white hover:scale-[1.01] active:scale-[0.99] transition-transform rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+        style={{ height: '3.5rem', minHeight: '3.5rem' }}
       >
         Register
       </button>

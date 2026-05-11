@@ -7,25 +7,25 @@
 const CARDS = [
   {
     num: '1.0',
-    img: '/img/why-invest-ill-01.png',
+    img: '/img/ill/why-invest-ill-01.png',
     title: 'Leading Tech',
     body: 'Claude often beats other models in coding and logic tests.',
   },
   {
     num: '2.0',
-    img: '/img/why-invest-ill-02.png',
+    img: '/img/ill/why-invest-ill-02.png',
     title: 'Safety First',
     body: 'Our "Constitutional AI" approach builds trust with big corporations.',
   },
   {
     num: '3.0',
-    img: '/img/why-invest-ill-03.png',
+    img: '/img/ill/why-invest-ill-03.png',
     title: 'Big Partners',
     body: 'Amazon and Google have already invested billions',
   },
   {
     num: '4.0',
-    img: '/img/why-invest-ill-03.png',
+    img: '/img/ill/why-invest-ill-03.png',
     title: 'Real Revenue',
     body: 'Anthropic is seeing fast growth in paid enterprise users.',
   },

@@ -103,18 +103,18 @@ export default function WBForm() {
         alt=""
         aria-hidden="true"
         className="hidden lg:block absolute top-0 left-0 pointer-events-none select-none"
-        style={{ width: 1000, height: '100vh', objectFit: 'fill' }}
+        style={{ width: '62.5rem', height: '100vh', objectFit: 'fill' }}
       />
-      {/* Right shine */}
+      {/* Right shine — desktop right-pinned, mobile centered (like 3rd block) */}
       <img
         src="/img/reg-right-shine.png"
         alt=""
         aria-hidden="true"
-        className="hidden lg:block absolute top-0 right-0 pointer-events-none select-none"
-        style={{ width: 1000, height: '100vh', objectFit: 'fill' }}
+        className="absolute top-0 h-full pointer-events-none select-none left-1/2 -translate-x-1/2 lg:left-auto lg:right-0 lg:translate-x-0 opacity-60 lg:opacity-100"
+        style={{ width: '62.5rem', objectFit: 'cover', objectPosition: 'center center' }}
       />
 
-      <div className="relative mx-auto w-full max-w-[1440px] px-5 py-[80px] sm:py-[100px] lg:py-[120px]">
+      <div className="relative mx-auto w-full max-w-[1440px] container-px" style={{ paddingTop: 'clamp(3rem, 8vw, 7.5rem)', paddingBottom: 'clamp(3rem, 8vw, 7.5rem)' }}>
         <div style={{ maxWidth: 'min(100%, 32.5rem)', marginLeft: 'auto', marginRight: 'auto' }}>
 
           <div className="flex flex-col items-center text-center gap-4 mb-8 sm:mb-10">
@@ -137,7 +137,7 @@ export default function WBForm() {
             <SuccessState />
           ) : (
             <form onSubmit={handleSubmit} noValidate>
-              <div className="flex flex-col" style={{ gap: 8 }}>
+              <div className="flex flex-col" style={{ gap: '0.5rem' }}>
                 <FieldInput
                   placeholder="Your name"
                   value={form.name}
@@ -164,8 +164,8 @@ export default function WBForm() {
                     className="w-full flex items-center justify-between text-left font-inter-tight font-medium text-[15px] focus:outline-none"
                     style={{
                       height: 'clamp(3rem, 4vw, 3.75rem)',
-                      padding: '20px 16px',
-                      borderRadius: 16,
+                      padding: '1.25rem 1rem',
+                      borderRadius: '1rem',
                       background: '#1A1A1A',
                       border: 'none',
                       color: form.role ? '#fff' : 'rgba(255,255,255,0.4)',
@@ -210,9 +210,9 @@ export default function WBForm() {
                 type="submit"
                 disabled={loading}
                 className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-[15px] text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white disabled:opacity-60"
-                style={{ height: 'clamp(3rem, 4vw, 3.75rem)', marginTop: 24 }}
+                style={{ height: 'clamp(3rem, 4vw, 3.75rem)', marginTop: '0.75rem' }}
               >
-                <span className="rounded-full" style={{ width: 8, height: 8, background: '#2b2b2b' }} />
+                <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: '#2b2b2b' }} />
                 {loading ? 'Sending...' : 'Register'}
               </button>
 
@@ -247,8 +247,8 @@ function FieldInput({
         style={{
           display: 'flex',
           height: 'clamp(3rem, 4vw, 3.75rem)',
-          padding: '20px 16px',
-          borderRadius: 16,
+          padding: '1.25rem 1rem',
+          borderRadius: '1rem',
           background: '#1A1A1A',
           border: error ? '1px solid rgba(239,68,68,0.5)' : 'none',
         }}

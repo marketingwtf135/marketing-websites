@@ -51,7 +51,7 @@ function CompanyCard({ name, status }: { name: string; status: keyof typeof STAT
 export default function Block02Logos() {
   return (
     <section className="w-full bg-page-bg" style={{ marginTop: '200px', paddingBottom: '200px' }}>
-      <div className="mx-auto w-full max-w-content flex flex-col gap-16 items-center">
+      <div className="mx-auto w-full max-w-content container-px flex flex-col gap-16 items-center">
 
         {/* Section heading */}
         <div className="flex flex-col gap-6 items-center" style={{ width: '557px' }}>
@@ -63,7 +63,7 @@ export default function Block02Logos() {
             className="font-inter-tight font-semibold text-h2 pb-2 text-transparent bg-clip-text text-center w-full"
             style={{ backgroundImage: 'linear-gradient(126.669deg, var(--neutral-00) 2.5635%, var(--neutral-40) 99.06%)' }}
           >
-            Heading 2
+            Selected portfolio companies
           </h2>
         </div>
 

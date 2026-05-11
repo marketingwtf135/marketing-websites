@@ -1,14 +1,25 @@
+import { useEffect, useState } from 'react'
+
 export default function WBSpeaker() {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    setIsMobile(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
   return (
     <section
       id="wb-speaker"
       className="relative w-full bg-page-bg"
     >
       <div
-        className="relative mx-auto w-full max-w-[1440px]"
-        style={{ paddingTop: '6.25rem', paddingBottom: '6.25rem' }}
+        className="relative mx-auto w-full max-w-[1440px] container-px"
+        style={{ paddingTop: 'clamp(3rem, 8vw, 7.5rem)', paddingBottom: 'clamp(3rem, 8vw, 7.5rem)' }}
       >
-        <div className="flex flex-col items-center text-center gap-4 mb-12">
+        <div className="flex flex-col items-center text-center gap-4 mb-6 md:mb-12">
           <div className="flex items-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30">
             <span className="opacity-50">4.0</span>
             <span className="opacity-80">About Speaker</span>
@@ -30,10 +41,10 @@ export default function WBSpeaker() {
         <div
           className="relative w-full overflow-hidden flex flex-col items-start"
           style={{
-            minHeight: 'clamp(28rem, 50vw, 46.875rem)',
-            padding: '2rem',
-            gap: 100,
-            borderRadius: 24,
+            minHeight: isMobile ? 'clamp(36rem, 60vw, 54.875rem)' : 'clamp(28rem, 50vw, 46.875rem)',
+            padding: isMobile ? '1.5rem' : '2rem',
+            gap: isMobile ? '2rem' : '6.25rem',
+            borderRadius: '1.5rem',
             backgroundImage: 'url(/img/bg-speaker.png)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
@@ -68,7 +79,7 @@ export default function WBSpeaker() {
               </p>
             </div>
 
-            <div style={{ maxWidth: 480 }}>
+            <div style={{ maxWidth: '30rem' }}>
               <p
                 className="font-inter-tight font-medium"
                 style={{ color: '#E6E6E6', fontSize: 'clamp(0.875rem, 1.5vw, 1.125rem)', lineHeight: '135%', letterSpacing: '-0.36px' }}
@@ -86,8 +97,8 @@ export default function WBSpeaker() {
               bottom: 0,
               left: '50%',
               transform: 'translateX(-50%)',
-              width: 'clamp(16rem, 45vw, 44.6875rem)',
-              height: 'clamp(14rem, 40vw, 43.75rem)',
+              width: isMobile ? 'clamp(22rem, 90vw, 30rem)' : 'clamp(16rem, 45vw, 44.6875rem)',
+              height: isMobile ? 'clamp(20rem, 80vw, 28rem)' : 'clamp(14rem, 40vw, 43.75rem)',
               objectFit: 'contain',
               objectPosition: 'bottom center',
             }}

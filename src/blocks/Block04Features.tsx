@@ -71,7 +71,7 @@ export default function Block04Features() {
             {/* Phone content — 111px top, 499px left */}
             <img
               alt=""
-              src="/img/mobile-app-image-01.png"
+              src="/img/block05/mobile-app-image-01.png"
               width={226}
               height={443}
               className="absolute pointer-events-none"
@@ -105,7 +105,7 @@ export default function Block04Features() {
             {/* Laptop/app image — 110px top, 484px left */}
             <img
               alt=""
-              src="/img/laptop-app-image-01.png"
+              src="/img/block04/laptop-app-image-01.png"
               width={235}
               height={438}
               className="absolute pointer-events-none"

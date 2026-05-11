@@ -15,14 +15,14 @@ export default function Footer() {
   return (
     <footer className="w-full bg-page-bg" style={{ borderTop: '1px solid #222', position: 'relative', zIndex: 1 }}>
       <div
-        className="mx-auto w-full max-w-content flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10 lg:gap-8"
+        className="mx-auto w-full max-w-content container-px flex flex-col lg:flex-row lg:items-start lg:justify-between gap-10 lg:gap-8"
         style={{ paddingTop: 'clamp(40px, 6vw, 60px)', paddingBottom: 'clamp(40px, 6vw, 80px)' }}
       >
         {/* ── Left: logo + address + social ── */}
         <div className="flex flex-col items-start gap-8 lg:justify-between lg:shrink-0 lg:w-[238px] lg:self-stretch">
           {/* Logo */}
           <img
-            src="/img/footer-logo.svg"
+            src="/img/logos/footer-logo.svg"
             alt="AXEVIL"
             style={{ width: '207px', height: '32px', objectFit: 'contain', objectPosition: 'left' }}
           />

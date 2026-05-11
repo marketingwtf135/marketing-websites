@@ -2,24 +2,13 @@ export default function Block07Web() {
   return (
     <section className="relative w-full bg-page-bg overflow-clip" style={{ height: '1060px', marginTop: '200px' }}>
 
-      {/* bg-shine layers */}
-      <div className="absolute pointer-events-none" style={{ left: '-2px', top: '-48px', width: '1930px', height: '479px' }}>
-        <img alt="" src="/img/block07/bg-shine1.svg" className="absolute w-full h-full" style={{ inset: '-33.51% -8.32%', width: 'calc(100% + 16.64%)', height: 'calc(100% + 67.02%)' }} />
-      </div>
-      <div className="absolute pointer-events-none" style={{ left: '-2px', top: '439px', width: '1930px', height: '675px' }}>
-        <img alt="" src="/img/block07/bg-shine2.svg" className="w-full h-full" style={{ transform: 'scaleY(-1)' }} />
-      </div>
-      <div className="absolute pointer-events-none" style={{ left: '-186px', top: '240px', width: '2500px', height: '604px' }}>
-        <img alt="" src="/img/block07/bg-shine3.svg" className="w-full h-full" />
-      </div>
-
-      {/* Edge glow ellipses */}
-      <div className="absolute mix-blend-plus-lighter pointer-events-none" style={{ left: '-227px', top: '381px', width: '367px', height: '396px' }}>
-        <img alt="" src="/img/block07/ellipse-glow.svg" className="w-full h-full" />
-      </div>
-      <div className="absolute mix-blend-plus-lighter pointer-events-none" style={{ right: '-291px', top: '381px', width: '367px', height: '396px' }}>
-        <img alt="" src="/img/block07/ellipse-glow.svg" className="w-full h-full" />
-      </div>
+      {/* Background PNG */}
+      <img
+        alt=""
+        src="/img/bg/web-app-cta-bg.png"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        aria-hidden="true"
+      />
 
       {/* Heading — centered at top */}
       <div className="absolute inset-x-0 flex flex-col items-center gap-8" style={{ top: '60px' }}>
@@ -41,7 +30,7 @@ export default function Block07Web() {
       <div className="absolute inset-x-0 flex justify-center pointer-events-none" style={{ top: '211px' }}>
         <img
           alt="Axevil Pro web app interface"
-          src="/img/web-app-cta.png"
+          src="/img/block07/web-app-cta.png"
           width={1055}
           height={788}
           className="object-contain"

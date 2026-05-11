@@ -12,40 +12,39 @@ const FEATURES = [
   { num: '4.0', text: 'AI-powered CRM with conversion intelligence' },
 ]
 
-// --- Figma asset URLs (Active Deals screen) ---
-const imgActiveAxevilLogo = 'https://www.figma.com/api/mcp/asset/05782ecc-e50a-43d2-b1d7-c3767f812d21'
-const imgActiveAxevilPro  = 'https://www.figma.com/api/mcp/asset/0d7bf89f-5684-4677-a6b3-44355c248041'
-const imgActiveAvatar     = 'https://www.figma.com/api/mcp/asset/38521879-4e2f-4e56-a5d7-e2197768d3d6'
+// --- Local icon paths ---
+const imgActiveAxevilLogo = '/icons/db-icon-logo.svg'
+const imgActiveAxevilPro  = '/icons/db-icon-logo.svg'
+const imgActiveAvatar     = '/icons/db-icon-person.svg'
 // Nav icons (Active Deals)
-const imgNavHome          = 'https://www.figma.com/api/mcp/asset/6a768510-ec30-4a98-a3a5-816ec89806ff'
-const imgNavDeals         = 'https://www.figma.com/api/mcp/asset/77896390-ff6a-4dca-9474-51b4fd9a6e73'
-const imgNavMarket        = 'https://www.figma.com/api/mcp/asset/36a81db9-fae9-4408-b57c-ba8bf656c6b1'
-const imgNavCRM           = 'https://www.figma.com/api/mcp/asset/16b51421-387a-4694-8d77-608c8fd0606f'
-const imgNavSecondary     = 'https://www.figma.com/api/mcp/asset/0aaa12ed-f4a2-47c9-8fec-038a16953091'
-const imgNavInsights      = 'https://www.figma.com/api/mcp/asset/2882bd0f-156e-43e9-9634-58d1fc8b6cbf'
-const imgNavKnowledge     = 'https://www.figma.com/api/mcp/asset/9c0302d1-0af0-47c3-a202-613aa445adce'
-// logout icon replaced with Figma 212-3708 asset (used inline below)
+const imgNavHome          = '/icons/db-icon-home.svg'
+const imgNavDeals         = '/icons/db-icon-deals.svg'
+const imgNavMarket        = '/icons/db-icon-money.svg'
+const imgNavCRM           = '/icons/db-icon-persons.svg'
+const imgNavSecondary     = '/icons/db-icon-up-line.svg'
+const imgNavInsights      = '/icons/db-icon-schedule.svg'
+const imgNavKnowledge     = '/icons/db-icon-books.svg'
 
-// Company logos inside deal cards (white bg boxes use the SpaceX mask as placeholder; others are text-only fallback)
-const imgSpaceXLogo       = 'https://www.figma.com/api/mcp/asset/19943687-3314-48ac-b28b-9529062556ba'
+// Company logos inside deal cards
+const imgSpaceXLogo       = '/icons/db-icon-spacex.svg'
 
-// --- Figma asset URLs (Portfolio screen) ---
-const imgPortAvatar       = 'https://www.figma.com/api/mcp/asset/19f01977-2a12-4314-8f04-deb86211a3d4'
-const imgPortCapIcon      = 'https://www.figma.com/api/mcp/asset/f7a9a529-3eaa-4ac7-ae16-1764861ae76e'
-const imgPortDealsIcon    = 'https://www.figma.com/api/mcp/asset/e9487394-d053-4111-b28f-d235e62e8621'
-const imgPortInvestors    = 'https://www.figma.com/api/mcp/asset/5c7248c7-0149-4747-abeb-bd92e91b9a28'
-const imgPortTotalVal     = 'https://www.figma.com/api/mcp/asset/80fb81f7-808f-47c1-a79b-461e7da2b5d2'
-const imgPortSpaceXRow    = 'https://www.figma.com/api/mcp/asset/932fbdfc-274e-491f-9c45-8f021d68dc9e'
-const imgPortKrakenRow    = 'https://www.figma.com/api/mcp/asset/ece6b0da-8c37-4299-a955-bb1f6c34a144'
+// --- Portfolio screen icons ---
+const imgPortAvatar       = '/icons/db-icon-person.svg'
+const imgPortCapIcon      = '/icons/db-icon-money.svg'
+const imgPortDealsIcon    = '/icons/db-icon-case.svg'
+const imgPortInvestors    = '/icons/db-icon-persons.svg'
+const imgPortTotalVal     = '/icons/db-icon-up-line.svg'
+const imgPortSpaceXRow    = '/icons/db-icon-spacex.svg'
+const imgPortKrakenRow    = '/icons/db-icon-kraken.svg'
 
-// Portfolio nav icons (same sidebar but "My Portfolio" active)
-const imgPortNavHome      = 'https://www.figma.com/api/mcp/asset/60c7b692-369d-4d8c-943c-4a9a93ae8c20'
-const imgPortNavDeals     = 'https://www.figma.com/api/mcp/asset/37840b2e-c870-486c-ae3d-c1564a643814'
-const imgPortNavMarket    = 'https://www.figma.com/api/mcp/asset/430752bb-427c-4974-872a-cab6ff4747f7'
-const imgPortNavCRM       = 'https://www.figma.com/api/mcp/asset/ec54455a-80c7-4ce8-8e9e-e1206a830e8a'
-const imgPortNavSecondary = 'https://www.figma.com/api/mcp/asset/58b8202c-20d8-47f6-955f-f7664d2d8d09'
-const imgPortNavInsights  = 'https://www.figma.com/api/mcp/asset/3116e98c-9552-440c-9118-4f842bb8265f'
-const imgPortNavKnowledge = 'https://www.figma.com/api/mcp/asset/fc314916-122c-447a-8bac-28020d0e8f69'
+// Portfolio nav icons
+const imgPortNavHome      = '/icons/db-icon-home.svg'
+const imgPortNavDeals     = '/icons/db-icon-deals.svg'
+const imgPortNavMarket    = '/icons/db-icon-money.svg'
+const imgPortNavCRM       = '/icons/db-icon-persons.svg'
+const imgPortNavSecondary = '/icons/db-icon-up-line.svg'
+const imgPortNavInsights  = '/icons/db-icon-schedule.svg'
+const imgPortNavKnowledge = '/icons/db-icon-books.svg'
 
 // ─── Shared sidebar nav data ───────────────────────────────────────────────
 interface NavItem { label: string; icon: string; active?: boolean }
@@ -60,19 +59,13 @@ function Sidebar({ items, activeLabel }: { items: NavItem[]; activeLabel: string
         borderRight: '1px solid rgba(255,255,255,0.06)',
       }}
     >
-      {/* Logo — centered, not stretched */}
-      <div className="flex items-center gap-2 px-5" style={{ height: '121px' }}>
+      {/* Logo — fixed size, not stretched */}
+      <div className="flex items-center px-5" style={{ height: '121px' }}>
         <img
           src={imgActiveAxevilLogo}
           alt="AXEVIL PRO"
           className="block flex-shrink-0"
-          style={{ width: '57px', height: 'auto', objectFit: 'contain' }}
-        />
-        <img
-          src={imgActiveAxevilPro}
-          alt="PRO"
-          className="block flex-shrink-0"
-          style={{ width: '33px', height: 'auto', objectFit: 'contain' }}
+          style={{ width: '28px', height: '28px', objectFit: 'contain' }}
         />
       </div>
 
@@ -122,11 +115,11 @@ function Sidebar({ items, activeLabel }: { items: NavItem[]; activeLabel: string
         <div style={{ height: '1px', background: 'rgba(255,255,255,0.08)' }} />
         <div className="flex items-center gap-[18px] px-5 py-5 cursor-pointer group">
           <img
-            src="https://www.figma.com/api/mcp/asset/ab302aef-8c7e-4b5b-aeeb-a1579f1d4afe"
+            src="/icons/db-icon-noti.svg"
             alt=""
             aria-hidden="true"
             className="block flex-shrink-0"
-            style={{ width: '20px', height: 'auto', objectFit: 'contain' }}
+            style={{ width: '28px', height: '28px', objectFit: 'contain' }}
           />
           <span
             className="font-inter-tight font-medium group-hover:text-white transition-colors duration-150"
@@ -804,7 +797,7 @@ export default function Block06Tablet() {
 
   return (
     <section className="w-full bg-page-bg">
-      <div className="mx-auto w-full max-w-content flex flex-col gap-16 items-center pb-0" style={{ paddingTop: '200px' }}>
+      <div className="mx-auto w-full max-w-content container-px flex flex-col gap-16 items-center pb-0" style={{ paddingTop: '200px' }}>
 
         {/* Heading */}
         <div className="flex flex-col gap-8 items-center" style={{ width: '1234px' }}>

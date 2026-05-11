@@ -16,7 +16,10 @@ function ClockIcon() {
 export default function WBSchedule() {
   return (
     <section id="wb-schedule" className="relative w-full bg-page-bg">
-      <div className="mx-auto w-full max-w-[1440px] pt-[64px] sm:pt-[80px] lg:pt-[100px]" style={{ paddingBottom: 200 }}>
+      <div
+        className="mx-auto w-full max-w-[1440px] container-px"
+        style={{ paddingTop: 'clamp(3rem, 8vw, 7.5rem)', paddingBottom: 'clamp(3rem, 8vw, 7.5rem)' }}
+      >
 
         {/* Heading */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-12 gap-4">
@@ -68,7 +71,7 @@ export default function WBSchedule() {
 
               {/* Right: time pill with clock icon */}
               <div
-                className="inline-flex items-center gap-2 shrink-0 px-3.5 py-2 rounded-full font-inter-tight font-medium tabular-nums"
+                className="inline-flex self-start sm:self-auto items-center gap-2 shrink-0 px-3.5 py-2 rounded-full font-inter-tight font-medium tabular-nums"
                 style={{
                   background: '#1a1a1a',
                   border: '1px solid rgba(255,255,255,0.08)',

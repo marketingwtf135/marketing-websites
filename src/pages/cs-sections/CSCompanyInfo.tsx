@@ -2,7 +2,7 @@
 export default function CSCompanyInfo() {
   return (
     <section className="w-full bg-page-bg" style={{ paddingTop: 'clamp(60px, 10vw, 100px)', paddingBottom: 'clamp(60px, 10vw, 100px)' }}>
-      <div className="mx-auto w-full max-w-content flex flex-col gap-6 items-center">
+      <div className="mx-auto w-full max-w-content container-px flex flex-col gap-6 items-center">
 
         {/* Heading */}
         <div className="flex flex-col gap-6 sm:gap-8 items-center text-center">

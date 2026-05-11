@@ -12,7 +12,7 @@ const STROKE_BORDER_STYLE: React.CSSProperties = {
 export default function Block03Cards() {
   return (
     <section className="w-full bg-page-bg">
-      <div className="relative mx-auto w-full max-w-content overflow-clip" style={{ height: '918px' }}>
+      <div className="relative mx-auto w-full max-w-content container-px overflow-clip" style={{ height: '918px' }}>
         {/* Section heading — top-left of content area */}
         <div className="absolute flex flex-col gap-8 items-start whitespace-nowrap" style={{ left: 0, top: 0 }}>
           <div className="flex gap-2 items-center font-inter-tight font-medium text-text-l text-neutral-30">
@@ -23,7 +23,7 @@ export default function Block03Cards() {
             className="font-inter-tight font-semibold text-h2 pb-2 text-transparent bg-clip-text"
             style={{ backgroundImage: 'linear-gradient(110.721deg, var(--neutral-00) 2.5635%, var(--neutral-40) 99.06%)' }}
           >
-            Heading 2
+            Key Stats
           </h2>
         </div>
 

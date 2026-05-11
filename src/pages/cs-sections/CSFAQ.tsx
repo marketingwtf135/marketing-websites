@@ -18,7 +18,7 @@ export default function CSFAQ() {
 
   return (
     <section className="w-full bg-page-bg" style={{ position: 'relative', zIndex: 1, paddingTop: 'clamp(60px, 10vw, 100px)', paddingBottom: 0 }}>
-      <div className="mx-auto w-full max-w-content flex flex-col gap-8 sm:gap-12 items-start">
+      <div className="mx-auto w-full max-w-content container-px flex flex-col gap-8 sm:gap-12 items-start">
 
         {/* Heading */}
         <div className="flex flex-col gap-4 sm:gap-6 items-start">
