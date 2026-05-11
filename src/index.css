@@ -8,6 +8,18 @@
   font-weight: 500;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/InterTight-Medium-Latin-ext.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF;
 }
 
 @font-face {
@@ -16,28 +28,186 @@
   font-weight: 600;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/InterTight-Medium-Latin-ext.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF;
 }
 
 :root {
-  --page-bg:      #080808;
-  --nav-bg:       #0a0a0a;
-  --phone-bg:     #060606;
-  --neutral-00:   #ffffff;
-  --neutral-30:   #b7b7b7;
-  --neutral-35:   #8f8f8f;
-  --neutral-40:   #717171;
-  --nav-border:   #171717;
-  --border-subtle:#1b1b1b;
-  --surface-3:    #2a2a2a;
+  /* Figma color tokens as CSS variables for use in inline styles */
+  --page-bg:         #080808;
+  --nav-bg:          #0a0a0a;
+  --phone-bg:        #060606;
+  --surface-edge:    #0e0e0e;
+  --surface-0:       #141414;
+  --surface-1:       #151515;
+  --surface-2:       #1a1a1a;
+  --surface-mid:     #1d1f20;
+  --surface-3:       #2a2a2a;
+  --surface-4:       #2b2b2b;
+  --surface-dark:    #484b4e;
+  --border-subtle:   #1b1b1b;
+  --neutral-00:      #ffffff;
+  --neutral-30:      #b7b7b7;
+  --neutral-35:      #8f8f8f;
+  --neutral-40:      #717171;
+  --status-open:     #4dba79;
+  --status-closed:   #990003;
+  --status-soon:     #a15e00;
+  --accent-teal:     #175e6e;
+  --accent-teal-lt:  #d7ffff;
+  --accent-blue:     #546fef;
+  --btn-label:       #2b2b2b;
 }
 
-* { box-sizing: border-box; }
+/* ── Responsive container — replaces max-w-content on inner wrappers ── */
+@layer utilities {
+  /* Horizontal padding: 1.25rem mobile → 1.5rem tablet → 0 desktop */
+  .container-px {
+    padding-left: 1.25rem !important;  /* 20px mobile */
+    padding-right: 1.25rem !important;
+  }
+  @media (min-width: 48rem) { /* 768px tablet */
+    .container-px {
+      padding-left: 1.5rem !important;
+      padding-right: 1.5rem !important;
+    }
+  }
+  @media (min-width: 90rem) { /* 1440px desktop */
+    .container-px {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
 
-html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #606060 #1A1A1A; }
+  /* padding-global: 1.25rem left/right on mobile only */
+  .padding-global {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+  @media (min-width: 90rem) {
+    .padding-global {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+
+  /* Legacy desktop-only content edge */
+  .px-content-edge {
+    padding-left: 15rem;   /* 240px */
+    padding-right: 15rem;
+  }
+
+  /* Section vertical rhythm in rem */
+  .py-section-y {
+    padding-top: 7.5rem;   /* 120px */
+    padding-bottom: 7.5rem;
+  }
+  .pt-section-y {
+    padding-top: 7.5rem;
+  }
+  .padding-section-t6-b0 {
+    padding-top: 6.25rem;  /* 100px */
+    padding-bottom: 0;
+  }
+  .padding-section-t6-b6 {
+    padding-top: 6.25rem;
+    padding-bottom: 6.25rem;
+  }
+  .padding-section-t12-b6 {
+    padding-top: 12.5rem;  /* 200px */
+    padding-bottom: 6.25rem;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* CtaButton — small idle shadow, big white glow + 4px lift on hover */
+.cta-button-glow {
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
+}
+.cta-button-glow:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    32px 32px 32px rgba(255, 255, 255, 0.25),
+    12px 12px 16px rgba(255, 255, 255, 0.25),
+    2px 2px 8px rgba(255, 255, 255, 0.5);
+}
+.cta-button-glow:active {
+  transform: translateY(-1px);
+  box-shadow: 0 1px 4px rgba(255, 255, 255, 0.06);
+}
+
+/* Hero illustration — 1100×997px fixed at 1200px+, proportionally scales below */
+.hero-illustration {
+  position: absolute;
+  top: 80px;
+  right: 0;
+  pointer-events: none;
+  /* proportional scale below 1200px: 1100/1200 ≈ 91.67% of viewport */
+  width: calc(100vw * (1100 / 1200));
+  height: auto;
+  aspect-ratio: 1100 / 997;
+}
+@media (min-width: 1200px) {
+  .hero-illustration {
+    width: 1100px;
+    height: 997px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #606060 #1A1A1A;
+}
+
+/* autoprefixer: off */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1A1A1A;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #606060;
+  border-radius: 10px;
+  border: 2px solid #1A1A1A;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #404040;
+}
+/* autoprefixer: on */
+
+/* Nav CTA button glow on hover */
+.nav-cta-glow {
+  transition: box-shadow 200ms, transform 200ms;
+}
+.nav-cta-glow:hover {
+  box-shadow: 0 0 20px rgba(255,255,255,0.25), 0 0 6px rgba(255,255,255,0.45);
+}
 
 body {
   margin: 0;
-  background-color: var(--page-bg);
+  background-color: #000000;
   color: #ffffff;
   font-family: 'Inter Tight', sans-serif;
   -webkit-font-smoothing: antialiased;

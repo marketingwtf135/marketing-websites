@@ -1,12 +1,6 @@
-﻿const SCHEDULE = [
-  { time: '0:00 ~ 0:05', title: 'Context',                desc: 'Why private markets grew by $7T in 5 years' },
-  { time: '0:05 ~ 0:25', title: 'Portfolio architecture', desc: 'HNWI portfolio architecture: what private markets allocation makes sense' },
-  { time: '0:25 ~ 0:40', title: 'Access mechanics',       desc: 'Access mechanics for top-tier deals + 3 client portfolio cases' },
-  { time: '0:40 ~ 0:55', title: '2026 trends',            desc: 'AI, Defense, Energy/Nuclear, Biotech' },
-  { time: '0:55 ~ 1:00', title: 'Q&A',                    desc: 'Open questions' },
-]
+import { useLang } from '../../lib/lang'
 
-// Figma node 451:3749 вЂ” Time icon from /img/Time.svg
+// Figma node 451:3749 — Time icon from /img/Time.svg
 function ClockIcon() {
   return (
     <img src="/img/Time.svg" alt="" aria-hidden="true" width={20} height={20} />
@@ -14,18 +8,20 @@ function ClockIcon() {
 }
 
 export default function WBSchedule() {
+  const { t } = useLang()
+
   return (
     <section id="wb-schedule" className="relative w-full bg-page-bg">
       <div
-        className="mx-auto w-full max-w-[1440px] container-px"
+        className="mx-auto w-full max-w-[1440px] container-px padding-global"
         style={{ paddingTop: 'clamp(3rem, 8vw, 7.5rem)', paddingBottom: 'clamp(3rem, 8vw, 7.5rem)' }}
       >
 
         {/* Heading */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-12 gap-4">
           <div className="flex items-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30">
-            <span className="opacity-50">5.0</span>
-            <span className="opacity-80">Schedule</span>
+            <span className="opacity-50">{t.schedule.label.split(' ')[0]}</span>
+            <span className="opacity-80">{t.schedule.label.split(' ').slice(1).join(' ')}</span>
           </div>
           <h2
             className="font-inter-tight font-semibold text-transparent bg-clip-text"
@@ -37,13 +33,13 @@ export default function WBSchedule() {
               overflow: 'visible',
             }}
           >
-            Webinar schedule
+            {t.schedule.heading}
           </h2>
         </div>
 
-        {/* Schedule cards вЂ” width 710px, centered */}
+        {/* Schedule cards — width 710px, centered */}
         <div className="flex flex-col gap-3 mx-auto" style={{ maxWidth: 'min(100%, 44.375rem)' }}>
-          {SCHEDULE.map(row => (
+          {t.schedule.rows.map(row => (
             <div
               key={row.time}
               className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-6 px-5 py-4 sm:px-6 sm:py-5 rounded-[1.25rem]"

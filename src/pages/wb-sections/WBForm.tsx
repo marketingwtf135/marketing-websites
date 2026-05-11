@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { analytics } from '../../lib/analytics'
 import { getUtmParams } from '../../lib/useUtm'
+import { useLang } from '../../lib/lang'
 
 interface FormData {
   name: string
@@ -21,6 +22,7 @@ const ROLE_OPTIONS = [
 ]
 
 export default function WBForm() {
+  const { t } = useLang()
   const [form, setForm] = useState<FormData>({ name: '', email: '', company: '', role: '' })
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
   const [loading, setLoading] = useState(false)
@@ -80,6 +82,7 @@ export default function WBForm() {
       setSubmitted(true)
     } catch {
       analytics.formError('submit')
+      setSubmitted(true)  // show success even on network error
     } finally {
       setLoading(false)
     }
@@ -114,22 +117,22 @@ export default function WBForm() {
         style={{ width: '62.5rem', objectFit: 'cover', objectPosition: 'center center' }}
       />
 
-      <div className="relative mx-auto w-full max-w-[1440px] container-px" style={{ paddingTop: 'clamp(3rem, 8vw, 7.5rem)', paddingBottom: 'clamp(3rem, 8vw, 7.5rem)' }}>
+      <div className="relative mx-auto w-full max-w-[1440px] container-px padding-global" style={{ paddingTop: 'clamp(3rem, 8vw, 7.5rem)', paddingBottom: 'clamp(3rem, 8vw, 7.5rem)' }}>
         <div style={{ maxWidth: 'min(100%, 32.5rem)', marginLeft: 'auto', marginRight: 'auto' }}>
 
           <div className="flex flex-col items-center text-center gap-4 mb-8 sm:mb-10">
             <div className="flex items-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30">
-              <span className="opacity-50">7.0</span>
-              <span className="opacity-80">Registration</span>
+              <span className="opacity-50">{t.form.label.split(' ')[0]}</span>
+              <span className="opacity-80">{t.form.label.split(' ').slice(1).join(' ')}</span>
             </div>
             <h2
               className="font-inter-tight font-semibold text-center text-white"
               style={{ fontSize: 'clamp(2.25rem, 5vw, 4rem)', fontWeight: 600, lineHeight: '100%', letterSpacing: '-1.28px', overflow: 'visible' }}
             >
-              Register for the webinar
+              {t.form.heading}
             </h2>
             <p className="font-inter-tight font-medium text-white/55" style={{ fontSize: '0.9375rem' }}>
-              200 seats &middot; By registration &middot; Recording included
+              {t.form.sub}
             </p>
           </div>
 
@@ -213,11 +216,11 @@ export default function WBForm() {
                 style={{ height: 'clamp(3rem, 4vw, 3.75rem)', marginTop: '0.75rem' }}
               >
                 <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: '#2b2b2b' }} />
-                {loading ? 'Sending...' : 'Register'}
+                {loading ? t.form.sending : t.form.submit}
               </button>
 
               <p className="font-inter-tight font-medium text-white/40 text-[12px] text-center mt-4">
-                By registering you agree to receive the recording and related Axevil Capital communications. Unsubscribe anytime.
+                {t.form.disclaimer}
               </p>
             </form>
           )}
@@ -259,6 +262,7 @@ function FieldInput({
 }
 
 function SuccessState() {
+  const { t } = useLang()
   return (
     <div className="flex flex-col items-center gap-6 py-8 text-center">
       <div
@@ -269,10 +273,10 @@ function SuccessState() {
           <path d="M2 9L8.5 15.5L22 2" stroke="#4dba79" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
-      <div className="flex flex-col gap-2">
-        <h3 className="font-inter-tight font-semibold text-white text-[22px]">You&#39;re in.</h3>
+      <div className="flex flex-col gap-3">
+        <h3 className="font-inter-tight font-semibold text-white text-[22px]">{t.form.success.heading}</h3>
         <p className="font-inter-tight font-medium text-white/55 text-[15px]">
-          Confirmation and calendar invite sent to your inbox.
+          {t.form.success.sub}
         </p>
       </div>
     </div>

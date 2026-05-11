@@ -1,7 +1,5 @@
 import WBCtaButton from './WBCtaButton'
-
-const WEBINAR_DATE = 'June 5, 2026'
-const WEBINAR_TIME = '11:00 CET'
+import { useLang } from '../../lib/lang'
 
 // 6 brand logos — drop icon-logo-01.svg ... icon-logo-06.svg into /img/
 const BRAND_LOGOS = [
@@ -14,6 +12,7 @@ const BRAND_LOGOS = [
 ]
 
 export default function WBHero() {
+  const { t } = useLang()
   return (
     <section
       id="wb-hero"
@@ -35,7 +34,7 @@ export default function WBHero() {
       <div className="absolute inset-0 bg-page-bg/60 pointer-events-none" />
 
       <div
-        className="relative flex-1 mx-auto w-full max-w-[1440px] container-px flex flex-col items-center justify-center text-center"
+        className="relative flex-1 mx-auto w-full max-w-[1440px] container-px padding-global flex flex-col items-center justify-center text-center"
         style={{ paddingTop: '2.5rem', paddingBottom: '7.5rem' }}
       >
         <div className="flex flex-col items-center max-w-[68.75rem] w-full" style={{ gap: '1.5rem' }}>
@@ -57,7 +56,7 @@ export default function WBHero() {
                 boxShadow: '0 0 6px #4dba79, 0 0 12px rgba(77,186,121,0.5)',
               }}
             />
-            {WEBINAR_DATE}  ·  {WEBINAR_TIME}  ·  Zoom  ·  60 minutes
+            {t.hero.badge}
           </div>
 
           {/* H1 + subheadline */}
@@ -71,19 +70,19 @@ export default function WBHero() {
                 margin: '0 auto',
               }}
             >
-              How to add private markets to your HNWI portfolios.
+              {t.hero.heading}
             </h1>
             <p
               className="font-inter-tight font-medium text-white/55 leading-[1.4]"
               style={{ maxWidth: '37.5rem', fontSize: 'clamp(1rem, 1.4vw, 1.125rem)' }}
             >
-              A closed-door session for private banking managers, family offices and independent capital advisors.
+              {t.hero.sub}
             </p>
           </div>
 
           {/* CTA — centered on mobile, auto on desktop */}
           <div className="flex justify-center sm:w-auto" style={{ marginTop: '0.5rem' }}>
-            <WBCtaButton />
+            <WBCtaButton label={t.hero.cta} />
           </div>
 
           {/* Brand logos — 48×48 on mobile, 64×64 on sm+ */}

@@ -1,13 +1,15 @@
-﻿const LINKS = ['Privacy', 'Terms', 'Cookie policy', 'Contacts']
+import { useLang } from '../../lib/lang'
 
 export default function WBFooter() {
+  const { t } = useLang()
+
   return (
     <footer
       id="wb-footer"
       className="relative w-full"
       style={{ background: '#000000', borderTop: '1px solid rgba(255,255,255,0.08)' }}
     >
-      <div className="mx-auto w-full max-w-[1440px] container-px py-10 sm:py-12">
+      <div className="mx-auto w-full max-w-[1440px] container-px padding-global py-10 sm:py-12">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 
           {/* Logo */}
@@ -18,7 +20,7 @@ export default function WBFooter() {
           {/* Right column: links + copyright */}
           <div className="flex flex-col sm:items-end gap-3">
             <div className="flex flex-wrap gap-x-6 gap-y-2">
-              {LINKS.map(l => (
+              {t.footer.links.map(l => (
                 <a
                   key={l}
                   href="#"
@@ -29,7 +31,7 @@ export default function WBFooter() {
               ))}
             </div>
             <p className="font-inter-tight font-medium text-white/30" style={{ fontSize: '0.75rem' }}>
-              В© 2026 Axevil Capital. All rights reserved.
+              {t.footer.copy}
             </p>
           </div>
         </div>

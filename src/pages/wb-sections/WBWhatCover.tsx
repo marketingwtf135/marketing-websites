@@ -1,13 +1,4 @@
-const ITEMS_ROW1 = [
-  { n: '1.0', body: 'The math of private market alpha — sources, persistence and net-of-fee evidence over the last two decades.' },
-  { n: '2.0', body: 'HNWI portfolio construction — four real allocation examples from 5% sleeve to 30% institutional-grade.' },
-  { n: '3.0', body: 'Access vehicles compared — SPVs, feeders, secondaries, evergreen, pre-IPO.' },
-]
-
-const ITEMS_ROW2 = [
-  { n: '4.0', body: 'A 90-day plan to introduce private markets to your existing client base without disrupting current allocations.' },
-  { n: '5.0', body: 'Live Q&A.' },
-]
+import { useLang } from '../../lib/lang'
 
 function AgendaCard({
   n, body, height, flex, bodyFill, className,
@@ -47,17 +38,22 @@ function AgendaCard({
 }
 
 export default function WBWhatCover() {
+  const { t } = useLang()
+  const items = t.whatCover.items
+  const row1 = items.slice(0, 3)
+  const row2 = items.slice(3)
+
   return (
     <section id="wb-agenda" className="relative w-full bg-page-bg">
       <div
-        className="mx-auto w-full max-w-[1440px] container-px"
+        className="mx-auto w-full max-w-[1440px] container-px padding-global"
         style={{ paddingTop: 'clamp(3rem, 8vw, 7.5rem)', paddingBottom: 'clamp(3rem, 8vw, 7.5rem)' }}
       >
         {/* Heading */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-12 gap-4">
           <div className="flex items-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30">
-            <span className="opacity-50">4.0</span>
-            <span className="opacity-80">Agenda</span>
+            <span className="opacity-50">{t.whatCover.label.split(' ')[0]}</span>
+            <span className="opacity-80">{t.whatCover.label.split(' ').slice(1).join(' ')}</span>
           </div>
           <h2
             className="font-inter-tight font-semibold text-transparent bg-clip-text"
@@ -69,21 +65,21 @@ export default function WBWhatCover() {
               overflow: 'visible',
             }}
           >
-            What we&#39;ll cover
+            {t.whatCover.heading}
           </h2>
         </div>
 
         <div className="flex flex-col gap-4">
-          {/* Row 1: 1.0/2.0/3.0 — paragraph fills container */}
+          {/* Row 1: first 3 items — paragraph fills container */}
           <div className="flex flex-col sm:flex-row gap-[1rem]">
-            {ITEMS_ROW1.map(item => (
+            {row1.map(item => (
               <AgendaCard key={item.n} n={item.n} body={item.body} className="sm:h-[198px]" bodyFill />
             ))}
           </div>
 
-          {/* Row 2: 4.0/5.0 — paragraph max-width 50% */}
+          {/* Row 2: remaining items — paragraph max-width 50% */}
           <div className="flex flex-col sm:flex-row gap-[1rem]">
-            {ITEMS_ROW2.map(item => (
+            {row2.map(item => (
               <AgendaCard key={item.n} n={item.n} body={item.body} />
             ))}
           </div>

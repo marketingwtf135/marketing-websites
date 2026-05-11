@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useLang } from '../../lib/lang'
 
 export function scrollToForm() {
   document.getElementById('wb-form')?.scrollIntoView({ behavior: 'smooth' })
@@ -9,15 +10,7 @@ function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 }
 
-const NAV_LINKS = [
-  { label: 'Audience',   id: 'wb-who'      },
-  { label: 'Why attend', id: 'wb-why'      },
-  { label: 'Agenda',     id: 'wb-agenda'   },
-  { label: 'Speaker',    id: 'wb-speaker'  },
-  { label: 'Schedule',   id: 'wb-schedule' },
-]
-
-const NAV_IDS = NAV_LINKS.map(l => l.id)
+const NAV_IDS = ['wb-who', 'wb-why', 'wb-agenda', 'wb-speaker', 'wb-schedule']
 
 const NAV_HEIGHT = '4rem' // 64px nav bar height
 
@@ -54,7 +47,16 @@ function useActiveSection(ids: string[]) {
 
 export default function WBNav() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { t, lang, setLang } = useLang()
   const active = useActiveSection(NAV_IDS)
+
+  const NAV_LINKS = [
+    { label: t.nav.audience,   id: 'wb-who'      },
+    { label: t.nav.whyAttend,  id: 'wb-why'      },
+    { label: t.nav.agenda,     id: 'wb-agenda'   },
+    { label: t.nav.speaker,    id: 'wb-speaker'  },
+    { label: t.nav.schedule,   id: 'wb-schedule' },
+  ]
 
   useEffect(() => {
     if (!menuOpen) return
@@ -71,7 +73,7 @@ export default function WBNav() {
         className="fixed top-0 left-0 w-full z-50 border-b border-nav-border bg-nav-bg"
         style={{ height: NAV_HEIGHT }}
       >
-        <div className="mx-auto w-full max-w-[90rem] h-full flex items-center justify-between container-px">
+        <div className="mx-auto w-full max-w-[90rem] h-full flex items-center justify-between container-px padding-global">
           {/* Logo */}
           <a href="#" aria-label="AXEVIL Capital" className="shrink-0">
             <img src="/img/block01/logo.svg" alt="AXEVIL Capital" width={110} height={17} />
@@ -97,14 +99,27 @@ export default function WBNav() {
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Reserve a seat — always visible */}
+            {/* Language switcher — visible on all sizes */}
+            <button
+              type="button"
+              onClick={() => setLang(lang === 'en' ? 'ru' : 'en')}
+              className="flex items-center gap-1 font-inter-tight font-medium transition-colors shrink-0"
+              style={{ fontSize: '0.8125rem', height: '2.25rem', padding: '0 0.75rem', borderRadius: '1rem', border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.04)', color: 'rgba(255,255,255,0.6)' }}
+              aria-label="Switch language"
+            >
+              <span style={{ color: lang === 'en' ? '#ffffff' : 'rgba(255,255,255,0.35)', fontWeight: lang === 'en' ? 600 : 500 }}>EN</span>
+              <span style={{ color: 'rgba(255,255,255,0.2)', margin: '0 1px' }}>/</span>
+              <span style={{ color: lang === 'ru' ? '#ffffff' : 'rgba(255,255,255,0.35)', fontWeight: lang === 'ru' ? 600 : 500 }}>RU</span>
+            </button>
+
+            {/* Reserve a seat — desktop only */}
             <button
               type="button"
               onClick={() => document.getElementById('wb-footer')?.scrollIntoView({ behavior: 'smooth' })}
-              className="flex items-center justify-center font-inter-tight font-semibold text-phone-bg bg-white hover:scale-[1.02] transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-white shrink-0"
+              className="hidden sm:flex items-center justify-center font-inter-tight font-semibold text-phone-bg bg-white hover:scale-[1.02] transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-white shrink-0"
               style={{ height: '2.25rem', padding: '0 1.25rem', borderRadius: '1rem', fontSize: '0.875rem' }}
             >
-              Reserve a seat
+              {t.nav.reserve}
             </button>
 
             {/* Hamburger — mobile/tablet only */}

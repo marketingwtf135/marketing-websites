@@ -1,37 +1,26 @@
-const CARDS = [
-  {
-    n: '1.0',
-    title: 'Wealth managers & RIAs',
-    text: "You're under pressure to differentiate beyond public ETFs. We'll show you a defensible private-markets sleeve you can introduce without overhauling your allocation model.",
-    icon: '/img/audience-01.svg',
-  },
-  {
-    n: '2.0',
-    title: 'Family Offices',
-    text: "You already know private markets work — the question is access, vehicle selection and vintage discipline. We'll walk through the approach used by mid-sized single-family offices.",
-    icon: '/img/audience-02.svg',
-  },
-  {
-    n: '3.0',
-    title: 'Independent IFAs & EAMs',
-    text: 'Add institutional-grade pre-IPO and venture access to your shelf — without $5M minimums or building infrastructure in-house.',
-    icon: '/img/audience-03.svg',
-  },
-] as const
+import { useLang } from '../../lib/lang'
+
+const CARD_ICONS = [
+  '/img/audience-01.svg',
+  '/img/audience-02.svg',
+  '/img/audience-03.svg',
+]
 
 export default function WBWhoFor() {
+  const { t } = useLang()
+
   return (
     <section id="wb-who" className="relative w-full bg-page-bg">
       {/* py 200px top/bottom, 0 horizontal padding removed from inner */}
       <div
-        className="mx-auto w-full max-w-[1440px] container-px"
-        style={{ padding: 'clamp(6rem, 16vw, 15rem) 1rem' }}
+        className="mx-auto w-full max-w-[1440px] container-px padding-global"
+        style={{ paddingTop: 0, paddingBottom: 'clamp(12rem, 32vw, 30rem)' }}
       >
         {/* Heading — centered */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-12 gap-4">
           <div className="flex items-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30">
-            <span className="opacity-50">1.0</span>
-            <span className="opacity-80">Audience</span>
+            <span className="opacity-50">{t.whoFor.label.split(' ')[0]}</span>
+            <span className="opacity-80">{t.whoFor.label.split(' ').slice(1).join(' ')}</span>
           </div>
           <h2
             className="font-inter-tight font-semibold text-transparent bg-clip-text"
@@ -43,13 +32,13 @@ export default function WBWhoFor() {
               overflow: 'visible',
             }}
           >
-            Who this webinar is for
+            {t.whoFor.heading}
           </h2>
         </div>
 
         {/* 3 cards — height 450px, items centered, gap auto (justify-between) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {CARDS.map(card => (
+          {t.whoFor.cards.map((card, i) => (
             <div
               key={card.title}
               className="flex flex-col items-center text-center justify-between md:h-[450px] gap-8 md:gap-0"
@@ -70,7 +59,7 @@ export default function WBWhoFor() {
 
               {/* Icon — 128×128 */}
               <img
-                src={card.icon}
+                src={CARD_ICONS[i]}
                 alt=""
                 width={80}
                 height={80}
@@ -90,7 +79,7 @@ export default function WBWhoFor() {
                   className="font-inter-tight font-medium text-white/55 text-center"
                   style={{ fontSize: '0.9375rem', lineHeight: 1.5 }}
                 >
-                  {card.text}
+                  {card.body}
                 </p>
               </div>
             </div>

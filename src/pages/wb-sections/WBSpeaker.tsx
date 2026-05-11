@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
+import { useLang } from '../../lib/lang'
 
 export default function WBSpeaker() {
+  const { t } = useLang()
   const [isMobile, setIsMobile] = useState(false)
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)')
@@ -16,13 +18,13 @@ export default function WBSpeaker() {
       className="relative w-full bg-page-bg"
     >
       <div
-        className="relative mx-auto w-full max-w-[1440px] container-px"
+        className="relative mx-auto w-full max-w-[1440px] container-px padding-global"
         style={{ paddingTop: 'clamp(3rem, 8vw, 7.5rem)', paddingBottom: 'clamp(3rem, 8vw, 7.5rem)' }}
       >
         <div className="flex flex-col items-center text-center gap-4 mb-6 md:mb-12">
           <div className="flex items-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30">
-            <span className="opacity-50">4.0</span>
-            <span className="opacity-80">About Speaker</span>
+            <span className="opacity-50">{t.speaker.label.split(' ')[0]}</span>
+            <span className="opacity-80">{t.speaker.label.split(' ').slice(1).join(' ')}</span>
           </div>
           <h2
             className="font-inter-tight font-semibold text-transparent bg-clip-text"
@@ -34,7 +36,7 @@ export default function WBSpeaker() {
               overflow: 'visible',
             }}
           >
-            Speaker
+            {t.speaker.heading}
           </h2>
         </div>
 
@@ -72,10 +74,10 @@ export default function WBSpeaker() {
                 className="font-inter-tight font-semibold text-white"
                 style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.875rem)', lineHeight: 1.15, letterSpacing: '-0.02em' }}
               >
-                Taras Chumachenko
+                {t.speaker.name}
               </h3>
               <p className="font-inter-tight font-medium text-white/55" style={{ fontSize: '0.9375rem' }}>
-                Co-founder &amp; Managing Partner, Axevil Capital
+                {t.speaker.role}
               </p>
             </div>
 
@@ -84,14 +86,14 @@ export default function WBSpeaker() {
                 className="font-inter-tight font-medium"
                 style={{ color: '#E6E6E6', fontSize: 'clamp(0.875rem, 1.5vw, 1.125rem)', lineHeight: '135%', letterSpacing: '-0.36px' }}
               >
-                10+ years in alternative investments. Co-founder of Axevil Capital — a digital private equity platform with $150M AUM, 1,000+ investors and 100+ wealth-management partners. Hosts the firm's quarterly research briefings and live Q&amp;A sessions on private markets strategy.
+                {t.speaker.bio}
               </p>
             </div>
           </div>
 
           <img
             src="/img/image-speaker.png"
-            alt="Taras Chumachenko"
+            alt={t.speaker.name}
             style={{
               position: 'absolute',
               bottom: 0,
