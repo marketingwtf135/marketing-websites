@@ -41,7 +41,7 @@ export default function WBHero() {
         }}
       />
       {/* Dark overlay so text stays readable */}
-      <div className="absolute inset-0 bg-page-bg/60 pointer-events-none" />
+      <div className="absolute inset-0 bg-transparent pointer-events-none" />
 
       <div
         className="relative flex-1 mx-auto w-full max-w-[1440px] container-px padding-global flex flex-col items-center justify-center text-center"
