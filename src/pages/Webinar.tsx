@@ -68,7 +68,7 @@ export default function Webinar() {
 
       {/* ── Layer 1 ─────────────────────────────────────────────
           WBWhoFor: STICKY base — stays in place while cover1 rolls over it */}
-      <div className="sm:sticky" style={{ top: 240, zIndex: 0 }}>
+      <div className="sm:sticky" style={{ top: -100, zIndex: 0 }}>
         <FadeIn><WBWhoFor /></FadeIn>
       </div>
 
@@ -93,7 +93,7 @@ export default function Webinar() {
 
         {/* ── Layer 2 ─────────────────────────────────────────────
             WBSchedule: STICKY base — stays in place while cover2 rolls over it */}
-        <div style={{ position: 'sticky', top: 240, zIndex: 0 }}>
+        <div style={{ position: 'sticky', top: -100, zIndex: 0 }}>
           <FadeIn><WBSchedule /></FadeIn>
         </div>
 
