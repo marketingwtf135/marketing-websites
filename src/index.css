@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/InterTight-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/fonts/InterTight-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --page-bg:      #080808;
+  --nav-bg:       #0a0a0a;
+  --phone-bg:     #060606;
+  --neutral-00:   #ffffff;
+  --neutral-30:   #b7b7b7;
+  --neutral-35:   #8f8f8f;
+  --neutral-40:   #717171;
+  --nav-border:   #171717;
+  --border-subtle:#1b1b1b;
+  --surface-3:    #2a2a2a;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: #606060 #1A1A1A; }
+
+body {
+  margin: 0;
+  background-color: var(--page-bg);
+  color: #ffffff;
+  font-family: 'Inter Tight', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
