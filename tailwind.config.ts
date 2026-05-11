@@ -50,7 +50,7 @@ const config: Config = {
       },
       // --- Figma font families ---
       fontFamily: {
-        'inter-tight': ['Raleway', 'sans-serif'],
+        'inter-tight': ['"Inter Tight"', 'sans-serif'],
       },
       // --- Figma font sizes in rem (1rem = 16px) ---
       fontSize: {
