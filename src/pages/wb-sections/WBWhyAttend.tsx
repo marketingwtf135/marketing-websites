@@ -116,7 +116,7 @@ export default function WBWhyAttend() {
               {/* Caption */}
               <div
                 className="flex flex-col items-start"
-                style={{ padding: '0 1.25rem', gap: '0.75rem', alignSelf: 'stretch' }}
+                style={{ padding: '0 1.25rem 1rem 1.25rem', gap: '0.75rem', alignSelf: 'stretch' }}
               >
                 <h3
                   className="font-inter-tight font-semibold text-white"

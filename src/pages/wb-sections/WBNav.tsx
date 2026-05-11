@@ -162,6 +162,17 @@ export default function WBNav() {
                 {label}
               </button>
             ))}
+            {/* Reserve a seat — desktop button in mobile menu */}
+            <div className="px-5 py-3">
+              <button
+                type="button"
+                onClick={() => { document.getElementById('wb-footer')?.scrollIntoView({ behavior: 'smooth' }); setMenuOpen(false) }}
+                className="flex items-center justify-center font-inter-tight font-semibold text-phone-bg bg-white hover:scale-[1.02] transition-transform w-full"
+                style={{ height: '2.75rem', borderRadius: '1rem', fontSize: '0.9375rem' }}
+              >
+                {t.nav.reserve}
+              </button>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -14,7 +14,7 @@ export default function WBWhoFor() {
       {/* py 200px top/bottom, 0 horizontal padding removed from inner */}
       <div
         className="mx-auto w-full max-w-[1440px] container-px padding-global"
-        style={{ paddingTop: 0, paddingBottom: 'clamp(12rem, 32vw, 30rem)' }}
+        style={{ paddingTop: '1.5rem', paddingBottom: 'clamp(12rem, 32vw, 30rem)' }}
       >
         {/* Heading — centered */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-12 gap-4">
