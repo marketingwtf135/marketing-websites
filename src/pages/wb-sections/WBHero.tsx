@@ -21,14 +21,24 @@ export default function WBHero() {
     >
       {/* Background video — drop bg-video.mp4 into /img/ */}
       <video
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         src="/ostracized_remix_scene.mp4"
         autoPlay
         muted
         loop
         playsInline
         aria-hidden="true"
-        style={{ opacity: 1, objectPosition: 'left center' }}
+        className="pointer-events-none"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100vh',
+          objectFit: 'cover',
+          objectPosition: 'left center',
+          opacity: 1,
+          zIndex: 0,
+        }}
       />
       {/* Dark overlay so text stays readable */}
       <div className="absolute inset-0 bg-page-bg/60 pointer-events-none" />
