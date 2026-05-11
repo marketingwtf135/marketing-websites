@@ -1,0 +1,13 @@
+# Binary files — never convert line endings
+*.mp4    binary
+*.webm   binary
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.webp   binary
+*.svg    text
+*.woff2  binary
+*.woff   binary
+*.ttf    binary
+*.ico    binary
