@@ -13,7 +13,7 @@ export default function WBWhoFor() {
     <section id="wb-who" className="relative w-full bg-page-bg">
       {/* py 200px top/bottom, 0 horizontal padding removed from inner */}
       <div
-        className="mx-auto w-full max-w-[1440px] container-px padding-global py-16 md:py-24"
+        className="mx-auto w-full max-w-[1440px] container-px padding-global py-16 md:py-24 lg:py-48"
       >
         {/* Heading — centered */}
         <div className="flex flex-col items-center text-center mb-4 gap-4">
