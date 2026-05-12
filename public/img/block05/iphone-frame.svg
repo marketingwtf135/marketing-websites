@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 761" fill="none">
+  <defs>
+    <!-- Mask: white = show, black = cut out (transparent hole) -->
+    <mask id="screenCutout">
+      <!-- Show entire phone body -->
+      <rect x="0" y="0" width="350" height="761" fill="white"/>
+      <!-- Cut out the screen area -->
+      <rect x="6" y="6" width="338" height="749" rx="47" fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- Phone body with screen punched out -->
+  <rect x="0" y="0" width="350" height="761" rx="52"
+    fill="#1c1c1e"
+    stroke="#3a3a3c"
+    stroke-width="1"
+    mask="url(#screenCutout)"
+  />
+
+  <!-- Dynamic Island -->
+  <rect x="125" y="18" width="100" height="30" rx="15" fill="#000000"/>
+  <circle cx="196" cy="33" r="6" fill="#111111"/>
+  <circle cx="196" cy="33" r="3" fill="#1c1c1e"/>
+
+  <!-- Side buttons (right: volume up/down, left: action, power) -->
+  <rect x="348.5" y="130" width="3" height="44" rx="1.5" fill="#2c2c2e"/>
+  <rect x="348.5" y="186" width="3" height="44" rx="1.5" fill="#2c2c2e"/>
+  <rect x="-1.5" y="120" width="3" height="36" rx="1.5" fill="#2c2c2e"/>
+  <rect x="348.5" y="260" width="3" height="72" rx="1.5" fill="#2c2c2e"/>
+</svg>
