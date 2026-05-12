@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 64 85% 68%;
+    --primary-foreground: 0 0% 4%;
+
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 64 85% 68%;
+    --accent-foreground: 0 0% 4%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 12%;
+    --input: 0 0% 12%;
+    --ring: 64 85% 68%;
+
+    --radius: 8px;
+
+    --sidebar-background: 0 0% 3%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 64 85% 68%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 12%;
+    --sidebar-ring: 64 85% 68%;
+
+    --surface: 0 0% 4%;
+    --surface-elevated: 0 0% 7%;
+    --data: 0 0% 95%;
+    --data-green: 142 60% 45%;
+    --data-red: 0 72% 51%;
+
+    --nav-bg: 0 0% 4%;
+    --hero-bg: 0 0% 4%;
+    --dark-card: 0 0% 7%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Mazzard H', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    font-family: 'Mazzard H', system-ui, sans-serif;
+  }
+
+  p {
+    text-wrap: pretty;
+    line-height: 1.7;
+  }
+}
+
+@layer utilities {
+  .font-mono-data {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .transition-axevil {
+    transition: all 200ms cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .accent-line {
+    height: 1px;
+    background: hsl(0 0% 12%);
+  }
+
+  @keyframes card-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  .shimmer-card {
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.06) 45%, rgba(255,255,255,0.13) 50%, rgba(255,255,255,0.06) 55%, transparent 60%);
+    background-size: 200% 100%;
+    animation: card-shimmer 2s ease-in-out infinite;
+  }
+}
