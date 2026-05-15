@@ -47,7 +47,7 @@ function useActiveSection(ids: string[]) {
 
 export default function WBNav() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const { t, lang, setLang } = useLang()
+  const { t } = useLang()
   const active = useActiveSection(NAV_IDS)
 
   const NAV_LINKS = [
@@ -99,19 +99,6 @@ export default function WBNav() {
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Language switcher — visible on all sizes */}
-            <button
-              type="button"
-              onClick={() => setLang(lang === 'en' ? 'ru' : 'en')}
-              className="flex items-center gap-1 font-inter-tight font-medium transition-colors shrink-0"
-              style={{ fontSize: '0.8125rem', height: '2.25rem', padding: '0 0.75rem', borderRadius: '1rem', border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.04)', color: 'rgba(255,255,255,0.6)' }}
-              aria-label="Switch language"
-            >
-              <span style={{ color: lang === 'en' ? '#ffffff' : 'rgba(255,255,255,0.35)', fontWeight: lang === 'en' ? 600 : 500 }}>EN</span>
-              <span style={{ color: 'rgba(255,255,255,0.2)', margin: '0 1px' }}>/</span>
-              <span style={{ color: lang === 'ru' ? '#ffffff' : 'rgba(255,255,255,0.35)', fontWeight: lang === 'ru' ? 600 : 500 }}>RU</span>
-            </button>
-
             {/* Reserve a seat — desktop only */}
             <button
               type="button"
