@@ -2,9 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-export default defineConfig(({ command }) => ({
+export default defineConfig(() => ({
   plugins: [react()],
-  base: command === 'build' ? '/webinar/2026-06-05/' : '/',
   server: {
     host: '0.0.0.0',
     port: 5180,
@@ -12,7 +11,6 @@ export default defineConfig(({ command }) => ({
   preview: {
     host: '0.0.0.0',
     port: parseInt(process.env.PORT || '4173'),
-    allowedHosts: ['m.axevil.com', 'm.axevil.app', 'localhost'],
   },
   resolve: {
     alias: {
