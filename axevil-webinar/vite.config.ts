@@ -12,7 +12,7 @@ export default defineConfig(({ command }) => ({
   preview: {
     host: '0.0.0.0',
     port: parseInt(process.env.PORT || '4173'),
-    allowedHosts: true,
+    allowedHosts: ['m.axevil.com', 'm.axevil.app', 'localhost'],
   },
   resolve: {
     alias: {
