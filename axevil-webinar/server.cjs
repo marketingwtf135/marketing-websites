@@ -4,6 +4,7 @@ const http = require('http')
 
 const PORT = parseInt(process.env.PORT || '4173')
 const DIST = path.join(__dirname, 'dist')
+const WEBINAR_PATH = '/webinar/2026-06-05'
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -26,25 +27,34 @@ const MIME = {
 http.createServer((req, res) => {
   let urlPath = req.url.split('?')[0]
 
-  // Remove trailing slash except root
+  // Normalize trailing slash
   if (urlPath.length > 1 && urlPath.endsWith('/')) {
     urlPath = urlPath.slice(0, -1)
   }
 
-  const filePath = path.join(DIST, urlPath)
-  const ext = path.extname(filePath).toLowerCase()
+  const ext = path.extname(urlPath).toLowerCase()
 
-  // Serve static file if it exists
-  if (ext && fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
-    res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' })
-    fs.createReadStream(filePath).pipe(res)
+  // Serve static assets (JS, CSS, images, fonts, etc.) from dist/
+  if (ext) {
+    const filePath = path.join(DIST, urlPath)
+    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+      res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' })
+      fs.createReadStream(filePath).pipe(res)
+      return
+    }
+  }
+
+  // Serve index.html only at the webinar path
+  if (urlPath === WEBINAR_PATH) {
+    const index = path.join(DIST, 'index.html')
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+    fs.createReadStream(index).pipe(res)
     return
   }
 
-  // SPA fallback — always serve index.html
-  const index = path.join(DIST, 'index.html')
-  res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-  fs.createReadStream(index).pipe(res)
+  // Redirect everything else to the webinar path
+  res.writeHead(301, { Location: WEBINAR_PATH })
+  res.end()
 }).listen(PORT, '0.0.0.0', () => {
-  console.log(`Axevil Webinar running on port ${PORT}`)
+  console.log(`Axevil Webinar → m.axevil.com${WEBINAR_PATH}`)
 })
