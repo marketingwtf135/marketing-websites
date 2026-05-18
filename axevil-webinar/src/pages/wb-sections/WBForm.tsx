@@ -319,6 +319,8 @@ export default function WBForm() {
     const leadId = crypto.randomUUID()
     const utm = getUtmParams()
     const tracking = getTrackingContext()
+    // NOTE: API endpoint accepts only a flat `data` object (no nested objects),
+    // so all tracking context fields are flattened to the top level alongside utm_*.
     const payload = {
       data: {
         id: leadId,
@@ -334,31 +336,17 @@ export default function WBForm() {
         page: 'webinar',
         ts: new Date().toISOString(),
         lead_event_id: leadId,
+        source: 'landing-webinar',
         gclid: tracking.gclid,
         gbraid: tracking.gbraid,
         wbraid: tracking.wbraid,
         fbclid: tracking.fbclid,
         fbc: tracking.fbc,
         fbp: tracking.fbp,
-        tracking: {
-          source: 'landing-webinar',
-          click_ids: {
-            gclid: tracking.gclid,
-            gbraid: tracking.gbraid,
-            wbraid: tracking.wbraid,
-            fbclid: tracking.fbclid,
-          },
-          meta: {
-            fbc: tracking.fbc,
-            fbp: tracking.fbp,
-          },
-          context: {
-            page_url: tracking.page_url,
-            page_path: tracking.page_path,
-            referrer: tracking.referrer,
-            user_agent: tracking.user_agent,
-          },
-        },
+        page_url: tracking.page_url,
+        page_path: tracking.page_path,
+        referrer: tracking.referrer,
+        user_agent: tracking.user_agent,
         ...utm,
       },
     }
