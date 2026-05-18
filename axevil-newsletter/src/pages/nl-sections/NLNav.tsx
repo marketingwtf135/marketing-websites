@@ -55,8 +55,12 @@ export default function NLNav() {
       <motion.nav
         className="fixed top-0 left-0 w-full z-50"
         style={{ background: '#060606', borderBottom: '1px solid #1a1a1a', height: 72 }}
-        animate={{ y: visible ? 0 : -72 }}
-        transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, y: visible ? 0 : -72 }}
+        transition={{
+          opacity: { duration: 0.3, ease: 'easeOut' },
+          y: { duration: 0.25, ease: [0.4, 0, 0.2, 1] },
+        }}
       >
         <div className="container-px mx-auto w-full max-w-[1440px] h-full flex items-center justify-between">
           {/* Logo */}
