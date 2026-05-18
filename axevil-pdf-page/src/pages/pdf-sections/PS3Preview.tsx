@@ -26,8 +26,8 @@ export default function PS3Preview() {
           style={{
             flex: '1 1 0', minWidth: 0,
             display: 'flex', flexDirection: 'column',
-            gap: '1.5rem',  /* 24px between eyebrow and heading */
-            width: '100%', height: '100%',
+            justifyContent: 'space-between',
+            height: '100%',
           }}
         >
           {/* Eyebrow */}
