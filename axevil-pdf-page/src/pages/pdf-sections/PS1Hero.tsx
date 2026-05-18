@@ -62,13 +62,14 @@ export default function PS1Hero() {
             width: '100%',
           }}
         >
-          {/* Badge + headline block */}
+          {/* Badge + headline block — badge stays hug, H1+subtitle+CTA fill width */}
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               gap: '1.5rem',
+              width: '100%',
             }}
           >
             {/* Badge */}
@@ -85,13 +86,14 @@ export default function PS1Hero() {
               </p>
             </div>
 
-            {/* H1 + subtitle */}
+            {/* H1 + subtitle — fill width */}
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 gap: '1.5rem',
+                width: '100%',
               }}
             >
               <h1
