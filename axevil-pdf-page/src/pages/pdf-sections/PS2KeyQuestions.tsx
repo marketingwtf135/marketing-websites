@@ -27,7 +27,7 @@ export default function PS2KeyQuestions() {
   const inView = useInView(ref, { once: true, amount: 0.1 })
   return (
     <section id="key-questions" className="relative w-full bg-page-bg">
-      <div className="pt-section-y mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-0 pb-[3.75rem] sm:pb-[5rem] lg:pt-[12.5rem] lg:pb-[6.25rem]">
+      <div className="pt-section-y mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-5 pb-[3.75rem] sm:pb-[5rem] lg:pt-[12.5rem] lg:pb-[6.25rem]">
 
         {/* Heading with inner desktop padding */}
         <div className="flex flex-col gap-6 items-center mb-8 sm:mb-10 lg:px-[80px]">

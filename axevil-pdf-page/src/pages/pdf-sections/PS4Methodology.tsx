@@ -37,6 +37,9 @@ export default function PS4Methodology() {
           alignItems: 'center',
         }}
       >
+        {/* ── Heading + Author (gap 24px) ─────────────── */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', width: '100%' }}>
+
         {/* ── Eyebrow + H2 + Desc ─────────────────────── */}
         <div
           style={{
@@ -52,44 +55,45 @@ export default function PS4Methodology() {
             <span className="eyebrow-text">Методология</span>
           </div>
 
-          {/* H2 */}
-          <h2
-            style={{
-              fontFamily: 'Inter Tight, sans-serif',
-              fontSize: 'clamp(2.25rem, 3.5vw, 4rem)',
-              fontWeight: 600,
-              lineHeight: 1,
-              letterSpacing: '-0.02em',
-              background:
-                'linear-gradient(122.1deg, rgb(162,162,162) 15.77%, rgb(255,255,255) 49.29%, rgb(162,162,162) 82.81%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              color: 'transparent',
-              textAlign: 'center',
-              margin: 0,
-              maxWidth: '50rem',
-            }}
-          >
-            Один источник вместо десятка подписок
-          </h2>
+          {/* H2 + Description */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
+            <h2
+              style={{
+                fontFamily: 'Inter Tight, sans-serif',
+                fontSize: 'clamp(2.25rem, 3.5vw, 4rem)',
+                fontWeight: 600,
+                lineHeight: 1,
+                letterSpacing: '-0.02em',
+                background:
+                  'linear-gradient(122.1deg, rgb(162,162,162) 15.77%, rgb(255,255,255) 49.29%, rgb(162,162,162) 82.81%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                color: 'transparent',
+                textAlign: 'center',
+                margin: 0,
+                maxWidth: '50rem',
+              }}
+            >
+              Один источник вместо десятка подписок
+            </h2>
 
-          {/* Description */}
-          <p
-            style={{
-              fontFamily: 'Inter Tight, sans-serif',
-              fontSize: 'clamp(1rem, 1.2vw, 1.125rem)',
-              fontWeight: 500,
-              lineHeight: 1.35,
-              letterSpacing: '-0.02em',
-              color: '#bcbcbc',
-              textAlign: 'center',
-              maxWidth: '44rem',
-              margin: 0,
-            }}
-          >
-            Pre-IPO Insider — это синтез аналитических материалов и внутренних данных платформы
-            Axevil Capital, собранный в один документ.
-          </p>
+            <p
+              style={{
+                fontFamily: 'Inter Tight, sans-serif',
+                fontSize: 'clamp(1rem, 1.2vw, 1.125rem)',
+                fontWeight: 500,
+                lineHeight: 1.35,
+                letterSpacing: '-0.02em',
+                color: '#bcbcbc',
+                textAlign: 'center',
+                maxWidth: '44rem',
+                margin: 0,
+              }}
+            >
+              Pre-IPO Insider — это синтез аналитических материалов и внутренних данных платформы
+              Axevil Capital, собранный в один документ.
+            </p>
+          </div>
         </div>
 
         {/* ── Author card ──────────────────────────────── */}
@@ -184,6 +188,8 @@ export default function PS4Methodology() {
             </div>
           </div>
         </div>
+
+        </div>{/* end heading+author wrapper */}
 
         {/* ── Data sources ─────────────────────────────── */}
         <div

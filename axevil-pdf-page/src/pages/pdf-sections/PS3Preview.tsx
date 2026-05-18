@@ -14,7 +14,7 @@ export default function PS3Preview() {
         style={{
           padding: '3.75rem 1.25rem',
           display: 'flex',
-          alignItems: 'flex-end',
+          alignItems: 'stretch',
           gap: 'clamp(2rem, 4vw, 4rem)',
         }}
       >
@@ -123,7 +123,7 @@ export default function PS3Preview() {
 
           {/* CTA button (z=11) */}
           <div style={{ position: 'relative', zIndex: 11 }}>
-            <PDFCtaButton style={{ width: '100%', justifyContent: 'center' }}>
+            <PDFCtaButton className="w-full sm:w-auto">
               Скачать полную версию PDF
             </PDFCtaButton>
           </div>

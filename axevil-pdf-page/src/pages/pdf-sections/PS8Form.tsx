@@ -75,7 +75,7 @@ export default function PS8Form() {
             <span style={{ color: '#404040' }}>7.0</span>
             <span style={{ color: '#848484' }}>PDF</span>
           </div>
-          <div className="flex flex-col gap-4 items-center text-center">
+          <div className="flex flex-col gap-4 items-center text-center" style={{ overflow: 'visible' }}>
             <h2
               className="font-inter-tight font-semibold text-transparent bg-clip-text"
               style={{

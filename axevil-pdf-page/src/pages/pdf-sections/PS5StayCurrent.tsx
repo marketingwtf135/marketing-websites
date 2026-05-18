@@ -30,7 +30,7 @@ const MOCKUP_STYLES: React.CSSProperties[] = [
     height: 'auto',
     objectFit: 'contain',
     pointerEvents: 'none',
-    transform: 'translateY(-2rem)',
+    transform: 'translateY(-0.5rem)',
   },
   {
     // Second card (bottom) — original position

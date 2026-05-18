@@ -59,6 +59,7 @@ export default function PS1Hero() {
             flexDirection: 'column',
             alignItems: 'center',
             gap: 'clamp(1rem, 2.5vw, 2rem)',
+            width: '100%',
           }}
         >
           {/* Badge + headline block */}
@@ -142,13 +143,13 @@ export default function PS1Hero() {
         <div
           style={{
             display: 'flex',
-            width: '100%',
-            maxWidth: 'none',
+            width: 'clamp(18rem, 28vw, 22rem)',
+            maxWidth: 'calc(100% - 2rem)',
             padding: '1.5rem',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            gap: '3rem',
+            gap: '1rem',
             background: '#111',
             borderRadius: '3rem',
             filter: 'drop-shadow(2rem 4rem 1.5rem rgba(0,0,0,0.8))',
