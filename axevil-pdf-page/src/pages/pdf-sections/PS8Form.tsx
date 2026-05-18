@@ -46,6 +46,8 @@ export default function PS8Form() {
         background: 'linear-gradient(0deg, #000 77.85%, #080808 100%)',
         minHeight: '100svh',
         paddingTop: 'clamp(5rem, 8vw, 7.5rem)',
+        paddingLeft: 'clamp(1rem, 5vw, 5rem)',
+        paddingRight: 'clamp(1rem, 5vw, 5rem)',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -58,11 +60,12 @@ export default function PS8Form() {
         style={{
           position: 'absolute',
           bottom: 0,
-          left: 0,
-          right: 0,
-          width: '100%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: 'max(100%, 37.5rem)',
           pointerEvents: 'none',
           opacity: 0.9,
+          zIndex: 0,
         }}
       />
 
@@ -71,6 +74,8 @@ export default function PS8Form() {
         style={{
           maxWidth: '1440px',
           margin: '0 auto',
+          position: 'relative',
+          zIndex: 1,
         }}
       >
         <motion.div

@@ -17,7 +17,7 @@ export default function PS3Preview() {
         ref={ref}
         className="mx-auto w-full max-w-[1440px] flex-responsive-col-reverse"
         style={{
-          padding: 'clamp(3.75rem, 6.5vw, 6.25rem) 0',
+          padding: 'clamp(3.75rem, 6.5vw, 6.25rem) clamp(1rem, 1.4vw, 1.25rem)',
           display: 'flex',
           alignItems: 'stretch',
           justifyContent: 'space-between',
@@ -76,6 +76,7 @@ export default function PS3Preview() {
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
           style={{
             flex: '1 1 0', minWidth: 0,
+            width: '100%',
             background: '#111',
             borderRadius: '2rem',
             padding: '2rem',

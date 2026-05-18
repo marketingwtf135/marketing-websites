@@ -17,9 +17,11 @@ export default function PS4Methodology() {
 
   return (
     <section
-      className="relative w-full padding-section-t12-b6"
+      className="relative w-full"
       style={{
         background: '#080808',
+        paddingTop: 'clamp(3.75rem, 8.5vw, 12.5rem)',
+        paddingBottom: 'clamp(3.75rem, 8.5vw, 12.5rem)',
       }}
     >
       <motion.div
@@ -124,36 +126,38 @@ export default function PS4Methodology() {
               flexDirection: 'column',
               justifyContent: 'space-between',
               height: '100%',
-              gap: '0.25rem',
               padding: '0.5rem 0',
             }}
           >
-            <p
-              style={{
-                fontFamily: 'Inter Tight, sans-serif',
-                fontSize: '1.25rem',
-                fontWeight: 500,
-                lineHeight: 1.3,
-                letterSpacing: '-0.02em',
-                color: '#ffffff',
-                margin: 0,
-              }}
-            >
-              Влад Соловьёв
-            </p>
-            <p
-              style={{
-                fontFamily: 'Inter Tight, sans-serif',
-                fontSize: '1rem',
-                fontWeight: 500,
-                lineHeight: 1.3,
-                letterSpacing: '-0.02em',
-                color: '#bcbcbc',
-                margin: 0,
-              }}
-            >
-              Senior Investment Analyst
-            </p>
+            {/* Name + role group */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+              <p
+                style={{
+                  fontFamily: 'Inter Tight, sans-serif',
+                  fontSize: '1.25rem',
+                  fontWeight: 500,
+                  lineHeight: 1.3,
+                  letterSpacing: '-0.02em',
+                  color: '#ffffff',
+                  margin: 0,
+                }}
+              >
+                Влад Соловьёв
+              </p>
+              <p
+                style={{
+                  fontFamily: 'Inter Tight, sans-serif',
+                  fontSize: '1rem',
+                  fontWeight: 500,
+                  lineHeight: 1.3,
+                  letterSpacing: '-0.02em',
+                  color: '#bcbcbc',
+                  margin: 0,
+                }}
+              >
+                Senior Investment Analyst
+              </p>
+            </div>
             {/* Status row */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
               <span

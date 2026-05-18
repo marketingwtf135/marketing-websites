@@ -22,20 +22,22 @@ const CARDS = [
 
 const MOCKUP_STYLES: React.CSSProperties[] = [
   {
+    // Left card (Pre-IPO Insider Q1 2026)
     position: 'absolute',
-    right: '-2.5rem',
-    bottom: '-4.75rem',
-    width: '23.0625rem',
-    height: '25rem',
+    right: 0,
+    bottom: '-4.5625rem',   // -73px
+    width: '23.0625rem',    // 369px — keep desktop width
+    height: '25rem',        // keep
     objectFit: 'contain',
     pointerEvents: 'none',
   },
   {
+    // Right card (Еженедельный дайджест)
     position: 'absolute',
-    right: '-4.3125rem',
-    bottom: '-2.625rem',
-    width: '29.125rem',
-    height: '20.875rem',
+    right: '-3.125rem',     // -50px
+    bottom: '-1.5rem',      // -24px
+    width: '29.125rem',     // keep
+    height: '20.875rem',    // keep
     objectFit: 'contain',
     pointerEvents: 'none',
   },

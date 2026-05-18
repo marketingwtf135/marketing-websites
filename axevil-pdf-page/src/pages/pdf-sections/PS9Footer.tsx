@@ -18,8 +18,8 @@ export default function PS9Footer() {
           <img
             src="/img/footer-logo.svg"
             alt="AXEVIL Capital"
-            className="absolute block inset-0 max-w-none size-full"
-            style={{ objectFit: 'contain', objectPosition: 'left' }}
+            className="absolute block inset-0 max-w-none"
+            style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'left' }}
             onError={e => { (e.currentTarget as HTMLImageElement).src = '/img/logo.svg' }}
           />
         </div>

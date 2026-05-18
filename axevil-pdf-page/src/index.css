@@ -359,3 +359,12 @@ body {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+
+@media (max-width: 640px) {
+  /* All secondary/desc paragraphs at 14px on mobile */
+  section .font-inter-tight[style*="bcbcbc"],
+  section .font-inter-tight[style*="0.55"],
+  section .font-inter-tight[style*="9b9b9b"] {
+    font-size: 0.875rem !important;
+  }
+}
