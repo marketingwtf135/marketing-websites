@@ -59,6 +59,7 @@ export default function PS1Hero() {
             flexDirection: 'column',
             alignItems: 'center',
             gap: 'clamp(1rem, 2.5vw, 2rem)',
+            width: '100%',
           }}
         >
           {/* Badge + headline block */}
@@ -140,10 +141,10 @@ export default function PS1Hero() {
 
         {/* Preview card — natural flex child pushed to bottom by space-between */}
         <div
+          className="w-full lg:w-[32.5rem]"
           style={{
             display: 'flex',
-            width: 'clamp(18rem, 28vw, 32.5rem)',   /* 520px desktop */
-            maxWidth: 'calc(100% - 2rem)',
+            maxWidth: '100%',
             padding: '1.5rem',
             flexDirection: 'column',
             justifyContent: 'center',
