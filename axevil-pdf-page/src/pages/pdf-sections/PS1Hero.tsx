@@ -153,17 +153,19 @@ export default function PS1Hero() {
             borderRadius: '3rem',
             filter: 'drop-shadow(2rem 4rem 1.5rem rgba(0,0,0,0.8))',
             marginBottom: '2.5rem',
+            overflow: 'visible',
           }}
         >
-          {/* Image container — overflow visible so 3D book bleeds above card */}
+          {/* Image — centered, fit content, no stretch */}
           <div
             style={{
               width: 'clamp(5rem, 9.1875vw, 9.1875rem)',
               height: 'clamp(5.4375rem, 9.9375vw, 9.9375rem)',
-              position: 'relative',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               overflow: 'visible',
               flexShrink: 0,
-              boxShadow: '1rem 3rem 4rem 0 rgba(0,0,0,0.9)',
             }}
             aria-hidden="true"
           >
@@ -171,11 +173,11 @@ export default function PS1Hero() {
               src="/img/image-left-card-hero.png"
               alt=""
               style={{
-                position: 'absolute',
-                width: '197.54%',
-                height: '136.43%',
-                left: '-49.66%',
-                top: '-18.22%',
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                objectPosition: 'center',
+                filter: 'drop-shadow(1rem 3rem 4rem rgba(0,0,0,0.9))',
               }}
             />
           </div>
