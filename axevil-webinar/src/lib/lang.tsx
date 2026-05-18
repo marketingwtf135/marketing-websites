@@ -148,10 +148,10 @@ export const translations = {
       label: '3.0 Зачем идти', heading: 'Что вы узнаете',
       cta: 'Занять место',
       cards: [
-        { metric: '$13T → $20T', metricSub: 'AUM 2025 → 2030F · Preqin', title: 'Как развиваются private markets в 2026', body: 'Что реально происходит на рынке — и что ожидать wealth managers до конца года.' },
-        { metric: '89%', metricSub: 'WM узнают о private сделках из СМИ · Опрос Axevil, 2026', title: 'Доступ к private markets', body: 'На что смотреть при входе в сделку, и как конкуренция за лучшие компании меняет правила.' },
-        { metric: '2,4–3,1×', metricSub: 'Late-stage venture TVPI · vintage 2018–2020 · Pitchbook NVCA', title: 'Секторы со скрытой альфой — AI, fintech, deep tech', body: 'Где реальные возможности в этом году, и какие сегменты перегреты или переоценены.' },
-        { metric: '2×', metricSub: 'Рост объёма secondary 2020 → 2024 · Jefferies', title: 'Как secondary рынки делают private компании ликвидными.', body: 'Почему secondary переписывают картину ликвидности — с реальными кейсами из портфеля Axevil Capital.' },
+        { metric: '$13T → $20T', metricSub: 'AUM 2025 → 2030F · Preqin', title: 'Динамика развития рынка частных компаний', body: 'Что происходит на рынке, что ожидать до конца 2026 года и как рынок будет развиваться на горизонте следующих 5 лет.' },
+        { metric: '89%', metricSub: 'управляющих капиталом не следят за рынком частных компаний', title: 'Системная работа с private markets', body: 'Конкуренция за топ-компании растёт. Как управляющему капиталом обеспечить доступ к лучшим технологическим компаниям.' },
+        { metric: '2,4–3,1×', metricSub: 'Late-stage venture TVPI · vintage 2018–2020 · Pitchbook NVCA', title: 'Главные инновации на рынке частных компаний — AI, финтех, диптех', body: 'Где реальные возможности в этом году и какие сегменты перегреты или переоценены.' },
+        { metric: '2×', metricSub: 'Рост объёма secondary 2020 → 2025 · Jefferies', title: 'Как secondary рынки делают компании ликвидными', body: 'Почему secondary переписывают картину ликвидности — с реальными кейсами из портфеля Axevil Capital.' },
       ],
     },
     whatCover: {
