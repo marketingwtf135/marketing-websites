@@ -6,7 +6,7 @@ export default function PS3Preview() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, amount: 0.1 })
   return (
-    <section id="preview" className="relative w-full padding-section-t6-b6" style={{ background: '#060606' }}>
+    <section id="preview" className="relative w-full" style={{ background: '#060606', paddingTop: 'clamp(3.75rem, 6.5vw, 6.25rem)', paddingBottom: 'clamp(3.75rem, 6.5vw, 6.25rem)' }}>
       <div ref={ref} className="nl-wrapper flex-responsive-col-reverse" style={{
         display: 'flex',
         gap: 'clamp(2rem, 4vw, 4rem)',
@@ -28,7 +28,7 @@ export default function PS3Preview() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <h2 style={{
               fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
-              fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
+              fontSize: 'clamp(2.25rem, 3.5vw, 4rem)',
               lineHeight: 1, letterSpacing: '-0.02em',
               color: 'transparent',
               background: 'linear-gradient(112.5deg, rgb(162,162,162) 4.26%, rgb(255,255,255) 40.2%, rgb(162,162,162) 76.15%)',
@@ -54,7 +54,7 @@ export default function PS3Preview() {
             borderRadius: '2rem',
             position: 'relative',
             display: 'flex', flexDirection: 'column',
-            minHeight: 'clamp(28rem, 45vw, 56.25rem)',
+            minHeight: 'clamp(26rem, 45vw, 56.25rem)',
             overflow: 'hidden',
           }}
         >

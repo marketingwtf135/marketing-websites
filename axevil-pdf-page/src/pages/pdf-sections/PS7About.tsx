@@ -9,7 +9,8 @@ export default function PS7About() {
   return (
     <section
       id="about"
-      className="relative w-full bg-page-bg padding-section-t6-b6 padding-global"
+      className="relative w-full bg-page-bg padding-global"
+      style={{ paddingTop: 'clamp(3.75rem, 6.5vw, 6.25rem)', paddingBottom: 'clamp(3.75rem, 6.5vw, 6.25rem)' }}
     >
       <div
         className="about-inner-padding mx-auto w-full max-w-[1440px] flex flex-col items-center overflow-visible"

@@ -23,21 +23,19 @@ const CARDS = [
 const MOCKUP_STYLES: React.CSSProperties[] = [
   {
     position: 'absolute',
-    right: '-40px',
-    bottom: '-108px',
-    width: '369px',
-    height: '400px',
-    aspectRatio: '119/129',
+    right: 'clamp(-0.0625rem, -2.8vw, -2.5rem)',
+    bottom: 'clamp(-6.75rem, -7.5vw, -6.75rem)',
+    width: 'clamp(15.5rem, 25.6vw, 23.0625rem)',
+    height: 'auto',
     objectFit: 'contain',
     pointerEvents: 'none',
   },
   {
     position: 'absolute',
-    right: '-69px',
-    bottom: '-42px',
-    width: '466px',
-    height: '334px',
-    aspectRatio: '233/167',
+    right: 'clamp(-4.3125rem, -4.8vw, -4.3125rem)',
+    bottom: 'clamp(-2.625rem, -2.9vw, -2.625rem)',
+    width: 'clamp(19.125rem, 32.4vw, 29.125rem)',
+    height: 'auto',
     objectFit: 'contain',
     pointerEvents: 'none',
   },
@@ -47,7 +45,7 @@ export default function PS5StayCurrent() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, amount: 0.1 })
   return (
-    <section id="stay-current" className="relative w-full padding-section-t6-b6" style={{ background: '#080808' }}>
+    <section id="stay-current" className="relative w-full" style={{ background: '#080808', paddingTop: 'clamp(3.75rem, 6.5vw, 6.25rem)', paddingBottom: 'clamp(3.75rem, 6.5vw, 6.25rem)' }}>
       <div className="nl-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
 
         {/* Heading */}
@@ -58,7 +56,7 @@ export default function PS5StayCurrent() {
           </div>
           <h2 style={{
             fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
-            fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
+            fontSize: 'clamp(2.25rem, 3.5vw, 4rem)',
             lineHeight: 1, letterSpacing: '-0.02em',
             color: 'transparent',
             background: 'linear-gradient(127.9deg, rgb(162,162,162) 15.77%, rgb(255,255,255) 49.29%, rgb(162,162,162) 82.81%)',
@@ -93,12 +91,12 @@ export default function PS5StayCurrent() {
                 border: '1px solid #151515', borderRadius: '1.5rem',
                 overflow: 'clip', position: 'relative',
                 display: 'flex', flexDirection: 'column',
-                minHeight: 'clamp(24rem, 37.5vw, 33.75rem)',
+                minHeight: 'clamp(25rem, 37.5vw, 33.75rem)',
               }}
             >
               {/* Content top */}
               <div style={{ padding: 'clamp(1.25rem, 2vw, 2rem)', display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
-                <h3 style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: 'clamp(1.25rem, 2vw, 2.25rem)', lineHeight: 1.1, letterSpacing: 0, color: 'white', margin: 0 }}>
+                <h3 style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: 'clamp(1.5rem, 2vw, 2.25rem)', lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0 }}>
                   {card.title}
                 </h3>
                 <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: 'clamp(0.875rem, 1.2vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc', maxWidth: '24rem', margin: 0 }}>
@@ -124,7 +122,7 @@ export default function PS5StayCurrent() {
                   zIndex: 1,
                 }}>
                   <img src={card.badgeIcon} alt="" style={{ width: '1.5rem', height: '1.5rem', flexShrink: 0 }} aria-hidden="true" />
-                  <span style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: 'clamp(0.875rem, 1.3vw, 1.25rem)', lineHeight: 1.3, letterSpacing: '-0.025em', color: 'white', whiteSpace: 'nowrap' }}>
+                  <span style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: 'clamp(0.75rem, 1.3vw, 1.25rem)', lineHeight: 1.3, letterSpacing: '-0.025em', color: 'white', whiteSpace: 'nowrap' }}>
                     {card.badgeText}
                   </span>
                 </div>

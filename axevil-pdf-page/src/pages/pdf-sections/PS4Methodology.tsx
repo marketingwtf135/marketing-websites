@@ -45,7 +45,7 @@ export default function PS4Methodology() {
           }}
         >
           {/* Eyebrow */}
-          <div className="eyebrow">
+          <div className="eyebrow" style={{ fontSize: 'clamp(1rem, 1.2vw, 1.125rem)' }}>
             <span className="eyebrow-num">3.0</span>
             <span className="eyebrow-text">Методология</span>
           </div>
@@ -54,7 +54,7 @@ export default function PS4Methodology() {
           <h2
             style={{
               fontFamily: 'Inter Tight, sans-serif',
-              fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
+              fontSize: 'clamp(2.25rem, 3.5vw, 4rem)',
               fontWeight: 600,
               lineHeight: 1,
               letterSpacing: '-0.02em',
@@ -192,7 +192,7 @@ export default function PS4Methodology() {
           <p
             style={{
               fontFamily: 'Inter Tight, sans-serif',
-              fontSize: '1.5rem',
+              fontSize: 'clamp(1.25rem, 1.7vw, 1.5rem)',
               fontWeight: 600,
               lineHeight: 1.1,
               letterSpacing: '-0.02em',

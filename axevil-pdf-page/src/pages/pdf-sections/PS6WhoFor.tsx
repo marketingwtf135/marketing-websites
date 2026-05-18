@@ -37,7 +37,7 @@ export default function PS6WhoFor() {
           </div>
           <h2 style={{
             fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
-            fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
+            fontSize: 'clamp(2.25rem, 3.5vw, 4rem)',
             lineHeight: 1, letterSpacing: '-0.02em', textAlign: 'center',
             color: 'transparent',
             background: 'linear-gradient(97.83deg, rgb(255,255,255) 0.18%, rgb(183,183,183) 98.82%)',
@@ -47,7 +47,7 @@ export default function PS6WhoFor() {
           }}>
             Аналитика для профессионалов финансового рынка
           </h2>
-          <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: 'clamp(1rem, 1.2vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc', maxWidth: '35rem', margin: 0 }}>
+          <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: 'clamp(0.875rem, 1.2vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc', maxWidth: '35rem', margin: 0 }}>
             Регулярно освещаем происходящее на рынке частных компаний, чтобы вы могли использовать эту информацию в своей работе.
           </p>
         </div>
@@ -75,10 +75,10 @@ export default function PS6WhoFor() {
               </div>
               {/* Text */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <h3 style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: 'clamp(1rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0 }}>
+                <h3 style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: 'clamp(1.25rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0 }}>
                   {card.title}
                 </h3>
-                <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: 'clamp(1rem, 1.2vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc', margin: 0 }}>
+                <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: 'clamp(0.875rem, 1.2vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc', margin: 0 }}>
                   {card.quote}
                 </p>
               </div>

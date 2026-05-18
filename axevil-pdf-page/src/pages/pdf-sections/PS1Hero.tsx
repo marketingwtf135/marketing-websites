@@ -97,7 +97,7 @@ export default function PS1Hero() {
                 style={{
                   fontFamily: 'Inter Tight, sans-serif',
                   fontWeight: 600,
-                  fontSize: 'clamp(2rem, 4.5vw, 4rem)',
+                  fontSize: 'clamp(2.25rem, 4.5vw, 4rem)',
                   lineHeight: 1,
                   letterSpacing: '-0.02em',
                   color: 'transparent',
@@ -119,7 +119,7 @@ export default function PS1Hero() {
                 style={{
                   fontFamily: 'Inter Tight, sans-serif',
                   fontWeight: 500,
-                  fontSize: 'clamp(0.9375rem, 1.2vw, 1.125rem)',
+                  fontSize: 'clamp(0.875rem, 1.2vw, 1.125rem)',
                   lineHeight: 1.35,
                   letterSpacing: '-0.02em',
                   color: '#9b9b9b',
@@ -144,12 +144,12 @@ export default function PS1Hero() {
             width: 'clamp(18rem, 28vw, 22rem)',
             maxWidth: 'calc(100% - 2rem)',
             background: '#111',
-            borderRadius: '3rem',
-            padding: '1.5rem',
+            borderRadius: 'clamp(1.5rem, 3.3vw, 3rem)',
+            padding: '1rem',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '1.5rem',
+            gap: '1rem',
             boxShadow: '0 4rem 6rem rgba(0,0,0,0.8)',
             marginBottom: '2.5rem',
           }}
@@ -157,9 +157,9 @@ export default function PS1Hero() {
           {/* Image */}
           <div
             style={{
-              width: '100%',
-              height: 'clamp(8rem, 12vw, 10rem)',
-              borderRadius: '1rem',
+              width: 'clamp(5rem, 9.1875vw, 9.1875rem)',
+              height: 'clamp(5.4375rem, 9.9375vw, 9.9375rem)',
+              borderRadius: '0.75rem',
               overflow: 'hidden',
               background: '#1a1a1a',
             }}
@@ -173,10 +173,10 @@ export default function PS1Hero() {
           </div>
           {/* Text */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', textAlign: 'center', width: '100%' }}>
-            <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0 }}>
+            <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: 'clamp(1.25rem, 2vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0 }}>
               Ключевые события рынка
             </p>
-            <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: '1rem', lineHeight: 1.35, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.55)', margin: 0 }}>
+            <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: 'clamp(0.875rem, 1.2vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.55)', margin: 0 }}>
               Axevil capital - квартальный брифинг инвест-команды
             </p>
           </div>

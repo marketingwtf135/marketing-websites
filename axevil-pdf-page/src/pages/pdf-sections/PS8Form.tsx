@@ -121,7 +121,7 @@ export default function PS8Form() {
               <p
                 className="font-inter-tight font-medium"
                 style={{
-                  fontSize: '1.125rem',
+                  fontSize: 'clamp(0.875rem, 1.2vw, 1.125rem)',
                   fontWeight: 500,
                   lineHeight: 1.35,
                   letterSpacing: '-0.02em',
@@ -270,7 +270,7 @@ export default function PS8Form() {
                     <span
                       className="font-inter-tight font-medium"
                       style={{
-                        fontSize: '0.75rem',
+                        fontSize: '0.625rem',
                         fontWeight: 500,
                         lineHeight: 1.3,
                         color: '#9b9b9b',
@@ -299,7 +299,7 @@ export default function PS8Form() {
                 <p
                   className="font-inter-tight font-medium text-center"
                   style={{
-                    fontSize: '0.75rem',
+                    fontSize: '0.625rem',
                     fontWeight: 500,
                     lineHeight: 1.3,
                     color: '#9b9b9b',

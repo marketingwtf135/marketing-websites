@@ -43,6 +43,17 @@
 }
 
 :root {
+  /* Mobile type scale (375px) */
+  --mob-h2: 2.25rem;        /* 36px SemiBold */
+  --mob-h4: 1.5rem;         /* 24px SemiBold */
+  --mob-h5: 1.25rem;        /* 20px SemiBold */
+  --mob-h6: 1.125rem;       /* 18px SemiBold */
+  --mob-text-L: 1rem;       /* 16px Medium */
+  --mob-paragraph: 0.875rem; /* 14px Medium */
+  --mob-text-S: 0.75rem;    /* 12px SemiBold */
+  --mob-text-XS: 0.625rem;  /* 10px Medium */
+  --mob-btn: 1rem;          /* 16px SemiBold, h 3.5rem */
+
   /* Figma color tokens as CSS variables for use in inline styles */
   --page-bg:         #080808;
   --nav-bg:          #0a0a0a;

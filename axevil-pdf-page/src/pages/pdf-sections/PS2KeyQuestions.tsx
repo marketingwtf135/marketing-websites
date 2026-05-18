@@ -27,10 +27,10 @@ export default function PS2KeyQuestions() {
   const inView = useInView(ref, { once: true, amount: 0.1 })
   return (
     <section id="key-questions" className="relative w-full bg-page-bg">
-      <div className="pt-section-y mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-0 pb-[3.75rem] sm:pb-[5rem] lg:pt-[12.5rem] lg:pb-[6.25rem]">
+      <div className="mx-auto w-full max-w-[1440px] px-4 sm:px-8 lg:px-0 py-[3.75rem] sm:py-[5rem] lg:pt-[12.5rem] lg:pb-[6.25rem]">
 
         {/* Heading with inner desktop padding */}
-        <div className="flex flex-col gap-6 items-center mb-10 sm:mb-12 lg:px-[80px]">
+        <div className="flex flex-col gap-6 items-center mb-8 sm:mb-10 lg:px-[80px]">
           <div className="eyebrow">
             <span className="eyebrow-num">1.0</span>
             <span className="eyebrow-text">Ключевые вопросы</span>
@@ -45,25 +45,25 @@ export default function PS2KeyQuestions() {
         </div>
 
         {/* Cards — stacked mobile, row sm+ */}
-        <div ref={ref} className="flex flex-col sm:flex-row gap-4 items-start overflow-hidden w-full">
+        <div ref={ref} className="flex flex-col sm:flex-row gap-4 items-stretch overflow-hidden w-full">
           {CARDS.map((card, i) => (
             <motion.div
               key={card.num}
               initial={{ opacity: 0, y: '1.5rem' }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.1 }}
-              className="flex flex-col items-center overflow-hidden rounded-[24px] flex-1 min-w-0"
-              style={{ background: '#111111', height: 'clamp(320px, 31.25vw, 450px)', paddingTop: 24, paddingBottom: 24, paddingLeft: 24, paddingRight: 24, gap: 48 }}
+              className="flex flex-col items-center overflow-hidden rounded-[1.5rem] flex-1 min-w-0"
+              style={{ background: '#111111', padding: '1rem', gap: '2rem' }}
             >
               <p className="font-inter-tight font-medium text-center whitespace-nowrap shrink-0 w-full"
-                style={{ fontSize: 18, lineHeight: 1.35, letterSpacing: '-0.36px', color: '#303030', margin: 0 }}>
+                style={{ fontSize: '1.125rem', lineHeight: 1.35, letterSpacing: '-0.02em', color: '#303030', margin: 0 }}>
                 {card.num}
               </p>
               <img src={card.icon} alt="" loading="lazy" className="shrink-0 block"
-                style={{ width: 'clamp(88px, 8.3vw, 120px)', height: 'clamp(88px, 8.3vw, 120px)', objectFit: 'contain' }} />
-              <div className="flex flex-col items-center justify-center flex-1 min-h-0 w-full gap-4">
+                style={{ width: 'clamp(5.5rem, 8.3vw, 7.5rem)', height: 'clamp(5.5rem, 8.3vw, 7.5rem)', objectFit: 'contain' }} />
+              <div className="flex flex-col items-center justify-center w-full gap-2 text-center">
                 <h3 className="font-inter-tight font-semibold text-white text-center w-full"
-                  style={{ fontSize: 'clamp(1rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', margin: 0 }}>
+                  style={{ fontSize: 'clamp(1.25rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', margin: 0 }}>
                   {card.title}
                 </h3>
                 <p className="font-inter-tight font-medium text-center w-full"
