@@ -11,7 +11,7 @@ export const translations = {
     },
     // Hero
     hero: {
-      badge: 'June 4, 2026 · 11:00 CET · Zoom · 60 minutes',
+      badge: 'June 4, 2026 · 19:00 MSK / 18:00 CEST · Zoom · 60 minutes',
       heading: 'How to add private markets to your HNWI portfolios',
       sub: 'A closed-door session for private banking managers, family offices and independent capital advisors',
       cta: 'Register for webinar',
@@ -118,7 +118,7 @@ export const translations = {
       speaker: 'Спикер', schedule: 'Расписание', reserve: 'Записаться',
     },
     hero: {
-      badge: '4 июня 2026 · 11:00 CET · Zoom · 60 минут',
+      badge: '4 июня 2026 · 19:00 МСК / 18:00 CEST · Zoom · 60 минут',
       heading: 'Как добавить private markets в портфели HNWI-клиентов',
       sub: 'Закрытая сессия для private banking менеджеров, family offices и независимых советников',
       cta: 'Зарегистрироваться',
