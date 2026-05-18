@@ -109,7 +109,7 @@ export default function PS1Hero() {
                   WebkitBackgroundClip: 'text',
                   backgroundClip: 'text',
                   width: '100%',
-                  maxWidth: 'none',
+                  maxWidth: '37.5rem',
                   textAlign: 'center',
                   margin: 0,
                 }}
@@ -128,7 +128,7 @@ export default function PS1Hero() {
                   letterSpacing: '-0.02em',
                   color: '#9b9b9b',
                   width: '100%',
-                  maxWidth: 'none',
+                  maxWidth: '37.5rem',
                   textAlign: 'center',
                   margin: 0,
                 }}
