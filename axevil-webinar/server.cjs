@@ -4,7 +4,7 @@ const http = require('http')
 
 const PORT = parseInt(process.env.PORT || '4173')
 const DIST = path.join(__dirname, 'dist')
-const WEBINAR_PATH = '/webinar/2026-06-05'
+const WEBINAR_PATH = '/webinar/2026-06-04'
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',

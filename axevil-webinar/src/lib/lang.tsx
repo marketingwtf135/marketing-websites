@@ -11,9 +11,9 @@ export const translations = {
     },
     // Hero
     hero: {
-      badge: 'June 5, 2026 · 11:00 CET · Zoom · 60 minutes',
-      heading: 'How to add private markets to your HNWI portfolios.',
-      sub: 'A closed-door session for private banking managers, family offices and independent capital advisors.',
+      badge: 'June 4, 2026 · 11:00 CET · Zoom · 60 minutes',
+      heading: 'How to add private markets to your HNWI portfolios',
+      sub: 'A closed-door session for private banking managers, family offices and independent capital advisors',
       cta: 'Register for webinar',
       stats: '$150M AUM · 1,000+ investors · 33 portfolio companies',
     },
@@ -118,9 +118,9 @@ export const translations = {
       speaker: 'Спикер', schedule: 'Расписание', reserve: 'Записаться',
     },
     hero: {
-      badge: '5 июня 2026 · 11:00 CET · Zoom · 60 минут',
-      heading: 'Как добавить private markets в портфели HNWI-клиентов.',
-      sub: 'Закрытая сессия для private banking менеджеров, family offices и независимых советников.',
+      badge: '4 июня 2026 · 11:00 CET · Zoom · 60 минут',
+      heading: 'Как добавить private markets в портфели HNWI-клиентов',
+      sub: 'Закрытая сессия для private banking менеджеров, family offices и независимых советников',
       cta: 'Зарегистрироваться',
       stats: '$150M AUM · 1,000+ инвесторов · 33 портфельные компании',
     },
