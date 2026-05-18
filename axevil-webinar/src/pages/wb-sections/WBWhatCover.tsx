@@ -77,10 +77,10 @@ export default function WBWhatCover() {
             ))}
           </div>
 
-          {/* Row 2: remaining items — paragraph max-width 50% */}
+          {/* Row 2: remaining items — paragraph fills container */}
           <div className="flex flex-col sm:flex-row gap-[1rem]">
             {row2.map(item => (
-              <AgendaCard key={item.n} n={item.n} body={item.body} />
+              <AgendaCard key={item.n} n={item.n} body={item.body} bodyFill />
             ))}
           </div>
         </div>

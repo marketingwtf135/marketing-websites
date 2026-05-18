@@ -63,7 +63,7 @@ export const translations = {
     },
     // Speaker
     speaker: {
-      label: '6.0 About Speaker', heading: 'Speaker',
+      label: '5.0 About Speaker', heading: 'Speaker',
       name: 'Taras Chumachenko',
       role: 'Co-founder & Managing Partner, Axevil Capital',
       bio: '15+ years in finance and investing — from building teams and launching investment products to working with the world\'s largest technology companies.',
@@ -71,7 +71,7 @@ export const translations = {
     },
     // Schedule
     schedule: {
-      label: '5.0 Schedule', heading: 'Webinar schedule',
+      label: '6.0 Schedule', heading: 'Webinar schedule',
       rows: [
         { title: 'Context', desc: 'Why private markets grew by $7T in 5 years', time: '0:00 ~ 0:05' },
         { title: 'Portfolio architecture', desc: 'HNWI portfolio construction: what private allocation actually looks like at scale', time: '0:05 ~ 0:20' },
@@ -166,14 +166,14 @@ export const translations = {
       ],
     },
     speaker: {
-      label: '6.0 О спикере', heading: 'Спикер',
+      label: '5.0 О спикере', heading: 'Ведущий встречи',
       name: 'Тарас Чумаченко',
       role: 'Co-founder & Managing Partner, Axevil Capital',
       bio: 'Более 15 лет в финансах и инвестициях — от построения команд и создания инвестиционных продуктов до работы с крупнейшими технологическими компаниями мира.',
       quote: '«Рынок private equity — не игра для избранных, а инструмент, доступный частным инвесторам со сформированным капиталом.»',
     },
     schedule: {
-      label: '5.0 Расписание', heading: 'Расписание вебинара',
+      label: '6.0 Расписание', heading: 'Расписание вебинара',
       rows: [
         { title: 'Роль private markets в портфеле', desc: 'Балансировка, доходность и риски', time: '0:00 — 0:10' },
         { title: 'Ситуация на рынке', desc: 'Почему сейчас лучшее время для private markets', time: '0:10 — 0:20' },
