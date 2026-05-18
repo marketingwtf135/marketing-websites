@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type HTMLAttributes, type RefObject } from 'react'
+import { useEffect, useMemo, useRef, useState, type HTMLAttributes, type ReactNode, type RefObject } from 'react'
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { PhoneInput, defaultCountries, getActiveFormattingMask, getCountry, type CountryIso2, type PhoneInputRefType } from 'react-international-phone'
 import { isValidPhoneNumber, parsePhoneNumber } from 'libphonenumber-js'
@@ -528,10 +528,25 @@ export default function WBForm() {
         {isSuccessModalOpen && (
           <FormModal
             title={t.form.success.heading}
-            message={`${t.form.success.sub}\n\n${lang === 'ru' ? 'Подпишитесь на уведомления о старте вебинара в Telegram.' : 'Subscribe to webinar start reminders in Telegram.'}`}
+            body={
+              <div className="flex flex-col" style={{ gap: '1.25rem' }}>
+                <p className="font-inter-tight font-medium text-white/65 text-[15px] leading-[1.5] text-center">
+                  {t.form.success.bodyEmail}
+                </p>
+                <div className="h-px w-full bg-white/10" />
+                <div className="flex flex-col text-center" style={{ gap: '0.5rem' }}>
+                  <p className="font-inter-tight font-semibold text-white text-[16px] leading-[1.35] tracking-[-0.01em]">
+                    {t.form.success.highlight}
+                  </p>
+                  <p className="font-inter-tight font-medium text-white/65 text-[15px] leading-[1.5]">
+                    {t.form.success.bodyTelegram}
+                  </p>
+                </div>
+              </div>
+            }
             onClose={() => setIsSuccessModalOpen(false)}
-            closeLabel={lang === 'ru' ? 'Закрыть' : 'Close'}
-            actionLabel={lang === 'ru' ? 'Открыть Telegram-бота' : 'Open Telegram bot'}
+            closeLabel={t.form.success.close}
+            actionLabel={t.form.success.primary}
             actionHref={successTelegramLink}
           />
         )}
@@ -597,13 +612,15 @@ function FieldInput({
 function FormModal({
   title,
   message,
+  body,
   closeLabel,
   actionLabel,
   actionHref,
   onClose,
 }: {
   title: string
-  message: string
+  message?: string
+  body?: ReactNode
   closeLabel: string
   actionLabel?: string
   actionHref?: string
@@ -619,7 +636,7 @@ function FormModal({
     >
       <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]" />
       <motion.div
-        className="relative w-full max-w-[28rem] rounded-2xl p-6 sm:p-7"
+        className="relative w-full max-w-[30rem] rounded-2xl p-6 sm:p-8"
         style={{ background: '#1A1A1A', border: '1px solid rgba(255,255,255,0.1)' }}
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -627,41 +644,54 @@ function FormModal({
         transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
         onClick={e => e.stopPropagation()}
       >
-        <div className="flex flex-col gap-3 text-center">
-          <h3 className="font-inter-tight font-semibold text-white text-[22px]">{title}</h3>
-          <p className="font-inter-tight font-medium text-white/70 text-[15px] whitespace-pre-line">{message}</p>
-          {actionHref && actionLabel && (
-            <a
-              href={actionHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative mt-2 w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-[15px] text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-              style={{ height: 'clamp(3rem, 4vw, 3.75rem)' }}
-            >
-              <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: '#2b2b2b' }} />
-              {actionLabel}
-            </a>
+        <div className="flex flex-col" style={{ gap: '1.25rem' }}>
+          <h3
+            className="font-inter-tight font-semibold text-white text-center"
+            style={{ fontSize: 'clamp(1.375rem, 2.2vw, 1.625rem)', lineHeight: 1.15, letterSpacing: '-0.02em' }}
+          >
+            {title}
+          </h3>
+          {body ?? (
+            message && (
+              <p className="font-inter-tight font-medium text-white/70 text-[15px] whitespace-pre-line text-center leading-[1.5]">
+                {message}
+              </p>
+            )
           )}
-          {actionHref && actionLabel ? (
-            <button
-              type="button"
-              onClick={onClose}
-              className="relative mt-2 w-full flex items-center justify-center font-inter-tight font-semibold text-[15px] text-white/80 hover:text-white bg-transparent hover:bg-white/5 rounded-[14px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/40"
-              style={{ height: 'clamp(3rem, 4vw, 3.75rem)', border: '1px solid rgba(255,255,255,0.15)' }}
-            >
-              {closeLabel}
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={onClose}
-              className="relative mt-2 w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-[15px] text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-              style={{ height: 'clamp(3rem, 4vw, 3.75rem)' }}
-            >
-              <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: '#2b2b2b' }} />
-              {closeLabel}
-            </button>
-          )}
+          <div className="flex flex-col" style={{ gap: '0.5rem', marginTop: '0.25rem' }}>
+            {actionHref && actionLabel && (
+              <a
+                href={actionHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-[15px] text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                style={{ height: 'clamp(3rem, 4vw, 3.75rem)' }}
+              >
+                <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: '#2b2b2b' }} />
+                {actionLabel}
+              </a>
+            )}
+            {actionHref && actionLabel ? (
+              <button
+                type="button"
+                onClick={onClose}
+                className="relative w-full flex items-center justify-center font-inter-tight font-semibold text-[15px] text-white/80 hover:text-white bg-transparent hover:bg-white/5 rounded-[14px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/40"
+                style={{ height: 'clamp(3rem, 4vw, 3.75rem)', border: '1px solid rgba(255,255,255,0.15)' }}
+              >
+                {closeLabel}
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={onClose}
+                className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-[15px] text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                style={{ height: 'clamp(3rem, 4vw, 3.75rem)' }}
+              >
+                <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: '#2b2b2b' }} />
+                {closeLabel}
+              </button>
+            )}
+          </div>
         </div>
       </motion.div>
     </motion.div>

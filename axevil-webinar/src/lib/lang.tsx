@@ -86,7 +86,14 @@ export const translations = {
       fields: { email: 'Email', name: 'Name', position: 'Position', company: 'Company / Family Office', phone: 'Phone', contact: 'Contact me personally to discuss investment opportunities' },
       submit: 'Register',
       sending: 'Sending...',
-      success: { heading: "Thank you — we've received your details.", sub: 'One last step — complete your registration via Telegram.' },
+      success: {
+        heading: "Thank you — you're registered for the event.",
+        bodyEmail: "Confirmation with the Zoom link and a calendar invite has been sent to your inbox.",
+        highlight: "Don't miss future Axevil Capital events.",
+        bodyTelegram: 'Extra session materials, reminders and announcements about upcoming events — in our Telegram bot. Join us.',
+        primary: 'Open Telegram bot',
+        close: 'Close',
+      },
       disclaimer: "By registering you agree to receive the recording and related Axevil Capital communications. Unsubscribe anytime.",
     },
     // Footer
@@ -179,7 +186,14 @@ export const translations = {
       fields: { email: 'Email', name: 'Имя', position: 'Должность', company: 'Компания / Family Office', phone: 'Телефон', contact: 'Свяжитесь лично для обсуждения инвестиционных возможностей' },
       submit: 'Зарегистрироваться',
       sending: 'Отправка...',
-      success: { heading: 'Спасибо — мы получили ваши данные.', sub: 'Остался последний шаг — завершите регистрацию через Telegram.' },
+      success: {
+        heading: 'Спасибо — вы зарегистрированы на встречу.',
+        bodyEmail: 'Подтверждение со ссылкой на Zoom и приглашением в календарь уже отправили на вашу почту.',
+        highlight: 'Не пропустите мероприятия Axevil Capital.',
+        bodyTelegram: 'Дополнительные материалы по встрече, напоминания и анонсы новых мероприятий — в нашем Telegram-боте. Переходите.',
+        primary: 'Перейти в Telegram-бота',
+        close: 'Закрыть',
+      },
       disclaimer: 'Регистрируясь, вы соглашаетесь получать запись вебинара и материалы Axevil Capital. Отписаться можно в любой момент.',
     },
     footer: {
