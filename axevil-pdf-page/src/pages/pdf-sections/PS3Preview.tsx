@@ -26,7 +26,7 @@ export default function PS3Preview() {
           style={{
             flex: '1 1 0', minWidth: 0,
             display: 'flex', flexDirection: 'column',
-            justifyContent: 'space-between',
+            gap: '1.5rem',
             height: '100%',
           }}
         >
