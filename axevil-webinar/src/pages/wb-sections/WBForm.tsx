@@ -46,7 +46,7 @@ const I18N = {
 
 const FORM_API_ENDPOINT = 'https://api.axevil.io/api/spreadsheet-form-writer/form-private-markets-webinar'
 const TELEGRAM_BOT_BASE_URL = 'https://t.me/axevil_events_bot'
-const TELEGRAM_START_PREFIX = 'mkt_webl_'
+const TELEGRAM_START_PREFIX = 'web_webl_'
 const IP_GEO_ENDPOINT = 'https://speed.cloudflare.com/meta'
 const IP_GEO_TIMEOUT_MS = 3000
 const IP_GEO_CACHE_KEY = 'axevil:webinar:geo-country:v1'
