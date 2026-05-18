@@ -24,43 +24,48 @@ export default function PS3Preview() {
           gap: 'clamp(2rem, 4vw, 4rem)',
         }}
       >
-        {/* LEFT: text — full divblock, gap auto, 100% height */}
+        {/* LEFT: animation wrapper */}
         <motion.div
           initial={{ opacity: 0, x: '-1.5rem' }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.5, ease: 'easeOut' }}
-          style={{
-            flex: '1 1 0', minWidth: 0,
-            display: 'flex', flexDirection: 'column',
-            justifyContent: 'space-between',  /* gap auto */
-            height: '100%',
-          }}
+          style={{ flex: '1 1 0', minWidth: 0, alignSelf: 'stretch' }}
         >
-          {/* Eyebrow at top */}
-          <div className="eyebrow">
-            <span className="eyebrow-num">2.0</span>
-            <span className="eyebrow-text">Образец</span>
-          </div>
-          {/* Heading block: H2 first, then desc */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <h2 style={{
-              fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
-              fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
-              lineHeight: 1, letterSpacing: '-0.02em', margin: 0,
-              color: 'transparent',
-              background: 'linear-gradient(112.5deg, rgb(162,162,162) 4.26%, rgb(255,255,255) 40.2%, rgb(162,162,162) 76.15%)',
-              WebkitBackgroundClip: 'text', backgroundClip: 'text',
-            }}>
-              Частный рынок vs Nasdaq за 2025 год
-            </h2>
-            <p style={{
-              fontFamily: 'Inter Tight, sans-serif', fontWeight: 500,
-              fontSize: 'clamp(1rem, 1.2vw, 1.125rem)',
-              lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc',
-              maxWidth: '36.25rem', margin: 0,
-            }}>
-              Динамика индекса топ-20 частных компаний по сравнению с NASDAQ на фоне торговых войн и конфликта Трампа с главой ФРС.
-            </p>
+          {/* Общий контейнер — eyebrow top, heading bottom */}
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            width: '100%',
+            height: '100%',
+          }}>
+            {/* Eyebrow */}
+            <div className="eyebrow">
+              <span className="eyebrow-num">2.0</span>
+              <span className="eyebrow-text">Образец</span>
+            </div>
+            {/* Heading block: H2 + desc */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'flex-start', width: '100%' }}>
+              <h2 style={{
+                fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
+                fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
+                lineHeight: 1, letterSpacing: '-0.02em', margin: 0,
+                color: 'transparent',
+                background: 'linear-gradient(112.5deg, rgb(162,162,162) 4.26%, rgb(255,255,255) 40.2%, rgb(162,162,162) 76.15%)',
+                WebkitBackgroundClip: 'text', backgroundClip: 'text',
+              }}>
+                Частный рынок vs Nasdaq за 2025 год
+              </h2>
+              <p style={{
+                fontFamily: 'Inter Tight, sans-serif', fontWeight: 500,
+                fontSize: 'clamp(1rem, 1.2vw, 1.125rem)',
+                lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc',
+                maxWidth: '36.25rem', margin: 0,
+              }}>
+                Динамика индекса топ-20 частных компаний по сравнению с NASDAQ на фоне торговых войн и конфликта Трампа с главой ФРС.
+              </p>
+            </div>
           </div>
         </motion.div>
 
