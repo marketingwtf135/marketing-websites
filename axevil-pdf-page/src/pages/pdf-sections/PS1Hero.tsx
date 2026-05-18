@@ -58,7 +58,7 @@ export default function PS1Hero() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: 'clamp(1rem, 2.5vw, 2rem)',
+            gap: '2rem',
             width: '100%',
           }}
         >
@@ -92,7 +92,7 @@ export default function PS1Hero() {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                gap: '1.5rem',
+                gap: '1rem',
                 width: '100%',
               }}
             >
