@@ -83,7 +83,7 @@ export const translations = {
     form: {
       label: '7.0 Registration', heading: 'Register for the webinar',
       sub: "Leave your details — we'll send registration confirmation and a calendar link.",
-      fields: { email: 'Email *', name: 'Name *', position: 'Position', company: 'Company / Family Office', phone: 'Phone *', contact: 'Contact me personally to discuss investment opportunities' },
+      fields: { email: 'Email *', name: 'Name *', position: 'Position', company: 'Company / Family Office', phone: 'Phone', contact: 'Contact me personally to discuss investment opportunities' },
       submit: 'Register',
       sending: 'Sending...',
       success: { heading: "Thank you — we've received your details.", sub: 'One last step — complete your registration via Telegram.' },
@@ -91,7 +91,17 @@ export const translations = {
     },
     // Footer
     footer: {
-      links: ['Privacy', 'Terms', 'Cookie policy', 'Contacts'],
+      entity: 'Axevil Capital',
+      contactLabel: 'Contact',
+      contactEmail: 'hello@axevil.io',
+      links: [
+        { label: 'Privacy Policy', href: '/legal/en/privacy.html' },
+        { label: 'Cookie Policy', href: '/legal/en/cookies.html' },
+        { label: 'Terms of Use', href: '/legal/en/terms.html' },
+        { label: 'Contact', href: 'mailto:hello@axevil.io' },
+      ],
+      disclaimer:
+        'For professional investors, wealth managers, family offices and qualified investors only. Information on this site and in the webinar is provided for general informational and educational purposes only and does not constitute investment, legal, tax or other professional advice, an offer or a solicitation to buy or sell any security or fund interest. Private market investments are illiquid, long-term and high-risk; past performance is not indicative of future results.',
       copy: '© 2026 Axevil Capital. All rights reserved.',
     },
   },
@@ -166,14 +176,24 @@ export const translations = {
     form: {
       label: '7.0 Регистрация', heading: 'Зарегистрироваться на вебинар',
       sub: 'Оставьте данные — пришлём подтверждение и ссылку в календарь.',
-      fields: { email: 'Email *', name: 'Имя *', position: 'Должность', company: 'Компания / Family Office', phone: 'Телефон *', contact: 'Свяжитесь лично для обсуждения инвестиционных возможностей' },
+      fields: { email: 'Email *', name: 'Имя *', position: 'Должность', company: 'Компания / Family Office', phone: 'Телефон', contact: 'Свяжитесь лично для обсуждения инвестиционных возможностей' },
       submit: 'Зарегистрироваться',
       sending: 'Отправка...',
       success: { heading: 'Спасибо — мы получили ваши данные.', sub: 'Остался последний шаг — завершите регистрацию через Telegram.' },
       disclaimer: 'Регистрируясь, вы соглашаетесь получать запись вебинара и материалы Axevil Capital. Отписаться можно в любой момент.',
     },
     footer: {
-      links: ['Конфиденциальность', 'Условия', 'Cookie политика', 'Контакты'],
+      entity: 'Axevil Capital',
+      contactLabel: 'Контакт',
+      contactEmail: 'hello@axevil.io',
+      links: [
+        { label: 'Конфиденциальность', href: '/legal/ru/privacy.html' },
+        { label: 'Политика cookie', href: '/legal/ru/cookies.html' },
+        { label: 'Условия использования', href: '/legal/ru/terms.html' },
+        { label: 'Контакты', href: 'mailto:hello@axevil.io' },
+      ],
+      disclaimer:
+        'Только для профессиональных инвесторов, wealth-менеджеров, family offices и квалифицированных инвесторов. Материалы Сайта и вебинара предоставлены в общих информационных и образовательных целях и не являются инвестиционным, юридическим, налоговым или иным профессиональным советом, офертой или приглашением совершить сделку с ценными бумагами или долями в фондах. Инвестиции в private markets неликвидны, носят долгосрочный характер и сопряжены с высокими рисками; прошлая доходность не гарантирует будущих результатов.',
       copy: '© 2026 Axevil Capital. Все права защищены.',
     },
   },
