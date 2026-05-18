@@ -83,7 +83,7 @@ export const translations = {
     form: {
       label: '7.0 Registration', heading: 'Register for the webinar',
       sub: "Leave your details — we'll send registration confirmation and a calendar link.",
-      fields: { email: 'Email *', name: 'Name *', position: 'Position', company: 'Company / Family Office', phone: 'Phone', contact: 'Contact me personally to discuss investment opportunities' },
+      fields: { email: 'Email', name: 'Name', position: 'Position', company: 'Company / Family Office', phone: 'Phone', contact: 'Contact me personally to discuss investment opportunities' },
       submit: 'Register',
       sending: 'Sending...',
       success: { heading: "Thank you — we've received your details.", sub: 'One last step — complete your registration via Telegram.' },
@@ -176,7 +176,7 @@ export const translations = {
     form: {
       label: '7.0 Регистрация', heading: 'Зарегистрироваться на вебинар',
       sub: 'Оставьте данные — пришлём подтверждение и ссылку в календарь.',
-      fields: { email: 'Email *', name: 'Имя *', position: 'Должность', company: 'Компания / Family Office', phone: 'Телефон', contact: 'Свяжитесь лично для обсуждения инвестиционных возможностей' },
+      fields: { email: 'Email', name: 'Имя', position: 'Должность', company: 'Компания / Family Office', phone: 'Телефон', contact: 'Свяжитесь лично для обсуждения инвестиционных возможностей' },
       submit: 'Зарегистрироваться',
       sending: 'Отправка...',
       success: { heading: 'Спасибо — мы получили ваши данные.', sub: 'Остался последний шаг — завершите регистрацию через Telegram.' },

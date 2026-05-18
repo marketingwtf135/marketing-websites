@@ -11,8 +11,6 @@ import 'react-international-phone/style.css'
 interface FormData {
   name: string
   email: string
-  company: string
-  role: string
   phone: string
   phoneCountry: CountryIso2
 }
@@ -40,8 +38,6 @@ const I18N = {
     invalidEmail: 'Invalid email',
     invalidPhone: 'Invalid phone number for selected country',
     submitError: 'Something went wrong. Please try again.',
-    phonePlaceholder: 'Phone number',
-    rolePlaceholder: 'Role',
     loadingAria: 'Submitting form',
   },
   ru: {
@@ -50,21 +46,9 @@ const I18N = {
     invalidEmail: 'Некорректный email',
     invalidPhone: 'Некорректный номер для выбранной страны',
     submitError: 'Не удалось отправить форму. Попробуйте еще раз.',
-    phonePlaceholder: 'Телефон',
-    rolePlaceholder: 'Роль',
     loadingAria: 'Отправка формы',
   },
 }
-
-const AMOCRM_WEBHOOK = 'https://your-amocrm-webhook-url.com/webinar'
-
-const ROLE_OPTIONS = [
-  'Wealth manager / RIA',
-  'Family office',
-  'Independent IFA / EAM',
-  'Private banker',
-  'Other',
-]
 
 const FORM_API_ENDPOINT = 'https://api.axevil.io/api/spreadsheet-form-writer/form-private-markets-webinar'
 const TELEGRAM_BOT_BASE_URL = 'https://t.me/axevil_events_bot'
@@ -81,8 +65,6 @@ export default function WBForm() {
   const [form, setForm] = useState<FormData>({
     name: '',
     email: '',
-    company: '',
-    role: '',
     phone: `+${defaultDialCode}`,
     phoneCountry: DEFAULT_COUNTRY,
   })
@@ -92,11 +74,9 @@ export default function WBForm() {
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
   const [successTelegramLink, setSuccessTelegramLink] = useState(TELEGRAM_BOT_BASE_URL)
   const [errorModalMessage, setErrorModalMessage] = useState('')
-  const [roleOpen, setRoleOpen] = useState(false)
   const [phoneFocused, setPhoneFocused] = useState(false)
   const hasStarted = useRef(false)
   const hasPhoneInteractionRef = useRef(false)
-  const roleRef = useRef<HTMLDivElement>(null)
   const phoneInputRef = useRef<PhoneInputRefType>(null)
   const submitLockRef = useRef(false)
   const sectionRef = useRef<HTMLElement>(null)
@@ -118,17 +98,6 @@ export default function WBForm() {
     )
     observer.observe(el)
     return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    function closeRoleOnOutsideClick(event: MouseEvent) {
-      if (!roleRef.current) return
-      if (event.target instanceof Node && !roleRef.current.contains(event.target)) {
-        setRoleOpen(false)
-      }
-    }
-    document.addEventListener('mousedown', closeRoleOnOutsideClick)
-    return () => document.removeEventListener('mousedown', closeRoleOnOutsideClick)
   }, [])
 
   function resolveSupportedCountry(iso2Maybe: string | undefined) {
@@ -268,7 +237,7 @@ export default function WBForm() {
       return EMAIL_REGEX.test(value) ? '' : ui.invalidEmail
     }
     if (field === 'phone') {
-      if (!value.trim() || !hasSubscriberDigits(value, nextForm.phoneCountry)) return ''
+      if (!value.trim() || !hasSubscriberDigits(value, nextForm.phoneCountry)) return ui.required
       return isValidPhoneNumber(value) ? '' : ui.invalidPhone
     }
     return ''
@@ -357,11 +326,11 @@ export default function WBForm() {
         email: form.email.trim(),
         phone: form.phone,
         phone_country: form.phoneCountry,
-        company: form.company.trim(),
-        role: form.role.trim(),
+        company: '',
+        role: '',
         telegram_username: '',
         'job title': '',
-        'lead profile (about)': form.role.trim(),
+        'lead profile (about)': '',
         page: 'webinar',
         ts: new Date().toISOString(),
         lead_event_id: leadId,
@@ -425,13 +394,10 @@ export default function WBForm() {
       setForm({
         name: '',
         email: '',
-        company: '',
-        role: '',
         phone: `+${resetDialCode}`,
         phoneCountry: resetPhoneCountry,
       })
       phoneInputRef.current?.setCountry(resetPhoneCountry, { focusOnInput: false })
-      setRoleOpen(false)
       setErrors({})
       setSubmitAttempted(false)
       setIsSuccessModalOpen(true)
@@ -532,12 +498,12 @@ export default function WBForm() {
                           className: 'wb-form-phone-country-dropdown',
                         },
                       }}
-                      placeholder={phoneFocused && !form.phone.trim() ? phoneMaskPlaceholder : ui.phonePlaceholder}
+                      placeholder={phoneFocused && !form.phone.trim() ? phoneMaskPlaceholder : t.form.fields.phone}
                       inputProps={{
                         name: 'phone',
                         autoComplete: 'tel',
                         inputMode: 'tel',
-                        enterKeyHint: 'next',
+                        enterKeyHint: 'send',
                         onFocus: () => setPhoneFocused(true),
                         onBlur: () => setPhoneFocused(false),
                         'aria-invalid': Boolean(errors.phone),
@@ -545,65 +511,6 @@ export default function WBForm() {
                       }}
                     />
                     {errors.phone && <p id="phone-error" className="font-inter-tight font-medium text-red-400 text-[12px] mt-1.5 ml-1">{errors.phone}</p>}
-                  </div>
-                  <FieldInput
-                    name="company"
-                    placeholder={t.form.fields.company}
-                    value={form.company}
-                    autoComplete="organization"
-                    enterKeyHint="next"
-                    onChange={v => updateField('company', v)}
-                  />
-
-                  <div ref={roleRef} className="relative">
-                    <button
-                      type="button"
-                      onClick={() => setRoleOpen(o => !o)}
-                      className="w-full flex items-center justify-between text-left font-inter-tight font-medium text-[15px] text-white placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35 transition-colors disabled:opacity-70"
-                      style={{
-                        height: 'clamp(3rem, 4vw, 3.75rem)',
-                        padding: '1.25rem 1rem',
-                        borderRadius: '1rem',
-                        background: '#1A1A1A',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                        color: form.role ? '#fff' : 'rgba(255,255,255,0.4)',
-                      }}
-                      aria-haspopup="listbox"
-                      aria-expanded={roleOpen}
-                    >
-                      {form.role || ui.rolePlaceholder}
-                      <svg
-                        width="16" height="16" viewBox="0 0 16 16" fill="none"
-                        aria-hidden="true"
-                        className={`transition-transform ${roleOpen ? 'rotate-180' : ''}`}
-                      >
-                        <path d="M3 6L8 11L13 6" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </button>
-                    <AnimatePresence>
-                      {roleOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: -6 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -6 }}
-                          transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-                          className="absolute left-0 right-0 top-full mt-2 z-10 rounded-[14px] overflow-hidden"
-                          style={{ background: '#1a1a1a', border: '1px solid rgba(255,255,255,0.08)' }}
-                          role="listbox"
-                        >
-                          {ROLE_OPTIONS.map(opt => (
-                            <button
-                              key={opt}
-                              type="button"
-                              onClick={() => { updateField('role', opt); setRoleOpen(false) }}
-                              className="w-full text-left px-4 py-3 font-inter-tight font-medium text-[14px] text-white/80 hover:bg-white/5 hover:text-white transition-colors"
-                            >
-                              {opt}
-                            </button>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
                   </div>
                 </div>
 
