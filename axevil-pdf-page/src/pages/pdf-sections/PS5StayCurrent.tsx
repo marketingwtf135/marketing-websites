@@ -23,9 +23,9 @@ const CARDS = [
 const MOCKUP_STYLES: React.CSSProperties[] = [
   {
     position: 'absolute',
-    right: 'clamp(-0.0625rem, -2.8vw, -2.5rem)',
-    bottom: 'clamp(-6.75rem, -7.5vw, -6.75rem)',
-    width: 'clamp(15.5rem, 25.6vw, 23.0625rem)',
+    right: '-2.5rem',
+    bottom: '-6.75rem',
+    width: 'clamp(14.25rem, 25.6vw, 23.0625rem)',
     height: 'auto',
     objectFit: 'contain',
     pointerEvents: 'none',

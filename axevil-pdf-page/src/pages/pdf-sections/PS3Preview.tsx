@@ -61,43 +61,43 @@ export default function PS3Preview() {
           {/* Dark overlay - zIndex 2, above bg image */}
           <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.3)', zIndex: 2, pointerEvents: 'none', borderRadius: '2rem' }} />
 
+          {/* Rock at bottom — absolute layer OVER everything */}
+          <img
+            src="/img/bg-image-rock.png"
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              width: '100%',
+              height: '50%',
+              objectFit: 'cover',
+              objectPosition: 'center top',
+              zIndex: 10,
+              pointerEvents: 'none',
+            }}
+          />
+
           {/* Top text inside card */}
-          <div style={{ padding: '2rem', paddingBottom: '1rem', position: 'relative', zIndex: 4 }}>
+          <div style={{ padding: '2rem', paddingBottom: '1rem', position: 'relative', zIndex: 2 }}>
             <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: 'clamp(0.9375rem, 1.3vw, 1.25rem)', lineHeight: 1.3, letterSpacing: '-0.02em', color: 'white', textAlign: 'center', margin: 0 }}>
               7 секторов с реальной динамикой вне AI, и IPO-пайплайн 2026: SpaceX, Databricks, Stripe, Revolut, Canva, Kraken, Discord, тренды 2026.
             </p>
           </div>
 
-          {/* Report screenshot + rock overlay */}
-          <div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 3 }}>
-            {/* Graph image — zIndex 1 */}
+          {/* Report image — z-index below rock */}
+          <div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 1 }}>
             <img
               src="/img/image-analyse.png"
               alt="Анализ частного рынка"
               style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block', position: 'relative', zIndex: 1 }}
             />
-            {/* Rock overlay — separate layer ABOVE graph image, zIndex 3 */}
-            <img
-              src="/img/bg-image-rock.png"
-              alt=""
-              aria-hidden="true"
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                width: '100%',
-                height: '55%',
-                objectFit: 'cover',
-                objectPosition: 'center top',
-                zIndex: 3,
-                pointerEvents: 'none',
-              }}
-            />
           </div>
 
-          {/* Bottom CTA */}
-          <div style={{ padding: 'clamp(1rem, 2vw, 1.5rem)', position: 'relative', zIndex: 4, display: 'flex', justifyContent: 'center' }}>
+          {/* Bottom CTA — z-index ABOVE rock */}
+          <div style={{ padding: 'clamp(1rem, 2vw, 1.5rem)', position: 'relative', zIndex: 11, display: 'flex', justifyContent: 'center' }}>
             <PDFCtaButton>
               Скачать полную версию PDF
             </PDFCtaButton>

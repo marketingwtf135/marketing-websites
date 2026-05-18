@@ -10,12 +10,7 @@ interface PDFCtaButtonProps {
 }
 
 export default function PDFCtaButton({
-  children,
-  className = '',
-  style,
-  type = 'button',
-  onClick,
-  scrollTo = 'pdf-form',
+  children, className = '', style, type = 'button', onClick, scrollTo = 'pdf-form',
 }: PDFCtaButtonProps) {
   function handleClick() {
     onClick?.()
@@ -28,11 +23,13 @@ export default function PDFCtaButton({
     <button
       type={type}
       onClick={handleClick}
-      className={`cta-button-glow relative flex items-center justify-center gap-2 font-inter-tight font-semibold shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white disabled:opacity-60 ${className}`}
+      className={`cta-button-glow relative flex items-center justify-center gap-2 font-inter-tight font-semibold shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white disabled:opacity-60 transition-all duration-300 ${className}`}
       style={{
         background: 'white',
+        borderTop: 'none',
+        borderLeft: 'none',
+        borderRight: 'none',
         borderBottom: '3px solid #b8b8b8',
-        border: 'none',
         height: 'clamp(3.5rem, 4.5vw, 4rem)',
         paddingLeft: '2rem',
         paddingRight: '2rem',
@@ -49,7 +46,6 @@ export default function PDFCtaButton({
         ...style,
       }}
     >
-      {/* Download icon */}
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
         <path d="M9 2v9M5.5 7.5L9 11l3.5-3.5" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M3 13.5h12" stroke="#202020" strokeWidth="1.5" strokeLinecap="round"/>

@@ -141,43 +141,32 @@ export default function PS1Hero() {
         {/* Preview card — natural flex child pushed to bottom by space-between */}
         <div
           style={{
-            width: 'clamp(18rem, 28vw, 22rem)',
+            display: 'flex',
+            width: 'clamp(20rem, 36vw, 32.5rem)',
             maxWidth: 'calc(100% - 2rem)',
+            padding: '1.5rem',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '3rem',
             background: '#111',
             borderRadius: 'clamp(1.5rem, 3.3vw, 3rem)',
-            padding: '1rem',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1rem',
             boxShadow: '0 4rem 6rem rgba(0,0,0,0.8)',
             marginBottom: '2.5rem',
           }}
         >
-          {/* Image — absolute positioned like Figma */}
+          {/* Image — CSS background per Figma */}
           <div
             style={{
               width: 'clamp(5rem, 9.1875vw, 9.1875rem)',
               height: 'clamp(5.4375rem, 9.9375vw, 9.9375rem)',
               borderRadius: '0.75rem',
-              overflow: 'visible',
-              position: 'relative',
+              flexShrink: 0,
+              background: "url('/img/image-left-card-hero.png') lightgray -4.5625rem -1.8103rem / 197.544% 136.432% no-repeat",
+              boxShadow: '1rem 3rem 4rem 0 rgba(0,0,0,0.9)',
             }}
-          >
-            <img
-              src="/img/image-left-card-hero.png"
-              alt=""
-              aria-hidden="true"
-              style={{
-                position: 'absolute',
-                right: '-2.5rem',
-                bottom: '-6.75rem',
-                width: 'clamp(5rem, 9.1875vw, 9.1875rem)',
-                height: 'clamp(5.4375rem, 9.9375vw, 9.9375rem)',
-                objectFit: 'contain',
-              }}
-            />
-          </div>
+            aria-hidden="true"
+          />
           {/* Text */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', textAlign: 'center', width: '100%' }}>
             <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: 'clamp(1.25rem, 2vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0 }}>
