@@ -15,12 +15,6 @@ interface FormData {
   phoneCountry: CountryIso2
 }
 
-declare global {
-  interface Window {
-    fbq?: (action: string, eventName: string, params?: Record<string, unknown>) => void
-  }
-}
-
 type FormField = keyof FormData
 type FormErrors = Partial<Record<FormField | 'submit', string>>
 
@@ -362,13 +356,16 @@ export default function WBForm() {
         throw new Error(`Submit failed with status ${response.status}`)
       }
       analytics.formSubmit({ email: form.email })
-      if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-        window.fbq('track', 'Lead', {
-          lead_event_id: leadId,
-          content_name: 'Private Markets Webinar',
-          status: 'registered',
-        })
-      }
+      // Canonical lead event — GTM listens on `lead_submit` and fans out to
+      // Meta Pixel (Lead), GA4 (generate_lead), Google Ads conversion, etc.
+      analytics.leadSubmit({
+        lead_event_id: leadId,
+        email: form.email.trim(),
+        phone: form.phone,
+        content_name: 'Private Markets Webinar',
+        value: 1,
+        currency: 'USD',
+      })
       const telegramPhoneToken = getTelegramPhoneToken(form.phone, form.phoneCountry)
       const telegramLink = telegramPhoneToken
         ? `${TELEGRAM_BOT_BASE_URL}?start=${TELEGRAM_START_PREFIX}${telegramPhoneToken}`

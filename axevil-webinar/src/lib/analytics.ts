@@ -10,12 +10,24 @@ function push(event: string, params?: Record<string, unknown>) {
   window.dataLayer.push({ event, ...params })
 }
 
+export interface LeadSubmitParams {
+  lead_event_id: string
+  email: string
+  phone: string
+  content_name: string
+  value: number
+  currency: string
+}
+
 export const analytics = {
   scrollDepth: (pct: 25 | 50 | 75 | 100) => push(`scroll_${pct}`),
   formView:   () => push('form_view'),
   formStart:  () => push('form_start'),
   formSubmit: (params?: Record<string, unknown>) => push('form_submit', params),
   formError:  (field: string) => push('form_error', { field }),
+  // Canonical lead event for GTM fan-out (Meta Lead, GA4 generate_lead, Google Ads, etc.).
+  // Fires once per successful form submission (API responded 2xx).
+  leadSubmit: (params: LeadSubmitParams) => push('lead_submit', { ...params }),
 }
 
 export function initScrollDepth() {
