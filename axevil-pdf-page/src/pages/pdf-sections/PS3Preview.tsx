@@ -26,7 +26,7 @@ export default function PS3Preview() {
           style={{
             flex: '1 1 0', minWidth: 0,
             display: 'flex', flexDirection: 'column',
-            justifyContent: 'space-between',  /* eyebrow top, H2 bottom */
+            gap: '1.5rem',  /* 24px between eyebrow and heading */
             width: '100%', height: '100%',
           }}
         >
@@ -36,10 +36,10 @@ export default function PS3Preview() {
             <span className="eyebrow-text">Образец</span>
           </div>
           {/* H2 + desc */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <h2 style={{
               fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
-              fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
+              fontSize: 'clamp(2.25rem, 4.4vw, 4rem)',
               lineHeight: 1, letterSpacing: '-0.02em', margin: 0,
               color: 'transparent',
               background: 'linear-gradient(112.5deg, rgb(162,162,162) 4.26%, rgb(255,255,255) 40.2%, rgb(162,162,162) 76.15%)',

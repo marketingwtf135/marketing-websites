@@ -19,7 +19,7 @@ export default function PS1Hero() {
     <section
       id="hero"
       style={{
-        minHeight: '100svh',
+        height: '100svh',
         background: '#010101',
         position: 'relative',
         overflow: 'hidden',
