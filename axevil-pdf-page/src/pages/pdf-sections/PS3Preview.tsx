@@ -24,7 +24,7 @@ export default function PS3Preview() {
           gap: 'clamp(2rem, 4vw, 4rem)',
         }}
       >
-        {/* LEFT: text */}
+        {/* LEFT: text — full divblock, gap auto, 100% height */}
         <motion.div
           initial={{ opacity: 0, x: '-1.5rem' }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -32,7 +32,7 @@ export default function PS3Preview() {
           style={{
             flex: '1 1 0', minWidth: 0,
             display: 'flex', flexDirection: 'column',
-            justifyContent: 'space-between',
+            justifyContent: 'space-between',  /* gap auto */
             height: '100%',
           }}
         >
@@ -41,16 +41,8 @@ export default function PS3Preview() {
             <span className="eyebrow-num">2.0</span>
             <span className="eyebrow-text">Образец</span>
           </div>
-          {/* Desc + H2 — flex space-between, H2 at very bottom */}
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1, gap: '1.5rem' }}>
-            <p style={{
-              fontFamily: 'Inter Tight, sans-serif', fontWeight: 500,
-              fontSize: 'clamp(1rem, 1.2vw, 1.125rem)',
-              lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc',
-              maxWidth: '36.25rem', margin: 0,
-            }}>
-              Динамика индекса топ-20 частных компаний по сравнению с NASDAQ на фоне торговых войн и конфликта Трампа с главой ФРС.
-            </p>
+          {/* Heading block: H2 first, then desc */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <h2 style={{
               fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
               fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
@@ -61,6 +53,14 @@ export default function PS3Preview() {
             }}>
               Частный рынок vs Nasdaq за 2025 год
             </h2>
+            <p style={{
+              fontFamily: 'Inter Tight, sans-serif', fontWeight: 500,
+              fontSize: 'clamp(1rem, 1.2vw, 1.125rem)',
+              lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc',
+              maxWidth: '36.25rem', margin: 0,
+            }}>
+              Динамика индекса топ-20 частных компаний по сравнению с NASDAQ на фоне торговых войн и конфликта Трампа с главой ФРС.
+            </p>
           </div>
         </motion.div>
 
