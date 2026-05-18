@@ -289,6 +289,7 @@ body {
     position: relative;
     overflow: hidden;
     width: 100%;
+    height: 10.3125rem; /* 165px — matches Figma mobile card height */
   }
 }
 
