@@ -108,7 +108,7 @@ export default function PS3Preview() {
 
           {/* Rock — absolute, fixed to bottom, z:10 above everything */}
           <img
-            src="/img/bg-image-rock.png"
+            src="/img/hero-bg-rock.png"
             alt=""
             aria-hidden="true"
             style={{
@@ -118,7 +118,7 @@ export default function PS3Preview() {
               width: '100%',
               height: '50%',
               objectFit: 'cover',
-              objectPosition: 'center top',
+              objectPosition: 'center bottom',
               pointerEvents: 'none',
               zIndex: 10,
               borderRadius: '0 0 2rem 2rem',
