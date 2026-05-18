@@ -289,33 +289,20 @@ body {
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: 10.3125rem; /* 165px — matches Figma mobile card height */
-  }
-}
-
-/* PS5StayCurrent mobile image positions */
-@media (max-width: 640px) {
-  .mockup-left {
-    right: -0.0625rem !important;
-    top: 12.6875rem !important;
-    bottom: auto !important;
-    width: 15.5rem !important;
-    height: 16.8125rem !important;
-  }
-  .mockup-right {
-    left: calc(50% + 4.03125rem) !important;
-    right: auto !important;
-    top: 12.6875rem !important;
-    bottom: auto !important;
-    width: 19.125rem !important;
-    height: 13.75rem !important;
-    transform: translateX(-50%) !important;
   }
 }
 
 /* PS7About — hide platform screenshot on mobile */
 @media (max-width: 640px) {
   .platform-screenshot { display: none !important; }
+}
+
+/* PS3Preview card mobile */
+@media (max-width: 640px) {
+  .preview-card {
+    padding: 1rem !important;
+    min-height: 40rem !important;
+  }
 }
 
 /* Badge pulse animation (from NL DS) */
@@ -358,13 +345,4 @@ body {
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
-}
-
-@media (max-width: 640px) {
-  /* All secondary/desc paragraphs at 14px on mobile */
-  section .font-inter-tight[style*="bcbcbc"],
-  section .font-inter-tight[style*="0.55"],
-  section .font-inter-tight[style*="9b9b9b"] {
-    font-size: 0.875rem !important;
-  }
 }

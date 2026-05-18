@@ -1,11 +1,10 @@
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import PDFCtaButton from '../../components/PDFCtaButton'
 
-const NAV_LINKS = [
-  { label: 'Образец',             id: 'preview' },
-  { label: 'Оставайтесь в курсе', id: 'stay-current' },
-  { label: 'О платформе',         id: 'about' },
-] as const
+function scrollTo(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+}
 
 function useNavVisible() {
   const [visible, setVisible] = useState(true)
@@ -24,291 +23,128 @@ function useNavVisible() {
   return visible
 }
 
-export default function PDFNav() {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const visible = useNavVisible()
+const NAV_LINKS = [
+  { label: 'Образец',             id: 'preview'      },
+  { label: 'Оставайтесь в курсе', id: 'stay-current' },
+  { label: 'О платформе',         id: 'about'        },
+]
 
-  // Lock body scroll when menu is open
+export default function PDFNav() {
+  const visible = useNavVisible()
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  function handleNavLink(id: string) {
+    scrollTo(id)
+    setMenuOpen(false)
+  }
+
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
-  function scrollTo(id: string) {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-    setMenuOpen(false)
-  }
-
   return (
     <>
-      <motion.header
-        role="banner"
-        animate={{ y: visible ? 0 : '-100%' }}
-        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          height: '4.5rem',
-          background: '#060606',
-          borderBottom: '1px solid #1a1a1a',
-        }}
+      <motion.nav
+        className="fixed top-0 left-0 w-full z-50"
+        style={{ background: '#060606', borderBottom: '1px solid #1a1a1a', height: 72 }}
+        animate={{ y: visible ? 0 : -72 }}
+        transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
       >
-        <div
-          style={{
-            maxWidth: '90rem',
-            margin: '0 auto',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '0 clamp(1rem, 5vw, 5rem)',
-            position: 'relative',
-          }}
-        >
+        <div className="container-px mx-auto w-full max-w-[1440px] h-full flex items-center justify-between">
           {/* Logo */}
-          <a
-            href="/"
-            aria-label="Axevil Capital"
-            style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}
-          >
-            <img
-              src="/img/logo.svg"
-              alt="AXEVIL"
-              style={{
-                width: 'clamp(116px, 10.8vw, 155px)',
-                height: 'clamp(18px, 1.7vw, 24px)',
-                display: 'block',
-              }}
+          <a href="#" aria-label="AXEVIL Capital" className="shrink-0">
+            <img src="/img/logo.svg" alt="AXEVIL Capital" className="shrink-0 block"
+              style={{ width: 'clamp(116px, 10.8vw, 155px)', height: 'clamp(18px, 1.7vw, 24px)' }}
+              onError={e => { (e.currentTarget as HTMLImageElement).src = '/img/footer-logo.svg' }}
             />
           </a>
 
-          {/* Center nav — desktop only, absolutely centered */}
-          <nav
-            aria-label="Sections"
-            className="hidden-mobile"
-            style={{
-              position: 'absolute',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              display: 'flex',
-              gap: '0.25rem',
-            }}
-          >
-            {NAV_LINKS.map((link, i) => (
-              <button
-                key={link.id}
-                onClick={() => scrollTo(link.id)}
-                style={{
-                  background: i === 0 ? 'rgba(255,255,255,0.05)' : 'transparent',
-                  borderRadius: '10rem',
-                  padding: '0.5rem 1rem',
-                  fontSize: '0.875rem',
-                  fontFamily: 'Inter Tight, sans-serif',
-                  fontWeight: 500,
-                  color: '#ffffff',
-                  opacity: i === 0 ? 1 : 0.8,
-                  border: 'none',
-                  cursor: 'pointer',
-                  transition: 'background 0.2s, opacity 0.2s',
-                  whiteSpace: 'nowrap',
-                }}
-                onMouseEnter={e => {
-                  if (i !== 0) (e.currentTarget as HTMLButtonElement).style.opacity = '1'
-                  ;(e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.05)'
-                }}
-                onMouseLeave={e => {
-                  if (i !== 0) (e.currentTarget as HTMLButtonElement).style.opacity = '0.8'
-                  if (i !== 0) (e.currentTarget as HTMLButtonElement).style.background = 'transparent'
-                }}
-              >
-                {link.label}
+          {/* Desktop: centered nav */}
+          <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-1 h-8">
+            {NAV_LINKS.map(({ label, id }, i) => (
+              <button key={id} type="button" onClick={() => scrollTo(id)}
+                className="flex items-center justify-center px-4 py-2 rounded-[160px] font-inter-tight font-medium text-white text-center whitespace-nowrap transition-colors"
+                style={{ fontSize: 14, lineHeight: 'normal', background: i === 0 ? 'rgba(255,255,255,0.05)' : 'transparent', opacity: i === 0 ? 1 : 0.8 }}>
+                {label}
               </button>
             ))}
-          </nav>
+          </div>
 
-          {/* Right: Download button (desktop) / Hamburger (mobile) */}
-          <>
-            {/* Desktop CTA */}
-            <button
-              onClick={() => scrollTo('pdf-form')}
-              className="hidden-mobile"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                height: '2.5rem',
-                padding: '0 1rem',
-                background: 'white',
-                borderRadius: '1rem',
-                border: 'none',
-                fontFamily: 'Inter Tight, sans-serif',
-                fontWeight: 600,
-                fontSize: '1rem',
-                color: '#202020',
-                cursor: 'pointer',
-                whiteSpace: 'nowrap',
-                flexShrink: 0,
-              }}
-            >
-              <DownloadIcon />
+          {/* Desktop: CTA */}
+          <div className="ml-auto hidden lg:flex">
+            <button type="button" onClick={() => scrollTo('pdf-form')}
+              className="flex items-center gap-2 font-inter-tight font-semibold text-[#202020] bg-white rounded-2xl hover:opacity-90 transition-opacity shrink-0 cta-button-glow"
+              style={{ height: 40, paddingLeft: 16, paddingRight: 16, paddingTop: 13, paddingBottom: 16, fontSize: 16, fontWeight: 600, lineHeight: '110%', border: 'none', cursor: 'pointer' }}>
+              <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
+                <path d="M9 2v9M5.5 7.5L9 11l3.5-3.5" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M3 13.5h12" stroke="#202020" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
               Скачать PDF
             </button>
+          </div>
 
-            {/* Mobile hamburger */}
-            <button
-              onClick={() => setMenuOpen(true)}
-              className="show-mobile"
-              aria-label="Открыть меню"
-              style={{
-                background: 'transparent',
-                border: 'none',
-                cursor: 'pointer',
-                padding: '0.5rem',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '6px',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <span style={{ display: 'block', width: '20px', height: '2px', background: 'white', borderRadius: '1px' }} />
-              <span style={{ display: 'block', width: '20px', height: '2px', background: 'white', borderRadius: '1px' }} />
-            </button>
-          </>
+          {/* Mobile: burger */}
+          <button
+            type="button"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="lg:hidden relative shrink-0 focus-visible:outline-none"
+            style={{ width: 40, height: 40 }}
+            aria-label="Меню"
+          >
+            <motion.div
+              className="absolute bg-white"
+              style={{ height: 2, left: 10, width: 20 }}
+              animate={{ top: menuOpen ? 19 : 15, rotate: menuOpen ? 45 : 0 }}
+              transition={{ duration: 0.25 }}
+            />
+            <motion.div
+              className="absolute bg-white"
+              style={{ height: 2, left: 10, width: 20 }}
+              animate={{ top: menuOpen ? 19 : 24, rotate: menuOpen ? -45 : 0 }}
+              transition={{ duration: 0.25 }}
+            />
+          </button>
         </div>
-      </motion.header>
+      </motion.nav>
 
-      {/* Mobile fullscreen menu */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
+            className="fixed inset-0 z-40 lg:hidden"
+            style={{ background: 'rgba(8,8,8,0.97)', backdropFilter: 'blur(1rem)', WebkitBackdropFilter: 'blur(1rem)', paddingTop: '4.5rem' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            style={{
-              position: 'fixed',
-              inset: 0,
-              zIndex: 100,
-              background: '#060606',
-              display: 'flex',
-              flexDirection: 'column',
-              padding: '1rem',
-            }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
           >
-            {/* Menu header */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '4.5rem' }}>
-              <img
-                src="/img/logo.svg"
-                alt="AXEVIL"
-                style={{ height: '1.125rem', width: 'auto' }}
-              />
-              <button
-                onClick={() => setMenuOpen(false)}
-                aria-label="Закрыть меню"
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  cursor: 'pointer',
-                  color: 'white',
-                  fontSize: '1.5rem',
-                  lineHeight: 1,
-                  padding: '0.5rem',
-                }}
-              >
-                ×
-              </button>
-            </div>
-
-            {/* Nav links */}
-            <nav
-              aria-label="Mobile menu"
-              style={{
-                flex: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                gap: '0.5rem',
-              }}
-            >
-              {NAV_LINKS.map(link => (
-                <button
-                  key={link.id}
-                  onClick={() => scrollTo(link.id)}
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontFamily: 'Inter Tight, sans-serif',
-                    fontWeight: 500,
-                    fontSize: '1.25rem',
-                    color: 'white',
-                    textAlign: 'left',
-                    padding: '1rem',
-                    borderRadius: '0.75rem',
-                    transition: 'background 0.15s',
-                  }}
+            <div className="flex flex-col px-5 sm:px-8 py-6 overflow-y-auto h-full">
+              <div className="flex flex-col gap-1 flex-1">
+                {NAV_LINKS.map(({ label, id }) => (
+                  <button key={id} type="button"
+                    onClick={() => handleNavLink(id)}
+                    className="flex items-center justify-between px-4 py-4 rounded-xl font-inter-tight font-medium text-white/70 hover:text-white hover:bg-white/5 text-left transition-colors"
+                    style={{ minHeight: '3.5rem', fontSize: '1.125rem', lineHeight: 1.35, letterSpacing: '-0.36px', background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.7)' }}>
+                    <span>{label}</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden style={{ transform: 'rotate(-90deg)', opacity: 0.5, flexShrink: 0 }}>
+                      <path d="M4 6L8 10L12 6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </button>
+                ))}
+              </div>
+              <div className="mt-auto pt-6">
+                <PDFCtaButton
+                  onClick={() => { scrollTo('pdf-form'); setMenuOpen(false) }}
+                  style={{ width: '100%' }}
                 >
-                  {link.label}
-                </button>
-              ))}
-            </nav>
-
-            {/* Download button at bottom */}
-            <button
-              onClick={() => scrollTo('pdf-form')}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.5rem',
-                height: '3.5rem',
-                background: 'white',
-                borderRadius: '1rem',
-                border: 'none',
-                fontFamily: 'Inter Tight, sans-serif',
-                fontWeight: 600,
-                fontSize: '1rem',
-                color: '#202020',
-                cursor: 'pointer',
-                marginBottom: '1rem',
-              }}
-            >
-              <DownloadIcon />
-              Скачать PDF
-            </button>
+                  Скачать PDF
+                </PDFCtaButton>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style>{`
-        @media (max-width: 767px) {
-          .hidden-mobile { display: none !important; }
-          .show-mobile { display: flex !important; }
-        }
-        @media (min-width: 768px) {
-          .show-mobile { display: none !important; }
-          .hidden-mobile { display: flex !important; }
-        }
-      `}</style>
     </>
-  )
-}
-
-function DownloadIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-      <path
-        d="M9 2v9M5.5 7.5L9 11l3.5-3.5"
-        stroke="#202020"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path d="M3 13.5h12" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
   )
 }

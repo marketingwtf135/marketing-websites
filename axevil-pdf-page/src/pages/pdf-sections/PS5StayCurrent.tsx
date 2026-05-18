@@ -22,22 +22,20 @@ const CARDS = [
 
 const MOCKUP_STYLES: React.CSSProperties[] = [
   {
-    // Left card (Pre-IPO Insider Q1 2026)
     position: 'absolute',
-    right: 0,
-    bottom: '-4.5625rem',   // -73px
-    width: '23.0625rem',    // 369px — keep desktop width
-    height: '25rem',        // keep
+    right: 'clamp(-0.0625rem, -2.8vw, -2.5rem)',
+    bottom: '-4.75rem',
+    width: 'clamp(15.5rem, 25.6vw, 23.0625rem)',
+    height: 'auto',
     objectFit: 'contain',
     pointerEvents: 'none',
   },
   {
-    // Right card (Еженедельный дайджест)
     position: 'absolute',
-    right: '-3.125rem',     // -50px
-    bottom: '-1.5rem',      // -24px
-    width: '29.125rem',     // keep
-    height: '20.875rem',    // keep
+    right: 'clamp(-4.3125rem, -4.8vw, -4.3125rem)',
+    bottom: 'clamp(-2.625rem, -2.9vw, -2.625rem)',
+    width: 'clamp(19.125rem, 32.4vw, 29.125rem)',
+    height: 'auto',
     objectFit: 'contain',
     pointerEvents: 'none',
   },
@@ -91,7 +89,7 @@ export default function PS5StayCurrent() {
               style={{
                 flex: '1 1 18rem', minWidth: 0,
                 border: '1px solid #151515', borderRadius: '1.5rem',
-                overflow: 'clip', position: 'relative',
+                overflow: 'hidden', position: 'relative',
                 display: 'flex', flexDirection: 'column',
                 minHeight: 'clamp(25rem, 37.5vw, 33.75rem)',
               }}

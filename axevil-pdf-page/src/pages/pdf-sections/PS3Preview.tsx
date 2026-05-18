@@ -1,82 +1,71 @@
 import { useRef } from 'react'
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { motion, useInView } from 'framer-motion'
 import PDFCtaButton from '../../components/PDFCtaButton'
 
 export default function PS3Preview() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, amount: 0.1 })
 
-  // Light parallax for rock
-  const sectionRef = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] })
-  const rockY = useTransform(scrollYProgress, [0, 1], ['0%', '-8%'])
-
   return (
-    <section id="preview" ref={sectionRef} className="relative w-full" style={{ background: '#060606' }}>
+    <section id="preview" className="relative w-full" style={{ background: '#060606' }}>
       <div
         ref={ref}
-        className="mx-auto w-full max-w-[1440px] flex-responsive-col-reverse"
+        className="mx-auto w-full max-w-[1440px] flex-responsive-col"
         style={{
-          padding: 'clamp(3.75rem, 6.5vw, 6.25rem) clamp(1rem, 1.4vw, 1.25rem)',
+          padding: 'clamp(3.75rem, 6.5vw, 6.25rem) 1.25rem',
           display: 'flex',
-          alignItems: 'stretch',
-          justifyContent: 'space-between',
+          alignItems: 'flex-end',
           gap: 'clamp(2rem, 4vw, 4rem)',
         }}
       >
-        {/* LEFT: animation wrapper */}
+        {/* LEFT: text */}
         <motion.div
           initial={{ opacity: 0, x: '-1.5rem' }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.5, ease: 'easeOut' }}
-          style={{ flex: '1 1 0', minWidth: 0, alignSelf: 'stretch' }}
+          style={{
+            flex: '1 1 0', minWidth: 0,
+            display: 'flex', flexDirection: 'column',
+            gap: '1.5rem',
+            width: '100%', height: '100%',
+          }}
         >
-          {/* Общий контейнер — eyebrow top, heading bottom */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            justifyContent: 'space-between',
-            width: '100%',
-            height: '100%',
-          }}>
-            {/* Eyebrow */}
-            <div className="eyebrow">
-              <span className="eyebrow-num">2.0</span>
-              <span className="eyebrow-text">Образец</span>
-            </div>
-            {/* Heading block: H2 + desc */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'flex-start', width: '100%' }}>
-              <h2 style={{
-                fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
-                fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
-                lineHeight: 1, letterSpacing: '-0.02em', margin: 0,
-                color: 'transparent',
-                background: 'linear-gradient(112.5deg, rgb(162,162,162) 4.26%, rgb(255,255,255) 40.2%, rgb(162,162,162) 76.15%)',
-                WebkitBackgroundClip: 'text', backgroundClip: 'text',
-              }}>
-                Частный рынок vs Nasdaq за 2025 год
-              </h2>
-              <p style={{
-                fontFamily: 'Inter Tight, sans-serif', fontWeight: 500,
-                fontSize: 'clamp(1rem, 1.2vw, 1.125rem)',
-                lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc',
-                maxWidth: '36.25rem', margin: 0,
-              }}>
-                Динамика индекса топ-20 частных компаний по сравнению с NASDAQ на фоне торговых войн и конфликта Трампа с главой ФРС.
-              </p>
-            </div>
+          {/* Eyebrow */}
+          <div className="eyebrow" style={{ fontSize: 'clamp(0.875rem, 1.2vw, 1.125rem)' }}>
+            <span className="eyebrow-num">2.0</span>
+            <span className="eyebrow-text">Образец</span>
+          </div>
+          {/* H2 + desc */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <h2 style={{
+              fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
+              fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
+              lineHeight: 1, letterSpacing: '-0.02em', margin: 0,
+              color: 'transparent',
+              background: 'linear-gradient(112.5deg, rgb(162,162,162) 4.26%, rgb(255,255,255) 40.2%, rgb(162,162,162) 76.15%)',
+              WebkitBackgroundClip: 'text', backgroundClip: 'text',
+            }}>
+              Частный рынок vs Nasdaq за 2025 год
+            </h2>
+            <p style={{
+              fontFamily: 'Inter Tight, sans-serif', fontWeight: 500,
+              fontSize: 'clamp(1rem, 1.2vw, 1.125rem)',
+              lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc',
+              maxWidth: '36.25rem', margin: 0,
+            }}>
+              Динамика индекса топ-20 частных компаний по сравнению с NASDAQ на фоне торговых войн и конфликта Трампа с главой ФРС.
+            </p>
           </div>
         </motion.div>
 
         {/* RIGHT: card */}
         <motion.div
+          className="preview-card"
           initial={{ opacity: 0, x: '1.5rem' }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
           style={{
             flex: '1 1 0', minWidth: 0,
-            width: '100%',
             background: '#111',
             borderRadius: '2rem',
             padding: '2rem',
@@ -86,10 +75,10 @@ export default function PS3Preview() {
             position: 'relative',
           }}
         >
-          {/* Top text (z=2) */}
+          {/* Top text (z=2) — h6 style 18px SemiBold */}
           <p style={{
             fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
-            fontSize: 'clamp(0.9375rem, 1.3vw, 1.25rem)',
+            fontSize: 'clamp(1.125rem, 1.3vw, 1.25rem)',
             lineHeight: 1.3, letterSpacing: '-0.025em',
             color: 'white', textAlign: 'center',
             maxWidth: '31.25rem', margin: '0 auto',
@@ -102,10 +91,12 @@ export default function PS3Preview() {
           <div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 2 }}>
             <div style={{
               position: 'absolute', left: '50%', transform: 'translateX(-50%)',
+              border: '0.5875rem solid #1a1a1a',
+              borderRadius: '1.878rem',
               overflow: 'hidden',
               width: 'clamp(16.8125rem, 28.625vw, 28.625rem)',
+              height: 'clamp(25.75rem, 40.625vw, 43.375rem)',
               top: '0.5rem',
-              bottom: 0,
             }}>
               <img
                 src="/img/image-analyse.png"
@@ -115,29 +106,35 @@ export default function PS3Preview() {
             </div>
           </div>
 
-          {/* Rock — absolute, +100px from bottom, light parallax, z:10 */}
-          <motion.img
-            src="/img/hero-bg-rock.png"
-            alt=""
+          {/* Rock bg — absolute, covers bottom, z=3 (above image) */}
+          <div
             aria-hidden="true"
             style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              width: '100%',
+              position: 'absolute', bottom: 0, left: 0, right: 0,
               height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center bottom',
               pointerEvents: 'none',
-              zIndex: 10,
-              y: rockY,
+              zIndex: 3,
+              overflow: 'hidden',
+              borderRadius: '2rem',
             }}
-          />
+          >
+            <img
+              src="/img/bg-image-rock.png"
+              alt=""
+              style={{
+                position: 'absolute',
+                width: '278.73%',
+                height: '100%',
+                left: '-89.37%',
+                top: '23.72%',
+                objectFit: 'cover',
+              }}
+            />
+          </div>
 
-          {/* CTA button (z=11, above rock) */}
-          <div style={{ position: 'relative', zIndex: 11, display: 'flex', justifyContent: 'center' }}>
-            <PDFCtaButton>
+          {/* CTA button (z=4) */}
+          <div style={{ position: 'relative', zIndex: 4 }}>
+            <PDFCtaButton style={{ width: '100%', justifyContent: 'center' }}>
               Скачать полную версию PDF
             </PDFCtaButton>
           </div>
