@@ -22,6 +22,7 @@ const CARDS = [
 
 const MOCKUP_STYLES: React.CSSProperties[] = [
   {
+    // First card (top) — raised 32px
     position: 'absolute',
     right: 'clamp(-0.0625rem, -2.8vw, -2.5rem)',
     bottom: '-4.75rem',
@@ -29,8 +30,10 @@ const MOCKUP_STYLES: React.CSSProperties[] = [
     height: 'auto',
     objectFit: 'contain',
     pointerEvents: 'none',
+    transform: 'translateY(-2rem)',
   },
   {
+    // Second card (bottom) — original position
     position: 'absolute',
     right: 'clamp(-4.3125rem, -4.8vw, -4.3125rem)',
     bottom: '-1.5rem',
