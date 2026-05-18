@@ -53,7 +53,7 @@ export default function PS2KeyQuestions() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.1 }}
               className="flex flex-col items-center overflow-hidden rounded-[1.5rem] flex-1 min-w-0"
-              style={{ background: '#111111', padding: '1rem', justifyContent: 'space-between', height: 'clamp(20rem, 31.25vw, 28.125rem)' }}
+              style={{ background: '#111111', padding: '1rem', gap: '2rem', justifyContent: 'space-between', height: 'clamp(20rem, 31.25vw, 28.125rem)' }}
             >
               <p className="font-inter-tight font-medium text-center whitespace-nowrap shrink-0 w-full"
                 style={{ fontSize: '1.125rem', lineHeight: 1.35, letterSpacing: '-0.02em', color: '#303030', margin: 0 }}>
