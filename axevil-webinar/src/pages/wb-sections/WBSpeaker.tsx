@@ -81,13 +81,27 @@ export default function WBSpeaker() {
               </p>
             </div>
 
-            <div style={{ maxWidth: '30rem' }}>
+            <div style={{ maxWidth: '30rem' }} className="flex flex-col gap-6">
               <p
                 className="font-inter-tight font-medium"
                 style={{ color: '#E6E6E6', fontSize: 'clamp(0.875rem, 1.5vw, 1.125rem)', lineHeight: '135%', letterSpacing: '-0.36px' }}
               >
                 {t.speaker.bio}
               </p>
+              <blockquote
+                className="font-inter-tight font-medium italic"
+                style={{
+                  color: '#ffffff',
+                  fontSize: 'clamp(1rem, 1.6vw, 1.25rem)',
+                  lineHeight: '140%',
+                  letterSpacing: '-0.01em',
+                  paddingLeft: '1rem',
+                  borderLeft: '2px solid rgba(255,255,255,0.35)',
+                  margin: 0,
+                }}
+              >
+                {t.speaker.quote}
+              </blockquote>
             </div>
           </div>
 

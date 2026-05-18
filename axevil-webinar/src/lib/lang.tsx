@@ -66,7 +66,8 @@ export const translations = {
       label: '6.0 About Speaker', heading: 'Speaker',
       name: 'Taras Chumachenko',
       role: 'Co-founder & Managing Partner, Axevil Capital',
-      bio: '10+ years in alternative investments. Co-founder of Axevil Capital — a digital private equity platform with $150M AUM, 1,000+ investors and 100+ wealth-management partners. Hosts the firm\'s quarterly research briefings and live Q&A sessions on private markets strategy.',
+      bio: '15+ years in finance and investing — from building teams and launching investment products to working with the world\'s largest technology companies.',
+      quote: '“The private equity market isn\'t a game for the chosen few — it\'s an instrument accessible to private investors with established capital.”',
     },
     // Schedule
     schedule: {
@@ -168,7 +169,8 @@ export const translations = {
       label: '6.0 О спикере', heading: 'Спикер',
       name: 'Тарас Чумаченко',
       role: 'Co-founder & Managing Partner, Axevil Capital',
-      bio: '10+ лет в альтернативных инвестициях. Сооснователь Axevil Capital — цифровой платформы private equity с AUM $150M, 1,000+ инвесторами и 100+ партнёрами по управлению капиталом. Ведёт ежеквартальные исследовательские брифинги и Q&A по стратегии private markets.',
+      bio: 'Более 15 лет в финансах и инвестициях — от построения команд и создания инвестиционных продуктов до работы с крупнейшими технологическими компаниями мира.',
+      quote: '«Рынок private equity — не игра для избранных, а инструмент, доступный частным инвесторам со сформированным капиталом.»',
     },
     schedule: {
       label: '5.0 Расписание', heading: 'Расписание вебинара',
