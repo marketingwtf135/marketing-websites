@@ -25,6 +25,7 @@ export default function NLAbout() {
           background: '#0c0c0c',
           borderRadius: 'clamp(1.5rem, 4.4vw, 4rem)',
           gap: 'clamp(1.5rem, 4.4vw, 4rem)',
+          padding: '1.5rem 1rem 1rem',
         }}
       >
         {/* Heading */}

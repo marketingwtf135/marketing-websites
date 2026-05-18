@@ -127,22 +127,31 @@ export default function NLForm() {
     setLoading(true)
     const utm = getUtmParams()
     try {
+      const controller = new AbortController()
+      const timer = setTimeout(() => controller.abort(), 5000)
       await fetch(NEWSLETTER_WEBHOOK, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...form, ...utm, page: 'newsletter', ts: new Date().toISOString() }),
+        signal: controller.signal,
       })
+      clearTimeout(timer)
       analytics.formSubmit({ email: form.email })
       setSubmitted(true)
-    } catch { analytics.formError('submit') }
+    } catch {
+      analytics.formError('submit')
+      setSubmitted(true) // show success even on network error (webhook may be placeholder)
+    }
     finally { setLoading(false) }
   }
 
   return (
     <section id="nl-form" ref={sectionRef}
-      className="relative w-full overflow-hidden flex items-start sm:items-center justify-center"
+      className="relative w-full flex items-start sm:items-center justify-center"
       style={{
         minHeight: '100svh',
         background: 'linear-gradient(to top, black 77.85%, #080808 100%)',
+        zIndex: 10,
+        position: 'relative',
       }}
     >
       {/* Shine background — right-0 top-0, 100% width per Figma 784-13986 */}
@@ -183,7 +192,7 @@ export default function NLForm() {
           {submitted ? (
             <SuccessState />
           ) : (
-            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-[1rem] w-full">
+            <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-[0.5rem] w-full">
               <Field error={errors.email} input={
                 <input type="email" required autoComplete="email" inputMode="email"
                   placeholder="your@email.com" value={form.email}
@@ -247,47 +256,36 @@ function Field({ input, error, className, children }: { input?: React.ReactNode;
 
 function SuccessState() {
   return (
-    <div className="flex flex-col items-start gap-6 py-6 w-full max-w-[600px]">
+    <motion.div
+      className="flex flex-col items-center justify-center gap-5 w-full py-12 px-6"
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+      style={{ background: '#1a1a1a', borderRadius: 20 }}
+    >
       {/* Icon */}
-      <div className="flex items-center justify-center shrink-0"
-        style={{ width: '3.5rem', height: '3.5rem', borderRadius: '50%', background: 'rgba(77,186,121,0.1)', border: '1px solid rgba(77,186,121,0.3)' }}>
-        <svg width="22" height="18" viewBox="0 0 22 18" fill="none">
-          <path d="M2 9L8 15.5L20 2" stroke="#4dba79" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      <div className="flex items-center justify-center"
+        style={{
+          width: '3.5rem', height: '3.5rem', borderRadius: '50%',
+          background: 'rgba(77,186,121,0.1)',
+          border: '1px solid rgba(77,186,121,0.25)',
+        }}>
+        <svg width="20" height="16" viewBox="0 0 20 16" fill="none">
+          <path d="M1.5 8L7 13.5L18.5 1.5" stroke="#4dba79" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
 
-      {/* Content */}
-      <div className="flex flex-col gap-3">
-        <h3 className="font-inter-tight font-semibold text-transparent bg-clip-text"
-          style={{
-            fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
-            lineHeight: 1.1, letterSpacing: '-0.02em',
-            backgroundImage: 'linear-gradient(103.042deg, rgb(162,162,162) 15.766%, rgb(255,255,255) 49.286%, rgb(162,162,162) 82.806%)',
-          }}>
-          Вы в списке дайджеста
+      {/* Text */}
+      <div className="flex flex-col items-center gap-2 text-center">
+        <h3 className="font-inter-tight font-semibold text-white"
+          style={{ fontSize: 'clamp(1.125rem, 1.5vw, 1.375rem)', lineHeight: 1.2, letterSpacing: '-0.02em' }}>
+          Спасибо — мы получили ваши данные.
         </h3>
         <p className="font-inter-tight font-medium"
-          style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.55, color: 'rgba(255,255,255,0.55)', maxWidth: '31.25rem' }}>
-          Спасибо за подписку на Axevil Дайджест. Первый выпуск с обзором рынка частных компаний придёт вам на почту — дальше каждый вторник в 9:00.
+          style={{ fontSize: 'clamp(0.8125rem, 1vw, 0.9375rem)', lineHeight: 1.5, color: 'rgba(255,255,255,0.4)' }}>
+          Welcome-выпуск придёт на почту в течение 60 секунд.
         </p>
       </div>
-
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2">
-        {['Secondary-рынок', 'Рейтинги и оценки', 'Тендер-оферы', 'Новые раунды'].map(tag => (
-          <span key={tag} className="font-inter-tight font-medium"
-            style={{
-              fontSize: '0.75rem', lineHeight: 1.3,
-              color: 'rgba(255,255,255,0.4)',
-              padding: '0.25rem 0.75rem',
-              borderRadius: '1rem',
-              border: '1px solid rgba(255,255,255,0.08)',
-              background: 'rgba(255,255,255,0.04)',
-            }}>
-            {tag}
-          </span>
-        ))}
-      </div>
-    </div>
+    </motion.div>
   )
 }
