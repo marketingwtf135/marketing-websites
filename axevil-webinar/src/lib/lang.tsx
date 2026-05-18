@@ -11,9 +11,9 @@ export const translations = {
     },
     // Hero
     hero: {
-      badge: 'June 5, 2026 · 11:00 CET · Zoom · 60 minutes',
-      heading: 'How to add private markets to your HNWI portfolios.',
-      sub: 'A closed-door session for private banking managers, family offices and independent capital advisors.',
+      badge: 'June 4, 2026 · 19:00 MSK / 18:00 CEST · Zoom · 60 minutes',
+      heading: 'How to add private markets to your HNWI portfolios',
+      sub: 'A closed-door session for private banking managers, family offices and independent capital advisors',
       cta: 'Register for webinar',
       stats: '$150M AUM · 1,000+ investors · 33 portfolio companies',
     },
@@ -83,16 +83,33 @@ export const translations = {
     form: {
       label: '7.0 Registration', heading: 'Register for the webinar',
       sub: "Leave your details — we'll send registration confirmation and a calendar link.",
-      fields: { email: 'Email *', name: 'Name *', position: 'Position', company: 'Company / Family Office', phone: 'Phone *', contact: 'Contact me personally to discuss investment opportunities' },
+      fields: { email: 'Email', name: 'Name', position: 'Position', company: 'Company / Family Office', phone: 'Phone', contact: 'Contact me personally to discuss investment opportunities' },
       submit: 'Register',
       sending: 'Sending...',
-      success: { heading: "Thank you — we've received your details.", sub: 'One last step — complete your registration via Telegram.' },
+      success: {
+        heading: "Thank you — you're registered for the event.",
+        bodyEmail: "Confirmation with the Zoom link and a calendar invite has been sent to your inbox.",
+        highlight: "Don't miss future Axevil Capital events.",
+        bodyTelegram: 'Extra session materials, reminders and announcements about upcoming events — in our Telegram bot. Join us.',
+        primary: 'Open Telegram bot',
+        close: 'Close',
+      },
       disclaimer: "By registering you agree to receive the recording and related Axevil Capital communications. Unsubscribe anytime.",
     },
     // Footer
     footer: {
-      links: ['Privacy', 'Terms', 'Cookie policy', 'Contacts'],
-      copy: '© 2026 Axevil Capital. All rights reserved.',
+      entity: 'Axevil Capital, LLC',
+      contactLabel: 'Contact',
+      contactEmail: 'info@axevil.com',
+      links: [
+        { label: 'Privacy Policy', href: '/legal/en/privacy.html' },
+        { label: 'Cookie Policy', href: '/legal/en/cookies.html' },
+        { label: 'Terms of Use', href: '/legal/en/terms.html' },
+        { label: 'Contact', href: 'mailto:info@axevil.com' },
+      ],
+      disclaimer:
+        'Axevil Capital, LLC is a US-registered company (Delaware, #6832739) with Exempt Reporting Adviser (ERA) status, regulated by the U.S. Securities and Exchange Commission (SEC #802-126907). For professional investors, wealth managers, family offices and accredited investors only. Information on this site and in the webinar is provided for general informational and educational purposes only and does not constitute investment, legal, tax or other professional advice, an offer or a solicitation to buy or sell any security or fund interest. Private market investments are illiquid, long-term and high-risk; past performance is not indicative of future results.',
+      copy: '© 2021–2026 Axevil Capital, LLC. All rights reserved.',
     },
   },
   ru: {
@@ -101,9 +118,9 @@ export const translations = {
       speaker: 'Спикер', schedule: 'Расписание', reserve: 'Записаться',
     },
     hero: {
-      badge: '5 июня 2026 · 11:00 CET · Zoom · 60 минут',
-      heading: 'Как добавить private markets в портфели HNWI-клиентов.',
-      sub: 'Закрытая сессия для private banking менеджеров, family offices и независимых советников.',
+      badge: '4 июня 2026 · 19:00 МСК / 18:00 CEST · Zoom · 60 минут',
+      heading: 'Как добавить private markets в портфели HNWI-клиентов',
+      sub: 'Закрытая сессия для private banking менеджеров, family offices и независимых советников',
       cta: 'Зарегистрироваться',
       stats: '$150M AUM · 1,000+ инвесторов · 33 портфельные компании',
     },
@@ -166,15 +183,32 @@ export const translations = {
     form: {
       label: '7.0 Регистрация', heading: 'Зарегистрироваться на вебинар',
       sub: 'Оставьте данные — пришлём подтверждение и ссылку в календарь.',
-      fields: { email: 'Email *', name: 'Имя *', position: 'Должность', company: 'Компания / Family Office', phone: 'Телефон *', contact: 'Свяжитесь лично для обсуждения инвестиционных возможностей' },
+      fields: { email: 'Email', name: 'Имя', position: 'Должность', company: 'Компания / Family Office', phone: 'Телефон', contact: 'Свяжитесь лично для обсуждения инвестиционных возможностей' },
       submit: 'Зарегистрироваться',
       sending: 'Отправка...',
-      success: { heading: 'Спасибо — мы получили ваши данные.', sub: 'Остался последний шаг — завершите регистрацию через Telegram.' },
+      success: {
+        heading: 'Спасибо — вы зарегистрированы на встречу.',
+        bodyEmail: 'Подтверждение со ссылкой на Zoom и приглашением в календарь уже отправили на вашу почту.',
+        highlight: 'Не пропустите мероприятия Axevil Capital.',
+        bodyTelegram: 'Дополнительные материалы по встрече, напоминания и анонсы новых мероприятий — в нашем Telegram-боте. Переходите.',
+        primary: 'Перейти в Telegram-бота',
+        close: 'Закрыть',
+      },
       disclaimer: 'Регистрируясь, вы соглашаетесь получать запись вебинара и материалы Axevil Capital. Отписаться можно в любой момент.',
     },
     footer: {
-      links: ['Конфиденциальность', 'Условия', 'Cookie политика', 'Контакты'],
-      copy: '© 2026 Axevil Capital. Все права защищены.',
+      entity: 'Axevil Capital, LLC',
+      contactLabel: 'Контакт',
+      contactEmail: 'info@axevil.com',
+      links: [
+        { label: 'Конфиденциальность', href: '/legal/ru/privacy.html' },
+        { label: 'Политика cookie', href: '/legal/ru/cookies.html' },
+        { label: 'Условия использования', href: '/legal/ru/terms.html' },
+        { label: 'Контакты', href: 'mailto:info@axevil.com' },
+      ],
+      disclaimer:
+        'Axevil Capital, LLC — компания, зарегистрированная в США (штат Делавэр, #6832739), со статусом Exempt Reporting Adviser (ERA), регулируется Комиссией по ценным бумагам и биржам США (SEC #802-126907). Только для профессиональных инвесторов, wealth-менеджеров, family offices и аккредитованных инвесторов. Материалы Сайта и вебинара предоставлены в общих информационных и образовательных целях и не являются инвестиционным, юридическим, налоговым или иным профессиональным советом, офертой или приглашением совершить сделку с ценными бумагами или долями в фондах. Инвестиции в private markets неликвидны, носят долгосрочный характер и сопряжены с высокими рисками; прошлая доходность не гарантирует будущих результатов.',
+      copy: '© 2021–2026 Axevil Capital, LLC. Все права защищены.',
     },
   },
 }
