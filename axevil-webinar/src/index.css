@@ -213,3 +213,66 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.wb-form-phone {
+  width: 100%;
+  min-height: clamp(3rem, 4vw, 3.75rem);
+  border-radius: 1rem;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 120ms ease;
+  --react-international-phone-text-color: #ffffff;
+  --react-international-phone-dropdown-item-text-color: #ffffff;
+  --react-international-phone-dropdown-item-dial-code-color: rgba(255, 255, 255, 0.65);
+  --react-international-phone-selected-dropdown-item-text-color: #ffffff;
+  --react-international-phone-selected-dropdown-item-dial-code-color: rgba(255, 255, 255, 0.8);
+  --react-international-phone-selected-dropdown-item-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.wb-form-phone:focus-within {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
+}
+
+.wb-form-phone-error {
+  border-color: rgba(239, 68, 68, 0.6);
+}
+
+.wb-form-phone-input {
+  width: 100%;
+  min-height: clamp(3rem, 4vw, 3.75rem) !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 0.9375rem !important;
+}
+
+.wb-form-phone-input::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.wb-form-phone-input-error {
+  color: #ffffff !important;
+}
+
+.wb-form-phone-country-btn {
+  min-height: clamp(3rem, 4vw, 3.75rem) !important;
+  background: transparent !important;
+  border: none !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 1rem 0 0 1rem !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.5rem !important;
+}
+
+.wb-form-phone-country-btn:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.wb-form-phone-country-dropdown {
+  background: #1a1a1a !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 0.875rem !important;
+  max-height: min(20rem, 56vh) !important;
+}
