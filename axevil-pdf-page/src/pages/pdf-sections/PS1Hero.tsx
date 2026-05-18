@@ -39,13 +39,12 @@ export default function PS1Hero() {
       <div
         className="nl-wrapper"
         style={{
-          height: 'clamp(40rem, 52vw, 62.5rem)',
+          height: 'calc(100svh - 4.25rem)',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
+          justifyContent: 'space-between',
           alignItems: 'center',
           paddingTop: 'clamp(2rem, 3vw, 2.5rem)',
-          paddingBottom: 'clamp(2rem, 3vw, 2.5rem)',
           position: 'relative',
           zIndex: 1,
         }}
@@ -139,65 +138,47 @@ export default function PS1Hero() {
           <PDFCtaButton>Скачать PDF</PDFCtaButton>
         </motion.div>
 
-        {/* Preview card — absolute bottom 40px */}
+        {/* Preview card — natural flex child pushed to bottom by space-between */}
         <div
           style={{
-            position: 'absolute',
-            bottom: '2.5rem',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            zIndex: 2,
             width: 'clamp(18rem, 28vw, 22rem)',
             maxWidth: 'calc(100% - 2rem)',
+            background: '#111',
+            borderRadius: '3rem',
+            padding: '1.5rem',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '1.5rem',
+            boxShadow: '0 4rem 6rem rgba(0,0,0,0.8)',
+            marginBottom: '2.5rem',
           }}
         >
+          {/* Image */}
           <div
             style={{
-              background: '#111',
-              borderRadius: '3rem',
-              padding: '1.5rem',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '3rem',
-              filter: 'drop-shadow(2rem 4rem 1.5rem rgba(0,0,0,0.8))',
+              width: '100%',
+              height: 'clamp(8rem, 12vw, 10rem)',
+              borderRadius: '1rem',
+              overflow: 'hidden',
+              background: '#1a1a1a',
             }}
           >
-            {/* Image */}
-            <div
-              style={{
-                width: '9.1875rem',
-                height: '9.9375rem',
-                borderRadius: '0.75rem',
-                overflow: 'hidden',
-                position: 'relative',
-                flexShrink: 0,
-                boxShadow: '1rem 3rem 4rem 0 rgba(0,0,0,0.9)',
-              }}
-            >
-              <img
-                src="/img/image-left-card-hero.png"
-                alt=""
-                aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  width: '197.54%',
-                  height: '136.43%',
-                  left: '-49.66%',
-                  top: '-18.22%',
-                  objectFit: 'fill',
-                }}
-              />
-            </div>
-            {/* Text */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', textAlign: 'center', width: '100%' }}>
-              <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0 }}>
-                Ключевые события рынка
-              </p>
-              <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: '1.125rem', lineHeight: 1.35, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.55)', margin: 0 }}>
-                Axevil capital - квартальный брифинг инвест-команды
-              </p>
-            </div>
+            <img
+              src="/img/image-left-card-hero.png"
+              alt=""
+              aria-hidden="true"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
+            />
+          </div>
+          {/* Text */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', textAlign: 'center', width: '100%' }}>
+            <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: '1.5rem', lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0 }}>
+              Ключевые события рынка
+            </p>
+            <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: '1rem', lineHeight: 1.35, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.55)', margin: 0 }}>
+              Axevil capital - квартальный брифинг инвест-команды
+            </p>
           </div>
         </div>
       </div>

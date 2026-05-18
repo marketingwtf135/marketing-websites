@@ -132,7 +132,29 @@
   }
   @media (max-width: 640px) {
     .flex-responsive-col-reverse {
-      flex-direction: column;
+      flex-direction: column-reverse !important;
+    }
+  }
+
+  /* Section paddings additional */
+  .padding-section-t0-b6 {
+    padding-top: 0;
+    padding-bottom: 6.25rem;  /* 100px */
+  }
+  .padding-global {
+    padding-left: clamp(1.25rem, 5vw, 1.25rem);
+    padding-right: clamp(1.25rem, 5vw, 1.25rem);
+  }
+  @media (min-width: 640px) {
+    .padding-global {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .padding-global {
+      padding-left: 0;
+      padding-right: 0;
     }
   }
 
@@ -214,6 +236,11 @@
       padding-right: 5rem;
     }
   }
+}
+
+/* About inner padding — matches NL design */
+.about-inner-padding {
+  padding: clamp(2rem, 6.25vw, 6.25rem) 1rem 1rem;
 }
 
 * {

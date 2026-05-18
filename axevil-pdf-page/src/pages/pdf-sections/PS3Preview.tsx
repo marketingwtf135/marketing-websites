@@ -51,52 +51,53 @@ export default function PS3Preview() {
           style={{
             flex: '1 1 0', minWidth: 0,
             background: '#111',
-            backgroundImage: 'url(/img/bg-image-rock.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center bottom',
             borderRadius: '2rem',
             position: 'relative',
             display: 'flex', flexDirection: 'column',
             minHeight: 'clamp(28rem, 45vw, 56.25rem)',
+            overflow: 'hidden',
           }}
         >
-          {/* Dark overlay - above bg image, below analyse img */}
-          <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.3)', zIndex: 0, pointerEvents: 'none', borderRadius: '2rem' }} />
+          {/* Dark overlay - zIndex 2, above bg image */}
+          <div aria-hidden="true" style={{ position: 'absolute', inset: 0, background: 'rgba(8,8,8,0.3)', zIndex: 2, pointerEvents: 'none', borderRadius: '2rem' }} />
 
           {/* Top text inside card */}
-          <div style={{ padding: '2rem', paddingBottom: '1rem', position: 'relative', zIndex: 2 }}>
+          <div style={{ padding: '2rem', paddingBottom: '1rem', position: 'relative', zIndex: 4 }}>
             <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: 'clamp(0.9375rem, 1.3vw, 1.25rem)', lineHeight: 1.3, letterSpacing: '-0.02em', color: 'white', textAlign: 'center', margin: 0 }}>
               7 секторов с реальной динамикой вне AI, и IPO-пайплайн 2026: SpaceX, Databricks, Stripe, Revolut, Canva, Kraken, Discord, тренды 2026.
             </p>
           </div>
 
-          {/* Report screenshot - sits ON TOP of the rock */}
-          <div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 2 }}>
+          {/* Report screenshot + rock overlay */}
+          <div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 3 }}>
+            {/* Graph image — zIndex 1 */}
             <img
               src="/img/image-analyse.png"
               alt="Анализ частного рынка"
               style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block', position: 'relative', zIndex: 1 }}
             />
-            {/* Rock overlay — separate layer above report image */}
+            {/* Rock overlay — separate layer ABOVE graph image, zIndex 3 */}
             <img
               src="/img/bg-image-rock.png"
               alt=""
               aria-hidden="true"
               style={{
                 position: 'absolute',
-                bottom: 0, left: 0, right: 0,
-                height: '60%',
+                bottom: 0,
+                left: 0,
+                right: 0,
                 width: '100%',
+                height: '55%',
                 objectFit: 'cover',
-                objectPosition: 'top',
-                zIndex: 2,
+                objectPosition: 'center top',
+                zIndex: 3,
                 pointerEvents: 'none',
               }}
             />
           </div>
 
           {/* Bottom CTA */}
-          <div style={{ padding: 'clamp(1rem, 2vw, 1.5rem)', position: 'relative', zIndex: 2, display: 'flex', justifyContent: 'center' }}>
+          <div style={{ padding: 'clamp(1rem, 2vw, 1.5rem)', position: 'relative', zIndex: 4, display: 'flex', justifyContent: 'center' }}>
             <PDFCtaButton>
               Скачать полную версию PDF
             </PDFCtaButton>

@@ -15,13 +15,14 @@ export default function PS8Form() {
   const [form, setForm] = useState<FormState>({ name: '', email: '', digest: false })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [errors, setErrors] = useState<{ name?: string; email?: string }>({})
+  const [errors, setErrors] = useState<{ name?: string; email?: string; digest?: string }>({})
 
   function validate() {
-    const e: { name?: string; email?: string } = {}
+    const e: { name?: string; email?: string; digest?: string } = {}
     if (!form.name.trim()) e.name = 'Введите имя'
     if (!form.email.trim()) e.email = 'Введите email'
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = 'Неверный формат'
+    if (!form.digest) e.digest = 'Необходимо подтвердить'
     return e
   }
 
@@ -250,63 +251,40 @@ export default function PS8Form() {
                 </div>
 
                 {/* Checkbox */}
-                <label
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.75rem',
-                    cursor: 'pointer',
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    checked={form.digest}
-                    onChange={e => setForm(f => ({ ...f, digest: e.target.checked }))}
-                    style={{ display: 'none' }}
-                  />
-                  <div
-                    onClick={() => setForm(f => ({ ...f, digest: !f.digest }))}
-                    role="checkbox"
-                    aria-checked={form.digest}
-                    tabIndex={0}
-                    onKeyDown={e => {
-                      if (e.key === ' ' || e.key === 'Enter') {
-                        e.preventDefault()
-                        setForm(f => ({ ...f, digest: !f.digest }))
-                      }
-                    }}
-                    style={{
-                      width: '1.5rem',
-                      height: '1.5rem',
-                      border: '1px solid #404040',
-                      borderRadius: '0.5rem',
-                      background: form.digest ? 'white' : 'transparent',
-                      flexShrink: 0,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      transition: 'background 150ms',
-                    }}
-                  >
-                    {form.digest && (
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                        <path d="M2.5 7L5.5 10L11.5 4" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    )}
-                  </div>
-                  <span
-                    className="font-inter-tight font-medium"
-                    style={{
-                      fontSize: '0.75rem',
-                      fontWeight: 500,
-                      lineHeight: 1.3,
-                      color: '#9b9b9b',
-                    }}
-                  >
-                    Подпишите меня на еженедельный дайджест Axevil
-                  </span>
-                </label>
+                <div>
+                  <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', cursor: 'pointer' }}>
+                    <input
+                      type="checkbox"
+                      required
+                      checked={form.digest}
+                      onChange={e => setForm(f => ({ ...f, digest: e.target.checked }))}
+                      style={{
+                        width: '1.5rem',
+                        height: '1.5rem',
+                        cursor: 'pointer',
+                        flexShrink: 0,
+                        accentColor: '#202020',
+                        marginTop: '0.125rem',
+                      }}
+                    />
+                    <span
+                      className="font-inter-tight font-medium"
+                      style={{
+                        fontSize: '0.75rem',
+                        fontWeight: 500,
+                        lineHeight: 1.3,
+                        color: '#9b9b9b',
+                      }}
+                    >
+                      Подпишите меня на еженедельный дайджест Axevil
+                    </span>
+                  </label>
+                  {errors.digest && (
+                    <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: '0.75rem', color: '#f87171', marginTop: '0.375rem', marginLeft: '0.25rem' }}>
+                      {errors.digest}
+                    </p>
+                  )}
+                </div>
 
                 {/* Submit button */}
                 <PDFCtaButton

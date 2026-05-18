@@ -26,67 +26,55 @@ export default function PS2KeyQuestions() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, amount: 0.1 })
   return (
-    <section id="key-questions" className="relative w-full padding-section-t6-b6" style={{ background: '#080808' }}>
-      <div className="nl-wrapper">
-        {/* Heading */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem', marginBottom: 'clamp(2rem, 4vw, 3rem)' }}>
-          {/* Eyebrow */}
+    <section id="key-questions" className="relative w-full bg-page-bg">
+      <div className="pt-section-y mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-0 pb-[3.75rem] sm:pb-[5rem] lg:pt-[12.5rem] lg:pb-[6.25rem]">
+
+        {/* Heading with inner desktop padding */}
+        <div className="flex flex-col gap-6 items-center mb-10 sm:mb-12 lg:px-[80px]">
           <div className="eyebrow">
             <span className="eyebrow-num">1.0</span>
             <span className="eyebrow-text">Ключевые вопросы</span>
           </div>
-          {/* H2 */}
-          <h2 style={{
-            fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
-            fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
-            lineHeight: 1, letterSpacing: '-0.02em', textAlign: 'center',
-            color: 'transparent',
-            background: 'linear-gradient(117.65deg, rgb(162,162,162) 15.77%, rgb(255,255,255) 49.29%, rgb(162,162,162) 82.81%)',
-            WebkitBackgroundClip: 'text', backgroundClip: 'text',
-            margin: 0,
-          }}>
+          <h2 className="font-inter-tight font-semibold text-transparent bg-clip-text text-center"
+            style={{
+              fontSize: 'clamp(2.25rem, 4.4vw, 4rem)', lineHeight: 1, letterSpacing: '-0.02em',
+              backgroundImage: 'linear-gradient(117.65deg, rgb(162,162,162) 15.77%, rgb(255,255,255) 49.29%, rgb(162,162,162) 82.81%)',
+            }}>
             Раскрываем главные вопросы<br />о private markets
           </h2>
         </div>
 
-        {/* Cards */}
-        <div ref={ref} style={{ display: 'flex', gap: '1rem', overflow: 'hidden', width: '100%' }}>
+        {/* Cards — stacked mobile, row sm+ */}
+        <div ref={ref} className="flex flex-col sm:flex-row gap-4 items-start overflow-hidden w-full">
           {CARDS.map((card, i) => (
             <motion.div
               key={card.num}
               initial={{ opacity: 0, y: '1.5rem' }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.1 }}
-              style={{
-                flex: '1 1 0', minWidth: 0,
-                background: '#111111', borderRadius: '1.5rem',
-                display: 'flex', flexDirection: 'column',
-                alignItems: 'center', justifyContent: 'space-between',
-                padding: 'clamp(1rem, 1.5vw, 1.5rem) clamp(1rem, 2vw, 2rem) clamp(1.5rem, 2vw, 2rem)',
-                gap: '1.5rem',
-                height: 'clamp(20rem, 31.25vw, 28.125rem)',
-              }}
+              className="flex flex-col items-center overflow-hidden rounded-[24px] flex-1 min-w-0"
+              style={{ background: '#111111', height: 'clamp(320px, 31.25vw, 450px)', paddingTop: 24, paddingBottom: 24, paddingLeft: 24, paddingRight: 24, gap: 48 }}
             >
-              {/* Number top */}
-              <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: '1.125rem', lineHeight: 1.35, letterSpacing: '-0.02em', color: '#303030', width: '100%', textAlign: 'center', margin: 0 }}>
+              <p className="font-inter-tight font-medium text-center whitespace-nowrap shrink-0 w-full"
+                style={{ fontSize: 18, lineHeight: 1.35, letterSpacing: '-0.36px', color: '#303030', margin: 0 }}>
                 {card.num}
               </p>
-              {/* Icon */}
-              <img src={card.icon} alt="" aria-hidden="true"
-                style={{ width: 'clamp(4rem, 7.5vw, 7.5rem)', height: 'clamp(4rem, 7.5vw, 7.5rem)', objectFit: 'contain' }}
-              />
-              {/* Text block */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'center', width: '100%' }}>
-                <h3 style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: 'clamp(1rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0 }}>
+              <img src={card.icon} alt="" loading="lazy" className="shrink-0 block"
+                style={{ width: 'clamp(88px, 8.3vw, 120px)', height: 'clamp(88px, 8.3vw, 120px)', objectFit: 'contain' }} />
+              <div className="flex flex-col items-center justify-center flex-1 min-h-0 w-full gap-4">
+                <h3 className="font-inter-tight font-semibold text-white text-center w-full"
+                  style={{ fontSize: 'clamp(1rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', margin: 0 }}>
                   {card.title}
                 </h3>
-                <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.3, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.55)', margin: 0 }}>
+                <p className="font-inter-tight font-medium text-center w-full"
+                  style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.3, color: 'rgba(255,255,255,0.55)', letterSpacing: '-0.02em', margin: 0 }}>
                   {card.desc}
                 </p>
               </div>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   )
