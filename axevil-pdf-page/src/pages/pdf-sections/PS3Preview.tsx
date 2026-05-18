@@ -95,7 +95,8 @@ export default function PS3Preview() {
               style={{
                 width: 'clamp(16.8125rem, 28.625vw, 28.625rem)',  /* 269px → 458px */
                 height: 'clamp(25.75rem, 40.625vw, 43.375rem)',   /* 412px → 694px */
-                objectFit: 'cover', objectPosition: 'top',
+                objectFit: 'contain', objectPosition: 'center',
+                background: 'transparent',
                 display: 'block', flexShrink: 0,
               }}
             />
@@ -112,7 +113,7 @@ export default function PS3Preview() {
               left: 0,
               right: 0,
               width: '100%',
-              height: '50%',
+              height: '100%',
               objectFit: 'cover',
               objectPosition: 'center bottom',
               pointerEvents: 'none',
@@ -120,8 +121,8 @@ export default function PS3Preview() {
             }}
           />
 
-          {/* CTA button (z=4) */}
-          <div style={{ position: 'relative', zIndex: 4 }}>
+          {/* CTA button (z=11) */}
+          <div style={{ position: 'relative', zIndex: 11 }}>
             <PDFCtaButton style={{ width: '100%', justifyContent: 'center' }}>
               Скачать полную версию PDF
             </PDFCtaButton>

@@ -9,7 +9,7 @@ export default function PDFSectionLabel({ children, className = '' }: PDFSection
   return (
     <p
       className={`font-inter-tight font-medium ${className}`}
-      style={{ fontSize: '1.125rem', lineHeight: 1.35, letterSpacing: '-0.02em', color: '#848484' }}
+      style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.02em', color: '#848484' }}
     >
       {children}
     </p>

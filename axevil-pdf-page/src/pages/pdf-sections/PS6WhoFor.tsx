@@ -31,7 +31,7 @@ export default function PS6WhoFor() {
 
         {/* Heading */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', textAlign: 'center' }}>
-          <div className="eyebrow">
+          <div className="eyebrow" style={{ fontSize: '0.875rem' }}>
             <span className="eyebrow-num">5.0</span>
             <span className="eyebrow-text">Кто пользуется Pre-IPO Insider</span>
           </div>
