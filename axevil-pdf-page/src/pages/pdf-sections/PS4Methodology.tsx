@@ -122,6 +122,8 @@ export default function PS4Methodology() {
             style={{
               display: 'flex',
               flexDirection: 'column',
+              justifyContent: 'space-between',
+              height: '100%',
               gap: '0.25rem',
               padding: '0.5rem 0',
             }}
@@ -269,9 +271,9 @@ export default function PS4Methodology() {
                   key={i}
                   style={{
                     border: '1px solid #151515',
-                    borderRadius: '1.25rem',
-                    height: '5rem',
-                    minWidth: '8rem',
+                    borderRadius: '2rem',
+                    height: '10.1875rem',
+                    minWidth: '10.1875rem',
                     padding: '1rem',
                     display: 'flex',
                     alignItems: 'center',

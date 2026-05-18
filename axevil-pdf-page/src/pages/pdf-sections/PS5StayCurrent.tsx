@@ -110,6 +110,7 @@ export default function PS5StayCurrent() {
                   src={card.mockup}
                   alt=""
                   aria-hidden="true"
+                  className={i === 0 ? 'mockup-left' : 'mockup-right'}
                   style={MOCKUP_STYLES[i]}
                 />
                 {/* Badge overlay */}

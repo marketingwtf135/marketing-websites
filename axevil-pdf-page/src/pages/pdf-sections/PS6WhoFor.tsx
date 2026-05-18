@@ -26,7 +26,7 @@ export default function PS6WhoFor() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, amount: 0.1 })
   return (
-    <section id="who-for" className="relative w-full padding-section-t12-b6" style={{ background: '#080808' }}>
+    <section id="who-for" className="relative w-full" style={{ background: '#080808', paddingTop: 'clamp(3.75rem, 8.5vw, 12.5rem)', paddingBottom: 'clamp(3.75rem, 8.5vw, 12.5rem)' }}>
       <div className="nl-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '3rem', alignItems: 'center' }}>
 
         {/* Heading */}

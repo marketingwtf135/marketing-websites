@@ -292,6 +292,26 @@ body {
   }
 }
 
+/* PS5StayCurrent mobile image positions */
+@media (max-width: 640px) {
+  .mockup-left {
+    right: -0.0625rem !important;
+    top: 12.6875rem !important;
+    bottom: auto !important;
+    width: 15.5rem !important;
+    height: 16.8125rem !important;
+  }
+  .mockup-right {
+    left: calc(50% + 4.03125rem) !important;
+    right: auto !important;
+    top: 12.6875rem !important;
+    bottom: auto !important;
+    width: 19.125rem !important;
+    height: 13.75rem !important;
+    transform: translateX(-50%) !important;
+  }
+}
+
 /* PS7About — hide platform screenshot on mobile */
 @media (max-width: 640px) {
   .platform-screenshot { display: none !important; }

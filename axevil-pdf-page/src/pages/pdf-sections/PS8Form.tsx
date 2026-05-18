@@ -46,7 +46,6 @@ export default function PS8Form() {
         background: 'linear-gradient(0deg, #000 77.85%, #080808 100%)',
         minHeight: '100svh',
         paddingTop: 'clamp(5rem, 8vw, 7.5rem)',
-        paddingInline: '1.25rem',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -72,7 +71,6 @@ export default function PS8Form() {
         style={{
           maxWidth: '1440px',
           margin: '0 auto',
-          paddingInline: 'clamp(1rem, 5vw, 5rem)',
         }}
       >
         <motion.div

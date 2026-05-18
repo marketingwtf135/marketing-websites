@@ -102,7 +102,7 @@ export default function PS3Preview() {
             <div style={{
               position: 'absolute', left: '50%', transform: 'translateX(-50%)',
               overflow: 'hidden',
-              width: 'clamp(18rem, 28.625vw, 28.625rem)',
+              width: 'clamp(16.8125rem, 28.625vw, 28.625rem)',
               top: '0.5rem',
               bottom: 0,
             }}>
@@ -130,7 +130,7 @@ export default function PS3Preview() {
               objectPosition: 'center bottom',
               pointerEvents: 'none',
               zIndex: 10,
-              y: '4.375rem',
+              y: rockY,
             }}
           />
 
