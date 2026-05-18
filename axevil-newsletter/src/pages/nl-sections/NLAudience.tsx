@@ -68,7 +68,7 @@ export default function NLAudience() {
               {/* Title + quote — centered */}
               <div className="flex flex-col items-center justify-center flex-1 min-h-0 w-full gap-4">
                 <h3 className="font-inter-tight font-semibold text-white text-center whitespace-pre-line w-full"
-                  style={{ fontSize: 'clamp(1rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
+                  style={{ fontSize: 'clamp(1.25rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
                   {card.title}
                 </h3>
                 <p className="font-inter-tight font-medium text-center w-full"
