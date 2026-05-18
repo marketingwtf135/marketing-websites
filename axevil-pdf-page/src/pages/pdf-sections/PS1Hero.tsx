@@ -154,21 +154,28 @@ export default function PS1Hero() {
             marginBottom: '2.5rem',
           }}
         >
-          {/* Image */}
+          {/* Image — absolute positioned like Figma */}
           <div
             style={{
               width: 'clamp(5rem, 9.1875vw, 9.1875rem)',
               height: 'clamp(5.4375rem, 9.9375vw, 9.9375rem)',
               borderRadius: '0.75rem',
-              overflow: 'hidden',
-              background: '#1a1a1a',
+              overflow: 'visible',
+              position: 'relative',
             }}
           >
             <img
               src="/img/image-left-card-hero.png"
               alt=""
               aria-hidden="true"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }}
+              style={{
+                position: 'absolute',
+                right: '-2.5rem',
+                bottom: '-6.75rem',
+                width: 'clamp(5rem, 9.1875vw, 9.1875rem)',
+                height: 'clamp(5.4375rem, 9.9375vw, 9.9375rem)',
+                objectFit: 'contain',
+              }}
             />
           </div>
           {/* Text */}
