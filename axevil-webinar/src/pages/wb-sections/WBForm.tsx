@@ -643,15 +643,26 @@ function FormModal({
               {actionLabel}
             </a>
           )}
-          <button
-            type="button"
-            onClick={onClose}
-            className="relative mt-2 w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-[15px] text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-            style={{ height: 'clamp(3rem, 4vw, 3.75rem)' }}
-          >
-            <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: '#2b2b2b' }} />
-            {closeLabel}
-          </button>
+          {actionHref && actionLabel ? (
+            <button
+              type="button"
+              onClick={onClose}
+              className="relative mt-2 w-full flex items-center justify-center font-inter-tight font-semibold text-[15px] text-white/80 hover:text-white bg-transparent hover:bg-white/5 rounded-[14px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/40"
+              style={{ height: 'clamp(3rem, 4vw, 3.75rem)', border: '1px solid rgba(255,255,255,0.15)' }}
+            >
+              {closeLabel}
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={onClose}
+              className="relative mt-2 w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-[15px] text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+              style={{ height: 'clamp(3rem, 4vw, 3.75rem)' }}
+            >
+              <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: '#2b2b2b' }} />
+              {closeLabel}
+            </button>
+          )}
         </div>
       </motion.div>
     </motion.div>
