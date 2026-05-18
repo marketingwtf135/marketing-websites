@@ -60,12 +60,11 @@ const IP_GEO_CACHE_TTL_MS = 24 * 60 * 60 * 1000
 
 export default function WBForm() {
   const { t, lang } = useLang()
-  const defaultDialCode = getCountry({ field: 'iso2', value: DEFAULT_COUNTRY, countries: defaultCountries })?.dialCode ?? '7'
   const [phoneDefaultCountry, setPhoneDefaultCountry] = useState<CountryIso2>(DEFAULT_COUNTRY)
   const [form, setForm] = useState<FormData>({
     name: '',
     email: '',
-    phone: `+${defaultDialCode}`,
+    phone: '',
     phoneCountry: DEFAULT_COUNTRY,
   })
   const [errors, setErrors] = useState<FormErrors>({})
@@ -74,11 +73,14 @@ export default function WBForm() {
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
   const [successTelegramLink, setSuccessTelegramLink] = useState(TELEGRAM_BOT_BASE_URL)
   const [errorModalMessage, setErrorModalMessage] = useState('')
-  const [phoneFocused, setPhoneFocused] = useState(false)
   const hasStarted = useRef(false)
   const hasPhoneInteractionRef = useRef(false)
   const phoneInputRef = useRef<PhoneInputRefType>(null)
   const submitLockRef = useRef(false)
+  // Mirror of submitAttempted updated synchronously so live validators in
+  // handlePhoneChange/updateField don't fire on programmatic resets that race
+  // ahead of React state updates (notably PhoneInput.setCountry's onChange).
+  const submitAttemptedRef = useRef(false)
   const sectionRef = useRef<HTMLElement>(null)
   const ui = I18N[lang]
 
@@ -115,17 +117,12 @@ export default function WBForm() {
 
       setPhoneDefaultCountry(detectedCountry.iso2)
       setForm(prev => {
-        const currentCountry = getCountry({ field: 'iso2', value: prev.phoneCountry, countries: defaultCountries })
-        const currentDialCode = currentCountry?.dialCode ?? defaultDialCode
-        const digits = prev.phone.replace(/\D/g, '')
-        const hasOnlyDialCode = digits === currentDialCode || prev.phone.trim() === ''
+        const phoneEmpty = prev.phone.trim() === ''
         const stillDefaultCountry = prev.phoneCountry === DEFAULT_COUNTRY
-
-        if (hasPhoneInteractionRef.current || !stillDefaultCountry || !hasOnlyDialCode) return prev
+        if (hasPhoneInteractionRef.current || !stillDefaultCountry || !phoneEmpty) return prev
         return {
           ...prev,
           phoneCountry: detectedCountry.iso2,
-          phone: `+${detectedCountry.dialCode}`,
         }
       })
       if (!hasPhoneInteractionRef.current) {
@@ -183,7 +180,8 @@ export default function WBForm() {
 
     detectCountryByIp()
     return () => { cancelled = true }
-  }, [defaultDialCode])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   function onInput() {
     if (!hasStarted.current) { hasStarted.current = true; analytics.formStart() }
@@ -260,7 +258,7 @@ export default function WBForm() {
       : value
     setForm(prev => {
       const next = { ...prev, [field]: normalizedValue }
-      if (submitAttempted) {
+      if (submitAttemptedRef.current) {
         const nextError = validateField(field, String(normalizedValue), next)
         setErrors(prevErrors => {
           const clone = { ...prevErrors }
@@ -283,7 +281,7 @@ export default function WBForm() {
     hasPhoneInteractionRef.current = true
     setForm(prev => {
       const next = { ...prev, phone, phoneCountry: country }
-      if (submitAttempted) {
+      if (submitAttemptedRef.current) {
         const phoneError = validateField('phone', phone, next)
         setErrors(prevErrors => {
           const clone = { ...prevErrors }
@@ -306,6 +304,7 @@ export default function WBForm() {
     e.preventDefault()
     if (isPending || submitLockRef.current) return
 
+    submitAttemptedRef.current = true
     setSubmitAttempted(true)
     const errs = validate(form)
     if (Object.keys(errs).length) {
@@ -377,17 +376,21 @@ export default function WBForm() {
       const resetCountry = getCountry({ field: 'iso2', value: phoneDefaultCountry, countries: defaultCountries })
         ?? getCountry({ field: 'iso2', value: DEFAULT_COUNTRY, countries: defaultCountries })
       const resetPhoneCountry = resetCountry?.iso2 ?? DEFAULT_COUNTRY
-      const resetDialCode = resetCountry?.dialCode ?? defaultDialCode
       setSuccessTelegramLink(telegramLink)
+      // Clear the "submit was attempted" flag synchronously BEFORE touching the
+      // PhoneInput, otherwise its setCountry triggers onChange while the ref
+      // is still true and surfaces a phantom "required" error on the reset.
+      submitAttemptedRef.current = false
+      hasPhoneInteractionRef.current = false
+      setSubmitAttempted(false)
+      setErrors({})
       setForm({
         name: '',
         email: '',
-        phone: `+${resetDialCode}`,
+        phone: '',
         phoneCountry: resetPhoneCountry,
       })
       phoneInputRef.current?.setCountry(resetPhoneCountry, { focusOnInput: false })
-      setErrors({})
-      setSubmitAttempted(false)
       setIsSuccessModalOpen(true)
     } catch {
       analytics.formError('submit')
@@ -475,6 +478,7 @@ export default function WBForm() {
                       defaultCountry={phoneDefaultCountry}
                       preferredCountries={PREFERRED_COUNTRIES}
                       value={form.phone}
+                      disableDialCodePrefill
                       onChange={(phone, meta) => {
                         handlePhoneChange(phone, meta.country.iso2)
                       }}
@@ -486,14 +490,12 @@ export default function WBForm() {
                           className: 'wb-form-phone-country-dropdown',
                         },
                       }}
-                      placeholder={phoneFocused && !form.phone.trim() ? phoneMaskPlaceholder : t.form.fields.phone}
+                      placeholder={phoneMaskPlaceholder || t.form.fields.phone}
                       inputProps={{
                         name: 'phone',
                         autoComplete: 'tel',
                         inputMode: 'tel',
                         enterKeyHint: 'send',
-                        onFocus: () => setPhoneFocused(true),
-                        onBlur: () => setPhoneFocused(false),
                         'aria-invalid': Boolean(errors.phone),
                         'aria-describedby': errors.phone ? 'phone-error' : undefined,
                       }}
