@@ -53,7 +53,7 @@ export default function NLAudience() {
           {CARDS.map((card) => (
             <div key={card.num}
               className="flex flex-col items-center overflow-hidden rounded-[24px] flex-1 min-w-0"
-              style={{ background: '#111111', height: 'clamp(320px, 31.25vw, 450px)', paddingTop: 24, paddingBottom: 24, paddingLeft: 24, paddingRight: 24, gap: 48 }}
+              style={{ background: '#111111', minHeight: 'clamp(280px, 31.25vw, 450px)', paddingTop: 24, paddingBottom: 24, paddingLeft: 24, paddingRight: 24, gap: 48 }}
             >
               {/* Number — centered */}
               <p className="font-inter-tight font-medium text-center whitespace-nowrap shrink-0 w-full"

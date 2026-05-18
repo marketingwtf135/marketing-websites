@@ -35,9 +35,10 @@ export default function NLHero() {
       {/* ── MOBILE (< lg) ── */}
       <div className="lg:hidden relative w-full flex flex-col items-center overflow-hidden"
         style={{ minHeight: 'calc(100svh - 72px)', padding: '40px 16px 0' }}>
-        <div className="flex flex-col items-center gap-8 w-full">
+        {/* Fix #1: badge→heading 1rem, heading→CTA 2rem */}
+        <div className="flex flex-col items-center w-full" style={{ gap: 0 }}>
           {/* Badge */}
-          <div className="flex items-center gap-2 px-4 py-3 rounded-full shrink-0"
+          <div className="flex items-center gap-2 px-4 py-3 rounded-full shrink-0 mb-[1rem]"
             style={{ background: 'rgba(77,186,121,0.05)', border: '1px solid rgba(77,186,121,0.15)' }}>
             <span className="badge-pulse shrink-0 block rounded-full" style={{ width: 10, height: 10, background: "#4DBA79", display: "block" }} aria-hidden />
             <p className="font-inter-tight font-medium text-white whitespace-nowrap" style={{ fontSize: 12, lineHeight: 1.3 }}>
@@ -54,7 +55,7 @@ export default function NLHero() {
               Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждый вторник.
             </p>
           </div>
-          <OwnButton onClick={scrollToNLForm} />
+          <div className="mt-[2rem]"><OwnButton onClick={scrollToNLForm} /></div>
         </div>
 
         {/* Letter preview — absolute bottom, 44px out of frame */}

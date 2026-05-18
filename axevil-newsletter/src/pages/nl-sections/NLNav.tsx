@@ -137,7 +137,7 @@ export default function NLNav() {
               </div>
               {/* gap auto — button pushed to bottom */}
               <div className="mt-auto pt-6">
-                <OwnButton onClick={() => { scrollToNLForm(); setMenuOpen(false) }} label="Подписаться" />
+                <OwnButton onClick={() => { scrollToNLForm(); setMenuOpen(false) }} label="Подписаться" fullWidth />
               </div>
             </div>
           </motion.div>

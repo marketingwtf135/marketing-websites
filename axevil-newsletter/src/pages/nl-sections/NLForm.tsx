@@ -62,7 +62,7 @@ function AUMDropdown({ value, onChange }: { value: string; onChange: (v: string)
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
-            className="absolute left-0 right-0 z-50 mt-1 overflow-hidden rounded-[16px]"
+            className="absolute left-0 right-0 z-[1000] mt-1 overflow-hidden rounded-[16px]"
             style={{ background: '#1a1a1a' }}
           >
             {AUM_OPTIONS.map((opt, i) => (
@@ -160,7 +160,7 @@ export default function NLForm() {
         transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
       >
         {/* Header */}
-        <div className="flex flex-col gap-8 items-center justify-center w-full max-w-[600px] mb-10">
+        <div className="flex flex-col gap-[1rem] items-center justify-center w-full max-w-[600px] mb-10">
           <div className="flex gap-2 font-inter-tight font-medium items-center justify-center whitespace-nowrap"
             style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.36px' }}>
             <span style={{ color: '#404040' }}>7.0</span>
@@ -168,7 +168,7 @@ export default function NLForm() {
           </div>
           <div className="flex flex-col gap-4 items-center text-center">
             <h2 className="font-inter-tight font-semibold text-transparent bg-clip-text"
-              style={{ fontSize: 'clamp(2rem, 4.4vw, 4rem)', lineHeight: 1, letterSpacing: '-0.02em', overflow: 'visible', backgroundImage: 'linear-gradient(103.042deg, rgb(162,162,162) 15.766%, rgb(255,255,255) 49.286%, rgb(162,162,162) 82.806%)', whiteSpace: 'pre-line' }}>
+              style={{ fontSize: 'clamp(2.25rem, 4.4vw, 4rem)', lineHeight: 1, letterSpacing: '-0.02em', overflow: 'visible', backgroundImage: 'linear-gradient(103.042deg, rgb(162,162,162) 15.766%, rgb(255,255,255) 49.286%, rgb(162,162,162) 82.806%)', whiteSpace: 'pre-line' }}>
               {'Подписаться \nна дайджест'}
             </h2>
             <p className="font-inter-tight font-medium"
@@ -247,18 +247,46 @@ function Field({ input, error, className, children }: { input?: React.ReactNode;
 
 function SuccessState() {
   return (
-    <div className="flex flex-col items-start gap-5 py-4 w-full">
-      <div className="w-12 h-12 rounded-full flex items-center justify-center shrink-0"
-        style={{ background: 'rgba(77,186,121,0.1)', border: '1px solid rgba(77,186,121,0.25)' }}>
-        <svg width="20" height="16" viewBox="0 0 20 16" fill="none">
-          <path d="M2 8L7 13.5L18 2" stroke="#4dba79" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    <div className="flex flex-col items-start gap-6 py-6 w-full max-w-[600px]">
+      {/* Icon */}
+      <div className="flex items-center justify-center shrink-0"
+        style={{ width: '3.5rem', height: '3.5rem', borderRadius: '50%', background: 'rgba(77,186,121,0.1)', border: '1px solid rgba(77,186,121,0.3)' }}>
+        <svg width="22" height="18" viewBox="0 0 22 18" fill="none">
+          <path d="M2 9L8 15.5L20 2" stroke="#4dba79" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
-      <div className="flex flex-col gap-1.5">
-        <h3 className="font-inter-tight font-semibold text-white" style={{ fontSize: 20 }}>Вы подписаны!</h3>
-        <p className="font-inter-tight font-medium" style={{ fontSize: 16, lineHeight: 1.5, color: 'rgba(255,255,255,0.5)', maxWidth: 400 }}>
-          Первый выпуск уже в вашей почте. Следующий — в ближайший вторник в 9:00.
+
+      {/* Content */}
+      <div className="flex flex-col gap-3">
+        <h3 className="font-inter-tight font-semibold text-transparent bg-clip-text"
+          style={{
+            fontSize: 'clamp(1.5rem, 2.5vw, 2rem)',
+            lineHeight: 1.1, letterSpacing: '-0.02em',
+            backgroundImage: 'linear-gradient(103.042deg, rgb(162,162,162) 15.766%, rgb(255,255,255) 49.286%, rgb(162,162,162) 82.806%)',
+          }}>
+          Вы в списке дайджеста
+        </h3>
+        <p className="font-inter-tight font-medium"
+          style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.55, color: 'rgba(255,255,255,0.55)', maxWidth: '31.25rem' }}>
+          Спасибо за подписку на Axevil Дайджест. Первый выпуск с обзором рынка частных компаний придёт вам на почту — дальше каждый вторник в 9:00.
         </p>
+      </div>
+
+      {/* Tags */}
+      <div className="flex flex-wrap gap-2">
+        {['Secondary-рынок', 'Рейтинги и оценки', 'Тендер-оферы', 'Новые раунды'].map(tag => (
+          <span key={tag} className="font-inter-tight font-medium"
+            style={{
+              fontSize: '0.75rem', lineHeight: 1.3,
+              color: 'rgba(255,255,255,0.4)',
+              padding: '0.25rem 0.75rem',
+              borderRadius: '1rem',
+              border: '1px solid rgba(255,255,255,0.08)',
+              background: 'rgba(255,255,255,0.04)',
+            }}>
+            {tag}
+          </span>
+        ))}
       </div>
     </div>
   )

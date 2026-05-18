@@ -6,6 +6,7 @@ interface OwnButtonProps {
   disabled?: boolean
   label?: string
   color?: string
+  fullWidth?: boolean
 }
 
 /**
@@ -14,14 +15,14 @@ interface OwnButtonProps {
  */
 export default function OwnButton({
   onClick, type = 'button', disabled = false,
-  label = 'Подписаться', color = '#202020',
+  label = 'Подписаться', color = '#202020', fullWidth = false,
 }: OwnButtonProps) {
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className="cta-button-glow relative flex items-center justify-center gap-2 font-inter-tight font-semibold shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white disabled:opacity-60 transition-all duration-300"
+      className={`cta-button-glow relative flex items-center justify-center gap-2 font-inter-tight font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-white disabled:opacity-60 transition-all duration-300${fullWidth ? ' w-full' : ' shrink-0'}`}
       style={{
         background: 'white',
         borderBottom: '3px solid #b8b8b8',
