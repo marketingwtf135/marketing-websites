@@ -36,16 +36,8 @@ export default function PS3Preview() {
             <span className="eyebrow-num">2.0</span>
             <span className="eyebrow-text">Образец</span>
           </div>
-          {/* Desc + H2 block — flex with gap auto so H2 goes to bottom */}
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1, gap: '1.5rem' }}>
-            <p style={{
-              fontFamily: 'Inter Tight, sans-serif', fontWeight: 500,
-              fontSize: 'clamp(1rem, 1.2vw, 1.125rem)',
-              lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc',
-              maxWidth: '36.25rem', margin: 0,
-            }}>
-              Динамика индекса топ-20 частных компаний по сравнению с NASDAQ на фоне торговых войн и конфликта Трампа с главой ФРС.
-            </p>
+          {/* H2 + desc together at bottom — space-between pushes them down */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <h2 style={{
               fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
               fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
@@ -56,6 +48,14 @@ export default function PS3Preview() {
             }}>
               Частный рынок vs Nasdaq за 2025 год
             </h2>
+            <p style={{
+              fontFamily: 'Inter Tight, sans-serif', fontWeight: 500,
+              fontSize: 'clamp(1rem, 1.2vw, 1.125rem)',
+              lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc',
+              maxWidth: '36.25rem', margin: 0,
+            }}>
+              Динамика индекса топ-20 частных компаний по сравнению с NASDAQ на фоне торговых войн и конфликта Трампа с главой ФРС.
+            </p>
           </div>
         </motion.div>
 
@@ -106,7 +106,7 @@ export default function PS3Preview() {
             </div>
           </div>
 
-          {/* Rock — absolute, fixed to bottom of card */}
+          {/* Rock — absolute, fixed to bottom, z:10 above everything */}
           <img
             src="/img/bg-image-rock.png"
             alt=""
@@ -116,17 +116,17 @@ export default function PS3Preview() {
               bottom: 0,
               left: 0,
               width: '100%',
-              height: '55%',
+              height: '50%',
               objectFit: 'cover',
               objectPosition: 'center top',
               pointerEvents: 'none',
-              zIndex: 3,
+              zIndex: 10,
               borderRadius: '0 0 2rem 2rem',
             }}
           />
 
-          {/* CTA button (z=4) */}
-          <div style={{ position: 'relative', zIndex: 4, display: 'flex', justifyContent: 'center' }}>
+          {/* CTA button (z=11, above rock) */}
+          <div style={{ position: 'relative', zIndex: 11, display: 'flex', justifyContent: 'center' }}>
             <PDFCtaButton>
               Скачать полную версию PDF
             </PDFCtaButton>

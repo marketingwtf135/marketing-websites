@@ -156,7 +156,7 @@ export default function PS1Hero() {
             overflow: 'visible',
           }}
         >
-          {/* Image — centered, fit content, no stretch */}
+          {/* Image — centered, fit content, shadow */}
           <div
             style={{
               width: 'clamp(5rem, 9.1875vw, 9.1875rem)',
@@ -177,7 +177,7 @@ export default function PS1Hero() {
                 height: '100%',
                 objectFit: 'contain',
                 objectPosition: 'center',
-                filter: 'drop-shadow(1rem 3rem 4rem rgba(0,0,0,0.9))',
+                filter: 'drop-shadow(1rem 3rem 4rem rgba(0,0,0,0.9)) drop-shadow(0 0.5rem 1rem rgba(0,0,0,0.7))',
               }}
             />
           </div>
