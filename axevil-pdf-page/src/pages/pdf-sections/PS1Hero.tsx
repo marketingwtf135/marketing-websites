@@ -1,6 +1,16 @@
 import { useScroll, useTransform, motion } from 'framer-motion'
 import PDFCtaButton from '../../components/PDFCtaButton'
 
+// Stagger animation helper — badge → h1 → p → btn, +0.05s each
+const E = [0.4, 0, 0.2, 1] as const
+function fadeUp(delay: number) {
+  return {
+    initial: { opacity: 0, y: 16 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, delay, ease: E },
+  } as const
+}
+
 export default function PS1Hero() {
   const { scrollY } = useScroll()
   const bgY = useTransform(scrollY, [0, 800], ['0%', '-12%'])
@@ -16,23 +26,25 @@ export default function PS1Hero() {
         paddingTop: '4.25rem',
       }}
     >
-      {/* Parallax rocky background — oversized so no black gap */}
+      {/* Rocky background — fades in first, then parallax takes over */}
       <motion.div
         className="absolute pointer-events-none"
         aria-hidden="true"
-        style={{
-          top: 'calc(-15% + 150px)', left: 0, right: 0, bottom: '-15%',
-          y: bgY,
-        }}
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.0, delay: 0, ease: E }}
+        style={{ top: 'calc(-15% + 150px)', left: 0, right: 0, bottom: '-15%' }}
       >
-        {/* Mobile */}
-        <img src="/img/hero-bg-rock.png" alt="" className="absolute max-w-none lg:hidden"
-          style={{ height: '100%', left: '-50%', top: '5%', width: '200%', objectFit: 'cover' }}
-        />
-        {/* Desktop */}
-        <img src="/img/hero-bg-rock.png" alt="" className="absolute max-w-none hidden lg:block w-full h-full object-cover"
-          style={{ inset: 0 }}
-        />
+        <motion.div className="absolute inset-0" style={{ y: bgY }}>
+          {/* Mobile */}
+          <img src="/img/hero-bg-rock.png" alt="" className="absolute max-w-none lg:hidden"
+            style={{ height: '100%', left: '-50%', top: '5%', width: '200%', objectFit: 'cover' }}
+          />
+          {/* Desktop */}
+          <img src="/img/hero-bg-rock.png" alt="" className="absolute max-w-none hidden lg:block w-full h-full object-cover"
+            style={{ inset: 0 }}
+          />
+        </motion.div>
       </motion.div>
 
       {/* Content wrapper */}
@@ -49,11 +61,8 @@ export default function PS1Hero() {
           zIndex: 1,
         }}
       >
-        {/* Top content */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
+        {/* Top content — each element fades up with 0.05s stagger */}
+        <div
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -62,7 +71,7 @@ export default function PS1Hero() {
             width: '100%',
           }}
         >
-          {/* Badge + headline block — badge stays hug, H1+subtitle+CTA fill width */}
+          {/* Badge block */}
           <div
             style={{
               display: 'flex',
@@ -72,8 +81,8 @@ export default function PS1Hero() {
               width: '100%',
             }}
           >
-            {/* Badge */}
-            <div className="flex items-center gap-2 px-4 py-3 rounded-full shrink-0"
+            {/* Badge — first, delay 0.1s */}
+            <motion.div {...fadeUp(0.1)} className="flex items-center gap-2 px-4 py-3 rounded-full shrink-0"
               style={{ background: 'rgba(77,186,121,0.05)', border: '1px solid rgba(77,186,121,0.15)' }}>
               <span
                 className="badge-pulse shrink-0 block rounded-full"
@@ -84,9 +93,9 @@ export default function PS1Hero() {
                 style={{ fontSize: '0.875rem', lineHeight: 1.3 }}>
                 PRE-IPO INSIDER · Q4&#39;25 — Q1&#39;26 · 51 страница
               </p>
-            </div>
+            </motion.div>
 
-            {/* H1 + subtitle — fill width */}
+            {/* H1 + subtitle */}
             <div
               style={{
                 display: 'flex',
@@ -96,7 +105,8 @@ export default function PS1Hero() {
                 width: '100%',
               }}
             >
-              <h1
+              {/* H1 — delay 0.15s */}
+              <motion.h1 {...fadeUp(0.15)}
                 style={{
                   fontFamily: 'Inter Tight, sans-serif',
                   fontWeight: 600,
@@ -109,7 +119,7 @@ export default function PS1Hero() {
                   WebkitBackgroundClip: 'text',
                   backgroundClip: 'text',
                   width: '100%',
-                  maxWidth: '37.5rem',
+                  maxWidth: '38.75rem',
                   textAlign: 'center',
                   margin: 0,
                 }}
@@ -117,9 +127,10 @@ export default function PS1Hero() {
                 Pre-IPO Insider.
                 <br />
                 Один отчёт вместо десятка источников
-              </h1>
+              </motion.h1>
 
-              <p
+              {/* Subtitle — delay 0.2s */}
+              <motion.p {...fadeUp(0.2)}
                 style={{
                   fontFamily: 'Inter Tight, sans-serif',
                   fontWeight: 500,
@@ -128,24 +139,29 @@ export default function PS1Hero() {
                   letterSpacing: '-0.02em',
                   color: '#9b9b9b',
                   width: '100%',
-                  maxWidth: '37.5rem',
+                  maxWidth: '38.75rem',
                   textAlign: 'center',
                   margin: 0,
                 }}
               >
                 Главное на рынке частных компаний по итогам Q1 2026: динамика индекса,
                 крупнейшие переоценки и раунды, кандидаты на IPO и многое другое.
-              </p>
+              </motion.p>
             </div>
           </div>
 
-          {/* CTA */}
-          <PDFCtaButton>Скачать PDF</PDFCtaButton>
-        </motion.div>
+          {/* CTA — delay 0.25s */}
+          <motion.div {...fadeUp(0.25)}>
+            <PDFCtaButton>Скачать PDF</PDFCtaButton>
+          </motion.div>
+        </div>
 
-        {/* Preview card — natural flex child pushed to bottom by space-between */}
-        <div
+        {/* Preview card — opacity fade in, delay 0.35s */}
+        <motion.div
           className="w-full lg:w-[32.5rem]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.35, ease: E }}
           style={{
             display: 'flex',
             maxWidth: '100%',
@@ -155,13 +171,13 @@ export default function PS1Hero() {
             alignItems: 'center',
             gap: '1rem',
             background: '#111',
-            borderRadius: '1.5rem',              /* 24px */
+            borderRadius: '1.5rem',
             filter: 'drop-shadow(2rem 4rem 1.5rem rgba(0,0,0,0.8))',
             marginBottom: '2.5rem',
             overflow: 'visible',
           }}
         >
-          {/* Image — centered, fit content, shadow */}
+          {/* Image */}
           <div
             style={{
               width: 'clamp(5rem, 9.1875vw, 9.1875rem)',
@@ -188,22 +204,14 @@ export default function PS1Hero() {
           </div>
           {/* Text */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', textAlign: 'center', width: '100%' }}>
-            <p style={{
-              fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
-              fontSize: 'clamp(1.25rem, 1.7vw, 1.5rem)',
-              lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0,
-            }}>
+            <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: 'clamp(1.25rem, 1.7vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0 }}>
               Ключевые события рынка
             </p>
-            <p style={{
-              fontFamily: 'Inter Tight, sans-serif', fontWeight: 500,
-              fontSize: 'clamp(0.875rem, 1.2vw, 1.125rem)',
-              lineHeight: 1.35, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.55)', margin: 0,
-            }}>
+            <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: 'clamp(0.875rem, 1.2vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.55)', margin: 0 }}>
               Axevil capital - квартальный брифинг инвест-команды
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )
