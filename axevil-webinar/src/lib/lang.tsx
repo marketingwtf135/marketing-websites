@@ -133,8 +133,8 @@ export const translations = {
       ],
     },
     whyAxevil: {
-      label: '2.0 Почему Axevil проводит это',
-      heading: 'Создано людьми, которые работают на private markets — не просто обсуждают.',
+      label: '2.0 Почему Axevil',
+      heading: 'Создано командой с практическим опытом в private markets более 5 лет.',
       link: 'Посмотреть платформу Axevil',
       stats: [
         { value: '$150M', label: 'AUM' },
