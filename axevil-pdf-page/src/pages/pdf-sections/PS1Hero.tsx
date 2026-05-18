@@ -108,7 +108,8 @@ export default function PS1Hero() {
                     'linear-gradient(103.37deg, rgb(162,162,162) 8.73%, rgb(255,255,255) 50.65%, rgb(162,162,162) 92.57%)',
                   WebkitBackgroundClip: 'text',
                   backgroundClip: 'text',
-                  maxWidth: 'clamp(20rem, 40vw, 38rem)',
+                  width: '100%',
+                  maxWidth: 'none',
                   textAlign: 'center',
                   margin: 0,
                 }}
@@ -126,7 +127,8 @@ export default function PS1Hero() {
                   lineHeight: 1.35,
                   letterSpacing: '-0.02em',
                   color: '#9b9b9b',
-                  maxWidth: 'clamp(18rem, 35vw, 37.5rem)',
+                  width: '100%',
+                  maxWidth: 'none',
                   textAlign: 'center',
                   margin: 0,
                 }}
