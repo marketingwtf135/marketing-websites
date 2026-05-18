@@ -99,7 +99,7 @@ export default function PS5StayCurrent() {
             >
               {/* Content top */}
               <div style={{ padding: 'clamp(1.25rem, 2vw, 2rem)', display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
-                <h3 style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: 'clamp(1.5rem, 2vw, 2.25rem)', lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0 }}>
+                <h3 style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 600, fontStyle: 'normal', fontSize: 'clamp(1.5rem, 2vw, 2.25rem)', lineHeight: 1.1, letterSpacing: '-0.02em', color: '#ffffff', margin: 0, WebkitFontSmoothing: 'antialiased' }}>
                   {card.title}
                 </h3>
                 <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: 'clamp(0.875rem, 1.2vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc', maxWidth: '24rem', margin: 0 }}>
