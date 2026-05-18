@@ -26,7 +26,7 @@ export default function PS3Preview() {
           style={{
             flex: '1 1 0', minWidth: 0,
             display: 'flex', flexDirection: 'column',
-            gap: '1.5rem',
+            gap: '1rem',
             width: '100%', height: '100%',
           }}
         >
@@ -88,49 +88,37 @@ export default function PS3Preview() {
           </p>
 
           {/* Image area (z=2) */}
-          <div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 2 }}>
-            <div style={{
-              position: 'absolute', left: '50%', transform: 'translateX(-50%)',
-              border: '0.5875rem solid #1a1a1a',
-              borderRadius: '1.878rem',
-              overflow: 'hidden',
-              width: 'clamp(16.8125rem, 28.625vw, 28.625rem)',
-              height: 'clamp(25.75rem, 40.625vw, 43.375rem)',
-              top: '0.5rem',
-            }}>
-              <img
-                src="/img/image-analyse.png"
-                alt="Анализ частного рынка"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' }}
-              />
-            </div>
-          </div>
-
-          {/* Rock bg — absolute, covers bottom, z=3 (above image) */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: 'absolute', bottom: 0, left: 0, right: 0,
-              height: '100%',
-              pointerEvents: 'none',
-              zIndex: 3,
-              overflow: 'hidden',
-              borderRadius: '2rem',
-            }}
-          >
+          <div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 2, display: 'flex', justifyContent: 'center' }}>
             <img
-              src="/img/bg-image-rock.png"
-              alt=""
+              src="/img/image-analyse.png"
+              alt="Анализ частного рынка"
               style={{
-                position: 'absolute',
-                width: '278.73%',
-                height: '100%',
-                left: '-89.37%',
-                top: '23.72%',
-                objectFit: 'cover',
+                width: 'clamp(16.8125rem, 28.625vw, 28.625rem)',  /* 269px → 458px */
+                height: 'clamp(25.75rem, 40.625vw, 43.375rem)',   /* 412px → 694px */
+                objectFit: 'cover', objectPosition: 'top',
+                display: 'block', flexShrink: 0,
               }}
             />
           </div>
+
+          {/* Rock — static img, absolute bottom, z:10 */}
+          <img
+            src="/img/hero-bg-rock.png"
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              width: '100%',
+              height: '50%',
+              objectFit: 'cover',
+              objectPosition: 'center bottom',
+              pointerEvents: 'none',
+              zIndex: 10,
+            }}
+          />
 
           {/* CTA button (z=4) */}
           <div style={{ position: 'relative', zIndex: 4 }}>
