@@ -150,29 +150,49 @@ export default function PS1Hero() {
             alignItems: 'center',
             gap: '3rem',
             background: '#111',
-            borderRadius: 'clamp(1.5rem, 3.3vw, 3rem)',
-            boxShadow: '0 4rem 6rem rgba(0,0,0,0.8)',
+            borderRadius: '3rem',
+            filter: 'drop-shadow(2rem 4rem 1.5rem rgba(0,0,0,0.8))',
             marginBottom: '2.5rem',
           }}
         >
-          {/* Image — CSS background per Figma */}
+          {/* Image container — overflow hidden, exact dimensions */}
           <div
             style={{
               width: 'clamp(5rem, 9.1875vw, 9.1875rem)',
               height: 'clamp(5.4375rem, 9.9375vw, 9.9375rem)',
-              borderRadius: '0.75rem',
+              position: 'relative',
+              overflow: 'hidden',
               flexShrink: 0,
-              background: "url('/img/image-left-card-hero.png') lightgray -4.5625rem -1.8103rem / 197.544% 136.432% no-repeat",
               boxShadow: '1rem 3rem 4rem 0 rgba(0,0,0,0.9)',
             }}
             aria-hidden="true"
-          />
+          >
+            <img
+              src="/img/image-left-card-hero.png"
+              alt=""
+              style={{
+                position: 'absolute',
+                width: '197.54%',
+                height: '136.43%',
+                left: '-49.66%',
+                top: '-18.22%',
+              }}
+            />
+          </div>
           {/* Text */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', textAlign: 'center', width: '100%' }}>
-            <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: 'clamp(1.25rem, 2vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0 }}>
+            <p style={{
+              fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
+              fontSize: 'clamp(1.25rem, 1.7vw, 1.5rem)',
+              lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0,
+            }}>
               Ключевые события рынка
             </p>
-            <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: 'clamp(0.875rem, 1.2vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.55)', margin: 0 }}>
+            <p style={{
+              fontFamily: 'Inter Tight, sans-serif', fontWeight: 500,
+              fontSize: 'clamp(0.875rem, 1.2vw, 1.125rem)',
+              lineHeight: 1.35, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.55)', margin: 0,
+            }}>
               Axevil capital - квартальный брифинг инвест-команды
             </p>
           </div>

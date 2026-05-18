@@ -252,35 +252,30 @@ export default function PS8Form() {
 
                 {/* Checkbox */}
                 <div>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }}>
-                    {/* Custom checkbox */}
-                    <span
-                      onClick={() => setForm(f => ({ ...f, digest: !f.digest }))}
-                      role="checkbox"
-                      aria-checked={form.digest}
-                      tabIndex={0}
-                      onKeyDown={e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); setForm(f => ({ ...f, digest: !f.digest })) } }}
+                  <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', cursor: 'pointer' }}>
+                    <input
+                      type="checkbox"
+                      required
+                      checked={form.digest}
+                      onChange={e => setForm(f => ({ ...f, digest: e.target.checked }))}
                       style={{
-                        width: '1.25rem',
-                        height: '1.25rem',
-                        borderRadius: '0.375rem',
-                        border: form.digest ? '1.5px solid rgba(255,255,255,0.6)' : '1.5px solid #404040',
-                        background: form.digest ? 'rgba(255,255,255,0.12)' : 'transparent',
-                        flexShrink: 0,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
+                        width: '1.5rem',
+                        height: '1.5rem',
                         cursor: 'pointer',
-                        transition: 'border-color 150ms, background 150ms',
+                        flexShrink: 0,
+                        accentColor: '#202020',
+                        marginTop: '0.125rem',
+                      }}
+                    />
+                    <span
+                      className="font-inter-tight font-medium"
+                      style={{
+                        fontSize: '0.625rem',
+                        fontWeight: 500,
+                        lineHeight: 1.3,
+                        color: '#9b9b9b',
                       }}
                     >
-                      {form.digest && (
-                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none" aria-hidden="true">
-                          <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      )}
-                    </span>
-                    <span className="font-inter-tight font-medium" style={{ fontSize: '0.75rem', lineHeight: 1.4, color: '#9b9b9b', textAlign: 'center' }}>
                       Подпишите меня на еженедельный дайджест Axevil
                     </span>
                   </label>
@@ -295,7 +290,7 @@ export default function PS8Form() {
                 <PDFCtaButton
                   type="submit"
                   scrollTo=""
-                  style={{ width: '100%', opacity: loading ? 0.7 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
+                  style={{ width: '100%', opacity: loading ? 0.7 : 1, cursor: loading ? 'not-allowed' : 'pointer', marginTop: '1.5rem' }}
                 >
                   {loading ? 'Отправляем...' : 'Получить PDF'}
                 </PDFCtaButton>
