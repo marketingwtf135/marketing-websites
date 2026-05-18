@@ -98,18 +98,18 @@ export const translations = {
     },
     // Footer
     footer: {
-      entity: 'Axevil Capital',
+      entity: 'Axevil Capital, LLC',
       contactLabel: 'Contact',
-      contactEmail: 'hello@axevil.io',
+      contactEmail: 'info@axevil.com',
       links: [
         { label: 'Privacy Policy', href: '/legal/en/privacy.html' },
         { label: 'Cookie Policy', href: '/legal/en/cookies.html' },
         { label: 'Terms of Use', href: '/legal/en/terms.html' },
-        { label: 'Contact', href: 'mailto:hello@axevil.io' },
+        { label: 'Contact', href: 'mailto:info@axevil.com' },
       ],
       disclaimer:
-        'For professional investors, wealth managers, family offices and qualified investors only. Information on this site and in the webinar is provided for general informational and educational purposes only and does not constitute investment, legal, tax or other professional advice, an offer or a solicitation to buy or sell any security or fund interest. Private market investments are illiquid, long-term and high-risk; past performance is not indicative of future results.',
-      copy: '© 2026 Axevil Capital. All rights reserved.',
+        'Axevil Capital, LLC is a US-registered company (Delaware, #6832739) with Exempt Reporting Adviser (ERA) status, regulated by the U.S. Securities and Exchange Commission (SEC #802-126907). For professional investors, wealth managers, family offices and accredited investors only. Information on this site and in the webinar is provided for general informational and educational purposes only and does not constitute investment, legal, tax or other professional advice, an offer or a solicitation to buy or sell any security or fund interest. Private market investments are illiquid, long-term and high-risk; past performance is not indicative of future results.',
+      copy: '© 2021–2026 Axevil Capital, LLC. All rights reserved.',
     },
   },
   ru: {
@@ -197,18 +197,18 @@ export const translations = {
       disclaimer: 'Регистрируясь, вы соглашаетесь получать запись вебинара и материалы Axevil Capital. Отписаться можно в любой момент.',
     },
     footer: {
-      entity: 'Axevil Capital',
+      entity: 'Axevil Capital, LLC',
       contactLabel: 'Контакт',
-      contactEmail: 'hello@axevil.io',
+      contactEmail: 'info@axevil.com',
       links: [
         { label: 'Конфиденциальность', href: '/legal/ru/privacy.html' },
         { label: 'Политика cookie', href: '/legal/ru/cookies.html' },
         { label: 'Условия использования', href: '/legal/ru/terms.html' },
-        { label: 'Контакты', href: 'mailto:hello@axevil.io' },
+        { label: 'Контакты', href: 'mailto:info@axevil.com' },
       ],
       disclaimer:
-        'Только для профессиональных инвесторов, wealth-менеджеров, family offices и квалифицированных инвесторов. Материалы Сайта и вебинара предоставлены в общих информационных и образовательных целях и не являются инвестиционным, юридическим, налоговым или иным профессиональным советом, офертой или приглашением совершить сделку с ценными бумагами или долями в фондах. Инвестиции в private markets неликвидны, носят долгосрочный характер и сопряжены с высокими рисками; прошлая доходность не гарантирует будущих результатов.',
-      copy: '© 2026 Axevil Capital. Все права защищены.',
+        'Axevil Capital, LLC — компания, зарегистрированная в США (штат Делавэр, #6832739), со статусом Exempt Reporting Adviser (ERA), регулируется Комиссией по ценным бумагам и биржам США (SEC #802-126907). Только для профессиональных инвесторов, wealth-менеджеров, family offices и аккредитованных инвесторов. Материалы Сайта и вебинара предоставлены в общих информационных и образовательных целях и не являются инвестиционным, юридическим, налоговым или иным профессиональным советом, офертой или приглашением совершить сделку с ценными бумагами или долями в фондах. Инвестиции в private markets неликвидны, носят долгосрочный характер и сопряжены с высокими рисками; прошлая доходность не гарантирует будущих результатов.',
+      copy: '© 2021–2026 Axevil Capital, LLC. Все права защищены.',
     },
   },
 }
