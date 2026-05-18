@@ -1,13 +1,18 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import PDFCtaButton from '../../components/PDFCtaButton'
 
 export default function PS3Preview() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, amount: 0.1 })
 
+  // Light parallax for rock
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] })
+  const rockY = useTransform(scrollYProgress, [0, 1], ['0%', '-8%'])
+
   return (
-    <section id="preview" className="relative w-full" style={{ background: '#060606' }}>
+    <section id="preview" ref={sectionRef} className="relative w-full" style={{ background: '#060606' }}>
       <div
         ref={ref}
         className="mx-auto w-full max-w-[1440px] flex-responsive-col-reverse"
@@ -106,22 +111,23 @@ export default function PS3Preview() {
             </div>
           </div>
 
-          {/* Rock — absolute, fixed to bottom, z:10 above everything */}
-          <img
+          {/* Rock — absolute, +100px from bottom, light parallax, z:10 */}
+          <motion.img
             src="/img/hero-bg-rock.png"
             alt=""
             aria-hidden="true"
             style={{
               position: 'absolute',
-              bottom: 0,
+              bottom: '6.25rem',
               left: 0,
               width: '100%',
-              height: '50%',
+              height: '55%',
               objectFit: 'cover',
               objectPosition: 'center bottom',
               pointerEvents: 'none',
               zIndex: 10,
               borderRadius: '0 0 2rem 2rem',
+              y: rockY,
             }}
           />
 
