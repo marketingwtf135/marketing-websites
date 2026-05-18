@@ -252,30 +252,39 @@ export default function PS8Form() {
 
                 {/* Checkbox */}
                 <div>
-                  <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', cursor: 'pointer' }}>
-                    <input
-                      type="checkbox"
-                      required
-                      checked={form.digest}
-                      onChange={e => setForm(f => ({ ...f, digest: e.target.checked }))}
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }}>
+                    <div
+                      onClick={() => setForm(f => ({ ...f, digest: !f.digest }))}
+                      role="checkbox"
+                      aria-checked={form.digest}
+                      tabIndex={0}
+                      onKeyDown={e => {
+                        if (e.key === ' ' || e.key === 'Enter') {
+                          e.preventDefault()
+                          setForm(f => ({ ...f, digest: !f.digest }))
+                        }
+                      }}
                       style={{
                         width: '1.5rem',
                         height: '1.5rem',
-                        cursor: 'pointer',
+                        borderRadius: '0.5rem',
+                        border: '1px solid #404040',
+                        background: form.digest ? 'white' : 'transparent',
                         flexShrink: 0,
-                        accentColor: '#202020',
-                        marginTop: '0.125rem',
-                      }}
-                    />
-                    <span
-                      className="font-inter-tight font-medium"
-                      style={{
-                        fontSize: '0.625rem',
-                        fontWeight: 500,
-                        lineHeight: 1.3,
-                        color: '#9b9b9b',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        transition: 'background 150ms, border-color 150ms',
                       }}
                     >
+                      {form.digest && (
+                        <svg width="12" height="10" viewBox="0 0 12 10" fill="none" aria-hidden="true">
+                          <path d="M1.5 5L4.5 8L10.5 1.5" stroke="#202020" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      )}
+                    </div>
+                    <span className="font-inter-tight font-medium" style={{ fontSize: '0.75rem', lineHeight: 1.4, color: '#9b9b9b' }}>
                       Подпишите меня на еженедельный дайджест Axevil
                     </span>
                   </label>

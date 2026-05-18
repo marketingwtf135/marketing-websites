@@ -14,7 +14,7 @@ export default function PS3Preview() {
         style={{
           padding: 'clamp(3.75rem, 6.5vw, 6.25rem) 1.25rem',
           display: 'flex',
-          alignItems: 'flex-end',
+          alignItems: 'stretch',
           justifyContent: 'space-between',
           gap: 'clamp(2rem, 4vw, 4rem)',
         }}
@@ -28,8 +28,7 @@ export default function PS3Preview() {
             flex: '1 1 0', minWidth: 0,
             display: 'flex', flexDirection: 'column',
             justifyContent: 'space-between',
-            gap: '2rem',
-            minHeight: 'clamp(16rem, 25vw, 28rem)',
+            height: '100%',
           }}
         >
           {/* Eyebrow at top */}
@@ -107,35 +106,34 @@ export default function PS3Preview() {
             </div>
           </div>
 
-          {/* Rock bg — absolute, covers bottom, z=3 (above image) */}
+          {/* Rock bg — absolute overlay at bottom of card */}
           <div
             aria-hidden="true"
             style={{
-              position: 'absolute', bottom: 0, left: 0, right: 0,
-              height: '100%',
+              position: 'absolute',
+              bottom: 0, left: 0, right: 0,
+              height: '55%',
               pointerEvents: 'none',
               zIndex: 3,
               overflow: 'hidden',
-              borderRadius: '2rem',
             }}
           >
             <img
               src="/img/bg-image-rock.png"
               alt=""
               style={{
-                position: 'absolute',
-                width: '278.73%',
+                width: '100%',
                 height: '100%',
-                left: '-89.37%',
-                top: '23.72%',
                 objectFit: 'cover',
+                objectPosition: 'center top',
+                display: 'block',
               }}
             />
           </div>
 
           {/* CTA button (z=4) */}
-          <div style={{ position: 'relative', zIndex: 4 }}>
-            <PDFCtaButton style={{ width: '100%', justifyContent: 'center' }}>
+          <div style={{ position: 'relative', zIndex: 4, display: 'flex', justifyContent: 'center' }}>
+            <PDFCtaButton>
               Скачать полную версию PDF
             </PDFCtaButton>
           </div>
