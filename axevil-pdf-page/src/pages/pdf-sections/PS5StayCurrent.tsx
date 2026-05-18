@@ -33,7 +33,7 @@ const MOCKUP_STYLES: React.CSSProperties[] = [
   {
     position: 'absolute',
     right: 'clamp(-4.3125rem, -4.8vw, -4.3125rem)',
-    bottom: 'clamp(-3.5rem, -3.5rem, -3.5rem)',
+    bottom: '-1.5rem',
     width: 'clamp(19.125rem, 32.4vw, 29.125rem)',
     height: 'auto',
     objectFit: 'contain',

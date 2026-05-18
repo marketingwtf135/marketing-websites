@@ -12,7 +12,7 @@ export default function PS3Preview() {
         ref={ref}
         className="mx-auto w-full max-w-[1440px] flex-responsive-col"
         style={{
-          padding: 'clamp(3.75rem, 6.5vw, 6.25rem) 1.25rem',
+          padding: '3.75rem 1.25rem',
           display: 'flex',
           alignItems: 'flex-end',
           gap: 'clamp(2rem, 4vw, 4rem)',
@@ -88,16 +88,16 @@ export default function PS3Preview() {
           </p>
 
           {/* Image area (z=2) */}
-          <div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 2, display: 'flex', justifyContent: 'center' }}>
+          <div style={{ flex: 1, overflow: 'hidden', position: 'relative', zIndex: 2 }}>
             <img
               src="/img/image-analyse.png"
               alt="Анализ частного рынка"
               style={{
-                width: 'clamp(16.8125rem, 28.625vw, 28.625rem)',  /* 269px → 458px */
-                height: 'clamp(25.75rem, 40.625vw, 43.375rem)',   /* 412px → 694px */
-                objectFit: 'contain', objectPosition: 'center',
-                background: 'transparent',
-                display: 'block', flexShrink: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                objectPosition: 'center',
+                display: 'block',
               }}
             />
           </div>
