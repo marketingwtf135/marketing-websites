@@ -61,7 +61,7 @@ export default function PS2KeyQuestions() {
               </p>
               <img src={card.icon} alt="" loading="lazy" className="shrink-0 block"
                 style={{ width: 'clamp(5.5rem, 8.3vw, 7.5rem)', height: 'clamp(5.5rem, 8.3vw, 7.5rem)', objectFit: 'contain' }} />
-              <div className="flex flex-col items-center w-full text-center" style={{ gap: '2rem', padding: '0 1rem' }}>
+              <div className="flex flex-col items-center w-full text-center" style={{ gap: '0.75rem', padding: '0 1rem' }}>
                 <h3 className="font-inter-tight font-semibold text-white text-center w-full"
                   style={{ fontSize: 'clamp(1.25rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', margin: 0 }}>
                   {card.title}
