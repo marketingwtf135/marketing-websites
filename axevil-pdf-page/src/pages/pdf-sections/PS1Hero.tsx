@@ -33,7 +33,7 @@ export default function PS1Hero() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.0, delay: 0, ease: E }}
-        style={{ top: 'calc(-15% + 150px)', left: 0, right: 0, bottom: '-15%' }}
+        style={{ top: 'calc(-15% + 50px)', left: 0, right: 0, bottom: '-15%' }}
       >
         <motion.div className="absolute inset-0" style={{ y: bgY }}>
           {/* Mobile */}
