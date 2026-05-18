@@ -12,7 +12,7 @@ export default function PS3Preview() {
         ref={ref}
         className="mx-auto w-full max-w-[1440px] flex-responsive-col"
         style={{
-          padding: '3.75rem 1.25rem',
+          padding: '6.25rem 1.25rem',
           display: 'flex',
           alignItems: 'stretch',
           gap: 'clamp(2rem, 4vw, 4rem)',

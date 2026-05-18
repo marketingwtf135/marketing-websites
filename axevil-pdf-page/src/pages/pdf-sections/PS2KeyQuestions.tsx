@@ -27,7 +27,7 @@ export default function PS2KeyQuestions() {
   const inView = useInView(ref, { once: true, amount: 0.1 })
   return (
     <section id="key-questions" className="relative w-full bg-page-bg">
-      <div className="pt-section-y mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-5 pb-[3.75rem] sm:pb-[5rem] lg:pt-[12.5rem] lg:pb-[6.25rem]">
+      <div className="pt-section-y mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-5 pb-[3.75rem] sm:pb-[5rem] lg:pt-[12.5rem] lg:pb-[12.5rem]">
 
         {/* Heading with inner desktop padding */}
         <div className="flex flex-col gap-6 items-center mb-8 sm:mb-10 lg:px-[80px]">
@@ -53,7 +53,7 @@ export default function PS2KeyQuestions() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.45, ease: 'easeOut', delay: i * 0.1 }}
               className="flex flex-col items-center overflow-hidden rounded-[1.5rem] flex-1 min-w-0"
-              style={{ background: '#111111', padding: '1rem', gap: '2rem' }}
+              style={{ background: '#111111', padding: '1rem', justifyContent: 'space-between', height: 'clamp(20rem, 31.25vw, 28.125rem)' }}
             >
               <p className="font-inter-tight font-medium text-center whitespace-nowrap shrink-0 w-full"
                 style={{ fontSize: '1.125rem', lineHeight: 1.35, letterSpacing: '-0.02em', color: '#303030', margin: 0 }}>
@@ -61,7 +61,7 @@ export default function PS2KeyQuestions() {
               </p>
               <img src={card.icon} alt="" loading="lazy" className="shrink-0 block"
                 style={{ width: 'clamp(5.5rem, 8.3vw, 7.5rem)', height: 'clamp(5.5rem, 8.3vw, 7.5rem)', objectFit: 'contain' }} />
-              <div className="flex flex-col items-center justify-center w-full gap-2 text-center">
+              <div className="flex flex-col items-center w-full text-center" style={{ gap: '1rem', padding: '0 1rem' }}>
                 <h3 className="font-inter-tight font-semibold text-white text-center w-full"
                   style={{ fontSize: 'clamp(1.25rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', margin: 0 }}>
                   {card.title}
