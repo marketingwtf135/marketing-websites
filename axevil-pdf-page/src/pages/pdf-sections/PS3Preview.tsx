@@ -125,7 +125,7 @@ export default function PS3Preview() {
               objectPosition: 'center bottom',
               pointerEvents: 'none',
               zIndex: 10,
-              y: rockY,
+              y: '4.375rem',
             }}
           />
 
