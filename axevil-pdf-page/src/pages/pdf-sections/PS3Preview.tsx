@@ -116,11 +116,13 @@ export default function PS3Preview() {
             aria-hidden="true"
             style={{
               position: 'absolute',
-              bottom: '6.25rem',
+              bottom: 0,
               left: '50%',
               transform: 'translateX(-50%)',
-              width: '120%',
-              height: 'auto',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center bottom',
               pointerEvents: 'none',
               zIndex: 10,
               y: rockY,
