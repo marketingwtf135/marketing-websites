@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import WBCtaButton from './WBCtaButton'
 import { useLang } from '../../lib/lang'
 
@@ -38,7 +38,7 @@ export default function WBWhyAttend() {
               fontSize: 'clamp(2.25rem, 5vw, 4.5rem)',
               lineHeight: 1.05,
               letterSpacing: '-0.02em',
-              backgroundImage: 'linear-gradient(95deg, #ffffff -2.56%, #b7b7b7 99.06%)',
+              backgroundImage: 'var(--acc-gradient)',
               overflow: 'visible',
             }}
           >
@@ -58,7 +58,7 @@ export default function WBWhyAttend() {
                 padding: '0',
                 gap: '1.5rem',
                 borderRadius: '1rem',
-                background: '#111111',
+                background: 'var(--black-300)',
               }}
             >
               {/* Photo: height 280px, border-radius 16px */}
@@ -100,13 +100,13 @@ export default function WBWhyAttend() {
                 >
                   <span
                     className="font-inter-tight font-semibold text-center"
-                    style={{ color: '#ffffff', fontSize: 'clamp(1.125rem, 2vw, 1.5rem)', fontWeight: 600, lineHeight: '110%', letterSpacing: '-0.48px' }}
+                    style={{ color: 'var(--white-100)', fontSize: 'clamp(1.125rem, 2vw, 1.5rem)', fontWeight: 600, lineHeight: '110%', letterSpacing: '-0.48px' }}
                   >
                     {card.metric}
                   </span>
                   <span
                     className="font-inter-tight font-medium text-center"
-                    style={{ color: '#9B9B9B', fontSize: '0.875rem', lineHeight: '130%' }}
+                    style={{ color: 'var(--white-400)', fontSize: 'var(--font-s)', lineHeight: '130%' }}
                   >
                     {card.metricSub}
                   </span>
@@ -126,7 +126,7 @@ export default function WBWhyAttend() {
                 </h3>
                 <p
                   className="font-inter-tight font-medium text-white/55"
-                  style={{ fontSize: '0.9375rem', lineHeight: 1.5 }}
+                  style={{ fontSize: 'var(--font-s)', lineHeight: 1.5 }}
                 >
                   {card.body}
                 </p>

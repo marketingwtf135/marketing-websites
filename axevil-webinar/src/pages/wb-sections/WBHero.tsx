@@ -1,4 +1,4 @@
-import WBCtaButton from './WBCtaButton'
+﻿import WBCtaButton from './WBCtaButton'
 import { useLang } from '../../lib/lang'
 
 // 6 brand logos — drop icon-logo-01.svg ... icon-logo-06.svg into /img/
@@ -53,7 +53,7 @@ export default function WBHero() {
           <div
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-inter-tight font-medium"
             style={{
-              fontSize: '0.875rem',
+              fontSize: 'var(--font-s)',
               border: '1px solid rgba(255,255,255,0.15)',
               color: 'rgba(255,255,255,0.6)',
               background: 'rgba(255,255,255,0.04)',
@@ -62,7 +62,7 @@ export default function WBHero() {
             <span
               className="rounded-full shrink-0"
               style={{
-                width: '0.625rem', height: '0.625rem', background: '#4dba79',
+                width: '0.625rem', height: '0.625rem', background: 'var(--status-open)',
                 boxShadow: '0 0 6px #4dba79, 0 0 12px rgba(77,186,121,0.5)',
               }}
             />
@@ -75,7 +75,7 @@ export default function WBHero() {
               className="font-inter-tight font-semibold leading-[1.05] tracking-[-0.03em] text-transparent bg-clip-text w-full"
               style={{
                 fontSize: 'clamp(1.75rem, 5vw, 4rem)',
-                backgroundImage: 'linear-gradient(95deg, #ffffff -2.56%, #b7b7b7 99.06%)',
+                backgroundImage: 'var(--acc-gradient)',
                 maxWidth: '55rem',
                 margin: '0 auto',
               }}
@@ -101,7 +101,7 @@ export default function WBHero() {
               <div
                 key={i}
                 className="flex items-center justify-center shrink-0 w-12 h-12 sm:w-16 sm:h-16"
-                style={{ borderRadius: '0.625rem', background: '#141414' }}
+                style={{ borderRadius: '0.625rem', background: 'var(--surface-0)' }}
               >
                 <img
                   src={b.src}

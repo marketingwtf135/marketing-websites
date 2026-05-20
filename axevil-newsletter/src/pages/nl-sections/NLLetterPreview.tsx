@@ -1,4 +1,4 @@
-const letterLogo = '/img/newsletter/letter-logo.svg'
+﻿const letterLogo = '/img/newsletter/letter-logo.svg'
 
 /** Reusable newsletter letter preview card.
  *  scale=1.0 → base (320px inner, mobile/desktop hero)
@@ -19,7 +19,7 @@ export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
       <div
         className="flex items-center"
         style={{
-          background: '#1a1a1a',
+          background: 'var(--black-500)',
           padding: s(12),
           borderRadius: s(24),
           width: s(346.5),
@@ -49,7 +49,7 @@ export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
                 </span>
                 <span
                   className="font-inter-tight font-medium shrink-0"
-                  style={{ fontSize: s(8.6), lineHeight: 1.3, color: '#bcbcbc', letterSpacing: -s(0.172) }}
+                  style={{ fontSize: s(8.6), lineHeight: 1.3, color: 'var(--white-300)', letterSpacing: -s(0.172) }}
                 >
                   12.05.2026 · 09:00 CET
                 </span>
@@ -65,7 +65,7 @@ export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
                 </p>
                 <p
                   className="font-inter-tight font-medium w-full"
-                  style={{ fontSize: s(9.675), lineHeight: 1.35, color: '#bcbcbc', letterSpacing: -s(0.1935) }}
+                  style={{ fontSize: s(9.675), lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: -s(0.1935) }}
                 >
                   За последние 12 месяцев AI Infrastructure-сегмент привлёк $80+ млрд венчурного капитала — больше, чем все остальные вертикали вместе взятые.
                 </p>
@@ -82,7 +82,7 @@ export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
               </p>
               <p
                 className="font-inter-tight font-medium w-full"
-                style={{ fontSize: s(8.6), lineHeight: 1.3, color: '#bcbcbc', letterSpacing: -s(0.172) }}
+                style={{ fontSize: s(8.6), lineHeight: 1.3, color: 'var(--white-300)', letterSpacing: -s(0.172) }}
               >
                 3 уровня экспозиции: GPU-производители (NVDA, AMD), neoclouds (CoreWeave, Lambda), модель-вертикаль (Anthropic, OpenAI). Каждый уровень — свой риск-профиль и горизонт.
               </p>
@@ -92,7 +92,7 @@ export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
             <div className="flex flex-col items-start w-full" style={{ gap: s(25.8) }}>
               <div
                 className="flex flex-col items-start w-full"
-                style={{ background: '#151515', padding: s(12.9), borderRadius: s(8.6), gap: s(12.9) }}
+                style={{ background: 'var(--black-400)', padding: s(12.9), borderRadius: s(8.6), gap: s(12.9) }}
               >
                 <div className="flex flex-col items-start w-full" style={{ gap: s(8.6) }}>
                   <p
@@ -103,7 +103,7 @@ export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
                   </p>
                   <p
                     className="font-inter-tight font-medium w-full"
-                    style={{ fontSize: s(8.6), lineHeight: 1.3, color: '#bcbcbc', letterSpacing: -s(0.172) }}
+                    style={{ fontSize: s(8.6), lineHeight: 1.3, color: 'var(--white-300)', letterSpacing: -s(0.172) }}
                   >
                     3 уровня экспозиции: GPU, neoclouds, модель-вертикаль. Каждый уровень — свой риск-профиль.
                   </p>
@@ -113,7 +113,7 @@ export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
                     <div
                       key={val}
                       className="flex flex-col flex-1 items-start min-w-0"
-                      style={{ background: '#202020', padding: s(8.6), borderRadius: s(8.6), gap: s(4.3) }}
+                      style={{ background: 'var(--black-600)', padding: s(8.6), borderRadius: s(8.6), gap: s(4.3) }}
                     >
                       <span
                         className="font-inter-tight font-semibold text-white whitespace-nowrap"
@@ -123,7 +123,7 @@ export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
                       </span>
                       <span
                         className="font-inter-tight font-medium"
-                        style={{ fontSize: s(7.525), lineHeight: 1.3, color: '#9b9b9b' }}
+                        style={{ fontSize: s(7.525), lineHeight: 1.3, color: 'var(--white-400)' }}
                       >
                         {label}
                       </span>
@@ -138,7 +138,7 @@ export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
               >
                 <p
                   className="font-inter-tight font-medium text-center whitespace-nowrap"
-                  style={{ fontSize: s(8.6), lineHeight: 1.3, color: '#bcbcbc', letterSpacing: -s(0.172) }}
+                  style={{ fontSize: s(8.6), lineHeight: 1.3, color: 'var(--white-300)', letterSpacing: -s(0.172) }}
                 >
                   Каждый вторник в 9 часов полный выпуск на почте
                 </p>

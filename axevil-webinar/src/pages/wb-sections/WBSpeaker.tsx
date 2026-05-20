@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import { useLang } from '../../lib/lang'
 
 export default function WBSpeaker() {
@@ -32,7 +32,7 @@ export default function WBSpeaker() {
               fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
               lineHeight: 1,
               letterSpacing: '-0.03em',
-              backgroundImage: 'linear-gradient(95deg, #ffffff -2.56%, #b7b7b7 99.06%)',
+              backgroundImage: 'var(--acc-gradient)',
               overflow: 'visible',
             }}
           >
@@ -50,7 +50,7 @@ export default function WBSpeaker() {
             backgroundImage: 'url(/img/bg-speaker.png)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundColor: '#0d0d0d',
+            backgroundColor: 'var(--black-300)',
           }}
         >
           <video
@@ -76,7 +76,7 @@ export default function WBSpeaker() {
               >
                 {t.speaker.name}
               </h3>
-              <p className="font-inter-tight font-medium text-white/55" style={{ fontSize: '0.9375rem' }}>
+              <p className="font-inter-tight font-medium text-white/55" style={{ fontSize: 'var(--font-s)' }}>
                 {t.speaker.role}
               </p>
             </div>
@@ -84,14 +84,14 @@ export default function WBSpeaker() {
             <div style={{ maxWidth: '30rem' }} className="flex flex-col gap-6">
               <p
                 className="font-inter-tight font-medium"
-                style={{ color: '#E6E6E6', fontSize: 'clamp(0.875rem, 1.5vw, 1.125rem)', lineHeight: '135%', letterSpacing: '-0.36px' }}
+                style={{ color: 'var(--white-200)', fontSize: 'clamp(0.875rem, 1.5vw, 1.125rem)', lineHeight: '135%', letterSpacing: '-0.36px' }}
               >
                 {t.speaker.bio}
               </p>
               <blockquote
                 className="font-inter-tight font-medium italic"
                 style={{
-                  color: '#ffffff',
+                  color: 'var(--white-100)',
                   fontSize: 'clamp(1rem, 1.6vw, 1.25rem)',
                   lineHeight: '140%',
                   letterSpacing: '-0.01em',

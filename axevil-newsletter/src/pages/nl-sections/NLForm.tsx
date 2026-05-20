@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+﻿import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { analytics } from '../../lib/analytics'
 import { getUtmParams } from '../../lib/useUtm'
@@ -38,7 +38,7 @@ function AUMDropdown({ value, onChange }: { value: string; onChange: (v: string)
       <div
         onClick={() => setOpen(!open)}
         className="flex items-center justify-between px-4 cursor-pointer select-none"
-        style={{ background: '#1a1a1a', height: 60, borderRadius: 16 }}
+        style={{ background: 'var(--black-500)', height: 60, borderRadius: 16 }}
       >
         <span className="font-inter-tight font-medium text-[16px]"
           style={{ color: selected ? '#ffffff' : 'rgba(255,255,255,0.35)' }}>
@@ -63,7 +63,7 @@ function AUMDropdown({ value, onChange }: { value: string; onChange: (v: string)
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.15, ease: [0.4, 0, 0.2, 1] }}
             className="absolute left-0 right-0 z-[1000] mt-1 overflow-hidden rounded-[16px]"
-            style={{ background: '#1a1a1a' }}
+            style={{ background: 'var(--black-500)' }}
           >
             {AUM_OPTIONS.map((opt, i) => (
               <div
@@ -73,7 +73,7 @@ function AUMDropdown({ value, onChange }: { value: string; onChange: (v: string)
                 style={{
                   height: 52,
                   borderBottom: i < AUM_OPTIONS.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
-                  color: '#9B9B9B',
+                  color: 'var(--white-400)',
                 }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
                 onMouseLeave={e => (e.currentTarget.style.color = '#9B9B9B')}
@@ -172,8 +172,8 @@ export default function NLForm() {
         <div className="flex flex-col gap-[1rem] items-center justify-center w-full max-w-[600px] mb-10">
           <div className="flex gap-2 font-inter-tight font-medium items-center justify-center whitespace-nowrap"
             style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.36px' }}>
-            <span style={{ color: '#404040' }}>7.0</span>
-            <span style={{ color: '#848484' }}>Подписка на дайджест</span>
+            <span style={{ color: 'var(--black-800)' }}>7.0</span>
+            <span style={{ color: 'var(--black-900)' }}>Подписка на дайджест</span>
           </div>
           <div className="flex flex-col gap-4 items-center text-center">
             <h2 className="font-inter-tight font-semibold text-transparent bg-clip-text"
@@ -227,7 +227,7 @@ export default function NLForm() {
               <OwnButton type="submit" disabled={loading} label={loading ? 'Отправка…' : 'Подписаться'} />
 
               <p className="font-inter-tight font-medium text-center w-full"
-                style={{ fontSize: '0.75rem', lineHeight: 1.3, color: '#9b9b9b', mixBlendMode: 'difference' }}>
+                style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--white-400)', mixBlendMode: 'difference' }}>
                 Бесплатно. Отписаться — одной кнопкой в любом письме. Подписываясь, соглашаетесь с обработкой данных
               </p>
             </form>
@@ -246,7 +246,7 @@ function Field({ input, error, className, children }: { input?: React.ReactNode;
   return (
     <div className={`flex flex-col gap-1.5 ${className ?? ''}`}>
       <div className="flex items-center px-4 w-full"
-        style={{ background: '#1a1a1a', height: 60, borderRadius: 16, border: error ? '1px solid rgba(239,68,68,0.5)' : 'none' }}>
+        style={{ background: 'var(--black-500)', height: 60, borderRadius: 16, border: error ? '1px solid rgba(239,68,68,0.5)' : 'none' }}>
         {input ?? children}
       </div>
       {error && <p className="font-inter-tight font-medium text-red-400 text-[12px]">{error}</p>}
@@ -261,7 +261,7 @@ function SuccessState() {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-      style={{ background: '#1a1a1a', borderRadius: 20 }}
+      style={{ background: 'var(--black-500)', borderRadius: 20 }}
     >
       {/* Icon */}
       <div className="flex items-center justify-center"

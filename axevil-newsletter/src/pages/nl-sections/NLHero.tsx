@@ -1,4 +1,4 @@
-import { useScroll, useTransform, motion } from 'framer-motion'
+﻿import { useScroll, useTransform, motion } from 'framer-motion'
 import { scrollToNLForm } from './NLNav'
 import NLLetterPreview from './NLLetterPreview'
 import OwnButton from './OwnButton'
@@ -19,7 +19,7 @@ export default function NLHero() {
   const bgY = useTransform(scrollY, [0, 800], ['0%', '-12%'])
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ background: '#010101', paddingTop: '72px' }}>
+    <section className="relative w-full overflow-hidden" style={{ background: 'var(--black-100)', paddingTop: '72px' }}>
 
       {/* ── Background stone — outer wrapper animates entry, inner handles parallax ── */}
       <motion.div
@@ -50,7 +50,7 @@ export default function NLHero() {
           {/* Badge */}
           <motion.div {...fadeUp(0.1)} className="flex items-center gap-2 px-4 py-3 rounded-full shrink-0 mb-[1rem]"
             style={{ background: 'rgba(77,186,121,0.05)', border: '1px solid rgba(77,186,121,0.15)' }}>
-            <span className="badge-pulse shrink-0 block rounded-full" style={{ width: 10, height: 10, background: '#4DBA79' }} aria-hidden />
+            <span className="badge-pulse shrink-0 block rounded-full" style={{ width: 10, height: 10, background: 'var(--status-open)' }} aria-hidden />
             <p className="font-inter-tight font-medium text-white whitespace-nowrap" style={{ fontSize: 12, lineHeight: 1.3 }}>
               Axevil дайджест · еженедельно
             </p>
@@ -67,7 +67,7 @@ export default function NLHero() {
             {/* Paragraph */}
             <motion.p {...fadeUp(0.20)}
               className="font-inter-tight font-medium w-full"
-              style={{ fontSize: 14, lineHeight: 1.35, color: '#9b9b9b', letterSpacing: '-0.28px' }}>
+              style={{ fontSize: 14, lineHeight: 1.35, color: 'var(--white-400)', letterSpacing: '-0.28px' }}>
               Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждый вторник.
             </motion.p>
           </div>
@@ -104,7 +104,7 @@ export default function NLHero() {
           <motion.div {...fadeUp(0.1)}
             className="flex items-center gap-2 px-4 py-3 rounded-full"
             style={{ background: 'rgba(77,186,121,0.05)', border: '1px solid rgba(77,186,121,0.15)' }}>
-            <span className="badge-pulse shrink-0 block rounded-full" style={{ width: 10, height: 10, background: '#4DBA79' }} aria-hidden />
+            <span className="badge-pulse shrink-0 block rounded-full" style={{ width: 10, height: 10, background: 'var(--status-open)' }} aria-hidden />
             <p className="font-inter-tight font-medium text-white whitespace-nowrap" style={{ fontSize: 14, lineHeight: 1.3 }}>
               Axevil дайджест · еженедельно
             </p>
@@ -121,7 +121,7 @@ export default function NLHero() {
             {/* Paragraph */}
             <motion.p {...fadeUp(0.20)}
               className="font-inter-tight font-medium"
-              style={{ fontSize: 'clamp(1rem,1.4vw,1.25rem)', lineHeight: 1.3, color: '#9b9b9b', letterSpacing: '-0.02em', maxWidth: 600 }}>
+              style={{ fontSize: 'clamp(1rem,1.4vw,1.25rem)', lineHeight: 1.3, color: 'var(--white-400)', letterSpacing: '-0.02em', maxWidth: 600 }}>
               Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждый вторник.
             </motion.p>
           </div>

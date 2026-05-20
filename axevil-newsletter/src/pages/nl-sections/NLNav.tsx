@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import MailIcon from './MailIcon'
 import OwnButton from './OwnButton'
@@ -54,7 +54,7 @@ export default function NLNav() {
     <>
       <motion.nav
         className="fixed top-0 left-0 w-full z-50"
-        style={{ background: '#060606', borderBottom: '1px solid #1a1a1a', height: 72 }}
+        style={{ background: 'var(--black-200)', borderBottom: '1px solid #1a1a1a', height: 72 }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: visible ? 0 : -72 }}
         transition={{
@@ -131,7 +131,7 @@ export default function NLNav() {
                   <button key={id} type="button"
                     onClick={() => handleNavLink(id)}
                     className="flex items-center justify-between px-4 py-4 rounded-xl font-inter-tight font-medium text-white/70 hover:text-white hover:bg-white/5 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-                    style={{ minHeight: '3.5rem', fontSize: '1.125rem', lineHeight: 1.35, letterSpacing: '-0.36px' }}>
+                    style={{ minHeight: '3.5rem', fontSize: 'var(--font-l)', lineHeight: 1.35, letterSpacing: '-0.36px' }}>
                     <span>{label}</span>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden style={{ transform: 'rotate(-90deg)', opacity: 0.5, flexShrink: 0, display: 'block' }}>
                       <path d="M4 6L8 10L12 6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

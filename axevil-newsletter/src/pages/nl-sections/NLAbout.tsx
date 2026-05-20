@@ -1,4 +1,4 @@
-const STATS = [
+﻿const STATS = [
   { value: '$150M',  label: 'AUM' },
   { value: '1,000+', label: 'Клиентов' },
   { value: '35',     label: 'Компаний в портфеле' },
@@ -22,7 +22,7 @@ export default function NLAbout() {
       <div
         className="about-inner-padding mx-auto w-full max-w-[1440px] flex flex-col items-center overflow-visible"
         style={{
-          background: '#0c0c0c',
+          background: 'var(--bg-100)',
           borderRadius: 'clamp(1.5rem, 4.4vw, 4rem)',
           gap: 'clamp(1.5rem, 4.4vw, 4rem)',
           padding: '1.5rem 1rem 1rem',
@@ -32,8 +32,8 @@ export default function NLAbout() {
         <div className="flex flex-col gap-[1.5rem] items-center">
           <div className="flex gap-[0.5rem] font-inter-tight font-medium items-center justify-center whitespace-nowrap"
             style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.36px' }}>
-            <span style={{ color: '#404040' }}>6.0</span>
-            <span style={{ color: '#848484' }}>О платформе</span>
+            <span style={{ color: 'var(--black-800)' }}>6.0</span>
+            <span style={{ color: 'var(--black-900)' }}>О платформе</span>
           </div>
           <div className="flex flex-col gap-[1rem] items-center">
             <h2 className="font-inter-tight font-semibold text-transparent bg-clip-text whitespace-nowrap"
@@ -41,7 +41,7 @@ export default function NLAbout() {
               Axevil Capital
             </h2>
             <p className="font-inter-tight font-medium text-center"
-              style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: '#bcbcbc', letterSpacing: '-0.36px', maxWidth: '35.625rem' }}>
+              style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.36px', maxWidth: '35.625rem' }}>
               Axevil — технологическая платформа, предоставляющая профессиональным инвесторам и управляющим капиталом прямой доступ к лучшим инвестиционным возможностям частного рынка.
             </p>
           </div>
@@ -53,13 +53,13 @@ export default function NLAbout() {
             {STATS.map(stat => (
               <div key={stat.value}
                 className="flex flex-col gap-[0.25rem] p-[1rem] rounded-[1.25rem] flex-1"
-                style={{ background: '#1a1a1a' }}>
+                style={{ background: 'var(--black-500)' }}>
                 <span className="font-inter-tight font-semibold text-white"
                   style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.25rem)', letterSpacing: '-0.03em', lineHeight: 1.2 }}>
                   {stat.value}
                 </span>
                 <span className="font-inter-tight font-medium"
-                  style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: '#9b9b9b', letterSpacing: '-0.02em' }}>
+                  style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: 'var(--white-400)', letterSpacing: '-0.02em' }}>
                   {stat.label}
                 </span>
               </div>

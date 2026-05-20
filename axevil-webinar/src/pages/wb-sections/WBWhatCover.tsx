@@ -1,4 +1,4 @@
-import { useLang } from '../../lib/lang'
+﻿import { useLang } from '../../lib/lang'
 
 function AgendaCard({
   n, body, height, flex, bodyFill, className,
@@ -11,13 +11,13 @@ function AgendaCard({
         gap: '2rem',
         flex: flex ?? '1 0 0',
         borderRadius: '1.5rem',
-        background: '#0d0d0d',
+        background: 'var(--black-300)',
         height: height ?? 'auto',
       }}
     >
       <span
         className="font-inter-tight font-medium tabular-nums"
-        style={{ fontSize: '0.875rem', lineHeight: '135%', letterSpacing: '-0.36px', color: '#404040' }}
+        style={{ fontSize: 'var(--font-s)', lineHeight: '135%', letterSpacing: '-0.36px', color: 'var(--black-800)' }}
       >
         {n}
       </span>
@@ -27,7 +27,7 @@ function AgendaCard({
           fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
           lineHeight: '130%',
           letterSpacing: '-0.4px',
-          color: '#ffffff',
+          color: 'var(--white-100)',
           maxWidth: bodyFill ? 'none' : (typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches ? 'none' : '50%'),
         }}
       >
@@ -61,7 +61,7 @@ export default function WBWhatCover() {
               fontSize: 'clamp(2.25rem, 5vw, 4.5rem)',
               lineHeight: 1.05,
               letterSpacing: '-0.02em',
-              backgroundImage: 'linear-gradient(95deg, #ffffff -2.56%, #b7b7b7 99.06%)',
+              backgroundImage: 'var(--acc-gradient)',
               overflow: 'visible',
             }}
           >

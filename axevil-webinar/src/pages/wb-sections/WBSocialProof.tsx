@@ -30,7 +30,7 @@ export default function WBSocialProof() {
               fontSize: 'clamp(2.25rem, 3.5vw, 3rem)',
               lineHeight: 1.1,
               letterSpacing: '-0.02em',
-              backgroundImage: 'linear-gradient(95deg, #ffffff -2.56%, #8f8f8f 99.06%)',
+              backgroundImage: 'var(--acc-gradient)',
               overflow: 'visible',
             }}
           >
@@ -43,7 +43,7 @@ export default function WBSocialProof() {
             <div
               key={q.caption}
               className="flex flex-col justify-between gap-6 p-6 sm:p-7 rounded-[24px]"
-              style={{ background: '#111111', border: '1px solid rgba(255,255,255,0.07)' }}
+              style={{ background: 'var(--black-300)', border: '1px solid rgba(255,255,255,0.07)' }}
             >
               <div className="flex flex-col gap-4">
                 <div className="font-inter-tight font-semibold text-[32px] leading-none text-white/20" aria-hidden="true">

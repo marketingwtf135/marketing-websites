@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useLang } from '../../lib/lang'
 
@@ -104,7 +104,7 @@ export default function WBNav() {
               type="button"
               onClick={() => document.getElementById('wb-footer')?.scrollIntoView({ behavior: 'smooth' })}
               className="hidden sm:flex items-center justify-center font-inter-tight font-semibold text-phone-bg bg-white hover:scale-[1.02] transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-white shrink-0"
-              style={{ height: '2.25rem', padding: '0 1.25rem', borderRadius: '1rem', fontSize: '0.875rem' }}
+              style={{ height: '2.25rem', padding: '0 1.25rem', borderRadius: '1rem', fontSize: 'var(--font-s)' }}
             >
               {t.nav.reserve}
             </button>
@@ -155,7 +155,7 @@ export default function WBNav() {
                 type="button"
                 onClick={() => { document.getElementById('wb-footer')?.scrollIntoView({ behavior: 'smooth' }); setMenuOpen(false) }}
                 className="flex items-center justify-center font-inter-tight font-semibold text-phone-bg bg-white hover:scale-[1.02] transition-transform w-full"
-                style={{ height: '2.75rem', borderRadius: '1rem', fontSize: '0.9375rem' }}
+                style={{ height: '2.75rem', borderRadius: '1rem', fontSize: 'var(--font-s)' }}
               >
                 {t.nav.reserve}
               </button>

@@ -1,4 +1,4 @@
-const footerLogo = '/img/newsletter/footer-logo.svg'
+﻿const footerLogo = '/img/newsletter/footer-logo.svg'
 
 const LINKS = ['Privacy', 'Terms', 'Cookie policy', 'Contacts']
 
@@ -6,7 +6,7 @@ export default function NLFooter() {
   return (
     <footer
       className="relative w-full"
-      style={{ background: 'black' }}
+      style={{ background: 'var(--black-100)' }}
     >
       <div
         className="mx-auto w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 overflow-hidden"
@@ -26,7 +26,7 @@ export default function NLFooter() {
         {/* Right: links + copyright */}
         <div
           className="flex flex-col font-inter-tight font-medium gap-3 items-start sm:items-end overflow-hidden shrink-0"
-          style={{ fontSize: '12px', lineHeight: 1.3, color: '#404040', whiteSpace: 'nowrap' }}
+          style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--black-800)', whiteSpace: 'nowrap' }}
         >
           <div className="flex gap-5 items-center overflow-hidden">
             {LINKS.map(link => (
@@ -34,7 +34,7 @@ export default function NLFooter() {
                 key={link}
                 href="#"
                 className="hover:text-white/50 transition-colors"
-                style={{ color: '#404040' }}
+                style={{ color: 'var(--black-800)' }}
               >
                 {link}
               </a>

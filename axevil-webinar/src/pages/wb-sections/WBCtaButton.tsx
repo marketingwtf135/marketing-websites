@@ -1,4 +1,4 @@
-import { scrollToForm } from './WBNav'
+﻿import { scrollToForm } from './WBNav'
 
 interface WBCtaButtonProps {
   className?: string
@@ -32,7 +32,7 @@ export default function WBCtaButton({ className = '', fullWidthMobile: _fullWidt
       />
       <span
         className="relative z-10 shrink-0 rounded-full"
-        style={{ width: 8, height: 8, background: '#2b2b2b' }}
+        style={{ width: 8, height: 8, background: 'var(--black-700)' }}
       />
       <span className="relative z-10">{label}</span>
     </button>

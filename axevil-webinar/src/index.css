@@ -1,6 +1,33 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* @axevil/tokens */
+:root {
+  --white-100:#ffffff; --white-200:#e6e6e6; --white-300:#bcbcbc; --white-400:#9b9b9b;
+  --black-100:#000000; --black-200:#060606; --black-300:#111111; --black-400:#151515;
+  --black-500:#1a1a1a; --black-600:#202020; --black-700:#303030; --black-800:#404040; --black-900:#848484;
+  --bg-100:#080808; --nav-bg:#0a0a0a; --outline-100:#151515;
+  --section-border:#121212; --border-subtle:#1b1b1b; --nav-border:#171717; --btn-border:#c9c9c9;
+  --surface-0:#141414; --surface-mid:#1d1f20; --surface-dark:#484b4e;
+  --status-open:#4dba79; --status-closed:#990003; --status-soon:#a15e00;
+  --accent-teal:#175e6e; --accent-teal-light:#d7ffff; --accent-blue:#546fef; --lime-accent:#F5FD5A;
+  --font-xs:0.75rem; --font-s:0.875rem; --font-m:1rem; --font-l:1.125rem; --font-xl:1.25rem;
+  --font-h5:1.5rem; --font-h4:2.25rem; --font-h3:3rem; --font-h2:4rem; --font-h1:5.5rem;
+  --acc-gradient:linear-gradient(94deg,#A2A2A2 8.73%,#FFF 50.65%,#A2A2A2 92.57%);
+}
+.text-acc-gradient{background:var(--acc-gradient);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+/* AXEVIL Design System tokens */
+:root {
+  --acc-gradient: linear-gradient(94deg, #A2A2A2 8.73%, #FFF 50.65%, #A2A2A2 92.57%);
+}
+.text-acc-gradient {
+  background: var(--acc-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 @font-face {
   font-family: 'Inter Tight';

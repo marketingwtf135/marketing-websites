@@ -1,4 +1,4 @@
-import { useLang } from '../../lib/lang'
+﻿import { useLang } from '../../lib/lang'
 
 const CARD_ICONS = [
   '/img/audience-01.svg',
@@ -27,7 +27,7 @@ export default function WBWhoFor() {
               fontSize: 'clamp(2.25rem, 5vw, 4.5rem)',
               lineHeight: 1.05,
               letterSpacing: '-0.02em',
-              backgroundImage: 'linear-gradient(95deg, #ffffff -2.56%, #b7b7b7 99.06%)',
+              backgroundImage: 'var(--acc-gradient)',
               overflow: 'visible',
             }}
           >
@@ -44,14 +44,14 @@ export default function WBWhoFor() {
               style={{
                 padding: '1.25rem',
                 borderRadius: '1.5rem',
-                background: '#0d0d0d',
+                background: 'var(--black-300)',
                 border: '1px solid rgba(255,255,255,0.06)',
               }}
             >
               {/* Number — text-align center */}
               <span
                 className="font-inter-tight font-medium tabular-nums text-center w-full"
-                style={{ fontSize: '1.125rem', lineHeight: '135%', letterSpacing: '-0.36px', color: '#303030' }}
+                style={{ fontSize: 'var(--font-l)', lineHeight: '135%', letterSpacing: '-0.36px', color: 'var(--black-700)' }}
               >
                 {card.n}
               </span>
@@ -76,7 +76,7 @@ export default function WBWhoFor() {
                 </h3>
                 <p
                   className="font-inter-tight font-medium text-white/55 text-center"
-                  style={{ fontSize: '0.9375rem', lineHeight: 1.5 }}
+                  style={{ fontSize: 'var(--font-s)', lineHeight: 1.5 }}
                 >
                   {card.body}
                 </p>

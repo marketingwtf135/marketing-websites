@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+﻿import { useEffect } from 'react'
 import FadeIn from '../components/FadeIn'
 import { initScrollDepth } from '../lib/analytics'
 import NLNav from './nl-sections/NLNav'
@@ -18,7 +18,7 @@ export default function Newsletter() {
   }, [])
 
   return (
-    <main className="overflow-x-clip" style={{ background: '#0a0a0a' }}>
+    <main className="overflow-x-clip" style={{ background: 'var(--nav-bg)' }}>
       <NLNav />
       <NLHero />
       <FadeIn><NLAudience /></FadeIn>

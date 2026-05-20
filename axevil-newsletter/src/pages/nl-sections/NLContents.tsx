@@ -1,4 +1,4 @@
-import { scrollToNLForm } from './NLNav'
+﻿import { scrollToNLForm } from './NLNav'
 import OwnButton from './OwnButton'
 
 // Unified description size (matches NLAbout and whole page)
@@ -63,8 +63,8 @@ export default function NLContents() {
         <div className="flex flex-col gap-[1rem] sm:gap-[1.5rem] items-start sm:items-center text-left sm:text-center mb-[2rem] sm:mb-[3rem] lg:px-[5rem]">
           <div className="flex gap-[0.5rem] font-inter-tight font-medium items-center whitespace-nowrap"
             style={{ fontSize: DESC_SIZE, lineHeight: 1.35, letterSpacing: '-0.36px' }}>
-            <span style={{ color: '#404040' }}>2.0</span>
-            <span style={{ color: '#848484' }}>Состав выпуска</span>
+            <span style={{ color: 'var(--black-800)' }}>2.0</span>
+            <span style={{ color: 'var(--black-900)' }}>Состав выпуска</span>
           </div>
           <h2 className="font-inter-tight font-semibold text-transparent bg-clip-text"
             style={{
@@ -75,7 +75,7 @@ export default function NLContents() {
             Что в каждом выпуске
           </h2>
           <p className="font-inter-tight font-medium"
-            style={{ fontSize: DESC_SIZE, lineHeight: 1.35, color: '#bcbcbc', letterSpacing: '-0.02em', maxWidth: '35.625rem' }}>
+            style={{ fontSize: DESC_SIZE, lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.02em', maxWidth: '35.625rem' }}>
             Систематический срез по событиям недели, динамика вторичного рынка, инвестиционные идеи и полезные инструменты для управляющих капиталом.
           </p>
         </div>
@@ -86,7 +86,7 @@ export default function NLContents() {
             {CARDS.map((card) => (
               <div key={card.num}
                 className="relative flex flex-col p-[1rem] sm:p-[1.5rem] rounded-[1.5rem] overflow-hidden"
-                style={{ background: '#111111', minHeight: 'clamp(16.25rem, 20.8vw, 18.75rem)' }}
+                style={{ background: 'var(--black-300)', minHeight: 'clamp(16.25rem, 20.8vw, 18.75rem)' }}
               >
                 {/* Title */}
                 <h3 className="font-inter-tight font-semibold text-white w-full z-10 relative"
@@ -96,13 +96,13 @@ export default function NLContents() {
 
                 {/* Body */}
                 <p className="font-inter-tight font-medium w-full z-10 relative flex-1 mt-[0.75rem]"
-                  style={{ fontSize: DESC_SIZE, lineHeight: 1.35, color: '#bcbcbc', letterSpacing: '-0.02em' }}>
+                  style={{ fontSize: DESC_SIZE, lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.02em' }}>
                   {card.text}
                 </p>
 
                 {/* Number */}
                 <p className="font-inter-tight font-medium whitespace-nowrap z-10 relative mt-[1rem] shrink-0"
-                  style={{ fontSize: DESC_SIZE, lineHeight: 1.35, letterSpacing: '-0.02em', color: '#404040' }}>
+                  style={{ fontSize: DESC_SIZE, lineHeight: 1.35, letterSpacing: '-0.02em', color: 'var(--black-800)' }}>
                   {card.num}
                 </p>
 

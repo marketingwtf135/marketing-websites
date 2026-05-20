@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import FadeIn from '../components/FadeIn'
 import WBNav from './wb-sections/WBNav'
@@ -61,7 +61,7 @@ export default function Webinar() {
   const { radius: radius2, scale: scale2 } = useRollingCover(cover2Ref)
 
   return (
-    <div style={{ background: '#080808' }} className="overflow-x-clip">
+    <div style={{ background: 'var(--bg-100)' }} className="overflow-x-clip">
       <WBNav />
       <div style={{ height: '4rem' }} />
       <WBHero />
@@ -79,7 +79,7 @@ export default function Webinar() {
         className="relative"
         style={{
           zIndex: 10,
-          background: '#080808',
+          background: 'var(--bg-100)',
           borderTopLeftRadius: radius1,
           borderTopRightRadius: radius1,
           scale: scale1,
@@ -104,7 +104,7 @@ export default function Webinar() {
           className="relative"
           style={{
             zIndex: 20,
-            background: '#080808',
+            background: 'var(--bg-100)',
             borderTopLeftRadius: radius2,
             borderTopRightRadius: radius2,
             scale: scale2,

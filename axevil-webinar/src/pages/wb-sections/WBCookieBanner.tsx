@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 
 const STORAGE_KEY = 'wb_cookie_consent'
 
@@ -34,7 +34,7 @@ export default function WBCookieBanner() {
     <div
       className="fixed bottom-0 left-0 right-0 z-[60] sm:bottom-4 sm:left-4 sm:right-auto sm:max-w-[400px]"
       style={{
-        background: '#141414',
+        background: 'var(--surface-0)',
         border: '1px solid rgba(255,255,255,0.1)',
         borderRadius: '16px 16px 0 0',
         padding: '20px',

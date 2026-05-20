@@ -1,4 +1,4 @@
-import { useLang } from '../../lib/lang'
+﻿import { useLang } from '../../lib/lang'
 
 // Figma node 451:3749 — Time icon from /img/Time.svg
 function ClockIcon() {
@@ -29,7 +29,7 @@ export default function WBSchedule() {
               fontSize: 'clamp(2.25rem, 5vw, 4.5rem)',
               lineHeight: 1.05,
               letterSpacing: '-0.02em',
-              backgroundImage: 'linear-gradient(95deg, #ffffff -2.56%, #b7b7b7 99.06%)',
+              backgroundImage: 'var(--acc-gradient)',
               overflow: 'visible',
             }}
           >
@@ -45,7 +45,7 @@ export default function WBSchedule() {
               className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-6 px-5 py-4 sm:px-6 sm:py-5 rounded-[1.25rem]"
               style={{
                 width: '100%',
-                background: '#0d0d0d',
+                background: 'var(--black-300)',
                 border: '1px solid rgba(255,255,255,0.06)',
               }}
             >
@@ -59,7 +59,7 @@ export default function WBSchedule() {
                 </span>
                 <span
                   className="font-inter-tight font-medium text-white/45"
-                  style={{ fontSize: '0.875rem', lineHeight: 1.45 }}
+                  style={{ fontSize: 'var(--font-s)', lineHeight: 1.45 }}
                 >
                   {row.desc}
                 </span>
@@ -69,7 +69,7 @@ export default function WBSchedule() {
               <div
                 className="inline-flex self-start sm:self-auto items-center gap-2 shrink-0 px-3.5 py-2 rounded-full font-inter-tight font-medium tabular-nums"
                 style={{
-                  background: '#1a1a1a',
+                  background: 'var(--black-500)',
                   border: '1px solid rgba(255,255,255,0.08)',
                   color: 'rgba(255,255,255,0.85)',
                   fontSize: '0.8125rem',

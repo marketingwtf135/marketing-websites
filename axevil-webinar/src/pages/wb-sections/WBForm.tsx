@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type HTMLAttributes, type ReactNode, type RefObject } from 'react'
+﻿import { useEffect, useMemo, useRef, useState, type HTMLAttributes, type ReactNode, type RefObject } from 'react'
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { PhoneInput, defaultCountries, getActiveFormattingMask, getCountry, type CountryIso2, type PhoneInputRefType } from 'react-international-phone'
 import { isValidPhoneNumber, parsePhoneNumber } from 'libphonenumber-js'
@@ -407,7 +407,7 @@ export default function WBForm() {
       className="relative w-full overflow-clip flex items-center"
       style={{
         minHeight: '100vh',
-        background: '#000000',
+        background: 'var(--black-100)',
         borderTopLeftRadius: sectionRadius,
         borderTopRightRadius: sectionRadius,
       }}
@@ -443,7 +443,7 @@ export default function WBForm() {
             >
               {t.form.heading}
             </h2>
-            <p className="font-inter-tight font-medium text-white/55" style={{ fontSize: '0.9375rem' }}>
+            <p className="font-inter-tight font-medium text-white/55" style={{ fontSize: 'var(--font-s)' }}>
               {t.form.sub}
             </p>
           </div>
@@ -513,7 +513,7 @@ export default function WBForm() {
                 >
                   <span
                     className={`rounded-full ${isPending ? 'animate-pulse' : ''}`}
-                    style={{ width: '0.5rem', height: '0.5rem', background: '#2b2b2b' }}
+                    style={{ width: '0.5rem', height: '0.5rem', background: 'var(--black-700)' }}
                   />
                   {isPending ? t.form.sending : t.form.submit}
                 </button>
@@ -602,7 +602,7 @@ function FieldInput({
           height: 'clamp(3rem, 4vw, 3.75rem)',
           padding: '1.25rem 1rem',
           borderRadius: '1rem',
-          background: '#1A1A1A',
+          background: 'var(--black-500)',
           border: error ? '1px solid rgba(239,68,68,0.6)' : '1px solid rgba(255,255,255,0.08)',
         }}
       />
@@ -639,7 +639,7 @@ function FormModal({
       <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]" />
       <motion.div
         className="relative w-full max-w-[30rem] rounded-2xl p-6 sm:p-8"
-        style={{ background: '#1A1A1A', border: '1px solid rgba(255,255,255,0.1)' }}
+        style={{ background: 'var(--black-500)', border: '1px solid rgba(255,255,255,0.1)' }}
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 20, opacity: 0 }}
@@ -669,7 +669,7 @@ function FormModal({
                 className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-[15px] text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
                 style={{ height: 'clamp(3rem, 4vw, 3.75rem)' }}
               >
-                <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: '#2b2b2b' }} />
+                <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: 'var(--black-700)' }} />
                 {actionLabel}
               </a>
             )}
@@ -689,7 +689,7 @@ function FormModal({
                 className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-[15px] text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
                 style={{ height: 'clamp(3rem, 4vw, 3.75rem)' }}
               >
-                <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: '#2b2b2b' }} />
+                <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: 'var(--black-700)' }} />
                 {closeLabel}
               </button>
             )}

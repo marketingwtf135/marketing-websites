@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+﻿import { useRef } from 'react'
 import { useScroll, useTransform, motion } from 'framer-motion'
 import NLLetterPreview from './NLLetterPreview'
 
@@ -16,10 +16,10 @@ export default function NLMethodology() {
           <div className="flex flex-col gap-4 sm:gap-6 items-center text-center w-full lg:px-[80px]">
             <div className="flex gap-2 font-inter-tight font-medium items-center justify-center whitespace-nowrap"
               style={{ fontSize: 'clamp(14px, 1.1vw, 18px)', lineHeight: 1.35, letterSpacing: '-0.36px' }}>
-              <span style={{ color: '#404040' }}>3.0</span>
+              <span style={{ color: 'var(--black-800)' }}>3.0</span>
               {/* Mobile: "Пример выпуска", Desktop: "Методология" */}
-              <span className="sm:hidden" style={{ color: '#848484' }}>Пример выпуска</span>
-              <span className="hidden sm:inline" style={{ color: '#848484' }}>Методология</span>
+              <span className="sm:hidden" style={{ color: 'var(--black-900)' }}>Пример выпуска</span>
+              <span className="hidden sm:inline" style={{ color: 'var(--black-900)' }}>Методология</span>
             </div>
             <h2 className="font-inter-tight font-semibold text-transparent bg-clip-text text-center"
               style={{
@@ -30,7 +30,7 @@ export default function NLMethodology() {
               Так выглядит один выпуск
             </h2>
             <p className="font-inter-tight font-medium text-center"
-              style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: '#bcbcbc', letterSpacing: '-0.36px', maxWidth: 540 }}>
+              style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.36px', maxWidth: 540 }}>
               Лидерборд secondary, открывшиеся тендер-оферы, новые раунды, 1 sector deep-dive — всё в одном письме.
             </p>
           </div>
@@ -48,7 +48,7 @@ export default function NLMethodology() {
             {/* Parallax rock background */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden
               style={{ borderRadius: 'clamp(24px, 2.2vw, 32px)' }}>
-              <div className="absolute inset-0" style={{ background: '#111111', borderRadius: 'clamp(24px, 2.2vw, 32px)' }} />
+              <div className="absolute inset-0" style={{ background: 'var(--black-300)', borderRadius: 'clamp(24px, 2.2vw, 32px)' }} />
               <motion.img
                 src="/img/newsletter/hero-bg-rock.png"
                 alt=""

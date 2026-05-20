@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useLang } from '../../lib/lang'
 
@@ -28,7 +28,7 @@ export default function WBWhyAxevil() {
       className="relative w-full overflow-clip"
       style={{
         minHeight: '100vh',
-        background: '#000000',
+        background: 'var(--black-100)',
         borderTopLeftRadius: isMobile ? 0 : sectionRadius,
         borderTopRightRadius: isMobile ? 0 : sectionRadius,
       }}
@@ -57,7 +57,7 @@ export default function WBWhyAxevil() {
               fontSize: 'clamp(1.75rem, 3.5vw, 3rem)',
               lineHeight: 1.1,
               letterSpacing: '-0.02em',
-              backgroundImage: 'linear-gradient(95deg, #ffffff -2.56%, #b7b7b7 99.06%)',
+              backgroundImage: 'var(--acc-gradient)',
               maxWidth: '45rem',
               overflow: 'visible',
             }}
@@ -96,7 +96,7 @@ export default function WBWhyAxevil() {
                 >
                   {s.value}
                 </span>
-                <span className="font-inter-tight font-medium text-white/45" style={{ fontSize: '0.875rem' }}>
+                <span className="font-inter-tight font-medium text-white/45" style={{ fontSize: 'var(--font-s)' }}>
                   {s.label}
                 </span>
               </div>

@@ -1,4 +1,4 @@
-import { useLang } from '../../lib/lang'
+﻿import { useLang } from '../../lib/lang'
 
 export default function WBFooter() {
   const { t } = useLang()
@@ -8,7 +8,7 @@ export default function WBFooter() {
     <footer
       id="wb-footer"
       className="relative w-full"
-      style={{ background: '#000000', borderTop: '1px solid rgba(255,255,255,0.08)' }}
+      style={{ background: 'var(--black-100)', borderTop: '1px solid rgba(255,255,255,0.08)' }}
     >
       <div className="mx-auto w-full max-w-[1440px] container-px padding-global py-10 sm:py-12">
         <div className="flex flex-col gap-8">
@@ -52,11 +52,11 @@ export default function WBFooter() {
           <div className="flex flex-col gap-4 border-t pt-6" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
             <p
               className="font-inter-tight font-medium text-white/35 leading-[1.55]"
-              style={{ fontSize: '0.75rem', maxWidth: '60rem' }}
+              style={{ fontSize: 'var(--font-xs)', maxWidth: '60rem' }}
             >
               {footer.disclaimer}
             </p>
-            <p className="font-inter-tight font-medium text-white/30" style={{ fontSize: '0.75rem' }}>
+            <p className="font-inter-tight font-medium text-white/30" style={{ fontSize: 'var(--font-xs)' }}>
               {footer.copy}
             </p>
           </div>
