@@ -1,4 +1,4 @@
-﻿import MailIcon from './MailIcon'
+import MailIcon from './MailIcon'
 
 interface OwnButtonProps {
   onClick?: () => void
@@ -25,7 +25,7 @@ export default function OwnButton({
       className={`cta-button-glow relative flex items-center justify-center gap-2 font-inter-tight font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-white disabled:opacity-60 transition-all duration-300${fullWidth ? ' w-full' : ' shrink-0'}`}
       style={{
         background: 'var(--white-100)',
-        borderBottom: '3px solid #b8b8b8',
+        
         height: 'clamp(56px, 4.5vw, 64px)',
         paddingLeft: 32, paddingRight: 32,
         paddingTop: 13, paddingBottom: 16,
