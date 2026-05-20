@@ -2,12 +2,75 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useLang } from '../../lib/lang'
 
+// Fixed nav bar height — keep in sync with NAV_HEIGHT below.
+const NAV_OFFSET_PX = 64
+
+/**
+ * Layout-based document Y of an element — unaffected by CSS transforms or by
+ * a currently-stuck `position: sticky` ancestor.
+ *
+ * Two quirks this function defends against:
+ *
+ * 1. **Scaled ancestors.** Several sections sit inside framer-motion `motion.div`s
+ *    that animate `scale` (0.8 → 1) via scroll progress. `getBoundingClientRect`
+ *    and `scrollIntoView` use the visual rect (post-transform), so a click at the
+ *    top of the page captures a "compressed" target; while the page smooth-scrolls,
+ *    the scale grows to 1.0, layout expands, and the precomputed target becomes
+ *    stale — landing a few hundred pixels short. `offsetTop` is layout-based, so
+ *    walking the offsetParent chain sidesteps this.
+ *
+ * 2. **Stuck sticky ancestors.** Sections like `#wb-who` (and `#wb-schedule`) are
+ *    wrapped in a `position: sticky` parent with `top: -160`. When the user is
+ *    scrolled past them and the sticky parent is currently "stuck", browsers
+ *    report a translated layout position to descendants — so `offsetTop` of a
+ *    descendant ends up near the *current* scrollY rather than the parent's
+ *    natural flow position. The visible symptom is that clicking the nav link
+ *    only scrolls a hundred pixels or so. To get a clean reading, we walk up
+ *    the DOM tree once and momentarily set `position: static` on any sticky
+ *    ancestor, measure, then restore. The whole sequence is synchronous (no
+ *    paint in between), so it's visually invisible.
+ */
+function getDocumentOffsetTop(el: HTMLElement): number {
+  type Override = { el: HTMLElement; previous: string }
+  const overrides: Override[] = []
+  let walker: HTMLElement | null = el.parentElement
+  while (walker && walker !== document.body) {
+    if (window.getComputedStyle(walker).position === 'sticky') {
+      overrides.push({ el: walker, previous: walker.style.position })
+      walker.style.position = 'static'
+    }
+    walker = walker.parentElement
+  }
+
+  let top = 0
+  let node: HTMLElement | null = el
+  while (node && node !== document.body) {
+    top += node.offsetTop
+    node = node.offsetParent as HTMLElement | null
+  }
+
+  for (const o of overrides) {
+    o.el.style.position = o.previous
+  }
+
+  return top
+}
+
 export function scrollToForm() {
-  document.getElementById('wb-form')?.scrollIntoView({ behavior: 'smooth' })
+  const el = document.getElementById('wb-form')
+  if (!el) return
+  window.scrollTo({ top: Math.max(0, getDocumentOffsetTop(el)), behavior: 'smooth' })
 }
 
 function scrollTo(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  const el = document.getElementById(id)
+  if (!el) return
+  // Subtract the fixed nav height so the section heading isn't tucked under
+  // the navbar after the smooth scroll lands.
+  window.scrollTo({
+    top: Math.max(0, getDocumentOffsetTop(el) - NAV_OFFSET_PX),
+    behavior: 'smooth',
+  })
 }
 
 const NAV_IDS = ['wb-who', 'wb-why', 'wb-agenda', 'wb-speaker', 'wb-schedule']
@@ -99,10 +162,10 @@ export default function WBNav() {
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Reserve a seat — desktop only */}
+            {/* Reserve a seat — desktop only — scrolls to the registration form (same anchor as WBCtaButton "Занять место") */}
             <button
               type="button"
-              onClick={() => document.getElementById('wb-footer')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={scrollToForm}
               className="hidden sm:flex items-center justify-center font-inter-tight font-semibold text-phone-bg bg-white hover:scale-[1.02] transition-transform focus-visible:outline focus-visible:outline-2 focus-visible:outline-white shrink-0"
               style={{ height: '2.25rem', padding: '0 1.25rem', borderRadius: '1rem', fontSize: 'var(--font-s)' }}
             >
@@ -149,11 +212,11 @@ export default function WBNav() {
                 {label}
               </button>
             ))}
-            {/* Reserve a seat — desktop button in mobile menu */}
+            {/* Reserve a seat — desktop button in mobile menu — scrolls to the registration form */}
             <div className="px-5 py-3">
               <button
                 type="button"
-                onClick={() => { document.getElementById('wb-footer')?.scrollIntoView({ behavior: 'smooth' }); setMenuOpen(false) }}
+                onClick={() => { scrollToForm(); setMenuOpen(false) }}
                 className="flex items-center justify-center font-inter-tight font-semibold text-phone-bg bg-white hover:scale-[1.02] transition-transform w-full"
                 style={{ height: '2.75rem', borderRadius: '1rem', fontSize: 'var(--font-s)' }}
               >

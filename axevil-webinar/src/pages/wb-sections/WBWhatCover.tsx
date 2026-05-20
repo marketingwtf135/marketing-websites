@@ -1,4 +1,5 @@
-﻿import { useLang } from '../../lib/lang'
+import WBCtaButton from './WBCtaButton'
+import { useLang } from '../../lib/lang'
 
 function AgendaCard({
   n, body, height, flex, bodyFill, className,
@@ -69,7 +70,7 @@ export default function WBWhatCover() {
           </h2>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 mb-10 sm:mb-12">
           {/* Row 1: first 3 items — paragraph fills container */}
           <div className="flex flex-col sm:flex-row gap-[1rem]">
             {row1.map(item => (
@@ -83,6 +84,10 @@ export default function WBWhatCover() {
               <AgendaCard key={item.n} n={item.n} body={item.body} bodyFill />
             ))}
           </div>
+        </div>
+
+        <div className="flex justify-center">
+          <WBCtaButton label={t.hero.cta} />
         </div>
       </div>
     </section>

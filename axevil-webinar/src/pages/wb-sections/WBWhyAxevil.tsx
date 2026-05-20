@@ -44,8 +44,14 @@ export default function WBWhyAxevil() {
 
       <div
         className="relative mx-auto w-full max-w-[1440px] flex flex-col h-full container-px padding-global"
-        style={{ minHeight: '100vh', paddingTop: isMobile ? '1.5rem' : 'clamp(3rem, 8vw, 7.5rem)', paddingBottom: 'clamp(3rem, 8vw, 7.5rem)' }}
+        style={{
+          minHeight: '100vh',
+          paddingTop: isMobile ? '1.5rem' : 'clamp(3rem, 8vw, 7.5rem)',
+          paddingBottom: 'clamp(3rem, 8vw, 7.5rem)',
+          gap: '2rem',
+        }}
       >
+        {/* Top: section label + heading — pinned to top via mb-auto */}
         <div className="flex flex-col gap-4 mb-auto">
           <div className="flex items-center gap-2 font-inter-tight font-medium text-text-xs sm:text-text-l text-neutral-30">
             <span className="opacity-50">{t.whyAxevil.label.split(' ')[0]}</span>
@@ -66,42 +72,43 @@ export default function WBWhyAxevil() {
           </h2>
         </div>
 
-        <div className="mt-auto flex flex-col gap-8 sm:gap-10">
-          <a
-            href="https://axevil.com"
-            target="_blank"
-            rel="noreferrer"
-            aria-label={t.whyAxevil.link}
-            className="inline-flex items-center self-start opacity-90 hover:opacity-100 transition-opacity"
-          >
-            <img
-              src="/img/block01/logo.svg"
-              alt="AXEVIL Capital"
-              width={155}
-              height={24}
-              style={{ height: 'clamp(1.25rem, 1.75vw, 1.75rem)', width: 'auto', display: 'block' }}
-            />
-          </a>
+        {/* Middle: AXEVIL logo — sits exactly in the midpoint between top heading and bottom stats
+            (free vertical space is split equally above & below by the mb-auto/mt-auto on its siblings). */}
+        <a
+          href="https://axevil.com"
+          target="_blank"
+          rel="noreferrer"
+          aria-label={t.whyAxevil.link}
+          className="inline-flex items-center self-start opacity-90 hover:opacity-100 transition-opacity"
+        >
+          <img
+            src="/img/block01/logo.svg"
+            alt="AXEVIL Capital"
+            width={155}
+            height={24}
+            style={{ height: 'clamp(1.25rem, 1.75vw, 1.75rem)', width: 'auto', display: 'block' }}
+          />
+        </a>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8 sm:gap-y-10">
-            {t.whyAxevil.stats.map(s => (
-              <div
-                key={s.label}
-                className="flex flex-col gap-3 items-start"
-                style={{ borderLeft: '1px solid #202020', paddingLeft: '1.5rem' }}
+        {/* Bottom: stats grid — pinned to bottom via mt-auto */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8 sm:gap-y-10 mt-auto">
+          {t.whyAxevil.stats.map(s => (
+            <div
+              key={s.label}
+              className="flex flex-col gap-3 items-start"
+              style={{ borderLeft: '1px solid #202020', paddingLeft: '1.5rem' }}
+            >
+              <span
+                className="font-inter-tight font-medium text-white"
+                style={{ fontSize: 'clamp(2rem, 4.5vw, 4.5rem)', lineHeight: '110%', letterSpacing: '-0.165rem' }}
               >
-                <span
-                  className="font-inter-tight font-medium text-white"
-                  style={{ fontSize: 'clamp(2rem, 4.5vw, 4.5rem)', lineHeight: '110%', letterSpacing: '-0.165rem' }}
-                >
-                  {s.value}
-                </span>
-                <span className="font-inter-tight font-medium text-white/45" style={{ fontSize: 'var(--font-s)' }}>
-                  {s.label}
-                </span>
-              </div>
-            ))}
-          </div>
+                {s.value}
+              </span>
+              <span className="font-inter-tight font-medium text-white/45" style={{ fontSize: 'var(--font-s)' }}>
+                {s.label}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </motion.section>
