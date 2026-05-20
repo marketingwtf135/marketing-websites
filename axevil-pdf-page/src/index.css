@@ -79,6 +79,12 @@
   --accent-blue:     #546fef;
   --btn-label:       #2b2b2b;
   --btn-border:      #c9c9c9;
+  /* Extended palette */
+  --black-300:  #111111;
+  --black-800:  #404040;
+  --black-900:  #848484;
+  --white-300:  #bcbcbc;
+  --white-400:  #9b9b9b;
 }
 
 /* Explicit layout tokens that Tailwind's JIT doesn't compile from spacing keys */
