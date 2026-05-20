@@ -1,4 +1,6 @@
 import type { Config } from 'tailwindcss'
+// @axevil/design-system — single source of truth for all AXEVIL projects
+const { tokens } = require('@axevil/design-system')
 
 const config: Config = {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
