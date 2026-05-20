@@ -47,7 +47,7 @@ export default function WBWhyAxevil() {
         style={{ minHeight: '100vh', paddingTop: isMobile ? '1.5rem' : 'clamp(3rem, 8vw, 7.5rem)', paddingBottom: 'clamp(3rem, 8vw, 7.5rem)' }}
       >
         <div className="flex flex-col gap-4 mb-auto">
-          <div className="flex items-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30">
+          <div className="flex items-center gap-2 font-inter-tight font-medium text-text-xs sm:text-text-l text-neutral-30">
             <span className="opacity-50">{t.whyAxevil.label.split(' ')[0]}</span>
             <span className="opacity-80">{t.whyAxevil.label.split(' ').slice(1).join(' ')}</span>
           </div>

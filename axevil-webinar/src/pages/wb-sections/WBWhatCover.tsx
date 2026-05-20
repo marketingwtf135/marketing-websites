@@ -51,7 +51,7 @@ export default function WBWhatCover() {
       >
         {/* Heading */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-12 gap-4">
-          <div className="flex items-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30">
+          <div className="flex items-center gap-2 font-inter-tight font-medium text-text-xs sm:text-text-l text-neutral-30">
             <span className="opacity-50">{t.whatCover.label.split(' ')[0]}</span>
             <span className="opacity-80">{t.whatCover.label.split(' ').slice(1).join(' ')}</span>
           </div>

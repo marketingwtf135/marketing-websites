@@ -74,7 +74,7 @@ export default function NLNav() {
             {NAV_LINKS.map(({ label, id }, i) => (
               <button key={id} type="button" onClick={() => scrollTo(id)}
                 className="flex items-center justify-center px-4 py-2 rounded-[160px] font-inter-tight font-medium text-white text-center whitespace-nowrap transition-colors"
-                style={{ fontSize: 14, lineHeight: 'normal', background: i === 0 ? 'rgba(255,255,255,0.05)' : 'transparent', opacity: i === 0 ? 1 : 0.8 }}>
+                style={{ fontSize: 'var(--font-s)', lineHeight: 'normal', background: i === 0 ? 'rgba(255,255,255,0.05)' : 'transparent', opacity: i === 0 ? 1 : 0.8 }}>
                 {label}
               </button>
             ))}
@@ -83,8 +83,8 @@ export default function NLNav() {
           {/* Desktop: CTA */}
           <div className="ml-auto hidden lg:flex">
             <button type="button" onClick={scrollToNLForm}
-              className="flex items-center gap-2 font-inter-tight font-semibold text-[#202020] bg-white rounded-2xl hover:opacity-90 transition-opacity shrink-0"
-              style={{ height: 40, paddingLeft: 16, paddingRight: 16, paddingTop: 13, paddingBottom: 16, fontSize: 16, fontWeight: 600, lineHeight: '110%', letterSpacing: '-1px' }}>
+              className="flex items-center gap-2 font-inter-tight font-semibold text-black-600 bg-white rounded-2xl hover:opacity-90 transition-opacity shrink-0"
+              style={{ height: 40, paddingLeft: 16, paddingRight: 16, paddingTop: 13, paddingBottom: 16, fontSize: 'var(--font-m)', fontWeight: 600, lineHeight: '110%', letterSpacing: '-1px' }}>
               <MailIcon />
               Подписаться
             </button>

@@ -40,7 +40,7 @@ function AUMDropdown({ value, onChange }: { value: string; onChange: (v: string)
         className="flex items-center justify-between px-4 cursor-pointer select-none"
         style={{ background: 'var(--black-500)', height: 60, borderRadius: 16 }}
       >
-        <span className="font-inter-tight font-medium text-[16px]"
+        <span className="font-inter-tight font-medium text-text-m"
           style={{ color: selected ? '#ffffff' : 'rgba(255,255,255,0.35)' }}>
           {selected ? selected.label : 'AUM bracket (опционально)'}
         </span>
@@ -69,7 +69,7 @@ function AUMDropdown({ value, onChange }: { value: string; onChange: (v: string)
               <div
                 key={opt.value}
                 onClick={() => { onChange(opt.value); setOpen(false) }}
-                className="group flex items-center px-4 cursor-pointer transition-colors hover:bg-white/5 font-inter-tight font-medium text-[16px]"
+                className="group flex items-center px-4 cursor-pointer transition-colors hover:bg-white/5 font-inter-tight font-medium text-text-m"
                 style={{
                   height: 52,
                   borderBottom: i < AUM_OPTIONS.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
@@ -239,7 +239,7 @@ export default function NLForm() {
 }
 
 function inputClass(hasError: boolean) {
-  return ['w-full bg-transparent font-inter-tight font-medium text-white placeholder:text-[rgba(255,255,255,0.35)]', 'text-[16px] focus:outline-none transition-colors', hasError ? '' : ''].join(' ')
+  return ['w-full bg-transparent font-inter-tight font-medium text-white placeholder:text-[rgba(255,255,255,0.35)]', 'text-text-m focus:outline-none transition-colors', hasError ? '' : ''].join(' ')
 }
 
 function Field({ input, error, className, children }: { input?: React.ReactNode; error?: string; className?: string; children?: React.ReactNode }) {
@@ -249,7 +249,7 @@ function Field({ input, error, className, children }: { input?: React.ReactNode;
         style={{ background: 'var(--black-500)', height: 60, borderRadius: 16, border: error ? '1px solid rgba(239,68,68,0.5)' : 'none' }}>
         {input ?? children}
       </div>
-      {error && <p className="font-inter-tight font-medium text-red-400 text-[12px]">{error}</p>}
+      {error && <p className="font-inter-tight font-medium text-red-400 text-text-xs">{error}</p>}
     </div>
   )
 }

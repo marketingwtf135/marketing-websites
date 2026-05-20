@@ -20,7 +20,7 @@ export default function WBSocialProof() {
 
         {/* mb-6 = 24px before cards */}
         <div className="mb-6">
-          <div className="flex items-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30 mb-4">
+          <div className="flex items-center gap-2 font-inter-tight font-medium text-text-xs sm:text-text-l text-neutral-30 mb-4">
             <span className="opacity-50">6.0</span>
             <span className="opacity-80">Social proof</span>
           </div>
@@ -46,7 +46,7 @@ export default function WBSocialProof() {
               style={{ background: 'var(--black-300)', border: '1px solid rgba(255,255,255,0.07)' }}
             >
               <div className="flex flex-col gap-4">
-                <div className="font-inter-tight font-semibold text-[32px] leading-none text-white/20" aria-hidden="true">
+                <div className="font-inter-tight font-semibold text-[2rem] leading-none text-white/20" aria-hidden="true">
                   "
                 </div>
                 <p className="font-inter-tight font-medium text-white text-text-m sm:text-text-l leading-[1.55]">

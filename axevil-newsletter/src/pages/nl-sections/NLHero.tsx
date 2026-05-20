@@ -51,7 +51,7 @@ export default function NLHero() {
           <motion.div {...fadeUp(0.1)} className="flex items-center gap-2 px-4 py-3 rounded-full shrink-0 mb-[1rem]"
             style={{ background: 'rgba(77,186,121,0.05)', border: '1px solid rgba(77,186,121,0.15)' }}>
             <span className="badge-pulse shrink-0 block rounded-full" style={{ width: 10, height: 10, background: 'var(--status-open)' }} aria-hidden />
-            <p className="font-inter-tight font-medium text-white whitespace-nowrap" style={{ fontSize: 12, lineHeight: 1.3 }}>
+            <p className="font-inter-tight font-medium text-white whitespace-nowrap" style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3 }}>
               Axevil дайджест · еженедельно
             </p>
           </motion.div>
@@ -60,14 +60,14 @@ export default function NLHero() {
             {/* Heading */}
             <motion.h1 {...fadeUp(0.15)}
               className="font-inter-tight font-semibold text-transparent bg-clip-text w-full"
-              style={{ fontSize: 36, lineHeight: 1, letterSpacing: '-0.72px', backgroundImage: 'linear-gradient(103.344deg, rgb(162,162,162) 8.73%, rgb(255,255,255) 50.65%, rgb(162,162,162) 92.57%)' }}>
+              style={{ fontSize: 'var(--font-h4)', lineHeight: 1, letterSpacing: '-0.72px', backgroundImage: 'linear-gradient(103.344deg, rgb(162,162,162) 8.73%, rgb(255,255,255) 50.65%, rgb(162,162,162) 92.57%)' }}>
               Дайджест частного рынка — раз в неделю на почту
             </motion.h1>
 
             {/* Paragraph */}
             <motion.p {...fadeUp(0.20)}
               className="font-inter-tight font-medium w-full"
-              style={{ fontSize: 14, lineHeight: 1.35, color: 'var(--white-400)', letterSpacing: '-0.28px' }}>
+              style={{ fontSize: 'var(--font-s)', lineHeight: 1.35, color: 'var(--white-400)', letterSpacing: '-0.28px' }}>
               Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждый вторник.
             </motion.p>
           </div>
@@ -105,7 +105,7 @@ export default function NLHero() {
             className="flex items-center gap-2 px-4 py-3 rounded-full"
             style={{ background: 'rgba(77,186,121,0.05)', border: '1px solid rgba(77,186,121,0.15)' }}>
             <span className="badge-pulse shrink-0 block rounded-full" style={{ width: 10, height: 10, background: 'var(--status-open)' }} aria-hidden />
-            <p className="font-inter-tight font-medium text-white whitespace-nowrap" style={{ fontSize: 14, lineHeight: 1.3 }}>
+            <p className="font-inter-tight font-medium text-white whitespace-nowrap" style={{ fontSize: 'var(--font-s)', lineHeight: 1.3 }}>
               Axevil дайджест · еженедельно
             </p>
           </motion.div>

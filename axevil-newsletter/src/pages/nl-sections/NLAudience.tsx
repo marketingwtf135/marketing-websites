@@ -29,7 +29,7 @@ export default function NLAudience() {
         {/* Heading — has inner padding on desktop */}
         <div className="flex flex-col gap-6 items-center mb-10 sm:mb-12 lg:px-[80px]">
           <div className="flex gap-2 font-inter-tight font-medium items-center whitespace-nowrap"
-            style={{ fontSize: 18, lineHeight: 1.35, letterSpacing: '-0.36px' }}>
+            style={{ fontSize: 'var(--font-l)', lineHeight: 1.35, letterSpacing: '-0.36px' }}>
             <span style={{ color: 'var(--black-800)' }}>1.0</span>
             <span style={{ color: 'var(--black-900)' }}>Кому полезен дайджест</span>
           </div>
@@ -43,7 +43,7 @@ export default function NLAudience() {
             {'Аналитика для тех, \nкто работает с частным рынком'}
           </h2>
           <p className="hidden md:block font-inter-tight font-medium text-center"
-            style={{ fontSize: 18, lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.36px', maxWidth: 580 }}>
+            style={{ fontSize: 'var(--font-l)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.36px', maxWidth: 580 }}>
             Регулярно освещаем ключевые события рынка частных компаний — переоценки, рейтинги, тендер-оферы, раунды. Чтобы вы могли использовать эту информацию в своей работе.
           </p>
         </div>
@@ -57,7 +57,7 @@ export default function NLAudience() {
             >
               {/* Number — centered */}
               <p className="font-inter-tight font-medium text-center whitespace-nowrap shrink-0 w-full"
-                style={{ fontSize: 18, lineHeight: 1.35, letterSpacing: '-0.36px', color: 'var(--black-700)' }}>
+                style={{ fontSize: 'var(--font-l)', lineHeight: 1.35, letterSpacing: '-0.36px', color: 'var(--black-700)' }}>
                 {card.num}
               </p>
 

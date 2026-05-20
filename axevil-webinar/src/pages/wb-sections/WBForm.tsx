@@ -433,7 +433,7 @@ export default function WBForm() {
         <div style={{ maxWidth: 'min(100%, 32.5rem)', marginLeft: 'auto', marginRight: 'auto' }}>
 
           <div className="flex flex-col items-center text-center gap-4 mb-8 sm:mb-10">
-            <div className="flex items-center gap-2 font-inter-tight font-medium text-[12px] sm:text-text-l text-neutral-30">
+            <div className="flex items-center gap-2 font-inter-tight font-medium text-text-xs sm:text-text-l text-neutral-30">
               <span className="opacity-50">{t.form.label.split(' ')[0]}</span>
               <span className="opacity-80">{t.form.label.split(' ').slice(1).join(' ')}</span>
             </div>
@@ -499,7 +499,7 @@ export default function WBForm() {
                         'aria-describedby': errors.phone ? 'phone-error' : undefined,
                       }}
                     />
-                    {errors.phone && <p id="phone-error" className="font-inter-tight font-medium text-red-400 text-[12px] mt-1.5 ml-1">{errors.phone}</p>}
+                    {errors.phone && <p id="phone-error" className="font-inter-tight font-medium text-red-400 text-text-xs mt-1.5 ml-1">{errors.phone}</p>}
                   </div>
                 </div>
 
@@ -508,7 +508,7 @@ export default function WBForm() {
                   disabled={isPending}
                   aria-busy={isPending}
                   aria-label={isPending ? ui.loadingAria : t.form.submit}
-                  className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-[15px] text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-text-m text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white disabled:opacity-60 disabled:cursor-not-allowed"
                   style={{ height: 'clamp(3rem, 4vw, 3.75rem)', marginTop: '0.75rem' }}
                 >
                   <span
@@ -519,7 +519,7 @@ export default function WBForm() {
                 </button>
             </fieldset>
 
-            <p className="font-inter-tight font-medium text-white/40 text-[12px] text-center mt-4">
+            <p className="font-inter-tight font-medium text-white/40 text-text-xs text-center mt-4">
               {t.form.disclaimer}
             </p>
           </form>
@@ -532,15 +532,15 @@ export default function WBForm() {
             title={t.form.success.heading}
             body={
               <div className="flex flex-col" style={{ gap: '1.25rem' }}>
-                <p className="font-inter-tight font-medium text-white/65 text-[15px] leading-[1.5] text-center">
+                <p className="font-inter-tight font-medium text-white/65 text-text-m leading-[1.5] text-center">
                   {t.form.success.bodyEmail}
                 </p>
                 <div className="h-px w-full bg-white/10" />
                 <div className="flex flex-col text-center" style={{ gap: '0.5rem' }}>
-                  <p className="font-inter-tight font-semibold text-white text-[16px] leading-[1.35] tracking-[-0.01em]">
+                  <p className="font-inter-tight font-semibold text-white text-text-m leading-[1.35] tracking-[-0.01em]">
                     {t.form.success.highlight}
                   </p>
-                  <p className="font-inter-tight font-medium text-white/65 text-[15px] leading-[1.5]">
+                  <p className="font-inter-tight font-medium text-white/65 text-text-m leading-[1.5]">
                     {t.form.success.bodyTelegram}
                   </p>
                 </div>
@@ -596,7 +596,7 @@ function FieldInput({
         enterKeyHint={enterKeyHint}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
-        className="w-full font-inter-tight font-medium text-[15px] text-white placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35 transition-colors disabled:opacity-70 bg-transparent"
+        className="w-full font-inter-tight font-medium text-text-m text-white placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35 transition-colors disabled:opacity-70 bg-transparent"
         style={{
           display: 'flex',
           height: 'clamp(3rem, 4vw, 3.75rem)',
@@ -606,7 +606,7 @@ function FieldInput({
           border: error ? '1px solid rgba(239,68,68,0.6)' : '1px solid rgba(255,255,255,0.08)',
         }}
       />
-      {error && <p id={`${id}-error`} className="font-inter-tight font-medium text-red-400 text-[12px] mt-1.5 ml-1">{error}</p>}
+      {error && <p id={`${id}-error`} className="font-inter-tight font-medium text-red-400 text-text-xs mt-1.5 ml-1">{error}</p>}
     </div>
   )
 }
@@ -655,7 +655,7 @@ function FormModal({
           </h3>
           {body ?? (
             message && (
-              <p className="font-inter-tight font-medium text-white/70 text-[15px] whitespace-pre-line text-center leading-[1.5]">
+              <p className="font-inter-tight font-medium text-white/70 text-text-m whitespace-pre-line text-center leading-[1.5]">
                 {message}
               </p>
             )
@@ -666,7 +666,7 @@ function FormModal({
                 href={actionHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-[15px] text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-text-m text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
                 style={{ height: 'clamp(3rem, 4vw, 3.75rem)' }}
               >
                 <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: 'var(--black-700)' }} />
@@ -677,7 +677,7 @@ function FormModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="relative w-full flex items-center justify-center font-inter-tight font-semibold text-[15px] text-white/80 hover:text-white bg-transparent hover:bg-white/5 rounded-[14px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/40"
+                className="relative w-full flex items-center justify-center font-inter-tight font-semibold text-text-m text-white/80 hover:text-white bg-transparent hover:bg-white/5 rounded-[14px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/40"
                 style={{ height: 'clamp(3rem, 4vw, 3.75rem)', border: '1px solid rgba(255,255,255,0.15)' }}
               >
                 {closeLabel}
@@ -686,7 +686,7 @@ function FormModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-[15px] text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-text-m text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
                 style={{ height: 'clamp(3rem, 4vw, 3.75rem)' }}
               >
                 <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: 'var(--black-700)' }} />
