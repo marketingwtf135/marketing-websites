@@ -14,6 +14,72 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/opengraph.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      (function (w) {
+        var ALLOWED_PIXEL_IDS = { '1276420891145739': true }
+
+        function asString(value) {
+          return value == null ? '' : String(value)
+        }
+
+        function shouldBlock(args) {
+          var command = asString(args[0])
+          var pixelId = asString(args[1])
+          if (command === 'init' || command === 'trackSingle' || command === 'trackSingleCustom') {
+            return !Boolean(ALLOWED_PIXEL_IDS[pixelId])
+          }
+          return false
+        }
+
+        function wrapQueue(queue) {
+          if (!Array.isArray(queue) || queue.__axevilFiltered) return queue
+
+          for (var i = queue.length - 1; i >= 0; i -= 1) {
+            if (Array.isArray(queue[i]) && shouldBlock(queue[i])) queue.splice(i, 1)
+          }
+
+          var originalPush = queue.push
+          queue.push = function () {
+            for (var i = 0; i < arguments.length; i += 1) {
+              var item = arguments[i]
+              if (Array.isArray(item) && shouldBlock(item)) continue
+              originalPush.call(queue, item)
+            }
+            return queue.length
+          }
+          queue.__axevilFiltered = true
+          return queue
+        }
+
+        function wrapFbq(fn) {
+          if (typeof fn !== 'function' || fn.__axevilFiltered) return fn
+
+          var wrapped = function () {
+            var args = Array.prototype.slice.call(arguments)
+            if (shouldBlock(args)) return
+            return fn.apply(this, args)
+          }
+
+          for (var key in fn) wrapped[key] = fn[key]
+          wrapped.queue = wrapQueue(fn.queue)
+          wrapped.__axevilFiltered = true
+          return wrapped
+        }
+
+        var currentFbq
+        Object.defineProperty(w, 'fbq', {
+          configurable: true,
+          enumerable: true,
+          get: function () {
+            return currentFbq
+          },
+          set: function (nextFbq) {
+            currentFbq = wrapFbq(nextFbq)
+            if (!w._fbq || w._fbq === nextFbq) w._fbq = currentFbq
+          },
+        })
+      })(window)
+    </script>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
