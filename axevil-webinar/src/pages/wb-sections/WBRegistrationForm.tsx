@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type HTMLAttributes, type ReactNode, type RefObject } from 'react'
+import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { PhoneInput, defaultCountries, getActiveFormattingMask, getCountry, type CountryIso2, type PhoneInputRefType } from 'react-international-phone'
 import { isValidPhoneNumber, parsePhoneNumber } from 'libphonenumber-js'
@@ -521,23 +522,9 @@ export default function WBRegistrationForm({ className = '', disclaimerAlign = '
       <AnimatePresence>
         {isSuccessModalOpen && (
           <FormModal
+            variant="speaker"
             title={t.form.success.heading}
-            body={
-              <div className="flex flex-col" style={{ gap: '1.25rem' }}>
-                <p className="font-inter-tight font-medium text-white/65 text-text-m leading-[1.5] text-center">
-                  {t.form.success.bodyEmail}
-                </p>
-                <div className="h-px w-full bg-white/10" />
-                <div className="flex flex-col text-center" style={{ gap: '0.5rem' }}>
-                  <p className="font-inter-tight font-semibold text-white text-text-m leading-[1.35] tracking-[-0.01em]">
-                    {t.form.success.highlight}
-                  </p>
-                  <p className="font-inter-tight font-medium text-white/65 text-text-m leading-[1.5]">
-                    {t.form.success.bodyTelegram}
-                  </p>
-                </div>
-              </div>
-            }
+            message={t.form.success.subheading}
             onClose={() => setIsSuccessModalOpen(false)}
             closeLabel={t.form.success.close}
             actionLabel={t.form.success.primary}
@@ -611,6 +598,7 @@ function FormModal({
   actionLabel,
   actionHref,
   onClose,
+  variant = 'default',
 }: {
   title: string
   message?: string
@@ -619,26 +607,101 @@ function FormModal({
   actionLabel?: string
   actionHref?: string
   onClose: () => void
+  /** 'speaker' replicates the WBSpeaker block background (bg-speaker.png + bg-video.mp4 overlay). */
+  variant?: 'default' | 'speaker'
 }) {
-  return (
+  const isSpeakerVariant = variant === 'speaker'
+  // Lock body scroll while the modal is open and compensate for the missing
+  // scrollbar width so the page layout doesn't visibly shift.
+  useEffect(() => {
+    if (typeof document === 'undefined') return
+    const { body: docBody, documentElement: docEl } = document
+    const scrollbarWidth = window.innerWidth - docEl.clientWidth
+    const previousOverflow = docBody.style.overflow
+    const previousPaddingRight = docBody.style.paddingRight
+    docBody.style.overflow = 'hidden'
+    if (scrollbarWidth > 0) {
+      docBody.style.paddingRight = `${scrollbarWidth}px`
+    }
+    return () => {
+      docBody.style.overflow = previousOverflow
+      docBody.style.paddingRight = previousPaddingRight
+    }
+  }, [])
+
+  // Close on Escape key.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [onClose])
+
+  if (typeof document === 'undefined') return null
+
+  // Portaling to <body> ensures `position: fixed` is anchored to the viewport
+  // and not to any ancestor that creates a containing block via
+  // transform / filter / backdrop-filter (the hero form card uses
+  // backdrop-filter, which otherwise scopes `fixed` to that card).
+  return createPortal(
     <motion.div
       className="fixed inset-0 z-[120] flex items-center justify-center px-5"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
     >
       <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]" />
       <motion.div
-        className="relative w-full max-w-[30rem] rounded-2xl p-6 sm:p-8"
-        style={{ background: 'var(--black-500)', border: '1px solid rgba(255,255,255,0.1)' }}
+        className={`relative w-full max-w-[30rem] rounded-2xl ${isSpeakerVariant ? 'p-12 sm:p-16' : 'p-6 sm:p-8'} overflow-hidden`}
+        style={
+          isSpeakerVariant
+            ? {
+                backgroundImage: 'url(/img/bg-speaker.png)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundColor: 'var(--black-300)',
+                border: '1px solid rgba(255,255,255,0.1)',
+              }
+            : { background: 'var(--black-500)', border: '1px solid rgba(255,255,255,0.1)' }
+        }
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 20, opacity: 0 }}
         transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
         onClick={e => e.stopPropagation()}
       >
-        <div className="flex flex-col" style={{ gap: '1.25rem' }}>
+        {isSpeakerVariant && (
+          <video
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            src="/bg-video.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="none"
+            aria-hidden="true"
+            style={{ opacity: 0.5 }}
+          />
+        )}
+        {isSpeakerVariant && (
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label={closeLabel}
+            className="absolute top-4 right-4 z-20 flex items-center justify-center w-9 h-9 rounded-full transition-colors hover:bg-white/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/40"
+            style={{ color: 'var(--white-400)' }}
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </button>
+        )}
+        <div className="relative flex flex-col" style={{ gap: '1.25rem', zIndex: 1 }}>
           <h3
             className="font-inter-tight font-semibold text-white text-center"
             style={{ fontSize: 'clamp(1.375rem, 2.2vw, 1.625rem)', lineHeight: 1.15, letterSpacing: '-0.02em' }}
@@ -652,20 +715,43 @@ function FormModal({
               </p>
             )
           )}
-          <div className="flex flex-col" style={{ gap: '0.5rem', marginTop: '0.25rem' }}>
+          <div className="flex flex-col" style={{ gap: '0.5rem', marginTop: isSpeakerVariant ? '4.75rem' : '0.25rem' }}>
             {actionHref && actionLabel && (
-              <a
-                href={actionHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-text-m text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
-                style={{ height: 'clamp(3rem, 4vw, 3.75rem)' }}
-              >
-                <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: 'var(--black-700)' }} />
-                {actionLabel}
-              </a>
+              isSpeakerVariant ? (
+                <a
+                  href={actionHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative w-full flex items-center justify-center gap-2 h-14 md:h-16 px-6 sm:px-8 rounded-2xl font-inter-tight font-semibold text-[0.875rem] md:text-[1.125rem] text-btn-label transition-all duration-300 border-b-4 border-btn-border hover:shadow-[32px_32px_32px_rgba(255,255,255,0.25),12px_12px_16px_rgba(255,255,255,0.25),2px_2px_8px_rgba(255,255,255,0.5)] hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                >
+                  <div className="absolute inset-0 rounded-2xl bg-white pointer-events-none" />
+                  <img
+                    alt=""
+                    src="/img/block01/btn-overlay.png"
+                    className="absolute inset-0 w-full h-full rounded-2xl object-bottom mix-blend-overlay pointer-events-none"
+                  />
+                  <span
+                    className="relative z-10 shrink-0 rounded-full"
+                    style={{ width: 8, height: 8, background: 'var(--black-700)' }}
+                  />
+                  <span className="relative z-10">{actionLabel}</span>
+                </a>
+              ) : (
+                <a
+                  href={actionHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-text-m text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                  style={{ height: 'clamp(3rem, 4vw, 3.75rem)' }}
+                >
+                  <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: 'var(--black-700)' }} />
+                  {actionLabel}
+                </a>
+              )
             )}
-            {actionHref && actionLabel ? (
+            {/* Speaker variant uses the top-right X close button instead of a bottom close button. */}
+            {!(isSpeakerVariant && actionHref && actionLabel) && (
+              actionHref && actionLabel ? (
               <button
                 type="button"
                 onClick={onClose}
@@ -684,10 +770,11 @@ function FormModal({
                 <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: 'var(--black-700)' }} />
                 {closeLabel}
               </button>
-            )}
+            ))}
           </div>
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body,
   )
 }
