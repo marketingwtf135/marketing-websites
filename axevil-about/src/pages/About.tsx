@@ -1,5 +1,6 @@
-import { FadeIn, Footer } from '@axevil/design-system/components'
+import { FadeIn } from '@axevil/design-system/components'
 import AboutNav from './about-sections/AboutNav'
+import AboutFooter from './about-sections/AboutFooter'
 import AboutHero from './about-sections/AboutHero'
 import TrustStrip from './about-sections/TrustStrip'
 import ThesisRows from './about-sections/ThesisRows'
@@ -23,7 +24,7 @@ export default function About() {
       <FadeIn><LegalInfra /></FadeIn>
       <FadeIn><FoundersLetter /></FadeIn>
       <FinalCta />
-      <Footer />
+      <AboutFooter />
     </main>
   )
 }

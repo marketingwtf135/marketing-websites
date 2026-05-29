@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { BtnOwn, HeroEyebrow, BgFeatures, PRELOAD_DEVICES_MOTION } from '@axevil/design-system/components'
+import { BtnOwn, HeroEyebrow, PRELOAD_DEVICES_MOTION } from '@axevil/design-system/components'
 import { HERO } from './content'
 
 /**
@@ -23,8 +23,6 @@ export default function AboutHero() {
       id="top"
       className="relative w-full bg-page-bg overflow-hidden flex flex-col pt-[3.75rem] md:pt-[5rem] md:h-[100svh] pb-0 md:pb-0"
     >
-      <BgFeatures ambientOpacity={0.25} />
-
       {/* Container fills section height on desktop (flex-1) so the phone wrapper can be mt-auto pinned to bottom. */}
       <div
         className="relative mx-auto w-full max-w-content container-px flex flex-col items-center text-center md:flex-1"
