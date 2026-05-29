@@ -23,20 +23,87 @@
   font-weight: 600; font-style: normal; font-display: swap;
 }
 
+/* Tokens not present in the published package css but used by ported blocks */
+:root {
+  --page-bg: #080808;
+}
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background-color: var(--bg-100);
+  background-color: var(--page-bg);
   color: var(--white-100);
   font-family: 'Inter Tight', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Global container horizontal padding: 1rem mobile → 1.5rem tablet → 0 desktop */
+/* ──────────────────────────────────────────────────────────────
+   Utilities ported verbatim from the main-site design-system
+   (design-system/src/index.css) so reused blocks render identically.
+   ────────────────────────────────────────────────────────────── */
 @layer utilities {
+  /* Global container horizontal padding: 1rem mobile → 1.5rem tablet → 0 desktop */
   .container-px { padding-left: 1rem; padding-right: 1rem; }
   @media (min-width: 48rem) { .container-px { padding-left: 1.5rem; padding-right: 1.5rem; } }
   @media (min-width: 90rem) { .container-px { padding-left: 0; padding-right: 0; } }
+
+  /* ── Section vertical rhythm — responsive (Desktop ≥ 1440px) ── */
+  .py-section-y           { padding-top: 7.5rem;  padding-bottom: 7.5rem;  } /* 120/120 */
+  .pt-section-y           { padding-top: 7.5rem;                           } /* 120 top */
+
+  .padding-section-t6-b6  { padding-top: 6.25rem; padding-bottom: 6.25rem; } /* 100/100 */
+  .padding-section-t6-b0  { padding-top: 6.25rem; padding-bottom: 0;       } /* 100/0   */
+  .padding-section-t0-b6  { padding-top: 0;        padding-bottom: 6.25rem;} /* 0/100   */
+  .padding-section-t12-b6 { padding-top: 12.5rem; padding-bottom: 6.25rem; } /* 200/100 */
+  .padding-section-t6-b12 { padding-top: 6.25rem; padding-bottom: 12.5rem; } /* 100/200 */
+  .padding-section-t12-b12{ padding-top: 12.5rem; padding-bottom: 12.5rem; } /* 200/200 */
+
+  /* ── Tablet 768–1439px ── */
+  @media (min-width: 48rem) and (max-width: 89.9375rem) {
+    .py-section-y           { padding-top: 4rem;   padding-bottom: 4rem;   }
+    .pt-section-y           { padding-top: 4rem;                           }
+    .padding-section-t6-b6  { padding-top: 5rem;   padding-bottom: 5rem;  }
+    .padding-section-t6-b0  { padding-top: 5rem;   padding-bottom: 0;     }
+    .padding-section-t0-b6  { padding-top: 0;       padding-bottom: 5rem; }
+    .padding-section-t12-b6 { padding-top: 12.5rem; padding-bottom: 6.25rem; }
+    .padding-section-t6-b12 { padding-top: 6.25rem; padding-bottom: 12.5rem; }
+    .padding-section-t12-b12{ padding-top: 12.5rem; padding-bottom: 12.5rem; }
+  }
+
+  /* ── Mobile < 768px ── */
+  @media (max-width: 47.9375rem) {
+    .py-section-y           { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+    .pt-section-y           { padding-top: 2.5rem;                         }
+    .padding-section-t6-b6  { padding-top: 3.75rem; padding-bottom: 3.75rem; }
+    .padding-section-t6-b0  { padding-top: 3.75rem; padding-bottom: 0;      }
+    .padding-section-t0-b6  { padding-top: 0;        padding-bottom: 3.75rem;}
+    .padding-section-t12-b6 { padding-top: 7.5rem;  padding-bottom: 3.75rem; }
+    .padding-section-t6-b12 { padding-top: 3.75rem; padding-bottom: 7.5rem;  }
+    .padding-section-t12-b12{ padding-top: 7.5rem;  padding-bottom: 7.5rem;  }
+  }
+}
+
+/* ── Gradient text (paired with text-transparent + inline backgroundImage) ── */
+.gradient-text {
+  -webkit-background-clip: text;
+          background-clip: text;
+}
+h1.gradient-text,
+h2.gradient-text {
+  padding-bottom: 0.15em;
+}
+
+/* ── IllCards (Block08Section / AUOperate) ── */
+@media (min-width: 768px) {
+  .ill-card { height: 25rem !important; }
+}
+@media (max-width: 480px) {
+  .ill-card-img { max-height: 20rem; }
+  .ill-cards-home .ill-card-img {
+    height: 13rem !important;
+    max-height: 13rem !important;
+    object-position: center !important;
+  }
 }

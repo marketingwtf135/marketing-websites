@@ -174,5 +174,40 @@ export const FINAL_CTA = {
   crossHref: 'how_it_works.html',
 }
 
+// ── KeyStats regulatory pills (RIKeyStats port) ──
+export const KEYSTATS_PILLS = ['SEC Exempt Reporting Adviser', 'FINRA Member', 'Delaware SPV']
+
+// ── Thesis card images (RIInsight port) — paired by index with THESIS.rows ──
+export const THESIS_IMAGES = [
+  '/about/img/is/investor-image-01.webp',
+  '/about/img/is/investor-image-02.webp',
+  '/about/img/is/investor-image-03.webp',
+]
+
+// ── Portfolio companies (RIPortfolio port): logo + status + sector + body ──
+export interface PortfolioCompany { logo: string; status: 'open' | 'closed' | 'soon'; statusLabel: string; category: string; body: string }
+export const PORTFOLIO_COMPANIES: PortfolioCompany[] = [
+  { logo: '/about/img/is/logos/logo-spacex.svg',     status: 'open',   statusLabel: 'Открыта',  category: 'Deeptech · космос',   body: 'Мировой лидер запусков и спутниковой инфраструктуры. Оценка $527 млрд до IPO.' },
+  { logo: '/about/img/is/logos/logo-antrophic.svg',  status: 'closed', statusLabel: 'Закрыта',  category: 'AI / LLM · Pre-IPO',  body: 'Frontier-лаборатория AI, создающая надёжные и интерпретируемые системы.' },
+  { logo: '/about/img/is/logos/logo-xai.svg',        status: 'soon',   statusLabel: 'Скоро',    category: 'AI · Infrastructure', body: 'Лаборатория frontier-моделей: Grok и вычислительный кластер Colossus.' },
+  { logo: '/about/img/is/logos/logo-cursor.svg',     status: 'open',   statusLabel: 'Открыта',  category: 'Developer tools',     body: 'AI-нативный редактор кода, которым пользуются ведущие инженерные команды.' },
+  { logo: '/about/img/is/logos/logo-databricks.svg', status: 'soon',   statusLabel: 'Скоро',    category: 'Data / AI · Pre-IPO', body: 'Платформа данных и AI для 10 000+ корпоративных клиентов по всему миру.' },
+  { logo: '/about/img/is/logos/logo-stripe.svg',     status: 'closed', statusLabel: 'Закрыта',  category: 'Финтех · Pre-IPO',    body: 'Платёжная инфраструктура для интернета. $1,4 трлн обработано в 2025 году.' },
+]
+export const PORTFOLIO_CTA = 'Смотреть все 35 компаний портфеля'
+
+// ── Legal IllCards (AUOperate port): 4 regulatory pillars ──
+export interface LegalCard { num: string; img: string; imgMobile: string; title: string; body: string }
+export const LEGAL_CARDS: LegalCard[] = [
+  { num: '1.0', img: '/about/img/ill/ill-legal-03.webp', imgMobile: '/about/img/ill/ill-legal-03-mobile.webp', title: 'Регулируется SEC',
+    body: 'Axevil Capital — Exempt Reporting Adviser, зарегистрированный в SEC (#802-126907) и отчитывающийся перед FINRA (CRD #323970). Только Reg D 506(b).' },
+  { num: '2.0', img: '/about/img/ill/ill-legal-01.webp', imgMobile: '/about/img/ill/ill-legal-01-mobile.webp', title: 'SPV под каждую сделку',
+    body: 'Каждая инвестиция изолирована в отдельной US SPV (Alextar VC LLC) — отделена от других сделок и от управляющей компании.' },
+  { num: '3.0', img: '/about/img/ill/ill-legal-04.webp', imgMobile: '/about/img/ill/ill-legal-04-mobile.webp', title: 'Двойная верификация',
+    body: 'Каждая сделка проходит два независимых контура: инвестиционный кейс (фундамент, траектория IPO) и транзакция (документы, механика передачи, продавец).' },
+  { num: '4.0', img: '/about/img/ill/ill-legal-02.webp', imgMobile: '/about/img/ill/ill-legal-02-mobile.webp', title: 'Юрисдикция Delaware',
+    body: 'Фонд и управляющая компания — структуры Delaware, стандартной юрисдикции для институциональных венчурных vehicle.' },
+]
+
 export const FOOTER_COMPLIANCE =
   'Axevil Capital — SEC Exempt Reporting Adviser, CRD #802-126907, FINRA Member, CRD #323970. Reg D 506(b). © 2026 Axevil Capital. Все права защищены.'
