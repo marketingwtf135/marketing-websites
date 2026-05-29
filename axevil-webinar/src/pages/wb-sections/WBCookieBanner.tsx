@@ -40,7 +40,7 @@ export default function WBCookieBanner() {
         padding: '20px',
       }}
     >
-      <p className="font-inter-tight font-medium text-white/60 text-text-s-med leading-[1.5] mb-4">
+      <p className="font-inter-tight font-medium text-white/60 text-s-med leading-[1.5] mb-4">
         We use cookies to improve your experience and for analytics. By clicking "Accept", you consent to our{' '}
         <a href="#" className="text-white/80 underline underline-offset-2 hover:text-white transition-colors">
           Cookie Policy
@@ -51,14 +51,14 @@ export default function WBCookieBanner() {
         <button
           type="button"
           onClick={accept}
-          className="flex-1 h-10 rounded-[10px] font-inter-tight font-semibold text-text-s-med text-phone-bg bg-white hover:scale-[1.01] transition-transform"
+          className="flex-1 h-10 rounded-[10px] font-inter-tight font-semibold text-s-med text-phone-bg bg-white hover:scale-[1.01] transition-transform"
         >
           Accept
         </button>
         <button
           type="button"
           onClick={decline}
-          className="flex-1 h-10 rounded-[10px] font-inter-tight font-medium text-text-s-med text-white/50 hover:text-white transition-colors"
+          className="flex-1 h-10 rounded-[10px] font-inter-tight font-medium text-s-med text-white/50 hover:text-white transition-colors"
           style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}
         >
           Decline

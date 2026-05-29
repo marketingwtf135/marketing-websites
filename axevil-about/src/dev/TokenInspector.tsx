@@ -98,12 +98,38 @@ function fontSizeTokenFromClasses(el: Element): string | null {
   return null
 }
 
+/** Walk the React fiber tree up from a DOM node to the nearest named component. */
+function componentName(el: Element): string | null {
+  const key = Object.keys(el).find(
+    (k) => k.startsWith('__reactFiber$') || k.startsWith('__reactInternalInstance$'),
+  )
+  if (!key) return null
+  let fiber: any = (el as any)[key]
+  while (fiber) {
+    const t = fiber.type
+    let name: string | undefined
+    if (typeof t === 'function') {
+      name = t.displayName || t.name
+    } else if (t && typeof t === 'object') {
+      // forwardRef / memo wrappers (e.g. framer-motion) — try their inner names
+      name = t.displayName || t.render?.displayName || t.render?.name || t.type?.displayName || t.type?.name
+    }
+    // Skip anonymous / host / framer-motion wrappers — keep climbing to a real component.
+    if (name && name.length > 1 && !/^(Unknown|MotionComponent|_c\d*)$/.test(name)) {
+      return name
+    }
+    fiber = fiber.return
+  }
+  return null
+}
+
 function dsClasses(el: Element): string[] {
   const PREFIXES = ['text-', 'bg-', 'rounded-', 'gap-', 'border-', 'font-', 'max-w-', 'py-', 'px-', 'pt-', 'pb-', 'padding-']
   return Array.from(el.classList).filter((c) => PREFIXES.some((p) => c.startsWith(p)))
 }
 
 interface Info {
+  comp: string
   tag: string
   rect: DOMRect
   rows: { label: string; value: string }[]
@@ -160,7 +186,7 @@ export default function TokenInspector() {
           rows.push({ label: 'Padding', value: p ?? `${padT}px` })
         }
 
-        setInfo({ tag: el.tagName.toLowerCase(), rect: el.getBoundingClientRect(), rows, classes: dsClasses(el) })
+        setInfo({ comp: componentName(el) ?? 'none', tag: el.tagName.toLowerCase(), rect: el.getBoundingClientRect(), rows, classes: dsClasses(el) })
       })
     }
 
@@ -221,7 +247,12 @@ export default function TokenInspector() {
             boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
           }}
         >
-          <div style={{ color: '#4dba79', fontWeight: 700, marginBottom: '0.375rem' }}>&lt;{info.tag}&gt;</div>
+          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.375rem', alignItems: 'baseline' }}>
+            <span style={{ color: info.comp === 'none' ? '#9b9b9b' : '#4dba79', fontWeight: 700 }}>
+              Component: {info.comp}
+            </span>
+            <span style={{ color: '#717171' }}>&lt;{info.tag}&gt;</span>
+          </div>
           {info.rows.map((r) => (
             <div key={r.label} style={{ display: 'flex', gap: '0.5rem' }}>
               <span style={{ color: '#9b9b9b', minWidth: '3.5rem', flexShrink: 0 }}>{r.label}</span>

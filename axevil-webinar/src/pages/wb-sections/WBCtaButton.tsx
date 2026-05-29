@@ -16,7 +16,7 @@ export default function WBCtaButton({ className = '', fullWidthMobile: _fullWidt
   h-14 md:h-16
   px-6 sm:px-8
   rounded-2xl font-inter-tight font-semibold
-  text-text-s-med md:text-text-l
+  text-s-med md:text-l
   text-btn-label transition-all duration-300
   border-b-4 border-btn-border
   hover:shadow-[32px_32px_32px_rgba(255,255,255,0.25),12px_12px_16px_rgba(255,255,255,0.25),2px_2px_8px_rgba(255,255,255,0.5)]

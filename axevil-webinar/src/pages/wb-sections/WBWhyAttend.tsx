@@ -28,7 +28,7 @@ export default function WBWhyAttend() {
       >
         {/* Heading */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-12 gap-4">
-          <div className="flex items-center gap-2 font-inter-tight font-medium text-text-xs sm:text-text-l text-neutral-30">
+          <div className="flex items-center gap-2 font-inter-tight font-medium text-xs sm:text-l text-neutral-30">
             <span className="opacity-50">3.0</span>
             <span className="opacity-80">{t.whyAttend.label.split(' ').slice(1).join(' ')}</span>
           </div>

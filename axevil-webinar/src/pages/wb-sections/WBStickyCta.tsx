@@ -37,7 +37,7 @@ export default function WBStickyCta() {
       <button
         type="button"
         onClick={scrollToForm}
-        className="w-auto px-8 flex items-center justify-center font-inter-tight font-semibold text-text-m text-phone-bg bg-white hover:scale-[1.01] active:scale-[0.99] transition-transform rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+        className="w-auto px-8 flex items-center justify-center font-inter-tight font-semibold text-m text-phone-bg bg-white hover:scale-[1.01] active:scale-[0.99] transition-transform rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
         style={{ height: '3.5rem', minHeight: '3.5rem' }}
       >
         Register

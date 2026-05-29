@@ -151,7 +151,7 @@ export default function WBNav() {
                   key={id}
                   type="button"
                   onClick={() => scrollTo(id)}
-                  className={`flex items-center h-9 px-4 rounded-full font-inter-tight font-medium text-text-s-med transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white ${
+                  className={`flex items-center h-9 px-4 rounded-full font-inter-tight font-medium text-s-med transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white ${
                     isActive ? 'text-white bg-[#1a1a1a]' : 'text-white/50 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -207,7 +207,7 @@ export default function WBNav() {
                 key={id}
                 type="button"
                 onClick={() => { scrollTo(id); setMenuOpen(false) }}
-                className="w-full text-left px-5 py-3 font-inter-tight font-medium text-text-m text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+                className="w-full text-left px-5 py-3 font-inter-tight font-medium text-m text-white/70 hover:text-white hover:bg-white/5 transition-colors"
               >
                 {label}
               </button>

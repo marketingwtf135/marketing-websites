@@ -18,7 +18,7 @@ export default function WBFooter() {
               <a href="#" aria-label="AXEVIL Capital" className="shrink-0">
                 <img src="/img/block01/logo.svg" alt="AXEVIL Capital" width={130} height={20} />
               </a>
-              <div className="flex flex-col gap-0.5 font-inter-tight font-medium text-white/40 text-text-xs">
+              <div className="flex flex-col gap-0.5 font-inter-tight font-medium text-white/40 text-xs">
                 <span className="text-white/60">{footer.entity}</span>
                 <span>
                   {footer.contactLabel}:{' '}
@@ -40,7 +40,7 @@ export default function WBFooter() {
                 <a
                   key={l.href}
                   href={l.href}
-                  className="font-inter-tight font-medium text-white/50 text-text-s-med hover:text-white/85 transition-colors"
+                  className="font-inter-tight font-medium text-white/50 text-s-med hover:text-white/85 transition-colors"
                   rel={l.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 >
                   {l.label}

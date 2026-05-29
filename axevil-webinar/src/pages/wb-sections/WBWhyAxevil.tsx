@@ -53,7 +53,7 @@ export default function WBWhyAxevil() {
       >
         {/* Top: section label + heading — pinned to top via mb-auto */}
         <div className="flex flex-col gap-4 mb-auto">
-          <div className="flex items-center gap-2 font-inter-tight font-medium text-text-xs sm:text-text-l text-neutral-30">
+          <div className="flex items-center gap-2 font-inter-tight font-medium text-xs sm:text-l text-neutral-30">
             <span className="opacity-50">{t.whyAxevil.label.split(' ')[0]}</span>
             <span className="opacity-80">{t.whyAxevil.label.split(' ').slice(1).join(' ')}</span>
           </div>

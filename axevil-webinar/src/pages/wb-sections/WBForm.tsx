@@ -47,7 +47,7 @@ export default function WBForm() {
         <div style={{ maxWidth: 'min(100%, 32.5rem)', marginLeft: 'auto', marginRight: 'auto' }}>
 
           <div className="flex flex-col items-center text-center gap-4 mb-8 sm:mb-10">
-            <div className="flex items-center gap-2 font-inter-tight font-medium text-text-xs sm:text-text-l text-neutral-30">
+            <div className="flex items-center gap-2 font-inter-tight font-medium text-xs sm:text-l text-neutral-30">
               <span className="opacity-50">{t.form.label.split(' ')[0]}</span>
               <span className="opacity-80">{t.form.label.split(' ').slice(1).join(' ')}</span>
             </div>

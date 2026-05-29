@@ -469,7 +469,7 @@ export default function WBRegistrationForm({ className = '', disclaimerAlign = '
                   'aria-describedby': errors.phone ? 'phone-error' : undefined,
                 }}
               />
-              {errors.phone && <p id="phone-error" className="font-inter-tight font-medium text-red-400 text-text-xs mt-1.5 ml-1">{errors.phone}</p>}
+              {errors.phone && <p id="phone-error" className="font-inter-tight font-medium text-red-400 text-xs mt-1.5 ml-1">{errors.phone}</p>}
             </div>
           </div>
 
@@ -500,7 +500,7 @@ export default function WBRegistrationForm({ className = '', disclaimerAlign = '
               disabled={isPending}
               aria-busy={isPending}
               aria-label={isPending ? ui.loadingAria : t.form.submit}
-              className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-text-m text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white disabled:opacity-60 disabled:cursor-not-allowed"
+              className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-m text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white disabled:opacity-60 disabled:cursor-not-allowed"
               style={{ height: 'clamp(3rem, 4vw, 3.75rem)', marginTop: '0.75rem' }}
             >
               <span
@@ -513,7 +513,7 @@ export default function WBRegistrationForm({ className = '', disclaimerAlign = '
         </fieldset>
 
         <p
-          className={`font-inter-tight font-medium text-white/40 text-text-xs mt-4 ${disclaimerAlign === 'left' ? 'text-left' : 'text-center'}`}
+          className={`font-inter-tight font-medium text-white/40 text-xs mt-4 ${disclaimerAlign === 'left' ? 'text-left' : 'text-center'}`}
         >
           {t.form.disclaimer}
         </p>
@@ -575,7 +575,7 @@ function FieldInput({
         enterKeyHint={enterKeyHint}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
-        className="w-full font-inter-tight font-medium text-text-m text-white placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35 transition-colors disabled:opacity-70 bg-transparent"
+        className="w-full font-inter-tight font-medium text-m text-white placeholder:text-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/35 transition-colors disabled:opacity-70 bg-transparent"
         style={{
           display: 'flex',
           height: 'clamp(3rem, 4vw, 3.75rem)',
@@ -585,7 +585,7 @@ function FieldInput({
           border: error ? '1px solid rgba(239,68,68,0.6)' : '1px solid rgba(255,255,255,0.08)',
         }}
       />
-      {error && <p id={`${id}-error`} className="font-inter-tight font-medium text-red-400 text-text-xs mt-1.5 ml-1">{error}</p>}
+      {error && <p id={`${id}-error`} className="font-inter-tight font-medium text-red-400 text-xs mt-1.5 ml-1">{error}</p>}
     </div>
   )
 }
@@ -710,7 +710,7 @@ function FormModal({
           </h3>
           {body ?? (
             message && (
-              <p className="font-inter-tight font-medium text-white/70 text-text-m whitespace-pre-line text-center leading-[1.5]">
+              <p className="font-inter-tight font-medium text-white/70 text-m whitespace-pre-line text-center leading-[1.5]">
                 {message}
               </p>
             )
@@ -741,7 +741,7 @@ function FormModal({
                   href={actionHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-text-m text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                  className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-m text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
                   style={{ height: 'clamp(3rem, 4vw, 3.75rem)' }}
                 >
                   <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: 'var(--black-700)' }} />
@@ -755,7 +755,7 @@ function FormModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="relative w-full flex items-center justify-center font-inter-tight font-semibold text-text-m text-white/80 hover:text-white bg-transparent hover:bg-white/5 rounded-[14px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/40"
+                className="relative w-full flex items-center justify-center font-inter-tight font-semibold text-m text-white/80 hover:text-white bg-transparent hover:bg-white/5 rounded-[14px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/40"
                 style={{ height: 'clamp(3rem, 4vw, 3.75rem)', border: '1px solid rgba(255,255,255,0.15)' }}
               >
                 {closeLabel}
@@ -764,7 +764,7 @@ function FormModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-text-m text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                className="relative w-full flex items-center justify-center gap-2 font-inter-tight font-semibold text-m text-phone-bg bg-white rounded-[14px] transition-all hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
                 style={{ height: 'clamp(3rem, 4vw, 3.75rem)' }}
               >
                 <span className="rounded-full" style={{ width: '0.5rem', height: '0.5rem', background: 'var(--black-700)' }} />
