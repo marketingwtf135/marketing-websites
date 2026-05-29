@@ -1,0 +1,13 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "packageRules": [
+    {
+      "description": "Auto-update the AXEVIL design system git package and merge without manual review",
+      "matchPackageNames": ["@axevil/design-system"],
+      "automerge": true,
+      "automergeType": "branch",
+      "schedule": ["at any time"]
+    }
+  ]
+}

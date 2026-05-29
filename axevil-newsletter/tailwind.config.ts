@@ -1,10 +1,10 @@
 import type { Config } from 'tailwindcss'
-// @axevil/tokens — single source of truth for all AXEVIL projects
-// Tokens live at: Marketing-Websites/packages/tokens/
-const { tokens } = require('../../packages/tokens')
+// @axevil/design-system — single source of truth for all AXEVIL projects
+// Published from github:marketingwtf135/axevil-design-system, resolved from node_modules.
+const { tokens } = require('@axevil/design-system')
 
 const config: Config = {
-  content: ['./index.html', './src/**/*.{ts,tsx}'],
+  content: ['./index.html', './src/**/*.{ts,tsx}', './node_modules/@axevil/design-system/dist/**/*.{js,cjs}'],
   theme: {
     extend: {
       ...tokens,
