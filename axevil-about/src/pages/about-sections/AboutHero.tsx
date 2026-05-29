@@ -35,7 +35,7 @@ export default function AboutHero() {
           <HeroEyebrow>Открыто для инвесторов</HeroEyebrow>
 
           {/* Heading + paragraph — gap spacing-1 (1rem) per latest feedback */}
-          <div className="flex flex-col items-center" style={{ gap: '1rem', overflow: 'visible' }}>
+          <div className="flex flex-col items-center" style={{ gap: '1rem', overflow: 'visible', maxWidth: '60rem' }}>
             <h1
               className="font-inter-tight font-semibold text-h1-semi text-transparent gradient-text whitespace-pre-line"
               style={{
