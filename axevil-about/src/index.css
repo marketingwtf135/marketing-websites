@@ -27,7 +27,7 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background-color: var(--page-bg);
+  background-color: var(--bg-100);
   color: var(--white-100);
   font-family: 'Inter Tight', sans-serif;
   -webkit-font-smoothing: antialiased;

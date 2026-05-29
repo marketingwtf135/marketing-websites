@@ -21,7 +21,7 @@
 - Font sizes (class → var): `text-h1-semi`(64/48/36), `text-h2`(64/48/36), `text-h3`(36/27/24), `text-h4`(24/20/20), `text-xl`, `text-text-l`, `text-paragraph`, `text-text-m`, `text-text-s-med`, `text-text-xs`. All responsive via `tokens.css` media queries — **do not** wrap them in clamp.
 - maxWidth: `max-w-content` (90rem), `max-w-container-medium` (90rem), `max-w-max-width-50` (50rem), `max-w-max-width-37` (37.5rem).
 - radius: `rounded-card`(2rem), `rounded-card-lg`(3rem), `rounded-border-r-1`(1rem), `rounded-border-r-0.75`(0.75rem).
-- CSS vars available in inline styles: `var(--page-bg)`, `var(--nav-bg)`, `var(--black-400..600)`, `var(--white-100..400)`, `var(--border-subtle)`, `var(--section-border)`, `var(--status-open)`, `var(--acc-gradient)`, `var(--gradient-headline)`, `var(--font-*)`.
+- CSS vars available in inline styles: `var(--bg-100)`, `var(--nav-bg)`, `var(--black-400..600)`, `var(--white-100..400)`, `var(--border-subtle)`, `var(--section-border)`, `var(--status-open)`, `var(--acc-gradient)`, `var(--gradient-headline)`, `var(--font-*)`.
 
 **Reference files (read-only, in main-site worktree `Axevil Site/axevil-website/worktrees/dazzling-wing-c0fe6d/`):** `src/pages/AboutUs.tsx`, `src/pages/about-sections/AUHero.tsx`, `AUOperate.tsx`, `AUTeam.tsx`, `src/pages/ri-sections/RIKeyStats.tsx`, `src/blocks/Block01HeroV2.tsx`; sibling `marketing-websites/axevil-newsletter/src/pages/nl-sections/NLNav.tsx`. Asset source dir below in Task 2.
 
@@ -259,7 +259,7 @@ export default function App() {
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background-color: var(--page-bg);
+  background-color: var(--bg-100);
   color: var(--white-100);
   font-family: 'Inter Tight', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -869,7 +869,7 @@ import { THESIS } from './content'
 
 export default function ThesisRows() {
   return (
-    <section id="thesis" className="w-full" style={{ background: 'linear-gradient(180deg, var(--page-bg) 0%, var(--black-300) 100%)', padding: 'clamp(4rem, 8vw, 7.5rem) 0' }}>
+    <section id="thesis" className="w-full" style={{ background: 'linear-gradient(180deg, var(--bg-100) 0%, var(--black-300) 100%)', padding: 'clamp(4rem, 8vw, 7.5rem) 0' }}>
       <div className="mx-auto w-full max-w-content container-px flex flex-col" style={{ gap: 'clamp(2.5rem, 5vw, 3.5rem)' }}>
         <SectionHeading number="1.0" label={THESIS.eyebrow} title={THESIS.title} subtitle={THESIS.lead} titleMaxWidth="42.5rem" />
         <div className="flex flex-col">
@@ -977,7 +977,7 @@ import { EXITS } from './content'
 
 export default function ExitsGrid() {
   return (
-    <section id="exits" className="w-full" style={{ background: 'linear-gradient(180deg, var(--page-bg) 0%, var(--black-300) 100%)', padding: 'clamp(4rem, 8vw, 7.5rem) 0' }}>
+    <section id="exits" className="w-full" style={{ background: 'linear-gradient(180deg, var(--bg-100) 0%, var(--black-300) 100%)', padding: 'clamp(4rem, 8vw, 7.5rem) 0' }}>
       <div className="mx-auto w-full max-w-content container-px flex flex-col" style={{ gap: 'clamp(2.5rem, 5vw, 3.5rem)' }}>
         <SectionHeading number="4.0" label={EXITS.eyebrow} title={EXITS.title} subtitle={EXITS.lead} titleMaxWidth="42.5rem" />
         <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: '1.25rem' }}>
@@ -1054,7 +1054,7 @@ import { LEGAL } from './content'
 
 export default function LegalInfra() {
   return (
-    <section id="legal" className="w-full" style={{ background: 'linear-gradient(180deg, var(--page-bg) 0%, var(--black-300) 100%)', padding: 'clamp(4rem, 8vw, 7.5rem) 0' }}>
+    <section id="legal" className="w-full" style={{ background: 'linear-gradient(180deg, var(--bg-100) 0%, var(--black-300) 100%)', padding: 'clamp(4rem, 8vw, 7.5rem) 0' }}>
       <div className="mx-auto w-full max-w-content container-px flex flex-col" style={{ gap: 'clamp(2.5rem, 5vw, 3.5rem)' }}>
         <SectionHeading number="6.0" label={LEGAL.eyebrow} title={LEGAL.title} subtitle={LEGAL.lead} titleMaxWidth="42.5rem" />
 
