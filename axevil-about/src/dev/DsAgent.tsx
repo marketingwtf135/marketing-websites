@@ -14,20 +14,20 @@ const T = tokens as AnyTokens
 
 /* ── DS-styled UI primitives ── */
 const FONT = "'Inter Tight', sans-serif"
-const ACCENT = 'var(--status-open)'      // #4dba79
-const BLUE = 'var(--accent-blue)'        // #546fef
+const ACCENT = 'var(--white-100)'        // accent = white (per DS)
+const BLUE = 'var(--accent-blue)'        // #546fef (selection)
 const C = {
   panel: 'rgba(8,8,8,0.97)', surface: 'var(--black-400)', surface2: 'var(--black-500)', deep: 'var(--bg-100)',
   border: 'var(--border-subtle)', borderStrong: 'rgba(255,255,255,0.14)',
   text: 'var(--white-100)', text2: 'var(--white-300)', text3: 'var(--white-400)', faint: 'rgba(255,255,255,0.35)',
 }
 const RAD = { sm: '0.5rem', md: '0.75rem', lg: '1rem' }
-const sBtnPrimary: React.CSSProperties = { padding: '0.5rem 1.25rem', borderRadius: RAD.md, fontFamily: FONT, fontSize: '0.875rem', fontWeight: 600, lineHeight: 1.1, letterSpacing: '-0.02em', background: 'var(--white-100)', color: 'var(--black-600)', border: 'none', cursor: 'pointer' }
+const sBtnPrimary: React.CSSProperties = { padding: '0.4375rem 1rem', borderRadius: RAD.sm, fontFamily: FONT, fontSize: '0.8125rem', fontWeight: 600, lineHeight: 1.1, letterSpacing: '-0.02em', background: 'var(--white-100)', color: 'var(--black-600)', border: 'none', cursor: 'pointer' }
 const sBtnOutline: React.CSSProperties = { ...sBtnPrimary, background: 'transparent', color: C.text, border: `1px solid ${C.borderStrong}` }
 const sBtnAccent: React.CSSProperties = { ...sBtnPrimary, background: ACCENT, color: 'var(--black-600)' }
 const sBtnGhost: React.CSSProperties = { ...sBtnPrimary, background: 'transparent', color: C.text2, border: 'none' }
 const sField: React.CSSProperties = { width: '100%', padding: '0.5rem 0.625rem', borderRadius: RAD.sm, background: C.surface, border: `1px solid ${C.borderStrong}`, color: C.text, fontFamily: FONT, fontSize: '0.8125rem', letterSpacing: '-0.02em', outline: 'none' }
-const iconBtn = (active: boolean): React.CSSProperties => ({ width: '2.5rem', height: '2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: RAD.md, cursor: 'pointer', background: active ? ACCENT : C.surface, color: active ? 'var(--black-600)' : C.text, border: `1px solid ${C.borderStrong}`, boxShadow: '0 4px 16px rgba(0,0,0,0.4)' })
+const iconBtn = (active: boolean): React.CSSProperties => ({ width: '2.25rem', height: '2.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: RAD.md, cursor: 'pointer', background: active ? ACCENT : C.surface, color: active ? 'var(--black-600)' : C.text, border: `1px solid ${C.borderStrong}`, boxShadow: '0 4px 16px rgba(0,0,0,0.4)' })
 
 const FOLDERS: Record<string, string[]> = {
   Blocks: ['Nav', 'Footer', 'CtaForm', 'CtaFormNewsletter', 'Form', 'FAQ', 'BgFeatures', 'PageEntry', 'Quiz'],
@@ -221,9 +221,9 @@ export default function DsAgent() {
   const list = folder === 'Icons' ? [] : FOLDERS[folder].filter((c) => c.toLowerCase().includes(search.toLowerCase()))
   const schema = target ? VARIANT_SCHEMA[target] : undefined
   const activeRect = sel?.rect ?? hover?.rect
-  const pos = activeRect ? { top: Math.min(activeRect.bottom + 8, window.innerHeight - 24), left: Math.min(activeRect.left, window.innerWidth - 384) } : {}
-  const panelBase: React.CSSProperties = { position: 'fixed', zIndex: 2147483647, width: '23rem', maxWidth: '94vw', maxHeight: '82vh', overflowY: 'auto', background: C.panel, border: `1px solid ${C.border}`, borderRadius: RAD.lg, fontFamily: FONT, fontSize: '0.8125rem', lineHeight: 1.5, letterSpacing: '-0.01em', color: C.text2, boxShadow: '0 1.5rem 3rem rgba(0,0,0,0.6)', backdropFilter: 'blur(0.75rem)' }
-  const label: React.CSSProperties = { color: C.text3, marginBottom: '0.5rem', fontSize: '0.75rem' }
+  const pos = activeRect ? { top: Math.min(activeRect.bottom + 8, window.innerHeight - 24), left: Math.min(activeRect.left, window.innerWidth - 320) } : {}
+  const panelBase: React.CSSProperties = { position: 'fixed', zIndex: 2147483647, width: '19rem', maxWidth: '92vw', maxHeight: '76vh', overflowY: 'auto', background: C.panel, border: `1px solid ${C.border}`, borderRadius: RAD.md, fontFamily: FONT, fontSize: '0.75rem', lineHeight: 1.45, letterSpacing: '-0.01em', color: C.text2, boxShadow: '0 1rem 2.5rem rgba(0,0,0,0.6)', backdropFilter: 'blur(0.75rem)' }
+  const label: React.CSSProperties = { color: C.text3, marginBottom: '0.375rem', fontSize: '0.6875rem' }
 
   let preview: React.ReactNode = null
   if (target && PREVIEWABLE.has(target) && (DS as any)[target]) {
@@ -237,9 +237,9 @@ export default function DsAgent() {
   return (
     <div id="ds-agent-ui">
       {/* launcher */}
-      <div style={{ position: 'fixed', left: '1.5rem', bottom: '1.5rem', zIndex: 2147483647, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      <div style={{ position: 'fixed', left: '1.25rem', bottom: '1.25rem', zIndex: 2147483647, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
         <button type="button" onClick={() => { setEnabled((v) => !v); close() }} title="ds-agent"
-          style={{ position: 'relative', padding: '0.625rem 1rem', borderRadius: RAD.md, cursor: 'pointer', fontFamily: FONT, fontSize: '0.875rem', fontWeight: 600, letterSpacing: '-0.02em', background: enabled ? ACCENT : C.surface, color: enabled ? 'var(--black-600)' : C.text, border: `1px solid ${C.borderStrong}`, boxShadow: '0 0.5rem 1.5rem rgba(0,0,0,0.5)' }}>
+          style={{ position: 'relative', padding: '0.5rem 0.875rem', borderRadius: RAD.sm, cursor: 'pointer', fontFamily: FONT, fontSize: '0.8125rem', fontWeight: 600, letterSpacing: '-0.02em', background: enabled ? ACCENT : C.surface, color: enabled ? 'var(--black-600)' : C.text, border: `1px solid ${C.borderStrong}`, boxShadow: '0 0.5rem 1.5rem rgba(0,0,0,0.5)' }}>
           ds-agent
           {edits.length > 0 && <span style={{ position: 'absolute', top: '-0.5rem', right: '-0.5rem', minWidth: '1.25rem', height: '1.25rem', padding: '0 0.3125rem', borderRadius: '999px', background: ACCENT, color: 'var(--black-600)', fontSize: '0.6875rem', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '0.125rem solid var(--bg-100)' }}>{edits.length}</span>}
         </button>
@@ -252,11 +252,11 @@ export default function DsAgent() {
       </div>
 
       {/* highlight */}
-      {enabled && activeRect && <div style={{ position: 'fixed', pointerEvents: 'none', zIndex: 2147483646, top: activeRect.top, left: activeRect.left, width: activeRect.width, height: activeRect.height, outline: `2px solid ${sel ? BLUE : ACCENT}`, borderRadius: '0.125rem', background: sel ? 'rgba(84,111,239,0.10)' : 'rgba(77,186,121,0.08)' }} />}
+      {enabled && activeRect && <div style={{ position: 'fixed', pointerEvents: 'none', zIndex: 2147483646, top: activeRect.top, left: activeRect.left, width: activeRect.width, height: activeRect.height, outline: `2px solid ${sel ? BLUE : ACCENT}`, borderRadius: '0.125rem', background: sel ? 'rgba(84,111,239,0.10)' : 'rgba(255,255,255,0.10)' }} />}
 
       {/* hover token panel */}
       {enabled && !sel && hover && (
-        <div style={{ ...panelBase, pointerEvents: 'none', padding: '0.875rem 1rem', ...pos }}>
+        <div style={{ ...panelBase, pointerEvents: 'none', padding: '0.625rem 0.75rem', ...pos }}>
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'baseline' }}><span style={{ color: hover.comp === 'none' ? C.text3 : ACCENT, fontWeight: 600 }}>Component: {hover.comp}</span><span style={{ color: C.faint }}>&lt;{hover.tag}&gt;</span></div>
           {hover.rows.map((r) => <Row key={r.label} label={r.label} value={r.value} />)}
           <div style={{ marginTop: '0.5rem', color: C.faint }}>click to comment / pick a DS component →</div>
@@ -266,13 +266,13 @@ export default function DsAgent() {
       {/* picker + comment composer */}
       {enabled && sel && (
         <div style={{ ...panelBase, pointerEvents: 'auto', ...pos }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.875rem 1rem', borderBottom: `1px solid ${C.border}` }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.625rem 0.75rem', borderBottom: `1px solid ${C.border}` }}>
             <span style={{ wordBreak: 'break-word' }}>{sel.path.length ? sel.path.map((p, i) => <span key={i}>{i > 0 && <span style={{ color: C.faint }}> › </span>}<span style={{ color: DS_SET.has(p) ? ACCENT : C.text2, fontWeight: DS_SET.has(p) ? 600 : 400 }}>{p}</span></span>) : <span style={{ color: C.faint }}>&lt;{sel.tag}&gt;</span>}</span>
             <button type="button" onClick={close} style={{ background: 'none', border: 'none', color: C.text3, cursor: 'pointer', fontSize: '1rem', flexShrink: 0 }}>✕</button>
           </div>
 
           {/* comment composer */}
-          <div style={{ padding: '0.875rem 1rem' }}>
+          <div style={{ padding: '0.625rem 0.75rem' }}>
             <button type="button" onClick={() => setExpand((x) => !x)} style={{ display: 'flex', alignItems: 'center', gap: '0.375rem', background: 'none', border: 'none', color: C.text3, cursor: 'pointer', fontFamily: FONT, fontSize: '0.75rem', padding: 0, marginBottom: '0.5rem' }}>
               <span style={{ transform: expand ? 'rotate(90deg)' : 'none', display: 'inline-block' }}>▸</span> characteristics · {sel.source}
             </button>
@@ -294,7 +294,7 @@ export default function DsAgent() {
             <div style={{ display: 'flex', gap: '0.375rem', padding: '0.875rem 1rem 0' }}>
               {Object.keys(FOLDERS).map((f) => (<button key={f} type="button" onClick={() => { setFolder(f); setSearch('') }} style={{ flex: 1, padding: '0.4375rem 0', borderRadius: RAD.sm, cursor: 'pointer', fontFamily: FONT, fontSize: '0.75rem', fontWeight: folder === f ? 600 : 400, background: folder === f ? C.surface2 : 'transparent', color: folder === f ? C.text : C.text3, border: `1px solid ${folder === f ? C.borderStrong : C.border}` }}>{f}</button>))}
             </div>
-            <div style={{ padding: '0.75rem 1rem' }}>
+            <div style={{ padding: '0.625rem 0.75rem' }}>
               {folder !== 'Icons' ? (
                 <>
                   <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="search…" style={{ ...sField, marginBottom: '0.5rem' }} />
@@ -311,21 +311,21 @@ export default function DsAgent() {
             </div>
 
             {target && (
-              <div style={{ padding: '0 1rem 0.75rem' }}>
+              <div style={{ padding: '0 0.75rem 0.5rem' }}>
                 <div style={label}>preview</div>
-                <div style={{ minHeight: '4rem', maxHeight: '9rem', overflow: 'hidden', borderRadius: RAD.md, border: `1px dashed ${C.borderStrong}`, background: C.deep, padding: '0.875rem', display: 'flex', alignItems: 'center' }}>{preview ?? <span style={{ color: C.faint }}>preview unavailable for &lt;{target}&gt;</span>}</div>
+                <div style={{ minHeight: '2.75rem', maxHeight: '6.5rem', overflow: 'hidden', borderRadius: RAD.sm, border: `1px dashed ${C.borderStrong}`, background: C.deep, padding: '0.625rem', display: 'flex', alignItems: 'center' }}>{preview ?? <span style={{ color: C.faint }}>preview unavailable for &lt;{target}&gt;</span>}</div>
               </div>
             )}
 
             {(schema || (target && ICON_PROP.has(target))) && (
-              <div style={{ padding: '0 1rem 0.75rem' }}>
+              <div style={{ padding: '0 0.75rem 0.5rem' }}>
                 <div style={label}>{target} variants</div>
                 {target && ICON_PROP.has(target) && (<div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.375rem' }}><span style={{ color: C.text2, minWidth: '5rem', flexShrink: 0 }}>icon</span><IconField value={icon} onChange={setIcon} /></div>)}
                 {(schema ?? []).map((f) => (<div key={f.prop} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.375rem' }}><span style={{ color: C.text2, minWidth: '5rem', flexShrink: 0 }}>{f.prop}</span><Dropdown value={variants[f.prop] ?? ''} options={f.options} placeholder="—" onChange={(v) => setVariants((s) => ({ ...s, [f.prop]: v }))} /></div>))}
               </div>
             )}
 
-            <div style={{ padding: '0.875rem 1rem', borderTop: `1px solid ${C.border}` }}>
+            <div style={{ padding: '0.625rem 0.75rem', borderTop: `1px solid ${C.border}` }}>
               {swapInstruction() && <div style={{ color: C.faint, marginBottom: '0.625rem', wordBreak: 'break-word' }}>{swapInstruction()}</div>}
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <button type="button" onClick={close} style={{ ...sBtnOutline, flex: 1 }}>Close</button>
