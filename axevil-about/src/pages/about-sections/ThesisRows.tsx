@@ -36,7 +36,7 @@ export default function ThesisRows() {
             ))}
           </div>
           <p
-            className="font-inter-tight font-medium text-text-xs text-center"
+            className="font-inter-tight font-medium text-xs text-center"
             style={{ color: 'var(--black-800)', maxWidth: '37.5rem' }}
           >
             {THESIS.sources}
@@ -85,7 +85,7 @@ function ThesisCardEl({ img, title, copy, stat, statLabel }: ThesisCardProps) {
           <h4 className="font-inter-tight font-medium text-h4 text-white w-full" style={{ margin: 0 }}>
             {title}
           </h4>
-          <p className="font-inter-tight font-medium text-text-m text-white-400 w-full">
+          <p className="font-inter-tight font-medium text-m text-white-400 w-full">
             {copy}
           </p>
         </div>
@@ -101,10 +101,10 @@ function ThesisCardEl({ img, title, copy, stat, statLabel }: ThesisCardProps) {
               gap: '0.5rem',
             }}
           >
-            <p className="font-inter-tight font-semibold text-text-xl text-white whitespace-nowrap" style={{ margin: 0 }}>
+            <p className="font-inter-tight font-semibold text-xl text-white whitespace-nowrap" style={{ margin: 0 }}>
               {stat}
             </p>
-            <p className="font-inter-tight font-medium text-text-s-med text-white-400" style={{ margin: 0 }}>
+            <p className="font-inter-tight font-medium text-s-med text-white-400" style={{ margin: 0 }}>
               {statLabel}
             </p>
           </div>

@@ -34,7 +34,7 @@ export default function LegalInfra() {
               }}
             >
               <span
-                className="font-inter-tight font-medium text-text-s-med"
+                className="font-inter-tight font-medium text-s-med"
                 style={{ color: 'var(--black-800)' }}
               >
                 {`${i + 1}.0`} {p.type}
@@ -45,7 +45,7 @@ export default function LegalInfra() {
               >
                 {p.title}
               </h4>
-              <p className="font-inter-tight font-medium text-text-s-med text-white-300">
+              <p className="font-inter-tight font-medium text-s-med text-white-300">
                 {p.copy}
               </p>
             </div>

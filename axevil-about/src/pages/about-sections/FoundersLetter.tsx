@@ -78,7 +78,7 @@ function FounderCard({ name, role }: { name: string; role: string }) {
           {name}
         </h3>
         <p
-          className="font-inter-tight font-medium text-text-xs"
+          className="font-inter-tight font-medium text-xs"
           style={{ color: 'var(--white-400)', lineHeight: 1.4 }}
         >
           {role}
@@ -204,7 +204,7 @@ export default function FoundersLetter() {
                       {s.name}
                     </strong>
                     <span
-                      className="font-inter-tight font-medium text-text-xs"
+                      className="font-inter-tight font-medium text-xs"
                       style={{ color: 'var(--white-400)' }}
                     >
                       {s.role}
@@ -235,7 +235,7 @@ export default function FoundersLetter() {
                 }}
               >
                 <div
-                  className="font-inter-tight font-medium text-text-xs"
+                  className="font-inter-tight font-medium text-xs"
                   style={{ color: 'var(--white-400)', letterSpacing: '0.12em', textTransform: 'uppercase' }}
                 >
                   Пять лет работы
@@ -258,7 +258,7 @@ export default function FoundersLetter() {
                         {val}
                       </span>
                       <span
-                        className="font-inter-tight font-medium text-text-xs"
+                        className="font-inter-tight font-medium text-xs"
                         style={{ color: 'var(--white-400)' }}
                       >
                         {label}

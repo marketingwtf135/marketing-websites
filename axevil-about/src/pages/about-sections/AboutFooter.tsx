@@ -19,7 +19,7 @@ export default function AboutFooter() {
             className="footer-logo"
             style={{ width: '12.9375rem', height: '2rem', objectFit: 'contain', objectPosition: 'left' }}
           />
-          <p className="font-inter-tight font-medium text-text-xs text-white-400" style={{ maxWidth: '34rem' }}>
+          <p className="font-inter-tight font-medium text-xs text-white-400" style={{ maxWidth: '34rem' }}>
             {FOOTER_COMPLIANCE}
           </p>
         </div>
@@ -29,7 +29,7 @@ export default function AboutFooter() {
             <a
               key={id}
               href={`#${id}`}
-              className="font-inter-tight font-medium text-text-s-med text-white-400 hover:text-white transition-colors"
+              className="font-inter-tight font-medium text-s-med text-white-400 hover:text-white transition-colors"
             >
               {label}
             </a>

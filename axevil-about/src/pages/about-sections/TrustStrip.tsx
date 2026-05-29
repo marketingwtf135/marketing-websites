@@ -61,9 +61,9 @@ export default function TrustStrip() {
             <div className="flex flex-col flex-1 items-start justify-between p-5 relative overflow-hidden" style={STROKE_BORDER_STYLE}>
               <div className="flex flex-col gap-2 items-start w-full">
                 <p className="font-inter-tight font-medium text-h1-med text-white">{card.stat}</p>
-                <p className="font-inter-tight font-medium text-text-l" style={{ color: 'var(--white-300)' }}>{card.label}</p>
+                <p className="font-inter-tight font-medium text-l" style={{ color: 'var(--white-300)' }}>{card.label}</p>
               </div>
-              <p className="font-inter-tight font-medium text-text-m relative" style={{ color: 'var(--black-800, #404040)' }}>{card.num}</p>
+              <p className="font-inter-tight font-medium text-m relative" style={{ color: 'var(--black-800, #404040)' }}>{card.num}</p>
             </div>
           </div>
         ))}
@@ -98,7 +98,7 @@ export default function TrustStrip() {
                     <p className="font-inter-tight font-medium text-h1-med text-white">{card.stat}</p>
                     <p className="font-inter-tight font-medium text-paragraph text-white">{card.label}</p>
                   </div>
-                  <p className="font-inter-tight font-medium text-text-m" style={{ color: 'var(--black-800, #404040)' }}>{card.num}</p>
+                  <p className="font-inter-tight font-medium text-m" style={{ color: 'var(--black-800, #404040)' }}>{card.num}</p>
                 </div>
               </div>
             ))}
@@ -148,7 +148,7 @@ export default function TrustStrip() {
               <p className="font-inter-tight font-medium text-h1-med text-white">8</p>
               <p className="font-inter-tight font-medium text-paragraph text-white">успешных выходов</p>
             </div>
-            <p className="font-inter-tight font-medium text-text-l text-white/60 relative">1.0</p>
+            <p className="font-inter-tight font-medium text-l text-white/60 relative">1.0</p>
           </div>
         </div>
 
@@ -161,7 +161,7 @@ export default function TrustStrip() {
               <p className="font-inter-tight font-medium text-h1-med text-white">35</p>
               <p className="font-inter-tight font-medium text-paragraph text-white">компаний в портфеле</p>
             </div>
-            <p className="font-inter-tight font-medium text-text-l text-white/60 relative">2.0</p>
+            <p className="font-inter-tight font-medium text-l text-white/60 relative">2.0</p>
           </div>
         </div>
 
@@ -183,7 +183,7 @@ export default function TrustStrip() {
               <p className="font-inter-tight font-medium text-h1-med text-white relative">1 000+</p>
               <p className="font-inter-tight font-medium text-paragraph text-white relative">инвесторов</p>
             </div>
-            <p className="font-inter-tight font-medium text-text-l text-white/60 relative">3.0</p>
+            <p className="font-inter-tight font-medium text-l text-white/60 relative">3.0</p>
           </div>
         </div>
 
@@ -211,7 +211,7 @@ export default function TrustStrip() {
               <p className="font-inter-tight font-medium text-h1-med text-white mix-blend-hard-light">$150M</p>
               <p className="font-inter-tight font-medium text-paragraph text-white">под управлением</p>
             </div>
-            <p className="font-inter-tight font-medium text-text-l text-white/60">4.0</p>
+            <p className="font-inter-tight font-medium text-l text-white/60">4.0</p>
           </div>
         </div>
 

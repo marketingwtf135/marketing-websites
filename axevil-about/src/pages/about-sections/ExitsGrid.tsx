@@ -38,7 +38,7 @@ export default function ExitsGrid() {
             >
               {/* Text group: eyebrow (type) + (h4 company + body copy) — gap 1.5rem */}
               <div className="flex flex-col" style={{ gap: '1.5rem' }}>
-                <span className="font-inter-tight font-medium text-text-s-med text-white/50">
+                <span className="font-inter-tight font-medium text-s-med text-white/50">
                   {c.type}
                 </span>
                 {/* Inner: h4 + body — gap 1rem */}
@@ -60,7 +60,7 @@ export default function ExitsGrid() {
                 </span>
                 {/* Small italic note */}
                 <span
-                  className="font-inter-tight font-medium text-text-s-med text-white-400"
+                  className="font-inter-tight font-medium text-s-med text-white-400"
                   style={{ fontStyle: 'italic' }}
                 >
                   {c.why}
@@ -72,7 +72,7 @@ export default function ExitsGrid() {
 
         {/* Footer line */}
         <p
-          className="font-inter-tight font-medium text-text-s-med text-white-300"
+          className="font-inter-tight font-medium text-s-med text-white-300"
           style={{ textAlign: 'center', fontStyle: 'italic', marginTop: '1.5rem' }}
         >
           {EXITS.foot}

@@ -31,7 +31,7 @@ export default function FinalCta() {
             <BtnOwn size="L" hideIcon className="w-full sm:w-auto" onClick={openCalendly}>{FINAL_CTA.primary}</BtnOwn>
             <BtnOwn size="L" hideIcon variant="secondary" className="w-full sm:w-auto" onClick={openCalendly}>{FINAL_CTA.secondary}</BtnOwn>
           </div>
-          <p className="font-inter-tight font-medium text-text-xs text-white-400" style={{ marginTop: '0.5rem' }}>
+          <p className="font-inter-tight font-medium text-xs text-white-400" style={{ marginTop: '0.5rem' }}>
             {FINAL_CTA.crossPrefix}{' '}
             <a href={FINAL_CTA.crossHref} className="underline" style={{ color: 'var(--white-100)' }}>{FINAL_CTA.crossLink}</a>
           </p>

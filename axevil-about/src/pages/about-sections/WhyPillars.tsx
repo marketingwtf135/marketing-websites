@@ -62,7 +62,7 @@ export default function WhyPillars() {
                   <h4 className="font-inter-tight font-medium text-h4 text-white" style={{ margin: 0 }}>
                     {pillar.title}
                   </h4>
-                  <p className="font-inter-tight font-medium text-text-s-med text-white-400">
+                  <p className="font-inter-tight font-medium text-s-med text-white-400">
                     {pillar.copy}
                   </p>
                 </div>

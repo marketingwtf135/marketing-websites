@@ -79,7 +79,7 @@ function CompanyCard({ logo, status, statusLabel, category, body }: Company) {
       {/* Category (h4 token) + body */}
       <div className="flex flex-col" style={{ gap: '0.75rem' }}>
         <h4 className="font-inter-tight font-medium text-h4 text-white" style={{ margin: 0 }}>{category}</h4>
-        <p className="font-inter-tight font-medium text-text-m text-white-300">{body}</p>
+        <p className="font-inter-tight font-medium text-m text-white-300">{body}</p>
       </div>
 
       {/* Lock CTA — bottom */}
@@ -93,7 +93,7 @@ function CompanyCard({ logo, status, statusLabel, category, body }: Company) {
         }}
       >
         <img src="/icons/Lock.svg" alt="" aria-hidden="true" style={{ width: '1rem', height: '1rem', opacity: 0.5 }} />
-        <span className="font-inter-tight font-medium text-text-s-med text-white-400">Условия — в приложении</span>
+        <span className="font-inter-tight font-medium text-s-med text-white-400">Условия — в приложении</span>
       </div>
     </div>
   )

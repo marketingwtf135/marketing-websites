@@ -49,7 +49,7 @@ export default function AboutNav() {
                 key={id}
                 type="button"
                 onClick={() => scrollTo(id)}
-                className="flex items-center px-4 py-2 rounded-full font-inter-tight font-medium text-text-s-med text-white opacity-80 hover:opacity-100 hover:bg-white/5 transition-[opacity,background-color] duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                className="flex items-center px-4 py-2 rounded-full font-inter-tight font-medium text-s-med text-white opacity-80 hover:opacity-100 hover:bg-white/5 transition-[opacity,background-color] duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
               >
                 {label}
               </button>
