@@ -1,44 +1,100 @@
-import { SectionHeading, BtnOwn, DescTag } from '@axevil/design-system/components'
-import { PORTFOLIO } from './content'
-import CompanyChip from './CompanyChip'
+import { SectionHeading, StatusPill, type StatusKind, BtnOwn } from '@axevil/design-system/components'
+import { PORTFOLIO, PORTFOLIO_COMPANIES, PORTFOLIO_CTA } from './content'
+
+/**
+ * About — Portfolio Sectors (port of RIPortfolio)
+ * Cards: logo top-left + StatusPill top-right · category as h4 · body · lock link.
+ */
+
+interface Company {
+  logo: string
+  status: StatusKind
+  statusLabel: string
+  category: string
+  body: string
+}
 
 export default function PortfolioSectors() {
-  const lm = PORTFOLIO.leadmagnet
   return (
-    <section id="portfolio" className="w-full bg-page-bg" style={{ padding: 'clamp(4rem, 8vw, 7.5rem) 0' }}>
-      <div className="mx-auto w-full max-w-content container-px flex flex-col" style={{ gap: 'clamp(2.5rem, 5vw, 3.5rem)' }}>
-        <SectionHeading number="2.0" label={PORTFOLIO.eyebrow} title={PORTFOLIO.title} subtitle={PORTFOLIO.lead} titleMaxWidth="42.5rem" />
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3" style={{ gap: '1rem' }}>
-          {PORTFOLIO.sectors.map((s) => (
-            <div key={s.title} className="flex flex-col rounded-card bg-surface-0" style={{ border: '1px solid var(--border-subtle)', padding: '1.5rem', gap: '1rem' }}>
-              <span className="font-inter-tight font-semibold text-acc-gradient" style={{ fontSize: '1.875rem', lineHeight: 1 }}>{s.count}</span>
-              <h3 className="font-inter-tight font-semibold text-white text-xl">{s.title}</h3>
-              <div className="flex flex-wrap" style={{ gap: '0.5rem' }}>
-                {s.companies.map((c) => <CompanyChip key={c} name={c} />)}
-              </div>
-              <p className="font-inter-tight font-medium text-text-s-med text-white/45">{s.note}</p>
-            </div>
-          ))}
+    <section id="portfolio" className="relative w-full bg-page-bg padding-section-t6-b6">
+      <div className="mx-auto w-full max-w-content container-px flex flex-col items-center" style={{ gap: '2rem' }}>
+        <div style={{ maxWidth: '50rem' }}>
+          <SectionHeading
+            number="3.0"
+            label={PORTFOLIO.eyebrow}
+            title={PORTFOLIO.title}
+            subtitle={PORTFOLIO.lead}
+            gap="1.5rem"
+          />
         </div>
 
-        {/* Lead-magnet */}
-        <div className="rounded-card-lg bg-black-500" style={{ border: '1px solid rgba(77,186,121,0.2)', padding: 'clamp(1.5rem, 3vw, 1.875rem)' }}>
-          <div className="grid items-center lg:grid-cols-[17.5rem_1fr]" style={{ gap: '2rem' }}>
-            <div className="flex flex-col justify-between" style={{ minHeight: '13.75rem', borderRadius: '1rem', padding: '1.5rem', border: '1px solid var(--border-subtle)', background: 'radial-gradient(circle at 20% 20%, rgba(77,186,121,0.18), transparent 38%), linear-gradient(135deg,#111,#1c1c1c)' }}>
-              <span className="font-inter-tight font-medium text-text-xs" style={{ color: 'var(--status-open)', letterSpacing: '0.09375rem' }}>{lm.tag}</span>
-              <span className="font-inter-tight font-semibold text-white text-h4">{lm.coverTitle}</span>
-              <span className="font-inter-tight font-medium text-text-xs text-white/45">{lm.coverFoot}</span>
-            </div>
-            <div className="flex flex-col" style={{ gap: '1rem' }}>
-              <DescTag number="3.0" label={lm.eyebrow} />
-              <h3 className="font-inter-tight font-semibold text-white text-h4">{lm.title}</h3>
-              <p className="font-inter-tight font-medium text-paragraph text-white/70" style={{ maxWidth: '42.5rem' }}>{lm.body}</p>
-              <div><BtnOwn size="L" hideIcon onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' })}>{lm.cta}</BtnOwn></div>
-            </div>
+        {/* Cards grid + "See all" CTA grouped */}
+        <div className="flex flex-col items-center w-full" style={{ gap: '2rem' }}>
+          {/* Cards grid 3 cols desktop / 2 tablet / 1 mobile */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full" style={{ gap: '1rem' }}>
+            {PORTFOLIO_COMPANIES.map((company, i) => (
+              <CompanyCard
+                key={i}
+                logo={company.logo}
+                status={company.status}
+                statusLabel={company.statusLabel}
+                category={company.category}
+                body={company.body}
+              />
+            ))}
           </div>
+
+          {/* "See all" CTA — mobile full-width capped at 30rem; sm+ auto width */}
+          <BtnOwn
+            size="L"
+            hideIcon
+            className="w-full max-w-[30rem] sm:w-auto sm:max-w-none"
+            onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            {PORTFOLIO_CTA}
+          </BtnOwn>
         </div>
       </div>
     </section>
+  )
+}
+
+function CompanyCard({ logo, status, statusLabel, category, body }: Company) {
+  return (
+    <div
+      className="relative flex flex-col w-full"
+      style={{
+        background: 'var(--color-bg-card)',
+        borderRadius: '1rem',
+        padding: '1rem',
+        gap: '1.5rem',
+      }}
+    >
+      {/* Logo + status row */}
+      <div className="flex items-center justify-between">
+        <img src={logo} alt="" aria-hidden="true" style={{ height: '1.25rem', width: 'auto', objectFit: 'contain' }} />
+        <StatusPill status={status} label={statusLabel} />
+      </div>
+
+      {/* Category (h4 token) + body */}
+      <div className="flex flex-col" style={{ gap: '0.75rem' }}>
+        <h4 className="font-inter-tight font-medium text-h4 text-white" style={{ margin: 0 }}>{category}</h4>
+        <p className="font-inter-tight font-medium text-text-m text-white-300">{body}</p>
+      </div>
+
+      {/* Lock CTA — bottom */}
+      <div
+        className="flex items-center"
+        style={{
+          marginTop: 'auto',
+          padding: '1rem 0 0',
+          borderTop: '1px solid var(--border-subtle)',
+          gap: '0.5rem',
+        }}
+      >
+        <img src="/about/icons/Lock.svg" alt="" aria-hidden="true" style={{ width: '1rem', height: '1rem', opacity: 0.5 }} />
+        <span className="font-inter-tight font-medium text-text-s-med text-white-400">Условия — в приложении</span>
+      </div>
+    </div>
   )
 }
