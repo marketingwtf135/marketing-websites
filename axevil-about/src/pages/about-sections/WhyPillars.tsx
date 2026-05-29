@@ -15,7 +15,7 @@ export default function WhyPillars() {
     <section id="why" className="relative w-full bg-page-bg padding-section-t6-b6">
       <div
         className="mx-auto w-full max-w-content container-px flex flex-col items-center"
-        style={{ gap: '3rem' }}
+        style={{ gap: '3rem', maxWidth: 'calc(90rem + 3rem)' }}
       >
         <div style={{ maxWidth: '50rem' }}>
           <SectionHeading
@@ -45,7 +45,7 @@ export default function WhyPillars() {
                 {/* Marker eclipse + horizontal hairline */}
                 <div className="flex items-center w-full" style={{ gap: 0 }}>
                   <img
-                    src="/about/icons/icon-eclipse.svg"
+                    src="/icons/icon-eclipse.svg"
                     alt=""
                     aria-hidden="true"
                     className="shrink-0"

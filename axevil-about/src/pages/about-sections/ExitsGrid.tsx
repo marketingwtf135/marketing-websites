@@ -55,10 +55,7 @@ export default function ExitsGrid() {
               {/* Bottom accent — replaces Plus-arrow CTA from source */}
               <div className="flex flex-col" style={{ marginTop: 'auto', gap: '0.375rem' }}>
                 {/* Prominent metric value with gradient headline */}
-                <span
-                  className="font-inter-tight font-semibold text-h3 text-transparent gradient-text"
-                  style={{ backgroundImage: 'var(--gradient-headline)' }}
-                >
+                <span className="font-inter-tight font-semibold text-h3 text-white-100">
                   {c.metric}
                 </span>
                 {/* Small italic note */}

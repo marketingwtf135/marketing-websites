@@ -77,7 +77,7 @@ function ThesisCardEl({ img, title, copy, stat, statLabel }: ThesisCardProps) {
 
       {/* Bottom — mobile: gap-6; desktop: gap-0 + stats pinned to bottom via mt-auto */}
       <div
-        className="flex flex-col flex-1 w-full gap-6 md:gap-0"
+        className="flex flex-col flex-1 w-full gap-6"
         style={{ padding: '1.5rem 1rem 1rem 1rem' }}
       >
         {/* Title + body */}

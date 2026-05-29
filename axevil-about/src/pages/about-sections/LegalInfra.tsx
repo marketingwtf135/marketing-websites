@@ -22,7 +22,7 @@ export default function LegalInfra() {
           className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
           style={{ gap: '1rem', marginTop: 'clamp(2rem, 4vw, 3rem)' }}
         >
-          {LEGAL.partners.map((p) => (
+          {LEGAL.partners.map((p, i) => (
             <div
               key={p.title}
               className="flex flex-col"
@@ -34,10 +34,10 @@ export default function LegalInfra() {
               }}
             >
               <span
-                className="font-inter-tight font-medium text-text-xs text-white-400"
-                style={{ textTransform: 'uppercase', letterSpacing: '0.09375rem' }}
+                className="font-inter-tight font-medium text-text-s-med"
+                style={{ color: 'var(--black-800)' }}
               >
-                {p.type}
+                {`${i + 1}.0`} {p.type}
               </span>
               <h4
                 className="font-inter-tight font-semibold text-white text-xl"

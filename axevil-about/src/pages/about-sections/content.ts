@@ -17,11 +17,11 @@ export const NAV_LINKS: NavLink[] = [
 ]
 
 export const HERO = {
-  eyebrow: 'AXEVIL CAPITAL · PRE-IPO ПЛАТФОРМА',
+  eyebrow: 'Axevil Capital · Pre-IPO платформа',
   title: 'Платформа pre-IPO инвестиций в глобальных технологических лидеров',
   sub: 'Строим инфраструктуру доступа к лучшим частным компаниям мира для профессиональных инвесторов и управляющих капиталом.',
-  primary: 'Обсудить с инвест-менеджером →',
-  secondary: 'Получить доступ →',
+  primary: 'Обсудить с инвест-менеджером',
+  secondary: 'Получить доступ',
 }
 
 export const HERO_DEALS: Deal[] = [
@@ -39,8 +39,8 @@ export const TRUST_STATS = [
 export const COMPLIANCE = 'SEC Exempt Reporting Adviser · CRD #802-126907 · FINRA Member · CRD #323970'
 
 export const THESIS = {
-  eyebrow: 'ПОЧЕМУ PRIVATE MARKETS',
-  title: 'Стоимость технологических компаний сейчас создаётся до IPO — стратегия роста на частном рынке.',
+  eyebrow: 'Почему private markets',
+  title: 'Стоимость создаётся до IPO — рост на частном рынке.',
   lead: 'Топ-компании остаются частными в среднем 12 лет и формируют ~80% своей стоимости до момента выхода на биржу. IPO лишь фиксирует результат, основной рост уже состоялся.',
   rows: [
     { num: '01', title: 'Капитал перераспределяется', stat: '86%', statLabel: 'family offices уже инвестируют в private markets',
@@ -54,7 +54,7 @@ export const THESIS = {
 }
 
 export const PORTFOLIO = {
-  eyebrow: 'ИНВЕСТИЦИОННЫЙ ФОКУС AXEVIL CAPITAL',
+  eyebrow: 'Инвестиционный фокус Axevil Capital',
   title: '35 компаний в портфеле — от космоса и AI до blockchain и региональных супераппов.',
   lead: 'Инвестируем в технологических лидеров по всему миру — США, Европа, Ближний Восток, Азия.',
   sectors: [
@@ -75,15 +75,15 @@ export const PORTFOLIO = {
     tag: 'PRE-IPO INSIDER · Q1 2026',
     coverTitle: 'Портфель Axevil: компании, секторы, винтажи',
     coverFoot: 'Axevil Capital · quarterly report',
-    eyebrow: 'РЕЗУЛЬТАТЫ',
+    eyebrow: 'Результаты',
     title: 'Скачайте квартальный отчёт Q1 2026',
     body: 'Рассказываем, как команда Axevil провела первый квартал 2026 года: новые компании в портфеле, переоценки и выходы, текущие открытые инвестиционные возможности.',
-    cta: 'Скачать отчёт →',
+    cta: 'Скачать отчёт',
   },
 }
 
 export const EXITS = {
-  eyebrow: 'TRACK RECORD · КЕЙСЫ ЛИКВИДНОСТИ',
+  eyebrow: 'Track record · кейсы ликвидности',
   title: 'Примеры успешных выходов',
   lead: 'Для private markets ликвидность больше не сводится только к IPO. Вторичный рынок стал полноценным сценарием выхода: он повышает ликвидность класса активов и позволяет инвестору зафиксировать результат ещё до выхода компании на биржу.',
   cards: [
@@ -104,7 +104,7 @@ export const EXITS = {
 }
 
 export const WHY = {
-  eyebrow: 'ЧТО ДЕЛАЕТ AXEVIL ДРУГИМ',
+  eyebrow: 'Что делает Axevil другим',
   title: 'Меняем правила игры на рынке private equity.',
   lead: 'Private market по-прежнему остаётся закрытым и фрагментированным рынком. Миссия Axevil — упростить доступ к этому классу активов, сделав его прозрачным и удобным.',
   pillars: [
@@ -118,7 +118,7 @@ export const WHY = {
 }
 
 export const LEGAL = {
-  eyebrow: 'ЛУЧШИЕ ПРАКТИКИ ВЕНЧУРНОЙ ИНДУСТРИИ',
+  eyebrow: 'Лучшие практики венчурной индустрии',
   title: 'Как структурируется ваша инвестиция.',
   lead: 'Axevil — это технологический и операционный слой.',
   boxes: [
@@ -142,7 +142,7 @@ export const LEGAL = {
 }
 
 export const FOUNDERS = {
-  eyebrow: 'ПИСЬМО ОТ ОСНОВАТЕЛЕЙ',
+  eyebrow: 'Письмо от основателей',
   title: 'Почему мы делаем Axevil',
   people: [
     { name: 'Тарас Чумаченко',  role: 'Co-founder · Managing Partner · Ex-Societe Generale' },
@@ -166,7 +166,7 @@ export const FINAL_CTA = {
   label: 'Готовы двигаться дальше?',
   title: 'Запишитесь на 30-минутную консультацию с инвестиционным советником Axevil.',
   subtitle: 'Zoom-встреча, на которой наш инвестиционный аналитик ответит на все ваши вопросы.',
-  primary: 'Записаться на консультацию →',
+  primary: 'Записаться на консультацию',
   secondary: 'Получить доступ',
   calendly: 'https://calendly.com/axevil/consultation',
   crossPrefix: 'Сначала хотите понять процесс детальнее? →',
@@ -179,33 +179,33 @@ export const KEYSTATS_PILLS = ['SEC Exempt Reporting Adviser', 'FINRA Member', '
 
 // ── Thesis card images (RIInsight port) — paired by index with THESIS.rows ──
 export const THESIS_IMAGES = [
-  '/about/img/is/investor-image-01.webp',
-  '/about/img/is/investor-image-02.webp',
-  '/about/img/is/investor-image-03.webp',
+  '/img/is/investor-image-01.webp',
+  '/img/is/investor-image-02.webp',
+  '/img/is/investor-image-03.webp',
 ]
 
 // ── Portfolio companies (RIPortfolio port): logo + status + sector + body ──
 export interface PortfolioCompany { logo: string; status: 'open' | 'closed' | 'soon'; statusLabel: string; category: string; body: string }
 export const PORTFOLIO_COMPANIES: PortfolioCompany[] = [
-  { logo: '/about/img/is/logos/logo-spacex.svg',     status: 'open',   statusLabel: 'Открыта',  category: 'Deeptech · космос',   body: 'Мировой лидер запусков и спутниковой инфраструктуры. Оценка $527 млрд до IPO.' },
-  { logo: '/about/img/is/logos/logo-antrophic.svg',  status: 'closed', statusLabel: 'Закрыта',  category: 'AI / LLM · Pre-IPO',  body: 'Frontier-лаборатория AI, создающая надёжные и интерпретируемые системы.' },
-  { logo: '/about/img/is/logos/logo-xai.svg',        status: 'soon',   statusLabel: 'Скоро',    category: 'AI · Infrastructure', body: 'Лаборатория frontier-моделей: Grok и вычислительный кластер Colossus.' },
-  { logo: '/about/img/is/logos/logo-cursor.svg',     status: 'open',   statusLabel: 'Открыта',  category: 'Developer tools',     body: 'AI-нативный редактор кода, которым пользуются ведущие инженерные команды.' },
-  { logo: '/about/img/is/logos/logo-databricks.svg', status: 'soon',   statusLabel: 'Скоро',    category: 'Data / AI · Pre-IPO', body: 'Платформа данных и AI для 10 000+ корпоративных клиентов по всему миру.' },
-  { logo: '/about/img/is/logos/logo-stripe.svg',     status: 'closed', statusLabel: 'Закрыта',  category: 'Финтех · Pre-IPO',    body: 'Платёжная инфраструктура для интернета. $1,4 трлн обработано в 2025 году.' },
+  { logo: '/img/is/logos/logo-spacex.svg',     status: 'open',   statusLabel: 'Открыта',  category: 'Deeptech · космос',   body: 'Мировой лидер запусков и спутниковой инфраструктуры. Оценка $527 млрд до IPO.' },
+  { logo: '/img/is/logos/logo-antrophic.svg',  status: 'closed', statusLabel: 'Закрыта',  category: 'AI / LLM · Pre-IPO',  body: 'Frontier-лаборатория AI, создающая надёжные и интерпретируемые системы.' },
+  { logo: '/img/is/logos/logo-xai.svg',        status: 'soon',   statusLabel: 'Скоро',    category: 'AI · Infrastructure', body: 'Лаборатория frontier-моделей: Grok и вычислительный кластер Colossus.' },
+  { logo: '/img/is/logos/logo-cursor.svg',     status: 'open',   statusLabel: 'Открыта',  category: 'Developer tools',     body: 'AI-нативный редактор кода, которым пользуются ведущие инженерные команды.' },
+  { logo: '/img/is/logos/logo-databricks.svg', status: 'soon',   statusLabel: 'Скоро',    category: 'Data / AI · Pre-IPO', body: 'Платформа данных и AI для 10 000+ корпоративных клиентов по всему миру.' },
+  { logo: '/img/is/logos/logo-stripe.svg',     status: 'closed', statusLabel: 'Закрыта',  category: 'Финтех · Pre-IPO',    body: 'Платёжная инфраструктура для интернета. $1,4 трлн обработано в 2025 году.' },
 ]
 export const PORTFOLIO_CTA = 'Смотреть все 35 компаний портфеля'
 
 // ── Legal IllCards (AUOperate port): 4 regulatory pillars ──
 export interface LegalCard { num: string; img: string; imgMobile: string; title: string; body: string }
 export const LEGAL_CARDS: LegalCard[] = [
-  { num: '1.0', img: '/about/img/ill/ill-legal-03.webp', imgMobile: '/about/img/ill/ill-legal-03-mobile.webp', title: 'Регулируется SEC',
+  { num: '1.0', img: '/img/ill/ill-legal-03.png', imgMobile: '/img/ill/ill-legal-03-mobile.png', title: 'Регулируется SEC',
     body: 'Axevil Capital — Exempt Reporting Adviser, зарегистрированный в SEC (#802-126907) и отчитывающийся перед FINRA (CRD #323970). Только Reg D 506(b).' },
-  { num: '2.0', img: '/about/img/ill/ill-legal-01.webp', imgMobile: '/about/img/ill/ill-legal-01-mobile.webp', title: 'SPV под каждую сделку',
+  { num: '2.0', img: '/img/ill/ill-legal-01.png', imgMobile: '/img/ill/ill-legal-01-mobile.png', title: 'SPV под каждую сделку',
     body: 'Каждая инвестиция изолирована в отдельной US SPV (Alextar VC LLC) — отделена от других сделок и от управляющей компании.' },
-  { num: '3.0', img: '/about/img/ill/ill-legal-04.webp', imgMobile: '/about/img/ill/ill-legal-04-mobile.webp', title: 'Двойная верификация',
+  { num: '3.0', img: '/img/ill/ill-legal-04.png', imgMobile: '/img/ill/ill-legal-04-mobile.png', title: 'Двойная верификация',
     body: 'Каждая сделка проходит два независимых контура: инвестиционный кейс (фундамент, траектория IPO) и транзакция (документы, механика передачи, продавец).' },
-  { num: '4.0', img: '/about/img/ill/ill-legal-02.webp', imgMobile: '/about/img/ill/ill-legal-02-mobile.webp', title: 'Юрисдикция Delaware',
+  { num: '4.0', img: '/img/ill/ill-legal-02.png', imgMobile: '/img/ill/ill-legal-02-mobile.png', title: 'Юрисдикция Delaware',
     body: 'Фонд и управляющая компания — структуры Delaware, стандартной юрисдикции для институциональных венчурных vehicle.' },
 ]
 

@@ -3,7 +3,7 @@ import { NAV_LINKS, FOOTER_COMPLIANCE } from './content'
 /**
  * Local footer for the standalone /about deploy. The DS <Footer> hardcodes
  * root-absolute asset paths (/img/logos/footer-logo.svg) that 404 under the
- * `/about/` base — the sibling projects use a local footer for the same reason.
+ * `/` base — the sibling projects use a local footer for the same reason.
  */
 export default function AboutFooter() {
   return (
@@ -14,9 +14,10 @@ export default function AboutFooter() {
       >
         <div className="flex flex-col" style={{ gap: '1.25rem' }}>
           <img
-            src="/about/img/footer-logo.svg"
-            alt="Axevil Capital"
-            style={{ height: '1.5rem', width: 'auto', display: 'block' }}
+            src="/img/logos/footer-logo.svg"
+            alt="AXEVIL"
+            className="footer-logo"
+            style={{ width: '12.9375rem', height: '2rem', objectFit: 'contain', objectPosition: 'left' }}
           />
           <p className="font-inter-tight font-medium text-text-xs text-white-400" style={{ maxWidth: '34rem' }}>
             {FOOTER_COMPLIANCE}

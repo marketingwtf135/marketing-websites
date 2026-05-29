@@ -18,7 +18,7 @@ export default function PortfolioSectors() {
   return (
     <section id="portfolio" className="relative w-full bg-page-bg padding-section-t6-b6">
       <div className="mx-auto w-full max-w-content container-px flex flex-col items-center" style={{ gap: '2rem' }}>
-        <div style={{ maxWidth: '50rem' }}>
+        <div style={{ maxWidth: '60rem' }}>
           <SectionHeading
             number="3.0"
             label={PORTFOLIO.eyebrow}
@@ -92,7 +92,7 @@ function CompanyCard({ logo, status, statusLabel, category, body }: Company) {
           gap: '0.5rem',
         }}
       >
-        <img src="/about/icons/Lock.svg" alt="" aria-hidden="true" style={{ width: '1rem', height: '1rem', opacity: 0.5 }} />
+        <img src="/icons/Lock.svg" alt="" aria-hidden="true" style={{ width: '1rem', height: '1rem', opacity: 0.5 }} />
         <span className="font-inter-tight font-medium text-text-s-med text-white-400">Условия — в приложении</span>
       </div>
     </div>

@@ -143,7 +143,7 @@ export default function TrustStrip() {
         <div className="absolute flex flex-col bg-page-bg group" style={{ left: 0, top: '32.6875rem', width: '23.4375rem', height: '24.6875rem' }}>
           <div className="bg-white shrink-0 w-full" style={{ height: '0.625rem' }} />
           <div className="flex flex-col flex-1 items-start justify-between p-6 relative overflow-hidden" style={STROKE_BORDER_STYLE}>
-            <img alt="" src="/about/img/block03/gradient-image.webp" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 pointer-events-none" style={{ transition: 'opacity 0.8s ease-in-out' }} />
+            <img alt="" src="/img/block03/gradient-image.webp" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 pointer-events-none" style={{ transition: 'opacity 0.8s ease-in-out' }} />
             <div className="flex flex-col gap-4 items-start w-full relative">
               <p className="font-inter-tight font-medium text-h1-med text-white">8</p>
               <p className="font-inter-tight font-medium text-paragraph text-white">успешных выходов</p>
@@ -156,7 +156,7 @@ export default function TrustStrip() {
         <div className="absolute flex flex-col bg-page-bg group" style={{ left: '22.1875rem', top: '29.625rem', width: '23.4375rem', height: '27.75rem' }}>
           <div className="bg-white shrink-0 w-full" style={{ height: '0.625rem' }} />
           <div className="flex flex-col flex-1 items-start justify-between p-6 relative overflow-hidden" style={STROKE_BORDER_STYLE}>
-            <img alt="" src="/about/img/block03/gradient-image.webp" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 pointer-events-none" style={{ transition: 'opacity 0.8s ease-in-out' }} />
+            <img alt="" src="/img/block03/gradient-image.webp" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 pointer-events-none" style={{ transition: 'opacity 0.8s ease-in-out' }} />
             <div className="flex flex-col gap-4 items-start w-full relative">
               <p className="font-inter-tight font-medium text-h1-med text-white">35</p>
               <p className="font-inter-tight font-medium text-paragraph text-white">компаний в портфеле</p>
@@ -169,15 +169,15 @@ export default function TrustStrip() {
         <div className="absolute flex flex-col bg-page-bg group" style={{ left: '44.375rem', top: '17.6875rem', width: '23.4375rem', height: '39.6875rem' }}>
           <div className="bg-white shrink-0 w-full" style={{ height: '0.625rem' }} />
           <div className="flex flex-col flex-1 items-start justify-between p-6 relative overflow-hidden" style={STROKE_BORDER_STYLE}>
-            <img alt="" src="/about/img/block03/gradient-image.webp" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 pointer-events-none" style={{ transition: 'opacity 0.8s ease-in-out' }} />
+            <img alt="" src="/img/block03/gradient-image.webp" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 pointer-events-none" style={{ transition: 'opacity 0.8s ease-in-out' }} />
             <div className="absolute inset-0 pointer-events-none" style={{
-              maskImage: "url('/about/img/block03/card02-mask.svg')",
-              WebkitMaskImage: "url('/about/img/block03/card02-mask.svg')",
+              maskImage: "url('/img/block03/card02-mask.svg')",
+              WebkitMaskImage: "url('/img/block03/card02-mask.svg')",
               maskSize: '22.8125rem 46.8125rem', WebkitMaskSize: '22.8125rem 46.8125rem',
               maskRepeat: 'no-repeat', WebkitMaskRepeat: 'no-repeat',
               opacity: 0.03, transform: 'rotate(45deg) scale(1.5)',
             }}>
-              <img alt="" src="/about/img/block03/card02-mask-fill.webp" className="absolute w-full h-full object-cover" />
+              <img alt="" src="/img/block03/card02-mask-fill.webp" className="absolute w-full h-full object-cover" />
             </div>
             <div className="flex flex-col gap-4 items-start w-full relative">
               <p className="font-inter-tight font-medium text-h1-med text-white relative">1 000+</p>
@@ -193,20 +193,20 @@ export default function TrustStrip() {
               The mask <div> is kept without any child <img> so the card04 mask
               CSS is preserved and the ellipses layers below still render. */}
           <div className="absolute inset-0 pointer-events-none" style={{
-            maskImage: "url('/about/img/block03/card04-mask.svg')",
-            WebkitMaskImage: "url('/about/img/block03/card04-mask.svg')",
+            maskImage: "url('/img/block03/card04-mask.svg')",
+            WebkitMaskImage: "url('/img/block03/card04-mask.svg')",
             maskSize: '23.4375rem 46.8125rem', WebkitMaskSize: '23.4375rem 46.8125rem',
             maskRepeat: 'no-repeat', WebkitMaskRepeat: 'no-repeat',
           }} />
           <div className="absolute mix-blend-plus-lighter pointer-events-none" style={{ left: '10.25rem', top: '-9.625rem', width: '25.1875rem', height: '24.1875rem' }}>
-            <img alt="" src="/about/img/block03/card04-ellipse1.svg" className="w-full h-full" style={{ transform: 'rotate(41.09deg)' }} />
+            <img alt="" src="/img/block03/card04-ellipse1.svg" className="w-full h-full" style={{ transform: 'rotate(41.09deg)' }} />
           </div>
           <div className="absolute mix-blend-plus-lighter pointer-events-none" style={{ left: '-8.5625rem', top: '11.6875rem', width: '12.375rem', height: '15.1875rem' }}>
-            <img alt="" src="/about/img/block03/card04-ellipse2.svg" className="w-full h-full" style={{ transform: 'rotate(90deg)' }} />
+            <img alt="" src="/img/block03/card04-ellipse2.svg" className="w-full h-full" style={{ transform: 'rotate(90deg)' }} />
           </div>
           <div className="bg-white shrink-0 w-full relative z-10" style={{ height: '0.625rem' }} />
           <div className="flex flex-col flex-1 items-start justify-between p-6 relative z-10 overflow-clip" style={STROKE_BORDER_STYLE}>
-            <img alt="" src="/about/img/block03/gradient-image.webp" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 pointer-events-none" style={{ transition: 'opacity 0.8s ease-in-out' }} />
+            <img alt="" src="/img/block03/gradient-image.webp" className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 pointer-events-none" style={{ transition: 'opacity 0.8s ease-in-out' }} />
             <div className="flex flex-col gap-4 items-start w-full relative">
               <p className="font-inter-tight font-medium text-h1-med text-white mix-blend-hard-light">$150M</p>
               <p className="font-inter-tight font-medium text-paragraph text-white">под управлением</p>

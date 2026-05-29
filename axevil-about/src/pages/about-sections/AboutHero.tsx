@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { BtnOwn, HeroEyebrow, PRELOAD_DEVICES_MOTION } from '@axevil/design-system/components'
+import { BtnOwn, HeroEyebrow, BgFeatures, PRELOAD_DEVICES_MOTION } from '@axevil/design-system/components'
 import { HERO } from './content'
 
 /**
@@ -23,6 +23,8 @@ export default function AboutHero() {
       id="top"
       className="relative w-full bg-page-bg overflow-hidden flex flex-col pt-[3.75rem] md:pt-[5rem] md:h-[100svh] pb-0 md:pb-0"
     >
+      <BgFeatures />
+
       {/* Container fills section height on desktop (flex-1) so the phone wrapper can be mt-auto pinned to bottom. */}
       <div
         className="relative mx-auto w-full max-w-content container-px flex flex-col items-center text-center md:flex-1"
@@ -62,7 +64,7 @@ export default function AboutHero() {
           >
             <BtnOwn
               size="S"
-              icon="/about/icons/Download.svg"
+              hideIcon
               className="w-full sm:hidden"
               onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' })}
             >{HERO.primary}</BtnOwn>
@@ -75,15 +77,15 @@ export default function AboutHero() {
             >{HERO.secondary}</BtnOwn>
             <BtnOwn
               size="L"
-              icon="/about/icons/Download.svg"
-              className="hidden sm:flex sm:w-[15.375rem]"
+              hideIcon
+              className="hidden sm:flex sm:w-auto"
               onClick={() => document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' })}
             >{HERO.primary}</BtnOwn>
             <BtnOwn
               size="L"
               hideIcon
               variant="secondary"
-              className="hidden sm:flex sm:w-[15.375rem]"
+              className="hidden sm:flex sm:w-auto"
               onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
             >{HERO.secondary}</BtnOwn>
           </div>
@@ -93,7 +95,7 @@ export default function AboutHero() {
             (user reverted earlier 21rem clip — phone was "крайне маленький"). Width clamp controls scale.
             Desktop: mt-auto pinned to bottom of the 100svh section. */}
         <motion.img
-          src="/about/img/is/investors-iphone-image.webp"
+          src="/img/is/investors-iphone-image.webp"
           alt="Axevil — мобильное приложение"
           className="pointer-events-none md:!max-h-none mx-auto md:mt-auto"
           style={{
