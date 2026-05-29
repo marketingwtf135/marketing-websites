@@ -98,7 +98,16 @@ function fontSizeTokenFromClasses(el: Element): string | null {
   return null
 }
 
-/** Walk the React fiber tree up from a DOM node to the nearest named component. */
+/** Components that live in the design system (design-system/src/components/*.tsx).
+ *  Only these are reported as "Component:"; anything else (local page sections,
+ *  host elements) resolves to "none". */
+const DS_COMPONENTS = new Set([
+  'BgFeatures', 'BtnOwn', 'CtaForm', 'CtaFormNewsletter', 'DescTag', 'FAQ', 'FadeIn',
+  'Footer', 'Form', 'HeroEyebrow', 'IllCards', 'Nav', 'NavDropdown', 'PageEntry',
+  'Quiz', 'SectionHeading', 'SliderCard', 'StatusPill', 'Tag',
+])
+
+/** Walk up to the nearest OWNING component; return its name only if it's a DS component. */
 function componentName(el: Element): string | null {
   const key = Object.keys(el).find(
     (k) => k.startsWith('__reactFiber$') || k.startsWith('__reactInternalInstance$'),
@@ -114,9 +123,9 @@ function componentName(el: Element): string | null {
       // forwardRef / memo wrappers (e.g. framer-motion) — try their inner names
       name = t.displayName || t.render?.displayName || t.render?.name || t.type?.displayName || t.type?.name
     }
-    // Skip anonymous / host / framer-motion wrappers — keep climbing to a real component.
+    // Skip anonymous / framer-motion wrappers; the first REAL named component is the owner.
     if (name && name.length > 1 && !/^(Unknown|MotionComponent|_c\d*)$/.test(name)) {
-      return name
+      return DS_COMPONENTS.has(name) ? name : null
     }
     fiber = fiber.return
   }
