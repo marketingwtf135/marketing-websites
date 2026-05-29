@@ -1,0 +1,42 @@
+/* DS tokens (CSS variables: colors, fonts, gradients, radius) */
+@import '@axevil/design-system/css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Inter Tight @font-face ── */
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/about/fonts/InterTight-Medium.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/about/fonts/InterTight-Medium-Latin-ext.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/about/fonts/InterTight-SemiBold.woff2') format('woff2');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background-color: var(--page-bg);
+  color: var(--white-100);
+  font-family: 'Inter Tight', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global container horizontal padding: 1rem mobile → 1.5rem tablet → 0 desktop */
+@layer utilities {
+  .container-px { padding-left: 1rem; padding-right: 1rem; }
+  @media (min-width: 48rem) { .container-px { padding-left: 1.5rem; padding-right: 1.5rem; } }
+  @media (min-width: 90rem) { .container-px { padding-left: 0; padding-right: 0; } }
+}
