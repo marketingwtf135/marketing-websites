@@ -14,7 +14,7 @@ const T = tokens as AnyTokens
 
 /* ── DS-styled UI primitives ── */
 const FONT = "'Inter Tight', sans-serif"
-const ACCENT = 'var(--white-100)'        // accent = white (per DS)
+const ACCENT = 'var(--status-open)'      // accent = AXEVIL green
 const BLUE = 'var(--accent-blue)'        // #546fef (selection)
 const C = {
   panel: 'rgba(8,8,8,0.97)', surface: 'var(--black-400)', surface2: 'var(--black-500)', deep: 'var(--bg-100)',
@@ -252,7 +252,7 @@ export default function DsAgent() {
       </div>
 
       {/* highlight */}
-      {enabled && activeRect && <div style={{ position: 'fixed', pointerEvents: 'none', zIndex: 2147483646, top: activeRect.top, left: activeRect.left, width: activeRect.width, height: activeRect.height, outline: `2px solid ${sel ? BLUE : ACCENT}`, borderRadius: '0.125rem', background: sel ? 'rgba(84,111,239,0.10)' : 'rgba(255,255,255,0.10)' }} />}
+      {enabled && activeRect && <div style={{ position: 'fixed', pointerEvents: 'none', zIndex: 2147483646, top: activeRect.top, left: activeRect.left, width: activeRect.width, height: activeRect.height, outline: `2px solid ${sel ? BLUE : ACCENT}`, borderRadius: '0.125rem', background: sel ? 'rgba(84,111,239,0.10)' : 'rgba(77,186,121,0.10)' }} />}
 
       {/* hover token panel */}
       {enabled && !sel && hover && (
