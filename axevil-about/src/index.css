@@ -109,6 +109,7 @@ h1.gradient-text,
 h2.gradient-text {
   padding-bottom: 0.15em;
 }
+/* Headline shimmer now ships from @axevil/design-system/css (tokens.css). */
 
 /* ── HeroEyebrow online-dot pulse (status: open) ── */
 @keyframes ri-online-pulse {
