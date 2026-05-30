@@ -13,7 +13,7 @@ export default function FinalCta() {
     <section
       id="cta"
       className="w-full"
-      style={{ background: 'linear-gradient(180deg, #080808 0%, #161616 50%, #080808 100%)', borderTop: '1px solid var(--section-border)' }}
+      style={{ background: 'var(--bg-100)', borderTop: '1px solid var(--section-border)' }}
     >
       <div className="mx-auto w-full max-w-content container-px flex flex-col items-center text-center padding-section-t6-b12">
         {/* whole section — gap spacing-2 (2rem) */}
