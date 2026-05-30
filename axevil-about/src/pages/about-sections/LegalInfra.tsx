@@ -30,24 +30,29 @@ export default function LegalInfra() {
                 background: 'var(--color-bg-card)',
                 borderRadius: '1rem',
                 padding: '1.5rem',
-                gap: '0.625rem',
               }}
             >
-              <span
-                className="font-inter-tight font-medium text-s-med"
-                style={{ color: 'var(--black-800)' }}
-              >
-                {`${i + 1}.0`} {p.type}
-              </span>
-              <h4
-                className="font-inter-tight font-semibold text-white text-xl"
-                style={{ margin: 0 }}
-              >
-                {p.title}
-              </h4>
-              <p className="font-inter-tight font-medium text-s-med text-white-300">
-                {p.copy}
-              </p>
+              {/* descriptor + content group — gap spacing-2 (2rem) */}
+              <div className="flex flex-col" style={{ gap: '2rem' }}>
+                <span
+                  className="font-inter-tight font-medium text-s-med"
+                  style={{ color: 'var(--black-800)' }}
+                >
+                  {`${i + 1}.0`} {p.type}
+                </span>
+                {/* title + copy group — gap spacing-1 (1rem) */}
+                <div className="flex flex-col" style={{ gap: '1rem' }}>
+                  <h4
+                    className="font-inter-tight font-semibold text-white text-xl"
+                    style={{ margin: 0 }}
+                  >
+                    {p.title}
+                  </h4>
+                  <p className="font-inter-tight font-medium text-s-med text-white-300">
+                    {p.copy}
+                  </p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
