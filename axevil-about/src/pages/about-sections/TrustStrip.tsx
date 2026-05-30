@@ -44,7 +44,7 @@ export default function TrustStrip() {
         {/* Heading */}
         <div style={{ marginBottom: '2rem' }}>
           <SectionHeading
-            number="2.0"
+            number="1.0"
             label="Наши цифры"
             title="Ключевые показатели"
             align="start"
@@ -80,7 +80,7 @@ export default function TrustStrip() {
       <div className="hidden md:block lg:hidden w-full">
         <div className="mx-auto w-full max-w-content flex flex-col" style={{ gap: '2rem' }}>
           <SectionHeading
-            number="2.0"
+            number="1.0"
             label="Наши цифры"
             title="Ключевые показатели"
             align="start"
@@ -129,7 +129,7 @@ export default function TrustStrip() {
         {/* Section heading — top-left */}
         <div className="absolute whitespace-nowrap" style={{ left: 0, top: 0 }}>
           <SectionHeading
-            number="2.0"
+            number="1.0"
             label="Наши цифры"
             title="Ключевые показатели"
             align="start"
