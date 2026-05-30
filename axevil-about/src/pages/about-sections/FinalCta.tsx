@@ -18,12 +18,12 @@ export default function FinalCta() {
       <div className="mx-auto w-full max-w-content container-px flex flex-col items-center text-center padding-section-t6-b12">
         <div className="flex flex-col items-center" style={{ gap: 'clamp(1.5rem, 3vw, 2rem)', maxWidth: '60rem' }}>
           <DescTag number={FINAL_CTA.number} label={FINAL_CTA.label} className="items-center" />
-          <h2
-            className="font-inter-tight font-semibold text-h2 text-transparent gradient-text"
+          <h3
+            className="font-inter-tight font-semibold text-h3 text-transparent gradient-text"
             style={{ backgroundImage: 'var(--gradient-headline)' }}
           >
             {FINAL_CTA.title}
-          </h2>
+          </h3>
           <p className="font-inter-tight font-medium text-paragraph text-white/60" style={{ maxWidth: '37.5rem' }}>
             {FINAL_CTA.subtitle}
           </p>
