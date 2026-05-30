@@ -177,11 +177,11 @@ export const FINAL_CTA = {
 // ── KeyStats regulatory pills (RIKeyStats port) ──
 export const KEYSTATS_PILLS = ['SEC Exempt Reporting Adviser', 'FINRA Member', 'Delaware SPV']
 
-// ── Thesis card images (RIInsight port) — paired by index with THESIS.rows ──
+// ── Thesis card images — paired by index with THESIS.rows ──
 export const THESIS_IMAGES = [
-  '/img/is/investor-image-01.webp',
-  '/img/is/investor-image-02.webp',
-  '/img/is/investor-image-03.webp',
+  '/img/cards-01.webp',
+  '/img/cards-02.webp',
+  '/img/cards-03.webp',
 ]
 
 // ── Portfolio companies (RIPortfolio port): logo + status + sector + body ──
