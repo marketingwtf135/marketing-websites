@@ -1,4 +1,4 @@
-import { FadeIn } from '@axevil/design-system/components'
+import { FadeIn, PageEntry } from '@axevil/design-system/components'
 import AboutNav from './about-sections/AboutNav'
 import AboutFooter from './about-sections/AboutFooter'
 import AboutHero from './about-sections/AboutHero'
@@ -13,7 +13,7 @@ import FinalCta from './about-sections/FinalCta'
 
 export default function About() {
   return (
-    <main className="overflow-x-clip bg-page-bg">
+    <PageEntry className="overflow-x-clip bg-page-bg">
       <AboutNav />
       <AboutHero />
       <FadeIn><TrustStrip /></FadeIn>
@@ -25,6 +25,6 @@ export default function About() {
       <FadeIn><FoundersLetter /></FadeIn>
       <FinalCta />
       <AboutFooter />
-    </main>
+    </PageEntry>
   )
 }

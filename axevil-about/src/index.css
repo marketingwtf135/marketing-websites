@@ -109,7 +109,20 @@ h1.gradient-text,
 h2.gradient-text {
   padding-bottom: 0.15em;
 }
-/* Headline shimmer now ships from @axevil/design-system/css (tokens.css). */
+/* ── Headline shimmer — PARKED (idea kept for later) ───────────────────────
+   Reverted to the original static DS gradient for now. To re-enable an avon-style
+   sweep, override the headline gradient vars to a shine gradient + animate
+   background-position. Example (tune base grey / highlight / speed):
+
+   :root {
+     --gradient-headline:        linear-gradient(94deg, #8a8a8a 0%, #8a8a8a 38%, #fff 50%, #8a8a8a 62%, #8a8a8a 100%);
+     --gradient-headline-narrow: linear-gradient(94deg, #8a8a8a 0%, #8a8a8a 38%, #fff 50%, #8a8a8a 62%, #8a8a8a 100%);
+     --acc-gradient:             linear-gradient(94deg, #8a8a8a 0%, #8a8a8a 38%, #fff 50%, #8a8a8a 62%, #8a8a8a 100%);
+   }
+   @keyframes axv-headline-shine { from { background-position: 200% center } to { background-position: -200% center } }
+   .gradient-text, .text-acc-gradient { background-size: 250% auto !important; animation: axv-headline-shine 20s linear infinite; }
+   @media (prefers-reduced-motion: reduce) { .gradient-text, .text-acc-gradient { animation: none; background-position: 50% center; } }
+   ──────────────────────────────────────────────────────────────────────── */
 
 /* ── HeroEyebrow online-dot pulse (status: open) ── */
 @keyframes ri-online-pulse {

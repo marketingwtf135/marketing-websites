@@ -13,7 +13,7 @@ export default function ThesisRows() {
       <div className="mx-auto w-full max-w-content container-px flex flex-col" style={{ gap: '3rem' }}>
         <div className="w-full mx-auto" style={{ maxWidth: '50rem' }}>
           <SectionHeading
-            number="1.0"
+            number="2.0"
             label={THESIS.eyebrow}
             title={THESIS.title}
             subtitle={THESIS.lead}
