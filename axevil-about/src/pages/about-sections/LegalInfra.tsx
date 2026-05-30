@@ -30,6 +30,8 @@ export default function LegalInfra() {
                 background: 'var(--color-bg-card)',
                 borderRadius: '1rem',
                 padding: '1.5rem',
+                width: 'fit-content',
+                justifySelf: 'start',
               }}
             >
               {/* descriptor + content group — gap spacing-2 (2rem) */}

@@ -102,6 +102,21 @@ function computeRows(el: Element, root: number) {
   if (parseFloat(cs.borderTopLeftRadius) > 0) { const r = remToken(buildRemMap(T.borderRadius), cs.borderTopLeftRadius, root); if (r) rows.push({ label: 'Radius', value: r }) }
   if (parseFloat(cs.columnGap) > 0) { const g = remToken(buildRemMap(T.spacing), cs.columnGap, root); if (g) rows.push({ label: 'Gap', value: g }) }
   if (parseFloat(cs.paddingTop) > 0) rows.push({ label: 'Padding', value: remToken(buildRemMap(T.spacing), cs.paddingTop, root) ?? cs.paddingTop })
+  // Size — rendered box in px + rem
+  const r = (el as HTMLElement).getBoundingClientRect()
+  const toRem = (px: number) => `${+(px / root).toFixed(2)}rem`
+  rows.push({ label: 'Size', value: `${Math.round(r.width)}×${Math.round(r.height)}px · ${toRem(r.width)}×${toRem(r.height)}` })
+  // Position — only when not static; show offsets that are set
+  if (cs.position !== 'static') {
+    const offs = (['top', 'right', 'bottom', 'left'] as const)
+      .filter((k) => cs[k] !== 'auto')
+      .map((k) => `${k} ${cs[k]}`)
+    rows.push({ label: 'Position', value: `${cs.position}${cs.zIndex !== 'auto' ? ` · z${cs.zIndex}` : ''}${offs.length ? ' · ' + offs.join(' · ') : ''}` })
+  }
+  // Image — object-fit / object-position
+  if (el.tagName === 'IMG') {
+    rows.push({ label: 'Image', value: `${cs.objectFit} · ${cs.objectPosition}` })
+  }
   return rows
 }
 function parseVal(v: string): unknown { if (v === 'true') return true; if (v === 'false') return false; if (/^-?\d+(\.\d+)?$/.test(v)) return Number(v); return v }
