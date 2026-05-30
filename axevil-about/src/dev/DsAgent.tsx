@@ -166,6 +166,7 @@ export default function DsAgent() {
   const [edits, setEdits] = useState<Edit[]>(() => { try { return JSON.parse(localStorage.getItem('ds-agent:' + location.pathname) || '[]') } catch { return [] } })
   const [copied, setCopied] = useState(false)
   const [queueOpen, setQueueOpen] = useState(false)
+  const [previewBp, setPreviewBp] = useState<'Desktop' | 'Tablet' | 'Mobile'>('Desktop')
   const rafRef = useRef<number | null>(null)
   const selElRef = useRef<Element | null>(null)
 
@@ -390,8 +391,22 @@ export default function DsAgent() {
 
             {target && (
               <div style={{ padding: '0 0.75rem 0.5rem' }}>
-                <div style={label}>preview</div>
-                <div style={{ minHeight: '2.75rem', maxHeight: '6.5rem', overflow: 'hidden', borderRadius: RAD.sm, border: `1px dashed ${C.borderStrong}`, background: C.deep, padding: '0.625rem', display: 'flex', alignItems: 'center' }}>{preview ?? <span style={{ color: C.faint }}>preview unavailable for &lt;{target}&gt;</span>}</div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={label}>preview</div>
+                  <div style={{ display: 'flex', gap: '0.25rem' }}>
+                    {(['Desktop', 'Tablet', 'Mobile'] as const).map((bp) => (
+                      <button key={bp} type="button" onClick={() => setPreviewBp(bp)} title={bp}
+                        style={{ padding: '0.125rem 0.4375rem', borderRadius: '0.375rem', cursor: 'pointer', fontFamily: FONT, fontSize: '0.625rem', fontWeight: previewBp === bp ? 600 : 400, background: previewBp === bp ? C.surface2 : 'transparent', color: previewBp === bp ? C.text : C.text3, border: `1px solid ${previewBp === bp ? C.borderStrong : C.border}` }}>{bp[0]}</button>
+                    ))}
+                  </div>
+                </div>
+                {/* Emulate breakpoint: constrain width + set root font-size to that bp's token base
+                    (Desktop 16px / Tablet ~14.5px / Mobile ~13px) so responsive components reflow. */}
+                <div style={{ minHeight: '2.75rem', maxHeight: '9rem', overflow: 'auto', borderRadius: RAD.sm, border: `1px dashed ${C.borderStrong}`, background: C.deep, padding: '0.625rem', display: 'flex', alignItems: 'center' }}>
+                  <div style={{ width: previewBp === 'Desktop' ? '100%' : previewBp === 'Tablet' ? '20rem' : '14rem', maxWidth: '100%', fontSize: previewBp === 'Desktop' ? '16px' : previewBp === 'Tablet' ? '14.5px' : '13px' }}>
+                    {preview ?? <span style={{ color: C.faint }}>preview unavailable for &lt;{target}&gt;</span>}
+                  </div>
+                </div>
               </div>
             )}
 
