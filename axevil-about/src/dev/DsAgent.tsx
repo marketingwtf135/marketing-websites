@@ -262,9 +262,7 @@ export default function DsAgent() {
     pushEdit({ action: target && target !== sel.comp ? 'swap' : 'variant', file: sel.source, component: sel.comp, target: target ?? undefined, props, note: comment.trim() || undefined, text: comment.trim() ? `${t} — note: ${comment.trim()}` : t })
   }
   async function copyAll() {
-    const human = edits.map((e, i) => `${i + 1}. [${e.viewport}] ${e.text}`).join('\n\n')
-    const json = JSON.stringify(edits.map(({ viewport, action, file, component, target, props, note }) => ({ viewport, action, file, component, target, props, note })), null, 2)
-    const out = human + '\n\n```json\n' + json + '\n```'
+    const out = edits.map((e, i) => `${i + 1}. [${e.viewport}] ${e.text}`).join('\n\n')
     try { await navigator.clipboard.writeText(out); setCopied(true); setTimeout(() => setCopied(false), 1600) } catch { /* noop */ }
   }
 

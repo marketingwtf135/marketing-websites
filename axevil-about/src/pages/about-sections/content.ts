@@ -6,7 +6,7 @@ export interface Pillar { num: string; title: string; copy: string }
 export interface DiagramBox { kicker: string; title: string; copy: string }
 export interface LegalMessage { strong: string; rest: string }
 export interface Partner { type: string; title: string; copy: string }
-export interface Founder { name: string; role: string }
+export interface Founder { name: string; role: string; description: string; photo: string }
 export interface Deal { ticker: string; name: string; sector: string; status: 'open' | 'soon'; statusLabel: string; score: string }
 
 export const NAV_LINKS: NavLink[] = [
@@ -141,18 +141,20 @@ export const LEGAL = {
   ] as Partner[],
 }
 
+// 1×1 прозрачный gif — плейсхолдер до реальных фото (показывает фон карточки SliderCard)
+const FOUNDER_PHOTO_PLACEHOLDER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
+
 export const FOUNDERS = {
   eyebrow: 'Письмо от основателей',
   title: 'Почему мы делаем Axevil',
   people: [
-    { name: 'Тарас Чумаченко',  role: 'Co-founder · Managing Partner · Ex-Societe Generale' },
-    { name: 'Александр Иванов', role: 'Co-founder · Managing Partner · Ex-Финам · Открытие · Брокеркредитсервис' },
+    { name: 'Тарас Чумаченко',  role: 'Co-founder · Managing Partner', description: 'Ранее: Societe Generale', photo: FOUNDER_PHOTO_PLACEHOLDER },
+    { name: 'Александр Иванов', role: 'Co-founder · Managing Partner', description: 'Ранее: Финам · Открытие · БКС', photo: FOUNDER_PHOTO_PLACEHOLDER },
   ] as Founder[],
   letter: [
     'Мы запустили Axevil в 2020 году, потому что видели разрыв между тем, как устроен частный рынок сегодня, и тем, как он должен быть устроен для частного инвестора.',
     'Раньше доступ к SpaceX, Stripe или Databricks был только у больших институциональных фондов и узкого круга family offices с прямыми связями в Кремниевой долине.',
     'Мы построили технологическую и юридическую инфраструктуру, которая убирает этот барьер. Не упрощая суть — оставляя институциональный процесс, due diligence, регулирование и custody.',
-    'Спустя пять лет — $150 млн под управлением, 1 000+ инвесторов, 35 компаний в портфеле и 8 закрытых выходов. Мы по-прежнему считаем, что только начали.',
     'Если у вас есть вопросы о том, как это работает на практике — запишитесь на 30-минутный звонок. Один из нас или старший инвестиционный советник Axevil ответит лично.',
   ],
   signatures: [
