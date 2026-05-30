@@ -98,7 +98,7 @@ function ThesisCardEl({ img, title, copy, stat, statLabel }: ThesisCardProps) {
               background: 'var(--black-500)',
               borderRadius: '0.75rem',
               padding: '1rem',
-              gap: '0.5rem',
+              gap: '1rem',
             }}
           >
             <p className="font-inter-tight font-semibold text-xl text-white whitespace-nowrap" style={{ margin: 0 }}>
