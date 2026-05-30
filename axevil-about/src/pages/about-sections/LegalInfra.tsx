@@ -25,13 +25,11 @@ export default function LegalInfra() {
           {LEGAL.partners.map((p, i) => (
             <div
               key={p.title}
-              className="flex flex-col"
+              className="flex flex-col w-full"
               style={{
                 background: 'var(--color-bg-card)',
                 borderRadius: '1rem',
                 padding: '1.5rem',
-                width: 'fit-content',
-                justifySelf: 'start',
               }}
             >
               {/* descriptor + content group — gap spacing-2 (2rem) */}
