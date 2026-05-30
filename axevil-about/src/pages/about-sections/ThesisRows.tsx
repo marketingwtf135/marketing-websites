@@ -75,13 +75,13 @@ function ThesisCardEl({ img, title, copy, stat, statLabel }: ThesisCardProps) {
         />
       </div>
 
-      {/* Bottom — content section gap spacing-1 (1rem); stats pinned to bottom via mt-auto on desktop */}
+      {/* Bottom — content section gap spacing-1.5 (1.5rem); stats pinned to bottom via mt-auto on desktop */}
       <div
         className="flex flex-col flex-1 w-full"
-        style={{ padding: '1.5rem 1rem 1rem 1rem', gap: '1rem' }}
+        style={{ padding: '1.5rem 1rem 1rem 1rem', gap: '1.5rem' }}
       >
-        {/* Title + body */}
-        <div className="flex flex-col items-start w-full gap-2 md:gap-6">
+        {/* Title + body — gap spacing-1 (1rem) */}
+        <div className="flex flex-col items-start w-full" style={{ gap: '1rem' }}>
           <h4 className="font-inter-tight font-medium text-h4 text-white w-full" style={{ margin: 0 }}>
             {title}
           </h4>
