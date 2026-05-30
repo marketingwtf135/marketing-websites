@@ -85,6 +85,33 @@ not an inline hardcoded gradient.
 After changes run the smallest relevant checks: `tsc --noEmit`, `npm run build`,
 visual + responsive check at 1440 / 768 / 360, keyboard check if interaction changed.
 
+## Shortcut: "запушь дс" / "publish DS"
+When the user says **"запушь дс"** (or "publish the design system"), run this full
+publish-and-propagate flow so the DS updates everywhere:
+
+1. **Edit only the source** in the main repo, never the built package:
+   `Axevil Site/axevil-website/worktrees/<active-worktree>/` →
+   `packages/tokens/**` (tokens) or `design-system/src/components/**` (components).
+2. **Commit + push the source to `master`** (this triggers the
+   `sync-design-system` GitHub Action, which builds the package and pushes it to
+   `marketingwtf135/axevil-design-system`):
+   ```
+   cd "<main-repo-worktree>"
+   git add -A && git commit -m "ds: <what changed>"
+   git push origin HEAD:master
+   ```
+3. **If the Action can't run / package repo diverged**, sync it manually:
+   `npm run build:ds` → copy `.ds-build/*` into the local `axevil-design-system`
+   clone → `git pull --rebase origin master` (or `merge -X ours` if it only has
+   stale built artifacts) → `git push origin master`.
+4. **Re-install in every consumer** so the new package lands in node_modules:
+   `axevil-about`, `axevil-newsletter`, `axevil-pdf-page`, `axevil-webinar` →
+   `npm i` then `npm run build`.
+5. **Restart dev with `--force`** (Vite caches the old package): `npm run dev -- --force`,
+   and hard-refresh the browser (Ctrl+Shift+R). Required, else the screen shows stale CSS.
+6. **Verify:** `git grep -n "text-text-"` is empty; the published `dist/index.d.ts`
+   reflects the prop/type changes; the built CSS shows the new token values.
+
 ## Out of scope
 - No redesign of DS components, no new tokens, no new UI libraries.
 - No routing framework (single page, in-page anchor nav).
