@@ -166,6 +166,7 @@ export default function DsAgent() {
   const [edits, setEdits] = useState<Edit[]>(() => { try { return JSON.parse(localStorage.getItem('ds-agent:' + location.pathname) || '[]') } catch { return [] } })
   const [copied, setCopied] = useState(false)
   const rafRef = useRef<number | null>(null)
+  const selElRef = useRef<Element | null>(null)
 
   const colorMap = useMemo(buildColorMap, [])
   const radiusMap = useMemo(() => buildRemMap(T.borderRadius), [])
@@ -195,6 +196,7 @@ export default function DsAgent() {
       const tgt = document.elementFromPoint(e.clientX, e.clientY); if (!tgt) return
       const root = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16
       const comp = componentName(tgt) ?? 'none'
+      selElRef.current = tgt
       setSel({ comp, tag: tgt.tagName.toLowerCase(), source: sourceOf(tgt) ?? '—', rect: tgt.getBoundingClientRect(), rows: computeRows(tgt, root), classes: dsClasses(tgt), path: componentPath(tgt) })
       setTarget(DS_SET.has(comp) ? comp : null); setVariants({}); setIcon(''); setSearch(''); setComment(''); setExpand(false); setCopied(false)
       if (DS_SET.has(comp)) { const fo = Object.keys(FOLDERS).find((f) => FOLDERS[f].includes(comp)); if (fo) setFolder(fo) }
@@ -217,7 +219,22 @@ export default function DsAgent() {
     return () => window.removeEventListener('keydown', onKey)
   }, [enabled])
 
-  function close() { setSel(null); setTarget(null); setVariants({}); setIcon(''); setSearch(''); setComment(''); setExpand(false) }
+  // Re-track the frozen selection on scroll/resize so the panel + highlight follow
+  // the element (and don't drift off-screen). Drops the selection if it's gone.
+  useEffect(() => {
+    if (!sel) return
+    function reflow() {
+      const el = selElRef.current
+      if (!el || !el.isConnected) return
+      const r = el.getBoundingClientRect()
+      setSel((s) => (s ? { ...s, rect: r } : s))
+    }
+    window.addEventListener('scroll', reflow, { passive: true, capture: true })
+    window.addEventListener('resize', reflow)
+    return () => { window.removeEventListener('scroll', reflow, true); window.removeEventListener('resize', reflow) }
+  }, [sel?.comp, sel?.source])
+
+  function close() { selElRef.current = null; setSel(null); setTarget(null); setVariants({}); setIcon(''); setSearch(''); setComment(''); setExpand(false) }
   function swapInstruction(): string {
     if (!sel) return ''
     const props = Object.entries(variants).filter(([, v]) => v !== '')
