@@ -146,7 +146,7 @@ function IconField({ value, onChange }: { value: string; onChange: (v: string) =
 
 interface HoverInfo { comp: string; tag: string; rect: DOMRect; rows: { label: string; value: string }[]; classes: string[] }
 interface Selected { comp: string; tag: string; source: string; rect: DOMRect; rows: { label: string; value: string }[]; classes: string[]; path: string[] }
-interface Edit { viewport: string; text: string }
+interface Edit { viewport: string; text: string; action?: 'comment' | 'swap' | 'variant'; file?: string; component?: string; target?: string; props?: Record<string, string>; note?: string }
 
 const Row = ({ label, value }: { label: string; value: string }) => (
   <div style={{ display: 'flex', gap: '0.5rem' }}><span style={{ color: C.text3, minWidth: '4rem', flexShrink: 0 }}>{label}</span><span style={{ wordBreak: 'break-word', color: C.text2 }}>{value}</span></div>
@@ -163,7 +163,7 @@ export default function DsAgent() {
   const [target, setTarget] = useState<string | null>(null)
   const [variants, setVariants] = useState<Record<string, string>>({})
   const [icon, setIcon] = useState('')
-  const [edits, setEdits] = useState<Edit[]>([])
+  const [edits, setEdits] = useState<Edit[]>(() => { try { return JSON.parse(localStorage.getItem('ds-agent:' + location.pathname) || '[]') } catch { return [] } })
   const [copied, setCopied] = useState(false)
   const rafRef = useRef<number | null>(null)
 
@@ -203,6 +203,20 @@ export default function DsAgent() {
     return () => document.removeEventListener('click', onClick, true)
   }, [enabled])
 
+  // persist the edits queue per page so reloads don't lose work
+  useEffect(() => { try { localStorage.setItem('ds-agent:' + location.pathname, JSON.stringify(edits)) } catch { /* noop */ } }, [edits])
+  // hotkeys: ` or Alt+D toggle · Esc deselect
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      const t = e.target as HTMLElement | null
+      const typing = !!t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA')
+      if (!typing && (e.key === '`' || (e.altKey && (e.key === 'd' || e.key === 'D')))) { e.preventDefault(); setEnabled((v) => !v); setSel(null) }
+      if (e.key === 'Escape' && enabled) setSel(null)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [enabled])
+
   function close() { setSel(null); setTarget(null); setVariants({}); setIcon(''); setSearch(''); setComment(''); setExpand(false) }
   function swapInstruction(): string {
     if (!sel) return ''
@@ -213,10 +227,19 @@ export default function DsAgent() {
     if (target && props.length) return `at ${sel.source}: on <${target}>, set props {${props.map(([k, v]) => `${k}: ${v}`).join(', ')}}.`
     return ''
   }
-  function add(text: string) { if (!sel || !text) return; setEdits((e) => [...e, { viewport: viewportLabel(window.innerWidth), text }]); close() }
-  function saveComment() { if (sel && comment.trim()) add(`at ${sel.source} (${sel.path.join(' › ') || sel.tag}): ${comment.trim()}`) }
-  function saveSwap() { const t = swapInstruction(); if (t) add(comment.trim() ? `${t} — note: ${comment.trim()}` : t) }
-  async function copyAll() { try { await navigator.clipboard.writeText(edits.map((e, i) => `${i + 1}. [${e.viewport}] ${e.text}`).join('\n\n')); setCopied(true); setTimeout(() => setCopied(false), 1600) } catch { /* noop */ } }
+  function pushEdit(partial: Omit<Edit, 'viewport'>) { if (!sel) return; setEdits((e) => [...e, { viewport: viewportLabel(window.innerWidth), ...partial }]); close() }
+  function saveComment() { if (!sel || !comment.trim()) return; pushEdit({ action: 'comment', file: sel.source, note: comment.trim(), text: `at ${sel.source} (${sel.path.join(' › ') || sel.tag}): ${comment.trim()}` }) }
+  function saveSwap() {
+    const t = swapInstruction(); if (!t || !sel) return
+    const props: Record<string, string> = { ...variants }; if (icon) props.icon = `/icons/${icon}.svg`
+    pushEdit({ action: target && target !== sel.comp ? 'swap' : 'variant', file: sel.source, component: sel.comp, target: target ?? undefined, props, note: comment.trim() || undefined, text: comment.trim() ? `${t} — note: ${comment.trim()}` : t })
+  }
+  async function copyAll() {
+    const human = edits.map((e, i) => `${i + 1}. [${e.viewport}] ${e.text}`).join('\n\n')
+    const json = JSON.stringify(edits.map(({ viewport, action, file, component, target, props, note }) => ({ viewport, action, file, component, target, props, note })), null, 2)
+    const out = human + '\n\n```json\n' + json + '\n```'
+    try { await navigator.clipboard.writeText(out); setCopied(true); setTimeout(() => setCopied(false), 1600) } catch { /* noop */ }
+  }
 
   const list = folder === 'Icons' ? [] : FOLDERS[folder].filter((c) => c.toLowerCase().includes(search.toLowerCase()))
   const schema = target ? VARIANT_SCHEMA[target] : undefined
@@ -282,7 +305,7 @@ export default function DsAgent() {
                 {sel.classes.length > 0 && <div style={{ marginTop: '0.5rem', color: C.text2 }}>{sel.classes.join(' ')}</div>}
               </div>
             )}
-            <textarea value={comment} onChange={(e) => setComment(e.target.value)} placeholder="What should change?" rows={2} style={{ ...sField, resize: 'vertical', fontSize: '0.875rem', borderColor: comment ? BLUE : C.borderStrong, background: C.deep }} />
+            <textarea value={comment} onChange={(e) => setComment(e.target.value)} onKeyDown={(e) => { if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') saveComment() }} placeholder="What should change?  (⌘/Ctrl+Enter to add)" rows={2} style={{ ...sField, resize: 'vertical', fontSize: '0.875rem', borderColor: comment ? BLUE : C.borderStrong, background: C.deep }} />
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', marginTop: '0.625rem' }}>
               <button type="button" onClick={close} style={sBtnGhost}>Cancel</button>
               <button type="button" onClick={saveComment} disabled={!comment.trim()} style={{ ...sBtnAccent, opacity: comment.trim() ? 1 : 0.4, cursor: comment.trim() ? 'pointer' : 'not-allowed' }}>Add</button>
