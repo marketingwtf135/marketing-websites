@@ -165,6 +165,7 @@ export default function DsAgent() {
   const [icon, setIcon] = useState('')
   const [edits, setEdits] = useState<Edit[]>(() => { try { return JSON.parse(localStorage.getItem('ds-agent:' + location.pathname) || '[]') } catch { return [] } })
   const [copied, setCopied] = useState(false)
+  const [queueOpen, setQueueOpen] = useState(false)
   const rafRef = useRef<number | null>(null)
   const selElRef = useRef<Element | null>(null)
 
@@ -300,11 +301,33 @@ export default function DsAgent() {
         </button>
         {edits.length > 0 && (
           <>
+            <button type="button" title="view queue" onClick={() => setQueueOpen((o) => !o)} style={iconBtn(queueOpen)}>☰</button>
             <button type="button" title="copy all edits" onClick={copyAll} style={iconBtn(copied)}><IconCopyAlt size={16} /></button>
-            <button type="button" title="delete all" onClick={() => setEdits([])} style={iconBtn(false)}><IconTrashAlt size={16} /></button>
+            <button type="button" title="delete all" onClick={() => { setEdits([]); setQueueOpen(false) }} style={iconBtn(false)}><IconTrashAlt size={16} /></button>
           </>
         )}
       </div>
+
+      {/* queue list popover — view + delete individual edits */}
+      {queueOpen && edits.length > 0 && (
+        <div style={{ ...panelBase, left: '1.25rem', bottom: '4.25rem', top: 'auto', width: '24rem', maxHeight: '60vh', pointerEvents: 'auto' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.625rem 0.75rem', borderBottom: `1px solid ${C.border}` }}>
+            <span style={{ color: C.text, fontWeight: 600 }}>Queue · {edits.length}</span>
+            <button type="button" onClick={() => setQueueOpen(false)} style={{ background: 'none', border: 'none', color: C.text3, cursor: 'pointer', fontSize: '1rem' }}>✕</button>
+          </div>
+          <div style={{ padding: '0.5rem 0.75rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            {edits.map((e, i) => (
+              <div key={i} style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start', padding: '0.5rem', borderRadius: RAD.sm, background: C.surface }}>
+                <span style={{ color: C.text3, flexShrink: 0 }}>{i + 1}.</span>
+                <span style={{ flex: 1, wordBreak: 'break-word' }}>
+                  <span style={{ color: ACCENT }}>[{e.viewport}]</span> <span style={{ color: C.text2 }}>{e.text}</span>
+                </span>
+                <button type="button" title="remove" onClick={() => setEdits((q) => q.filter((_, j) => j !== i))} style={{ background: 'none', border: 'none', color: C.text3, cursor: 'pointer', flexShrink: 0, fontSize: '0.875rem' }}>✕</button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* highlight */}
       {enabled && activeRect && <div style={{ position: 'fixed', pointerEvents: 'none', zIndex: 2147483646, top: activeRect.top, left: activeRect.left, width: activeRect.width, height: activeRect.height, outline: `2px solid ${sel ? BLUE : ACCENT}`, borderRadius: '0.125rem', background: sel ? 'rgba(84,111,239,0.10)' : 'rgba(77,186,121,0.10)' }} />}
