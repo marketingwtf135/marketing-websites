@@ -29,13 +29,21 @@ const sBtnGhost: React.CSSProperties = { ...sBtnPrimary, background: 'transparen
 const sField: React.CSSProperties = { width: '100%', padding: '0.5rem 0.625rem', borderRadius: RAD.sm, background: C.surface, border: `1px solid ${C.borderStrong}`, color: C.text, fontFamily: FONT, fontSize: '0.8125rem', letterSpacing: '-0.02em', outline: 'none' }
 const iconBtn = (active: boolean): React.CSSProperties => ({ width: '2.25rem', height: '2.25rem', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: RAD.md, cursor: 'pointer', background: active ? ACCENT : C.surface, color: active ? 'var(--black-600)' : C.text, border: `1px solid ${C.borderStrong}`, boxShadow: '0 4px 16px rgba(0,0,0,0.4)' })
 
-const FOLDERS: Record<string, string[]> = {
+// Curated folder categorisation (my mapping). Any DS component NOT listed here is
+// auto-discovered from the package exports and dropped into "Other" — so the catalog
+// grows together with the design system without editing this file.
+const FOLDER_MAP: Record<string, string[]> = {
   Blocks: ['Nav', 'Footer', 'CtaForm', 'CtaFormNewsletter', 'Form', 'FAQ', 'BgFeatures', 'PageEntry', 'Quiz'],
   Elements: ['BtnOwn', 'StatusPill', 'Tag', 'DescTag', 'HeroEyebrow', 'SectionHeading', 'FadeIn', 'NavDropdown'],
   Cards: ['IllCards', 'SliderCard'],
-  Icons: [],
 }
-const DS_SET = new Set(Object.values(FOLDERS).flat())
+/** All real component exports from the package (functions starting with a capital,
+ *  excluding the motion-preset constants). */
+const DS_EXPORTS = Object.keys(DS).filter((k) => /^[A-Z]/.test(k) && typeof (DS as any)[k] === 'function' && !k.startsWith('PRELOAD_'))
+const CURATED = new Set(Object.values(FOLDER_MAP).flat())
+const OTHER = DS_EXPORTS.filter((c) => !CURATED.has(c))
+const FOLDERS: Record<string, string[]> = { ...FOLDER_MAP, ...(OTHER.length ? { Other: OTHER } : {}), Icons: [] }
+const DS_SET = new Set([...DS_EXPORTS, ...CURATED])
 const ICONS = [
   'Arrow-down-1', 'Arrow-down', 'Arrow-up-shadow', 'Arrow-up', 'Book', 'Download', 'Email', 'Fast', 'Key', 'Lock',
   'Mail', 'Minus', 'Money', 'Notes', 'Plus', 'Profile-shadow', 'Search', 'Security', 'Source-shadow', 'Source',
