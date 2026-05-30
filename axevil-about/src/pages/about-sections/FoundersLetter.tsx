@@ -60,10 +60,7 @@ export default function FoundersLetter() {
 
           {/* letter column (710px desktop) */}
           <div className="flex flex-col w-full lg:pt-[4.25rem]" style={{ gap: '1.5rem', maxWidth: '44.375rem' }}>
-            <p
-              className="font-inter-tight font-medium text-white"
-              style={{ fontSize: 'clamp(1.25rem, 2.2vw, 1.5rem)', lineHeight: 1.3, letterSpacing: '-0.02em' }}
-            >
+            <p className="font-inter-tight font-medium text-large text-white">
               {FOUNDERS.letter[0]}
             </p>
             <div className="flex flex-col" style={{ gap: '1rem' }}>
