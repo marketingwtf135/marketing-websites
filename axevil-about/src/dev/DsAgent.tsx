@@ -244,7 +244,22 @@ export default function DsAgent() {
   const list = folder === 'Icons' ? [] : FOLDERS[folder].filter((c) => c.toLowerCase().includes(search.toLowerCase()))
   const schema = target ? VARIANT_SCHEMA[target] : undefined
   const activeRect = sel?.rect ?? hover?.rect
-  const pos = activeRect ? { top: Math.min(activeRect.bottom + 8, window.innerHeight - 24), left: Math.min(activeRect.left, window.innerWidth - 320) } : {}
+  // Keep the panel fully inside the viewport: prefer below the element, flip above
+  // if it would overflow the bottom, then clamp so it never crosses top/bottom/sides.
+  const panelRef = useRef<HTMLDivElement | null>(null)
+  const [panelH, setPanelH] = useState(360)
+  useEffect(() => { const h = panelRef.current?.offsetHeight; if (h && Math.abs(h - panelH) > 2) setPanelH(h) })
+  const pos: React.CSSProperties = (() => {
+    if (!activeRect) return {}
+    const M = 12
+    const w = panelRef.current?.offsetWidth ?? Math.min(window.innerWidth * 0.92, 304)
+    const h = Math.min(panelH, window.innerHeight - 2 * M)
+    let left = Math.max(M, Math.min(activeRect.left, window.innerWidth - w - M))
+    let top = activeRect.bottom + 8
+    if (top + h > window.innerHeight - M) top = activeRect.top - 8 - h // not enough room below → flip above
+    top = Math.max(M, Math.min(top, window.innerHeight - h - M))     // final clamp inside viewport
+    return { top, left }
+  })()
   const panelBase: React.CSSProperties = { position: 'fixed', zIndex: 2147483647, width: '19rem', maxWidth: '92vw', maxHeight: '76vh', overflowY: 'auto', background: C.panel, border: `1px solid ${C.border}`, borderRadius: RAD.md, fontFamily: FONT, fontSize: '0.75rem', lineHeight: 1.45, letterSpacing: '-0.01em', color: C.text2, boxShadow: '0 1rem 2.5rem rgba(0,0,0,0.6)', backdropFilter: 'blur(0.75rem)' }
   const label: React.CSSProperties = { color: C.text3, marginBottom: '0.375rem', fontSize: '0.6875rem' }
 
@@ -279,7 +294,7 @@ export default function DsAgent() {
 
       {/* hover token panel */}
       {enabled && !sel && hover && (
-        <div style={{ ...panelBase, pointerEvents: 'none', padding: '0.625rem 0.75rem', ...pos }}>
+        <div ref={panelRef} style={{ ...panelBase, pointerEvents: 'none', padding: '0.625rem 0.75rem', ...pos }}>
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'baseline' }}><span style={{ color: hover.comp === 'none' ? C.text3 : ACCENT, fontWeight: 600 }}>Component: {hover.comp}</span><span style={{ color: C.faint }}>&lt;{hover.tag}&gt;</span></div>
           {hover.rows.map((r) => <Row key={r.label} label={r.label} value={r.value} />)}
           <div style={{ marginTop: '0.5rem', color: C.faint }}>click to comment / pick a DS component →</div>
@@ -288,7 +303,7 @@ export default function DsAgent() {
 
       {/* picker + comment composer */}
       {enabled && sel && (
-        <div style={{ ...panelBase, pointerEvents: 'auto', ...pos }}>
+        <div ref={panelRef} style={{ ...panelBase, pointerEvents: 'auto', ...pos }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.625rem 0.75rem', borderBottom: `1px solid ${C.border}` }}>
             <span style={{ wordBreak: 'break-word' }}>{sel.path.length ? sel.path.map((p, i) => <span key={i}>{i > 0 && <span style={{ color: C.faint }}> › </span>}<span style={{ color: DS_SET.has(p) ? ACCENT : C.text2, fontWeight: DS_SET.has(p) ? 600 : 400 }}>{p}</span></span>) : <span style={{ color: C.faint }}>&lt;{sel.tag}&gt;</span>}</span>
             <button type="button" onClick={close} style={{ background: 'none', border: 'none', color: C.text3, cursor: 'pointer', fontSize: '1rem', flexShrink: 0 }}>✕</button>
