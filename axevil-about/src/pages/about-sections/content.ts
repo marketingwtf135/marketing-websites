@@ -6,7 +6,7 @@ export interface Pillar { num: string; title: string; copy: string }
 export interface DiagramBox { kicker: string; title: string; copy: string }
 export interface LegalMessage { strong: string; rest: string }
 export interface Partner { type: string; title: string; copy: string }
-export interface Founder { name: string; role: string; description: string; photo: string }
+export interface Founder { num: string; name: string; role: string; photo: string }
 export interface Deal { ticker: string; name: string; sector: string; status: 'open' | 'soon'; statusLabel: string; score: string }
 
 export const NAV_LINKS: NavLink[] = [
@@ -141,15 +141,13 @@ export const LEGAL = {
   ] as Partner[],
 }
 
-// 1×1 прозрачный gif — плейсхолдер до реальных фото (показывает фон карточки SliderCard)
-const FOUNDER_PHOTO_PLACEHOLDER = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-
 export const FOUNDERS = {
   eyebrow: 'Письмо от основателей',
-  title: 'Почему мы делаем Axevil',
+  title: 'Почему мы\nделаем Axevil',
+  // Order + content per Figma 1426:5382 (01 Александр, 02 Тарас)
   people: [
-    { name: 'Тарас Чумаченко',  role: 'Co-founder · Managing Partner', description: 'Ранее: Societe Generale', photo: FOUNDER_PHOTO_PLACEHOLDER },
-    { name: 'Александр Иванов', role: 'Co-founder · Managing Partner', description: 'Ранее: Финам · Открытие · БКС', photo: FOUNDER_PHOTO_PLACEHOLDER },
+    { num: '01', name: 'Александр Иванов', role: 'Co-founder & Managing Partner', photo: '/img/alexander-photo.png' },
+    { num: '02', name: 'Тарас Чумаченко',  role: 'Co-founder & Managing Partner', photo: '/img/taras-photo.png' },
   ] as Founder[],
   letter: [
     'Мы запустили Axevil в 2020 году, потому что видели разрыв между тем, как устроен частный рынок сегодня, и тем, как он должен быть устроен для частного инвестора.',

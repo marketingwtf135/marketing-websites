@@ -1,130 +1,86 @@
-import { SectionHeading, SliderCard } from '@axevil/design-system/components'
+import { DescTag } from '@axevil/design-system/components'
 import { FOUNDERS } from './content'
 
 /**
- * Founders Letter — Block 7.0 (rebuilt from scratch on the design system).
+ * Founders Letter — Block 7.0 — rebuilt 1:1 from Figma 1426:5382.
  *
- * Composition:
- *   1. SectionHeading (eyebrow 7.0 + gradient h2), centered.
- *   2. Two DS <SliderCard/> founders side-by-side — the visual anchor.
- *   3. The letter below as a centered editorial column: an oversized green quote
- *      mark, the paragraphs, then signatures separated by a hairline.
- *
- * All tokens from the DS (Inter Tight, --status-open accent, gradient headline,
- * surface/border tokens, rem spacing). Responsive: founders 1-col on mobile.
+ * Layout:
+ *   · wrapper: heading-text (eyebrow + gradient h2) ←→ letter column (710px).
+ *   · cards-wrapper: two horizontal person-cards (text left + 240² photo right).
+ * Desktop = two columns / two cards in a row; tablet & mobile stack.
+ * Fully fluid (rem + clamp); all values from the DS token scale.
  */
+
+function PersonCard({ num, name, role, photo }: { num: string; name: string; role: string; photo: string }) {
+  return (
+    <div
+      className="flex items-center justify-between bg-black-400 w-full"
+      style={{ borderRadius: '0.75rem', padding: '0.25rem', gap: '0.75rem' }}
+    >
+      {/* text */}
+      <div className="flex flex-col justify-between self-stretch" style={{ padding: '0.75rem', gap: '1rem' }}>
+        <span className="font-inter-tight font-medium text-s-med" style={{ color: 'var(--black-800)' }}>{num}</span>
+        <div className="flex flex-col" style={{ gap: '0.25rem' }}>
+          <span className="font-inter-tight font-medium text-xl text-white" style={{ lineHeight: 1.3 }}>{name}</span>
+          <span className="font-inter-tight font-medium text-m" style={{ color: 'var(--white-300)' }}>{role}</span>
+        </div>
+      </div>
+      {/* photo 240² → fluid square, gradient base + overlay texture */}
+      <div
+        className="relative shrink-0 overflow-hidden"
+        style={{ width: 'clamp(8rem, 18vw, 15rem)', height: 'clamp(8rem, 18vw, 15rem)', borderRadius: '0.5rem' }}
+      >
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #484b4e 0%, #1d1f20 42.5%, #080808 85%)' }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: 'url(/img/founders-overlay.png)', backgroundSize: 'cover', backgroundPosition: 'top left', mixBlendMode: 'overlay' }} />
+        <img src={photo} alt={name} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+      </div>
+    </div>
+  )
+}
+
 export default function FoundersLetter() {
   return (
     <section id="founders" className="relative w-full bg-page-bg padding-section-t6-b6">
       <div
         className="mx-auto w-full max-w-content container-px flex flex-col items-center"
-        style={{ gap: 'clamp(2.5rem, 5vw, 4rem)' }}
+        style={{ gap: 'clamp(2.5rem, 4vw, 3rem)' }}
       >
-        {/* 1 — heading */}
-        <div style={{ maxWidth: '50rem' }}>
-          <SectionHeading
-            number="7.0"
-            label={FOUNDERS.eyebrow}
-            title={FOUNDERS.title}
-            align="center"
-            gap="1.5rem"
-          />
+        {/* wrapper: heading ←→ letter */}
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between w-full" style={{ gap: 'clamp(2rem, 4vw, 3.75rem)' }}>
+          {/* heading-text */}
+          <div className="flex flex-col items-start shrink-0" style={{ gap: '2rem' }}>
+            <DescTag number="7.0" label={FOUNDERS.eyebrow} />
+            <h2
+              className="font-inter-tight font-semibold text-h2 text-transparent gradient-text whitespace-pre-line"
+              style={{ backgroundImage: 'var(--gradient-headline)' }}
+            >
+              {FOUNDERS.title}
+            </h2>
+          </div>
+
+          {/* letter column (710px desktop) */}
+          <div className="flex flex-col w-full lg:pt-[4.25rem]" style={{ gap: '1.5rem', maxWidth: '44.375rem' }}>
+            <p
+              className="font-inter-tight font-medium text-white"
+              style={{ fontSize: 'clamp(1.25rem, 2.2vw, 1.5rem)', lineHeight: 1.3, letterSpacing: '-0.02em' }}
+            >
+              {FOUNDERS.letter[0]}
+            </p>
+            <div className="flex flex-col" style={{ gap: '1rem' }}>
+              {FOUNDERS.letter.slice(1).map((para, i) => (
+                <p key={i} className="font-inter-tight font-medium text-m" style={{ color: 'var(--white-300)', lineHeight: 1.4 }}>
+                  {para}
+                </p>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* 2 — founders as DS SliderCards, side by side */}
-        <div
-          className="grid grid-cols-1 sm:grid-cols-2 w-full"
-          style={{ gap: 'clamp(1rem, 2.5vw, 2rem)', maxWidth: '52rem' }}
-        >
+        {/* cards-wrapper: two person cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 w-full" style={{ gap: '1rem' }}>
           {FOUNDERS.people.map((p) => (
-            <SliderCard
-              key={p.name}
-              name={p.name}
-              role={p.role}
-              description={p.description}
-              photo={p.photo}
-              className="w-full"
-            />
+            <PersonCard key={p.name} num={p.num} name={p.name} role={p.role} photo={p.photo} />
           ))}
-        </div>
-
-        {/* 3 — letter as a centered editorial column inside a DS surface card */}
-        <div
-          className="relative w-full flex flex-col items-center text-center overflow-hidden"
-          style={{
-            maxWidth: '52rem',
-            borderRadius: '2rem',
-            border: '1px solid var(--border-subtle)',
-            borderTop: '1px solid var(--status-open)',
-            background: [
-              'radial-gradient(ellipse 60% 45% at 50% 0%, rgba(77,186,121,0.08), transparent 60%)',
-              'var(--black-300)',
-            ].join(', '),
-            padding: 'clamp(2rem, 4.5vw, 3.5rem)',
-            gap: '1.5rem',
-          }}
-        >
-          {/* Oversized opening quote */}
-          <span
-            aria-hidden="true"
-            className="font-inter-tight font-semibold select-none pointer-events-none"
-            style={{
-              fontSize: 'clamp(4rem, 9vw, 6.5rem)',
-              lineHeight: 0.8,
-              color: 'var(--status-open)',
-              opacity: 0.18,
-              letterSpacing: '-0.04em',
-            }}
-          >
-            «
-          </span>
-
-          {/* Paragraphs — first one larger as an editorial lead */}
-          <div className="flex flex-col" style={{ gap: '1.125rem' }}>
-            {FOUNDERS.letter.map((para, i) => (
-              <p
-                key={i}
-                className="font-inter-tight font-medium"
-                style={{
-                  color: i === 0 ? 'var(--white-100)' : 'rgba(255,255,255,0.6)',
-                  fontSize: i === 0 ? 'clamp(1.125rem, 2vw, 1.5rem)' : 'var(--font-l)',
-                  lineHeight: i === 0 ? 1.4 : 1.6,
-                  letterSpacing: '-0.02em',
-                }}
-              >
-                {para}
-              </p>
-            ))}
-          </div>
-
-          {/* Signatures */}
-          <div
-            className="flex flex-wrap justify-center w-full"
-            style={{
-              gap: '2.5rem',
-              marginTop: '0.5rem',
-              paddingTop: '1.75rem',
-              borderTop: '1px solid var(--border-subtle)',
-            }}
-          >
-            {FOUNDERS.signatures.map((s) => (
-              <div key={s.name} className="flex flex-col items-center" style={{ gap: '0.375rem' }}>
-                <span
-                  aria-hidden="true"
-                  style={{ height: '1px', width: '2.5rem', background: 'var(--status-open)', opacity: 0.7, marginBottom: '0.5rem' }}
-                />
-                <strong
-                  className="font-inter-tight font-semibold text-white"
-                  style={{ fontSize: '0.9375rem', letterSpacing: '-0.01em' }}
-                >
-                  {s.name}
-                </strong>
-                <span className="font-inter-tight font-medium text-xs" style={{ color: 'var(--white-400)' }}>
-                  {s.role}
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
