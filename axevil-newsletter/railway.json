@@ -6,7 +6,6 @@
   },
   "deploy": {
     "startCommand": "node server.js",
-    "runtime": "NODE",
     "healthcheckPath": "/pdf/pre-ipo-insider/"
   }
 }
