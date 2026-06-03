@@ -24,8 +24,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Phone validation (self-hosted libphonenumber-js, min metadata — same as the June 4 landing) -->
-  <script src="/vendor/libphonenumber-min.js" defer></script>
+  <!-- Phone field: prebuilt react-international-phone island (flags, full country list,
+       auto-formatting, libphonenumber-js validation) — identical to the June 4 landing -->
+  <link rel="stylesheet" href="/vendor/prometheus-phone.css">
+  <script src="/vendor/prometheus-phone.js" defer></script>
   <style>
     /* AXEVIL Design System tokens (same as React build) */
     :root {
@@ -798,42 +800,11 @@
             <input class="reg-input" type="email" id="rf-email" name="email" placeholder="Email" autocomplete="email" inputmode="email" />
             <p class="reg-error" id="err-email"></p>
 
-            <div class="phone-row" id="phone-row">
-              <label class="phone-country">
-                <span class="phone-flag" id="ph-flag">🇺🇸</span>
-                <span id="ph-dial">+1</span>
-                <svg class="phone-chev" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
-                  <path d="M1 1l4 4 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                <select id="rf-country" aria-label="Код страны" onchange="
-                  var opt = this.options[this.selectedIndex];
-                  document.getElementById('ph-flag').textContent = opt.dataset.flag;
-                  document.getElementById('ph-dial').textContent = opt.dataset.dial;
-                ">
-                  <option value="US" data-flag="🇺🇸" data-dial="+1" selected>🇺🇸 US +1</option>
-                  <option value="RU" data-flag="🇷🇺" data-dial="+7">🇷🇺 RU +7</option>
-                  <option value="KZ" data-flag="🇰🇿" data-dial="+7">🇰🇿 KZ +7</option>
-                  <option value="BY" data-flag="🇧🇾" data-dial="+375">🇧🇾 BY +375</option>
-                  <option value="UA" data-flag="🇺🇦" data-dial="+380">🇺🇦 UA +380</option>
-                  <option value="GE" data-flag="🇬🇪" data-dial="+995">🇬🇪 GE +995</option>
-                  <option value="AM" data-flag="🇦🇲" data-dial="+374">🇦🇲 AM +374</option>
-                  <option value="AZ" data-flag="🇦🇿" data-dial="+994">🇦🇿 AZ +994</option>
-                  <option value="AE" data-flag="🇦🇪" data-dial="+971">🇦🇪 AE +971</option>
-                  <option value="GB" data-flag="🇬🇧" data-dial="+44">🇬🇧 GB +44</option>
-                  <option value="DE" data-flag="🇩🇪" data-dial="+49">🇩🇪 DE +49</option>
-                  <option value="FR" data-flag="🇫🇷" data-dial="+33">🇫🇷 FR +33</option>
-                  <option value="ES" data-flag="🇪🇸" data-dial="+34">🇪🇸 ES +34</option>
-                  <option value="IT" data-flag="🇮🇹" data-dial="+39">🇮🇹 IT +39</option>
-                  <option value="PL" data-flag="🇵🇱" data-dial="+48">🇵🇱 PL +48</option>
-                  <option value="TR" data-flag="🇹🇷" data-dial="+90">🇹🇷 TR +90</option>
-                  <option value="CY" data-flag="🇨🇾" data-dial="+357">🇨🇾 CY +357</option>
-                  <option value="CH" data-flag="🇨🇭" data-dial="+41">🇨🇭 CH +41</option>
-                  <option value="NL" data-flag="🇳🇱" data-dial="+31">🇳🇱 NL +31</option>
-                  <option value="PT" data-flag="🇵🇹" data-dial="+351">🇵🇹 PT +351</option>
-                </select>
-              </label>
-              <input class="phone-input" type="tel" id="rf-phone" name="phone" autocomplete="tel" inputmode="tel" />
-            </div>
+            <!-- Phone field: same react-international-phone widget as the June 4 landing,
+                 mounted here as a prebuilt island. Hidden inputs below mirror its value. -->
+            <div id="rf-phone-mount" class="rf-phone-mount"></div>
+            <input type="hidden" id="rf-phone" name="phone" />
+            <input type="hidden" id="rf-country" name="phone_country" value="ru" />
             <p class="reg-error" id="err-phone"></p>
 
             <button class="reg-submit" type="submit" id="rf-submit"><span id="rf-submit-label">Зарегистрироваться</span></button>
@@ -1233,41 +1204,26 @@
     var emailEl = document.getElementById('rf-email');
     var countryEl = document.getElementById('rf-country');
     var phoneEl = document.getElementById('rf-phone');
-    var phoneRow = document.getElementById('phone-row');
+    var phoneMount = document.getElementById('rf-phone-mount');
     var submitEl = document.getElementById('rf-submit');
     var submitLabel = document.getElementById('rf-submit-label');
 
     // ── Validation ───────────────────────────────────────────────────────
     var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     var NAME_RE = /^\p{L}+(?:\s+\p{L}+)*$/u;
-    function dialDigits() {
-      var o = countryEl.options[countryEl.selectedIndex];
-      return ((o && o.dataset.dial) || '+1').replace(/\D/g, '');
-    }
-    function nationalDigits() { return phoneEl.value.replace(/\D/g, ''); }
-    function e164() { return '+' + dialDigits() + nationalDigits(); }
-    // Same validation engine as the June 4 landing (libphonenumber-js, min metadata).
-    // Falls back to a length heuristic only if the bundle failed to load.
-    function isValidPhone() {
-      var lpn = window.libphonenumber;
-      if (lpn && typeof lpn.isValidPhoneNumber === 'function') {
-        try { return lpn.isValidPhoneNumber(e164()); } catch (e) { return false; }
-      }
-      var nd = nationalDigits();
-      return nd.length >= 6 && (dialDigits() + nd).length <= 15;
-    }
+    // The phone field is the react-international-phone island (window.RIPhone),
+    // which mirrors its value into the hidden #rf-phone / #rf-country inputs and
+    // owns formatting + libphonenumber-js validation. These helpers read from it,
+    // falling back to the hidden input only if the island hasn't loaded.
+    function phoneReady() { return !!(window.RIPhone && window.RIPhone.ready); }
+    function phoneValue() { return phoneReady() ? window.RIPhone.value() : (phoneEl.value || ''); }
+    function phoneEmpty() { return phoneReady() ? window.RIPhone.isEmpty() : !phoneEl.value; }
+    function phoneCountry() { return phoneReady() ? window.RIPhone.iso2() : ((countryEl.value || '').toLowerCase()); }
+    function isValidPhone() { return phoneReady() ? window.RIPhone.isValid() : (phoneEl.value.replace(/\D/g, '').length >= 8); }
     // Telegram pairing token = E.164 digits without '+' (mirrors June 4's getTelegramPhoneToken).
     function telegramPhoneToken() {
-      var digits = dialDigits() + nationalDigits();
-      if (!nationalDigits()) return '';
-      var lpn = window.libphonenumber;
-      if (lpn && typeof lpn.parsePhoneNumber === 'function') {
-        try {
-          var parsed = lpn.parsePhoneNumber(e164());
-          if (parsed && parsed.isValid()) return parsed.number.replace('+', '');
-        } catch (e) {}
-      }
-      return digits;
+      if (phoneReady()) return window.RIPhone.tokenDigits();
+      return phoneEl.value.replace(/\D/g, '');
     }
     function setError(id, msg) {
       var p = document.getElementById(id);
@@ -1281,14 +1237,16 @@
       var em = emailEl.value.trim();
       if (!em) errs.email = 'Обязательное поле';
       else if (!EMAIL_RE.test(em)) errs.email = 'Некорректный email';
-      if (!nationalDigits()) errs.phone = 'Обязательное поле';
+      if (phoneEmpty()) errs.phone = 'Обязательное поле';
       else if (!isValidPhone()) errs.phone = 'Некорректный номер для выбранной страны';
       return errs;
     }
     function showErrors(errs) {
       setError('err-name', errs.name); nameEl.classList.toggle('invalid', !!errs.name);
       setError('err-email', errs.email); emailEl.classList.toggle('invalid', !!errs.email);
-      setError('err-phone', errs.phone); phoneRow.classList.toggle('invalid', !!errs.phone);
+      setError('err-phone', errs.phone);
+      if (phoneReady()) window.RIPhone.setError(!!errs.phone);
+      if (phoneMount) phoneMount.classList.toggle('invalid', !!errs.phone);
     }
 
     // ── form_view / form_start events ────────────────────────────────────
@@ -1302,18 +1260,14 @@
       io.observe(form);
     }
     var started = false, attempted = false;
-    form.addEventListener('input', function () { if (!started) { started = true; push('form_start'); } });
-    [nameEl, emailEl, phoneEl].forEach(function (el) {
-      el.addEventListener('input', function () { if (attempted) showErrors(validate()); });
+    // Single form-level listener: the phone island dispatches a bubbling 'input'
+    // on the hidden #rf-phone, so this covers name/email/phone for both events.
+    form.addEventListener('input', function () {
+      if (!started) { started = true; push('form_start'); }
+      if (attempted) showErrors(validate());
     });
-    countryEl.addEventListener('change', function () { if (attempted) showErrors(validate()); });
 
-    function resetCountryDisplay() {
-      var o = countryEl.options[countryEl.selectedIndex];
-      var flag = document.getElementById('ph-flag'), dl = document.getElementById('ph-dial');
-      if (o && flag) flag.textContent = o.dataset.flag;
-      if (o && dl) dl.textContent = o.dataset.dial;
-    }
+    function resetPhone() { if (phoneReady()) window.RIPhone.reset(); }
 
     // ── Submit ───────────────────────────────────────────────────────────
     var pending = false;
@@ -1335,13 +1289,13 @@
       var leadId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : (String(Date.now()) + Math.random().toString(16).slice(2));
       var tc = trackingContext();
       var utm = utmParams();
-      var phone = e164();
+      var phone = phoneValue();
       var payload = { data: {
         id: leadId,
         name: nameEl.value.trim(),
         email: emailEl.value.trim(),
         phone: phone,
-        phone_country: (countryEl.value || '').toLowerCase(),
+        phone_country: phoneCountry(),
         company: '', role: '', telegram_username: '',
         'job title': '', 'lead profile (about)': '',
         page: PAGE_SLUG,
@@ -1378,7 +1332,7 @@
           var token = telegramPhoneToken();
           openSuccess(token ? (TG_BASE + '?start=' + TG_START_PREFIX + token) : TG_BASE);
           form.reset();
-          resetCountryDisplay();
+          resetPhone();
           started = false; attempted = false; showErrors({});
         })
         .catch(function (err) {
