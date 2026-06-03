@@ -1,0 +1,1442 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Prometheus — AI Джеффа Безоса для физической экономики · Axevil Capital</title>
+  <meta name="description" content="Закрытая Zoom-встреча Axevil Capital 9 июня: инвестиционный кейс Project Prometheus — AI для физической экономики от основателя Amazon и Blue Origin." />
+  <meta property="og:title" content="Project Prometheus — AI Джеффа Безоса для физической экономики" />
+  <meta property="og:description" content="Закрытая Zoom-встреча Axevil Capital 9 июня: инвестиционный кейс Project Prometheus — AI для физической экономики." />
+  <meta property="og:image" content="/opengraph.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="/opengraph.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-K8LRWKPS');</script>
+  <!-- End Google Tag Manager -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Phone validation (self-hosted libphonenumber-js, min metadata — same as the June 4 landing) -->
+  <script src="/vendor/libphonenumber-min.js" defer></script>
+  <style>
+    /* AXEVIL Design System tokens (same as React build) */
+    :root {
+      --white-100:#ffffff; --neutral-30:#b7b7b7; --neutral-35:#8f8f8f; --neutral-40:#717171;
+      --black-100:#000000; --black-200:#060606; --black-300:#111111; --black-400:#151515; --black-500:#1a1a1a;
+      --bg-100:#080808; --nav-bg:#0a0a0a; --nav-border:#171717;
+      --surface-0:#141414;
+      --accent-blue:#546fef; --accent-teal:#175e6e; --lime-accent:#F5FD5A;
+      --status-open:#4dba79;
+      --font-xs:0.75rem; --font-s:0.875rem; --font-m:1rem; --font-l:1.125rem; --font-xl:1.25rem;
+      --acc-gradient: linear-gradient(94deg, #A2A2A2 8.73%, #FFF 50.65%, #A2A2A2 92.57%);
+    }
+    *, *:before, *:after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-y: scroll; }
+    body {
+      margin: 0;
+      background: var(--bg-100);
+      color: #fff;
+      font-family: 'Inter Tight', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    .text-grad {
+      background: var(--acc-gradient);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .wrap-1440 {
+      width: 100%; max-width: 1440px; margin: 0 auto;
+      padding-left: 1.25rem; padding-right: 1.25rem;
+    }
+    .wrap-90 {
+      width: 100%; max-width: 90rem; margin: 0 auto;
+      padding-left: 1.25rem; padding-right: 1.25rem;
+    }
+    @media (min-width: 48rem) {
+      .wrap-1440, .wrap-90 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    @media (min-width: 90rem) {
+      .wrap-1440, .wrap-90 { padding-left: 0; padding-right: 0; }
+    }
+
+    /* Nav */
+    nav.topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      height: 4rem;
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--nav-border);
+    }
+    nav.topnav .inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 100%;
+    }
+    .logo-svg { display: block; width: 110px; height: 17px; }
+    /* Section pill-links (desktop only) */
+    .nav-links { display: none; align-items: center; gap: 0.25rem; }
+    @media (min-width: 64rem) { .nav-links { display: flex; } }
+    .nav-link {
+      height: 2.25rem; padding: 0 1rem;
+      border-radius: 999px;
+      font-family: inherit; font-weight: 500; font-size: var(--font-s);
+      color: rgba(255,255,255,0.5);
+      background: transparent;
+      border: none; cursor: pointer;
+      transition: color 150ms, background-color 150ms;
+    }
+    .nav-link:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .nav-link.active { color: #fff; background: #1a1a1a; }
+    /* Right side */
+    .nav-right { display: flex; align-items: center; gap: 0.5rem; }
+    .btn-cta-nav {
+      display: none;
+      align-items: center; justify-content: center;
+      background: #fff; color: var(--black-200);
+      font-weight: 600; font-size: var(--font-s);
+      height: 2.25rem; padding: 0 1.25rem;
+      border-radius: 1rem;
+      transition: transform 200ms;
+    }
+    @media (min-width: 36rem) { .btn-cta-nav { display: inline-flex; } }
+    .btn-cta-nav:hover { transform: scale(1.02); }
+    /* Hamburger */
+    .hamburger {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      width: 2.75rem; height: 2.75rem; border-radius: 999px;
+      gap: 0.3125rem;
+      background: transparent; border: none; cursor: pointer;
+      transition: background-color 150ms;
+    }
+    @media (min-width: 64rem) { .hamburger { display: none; } }
+    .hamburger:hover { background: rgba(255,255,255,0.05); }
+    .hamburger span {
+      display: block; width: 1.25rem; height: 2px; background: #fff;
+      transition: transform 200ms;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(3.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { transform: translateY(-3.5px) rotate(-45deg); }
+    /* Mobile drawer */
+    .mobile-menu {
+      position: fixed; top: 4rem; left: 0; right: 0; z-index: 40;
+      display: none; flex-direction: column;
+      padding: 0.5rem 0;
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--nav-border);
+      opacity: 0; transform: translateY(-1rem);
+      transition: opacity 200ms, transform 200ms;
+    }
+    .mobile-menu.open {
+      display: flex; opacity: 1; transform: translateY(0);
+    }
+    @media (min-width: 64rem) { .mobile-menu { display: none !important; } }
+    .mobile-link {
+      width: 100%; text-align: left;
+      padding: 0.75rem 1.25rem;
+      font-family: inherit; font-weight: 500; font-size: var(--font-m);
+      color: rgba(255,255,255,0.7);
+      background: transparent; border: none; cursor: pointer;
+      transition: color 150ms, background-color 150ms;
+    }
+    .mobile-link:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .mobile-cta-wrap { padding: 0.75rem 1.25rem; }
+    .mobile-cta {
+      display: flex; align-items: center; justify-content: center; width: 100%;
+      height: 2.75rem; border-radius: 1rem;
+      background: #fff; color: var(--black-200);
+      font-weight: 600; font-size: var(--font-s);
+      text-decoration: none;
+    }
+    .nav-spacer { height: 4rem; }
+
+    /* Hero */
+    section.hero {
+      position: relative;
+      min-height: calc(100svh - 4rem);
+      display: flex; flex-direction: column;
+      overflow: clip;
+    }
+    .hero-bg-video {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: left center;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-bg-img {
+      position: absolute; top: 0; right: 0;
+      width: 65%; height: 100%;
+      object-fit: cover; object-position: right center;
+      pointer-events: none; user-select: none;
+      z-index: 1;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 25%, #000 55%);
+              mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 25%, #000 55%);
+    }
+    .hero-fade {
+      position: absolute; inset: 0; pointer-events: none;
+      z-index: 2;
+      background: linear-gradient(to right,
+        rgba(8,8,8,0.55) 0%, rgba(8,8,8,0.25) 30%, transparent 60%);
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      flex: 1;
+      display: flex; align-items: center;
+      padding-top: 2rem; padding-bottom: 2rem;
+    }
+    .hero-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2.5rem;
+      align-items: center;
+    }
+    @media (min-width: 64rem) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 3rem;
+      }
+    }
+    .hero-left {
+      display: flex; flex-direction: column; align-items: flex-start;
+      gap: 1.5rem; min-width: 0;
+    }
+
+    /* Badge with green dot */
+    .badge {
+      display: inline-flex; align-items: center;
+      gap: 0.5rem;
+      padding: 0.375rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.6);
+      font-weight: 500; font-size: var(--font-s);
+      letter-spacing: 0.04em;
+    }
+    .badge-dot {
+      width: 0.625rem; height: 0.625rem; border-radius: 999px;
+      background: var(--status-open);
+      box-shadow: 0 0 6px var(--status-open), 0 0 12px rgba(77,186,121,0.5);
+      flex-shrink: 0;
+    }
+
+    /* Hero text */
+    .hero-text { display: flex; flex-direction: column; gap: 1.25rem; width: 100%; }
+    h1 {
+      margin: 0;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 55rem;
+    }
+    .hero-sub {
+      margin: 0;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.4;
+      font-size: clamp(1rem, 1.4vw, 1.125rem);
+      max-width: 37.5rem;
+    }
+
+    /* Hero card (right column) */
+    .hero-card {
+      width: 100%;
+      max-width: 27rem;
+      display: flex; flex-direction: column;
+      gap: 1.25rem;
+      background: rgba(6,6,6,0.88);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 1.5rem;
+      padding: clamp(1.75rem, 2.4vw, 2.25rem);
+      box-shadow: 0 28px 56px -16px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.015) inset;
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    }
+    .hero-card h2 {
+      margin: 0; text-align: center;
+      font-weight: 600; color: #fff;
+      font-size: clamp(1.5rem, 2.2vw, 1.75rem);
+      line-height: 1.15; letter-spacing: -0.02em;
+    }
+    .hero-card-sub {
+      margin: 0; text-align: center;
+      font-weight: 500; color: rgba(255,255,255,0.55);
+      font-size: var(--font-s); line-height: 1.45;
+    }
+    /* Registration form */
+    .reg-form { display: flex; flex-direction: column; gap: 0.625rem; }
+    .reg-input {
+      width: 100%;
+      min-height: 3.5rem;
+      padding: 0 1.25rem;
+      background: rgba(20,20,20,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1rem;
+      color: #fff;
+      font-family: inherit;
+      font-weight: 500;
+      font-size: var(--font-m);
+      outline: none;
+      transition: border-color 120ms, box-shadow 120ms;
+    }
+    .reg-input::placeholder { color: rgba(255,255,255,0.5); }
+    .reg-input:focus {
+      border-color: rgba(255,255,255,0.35);
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.18);
+    }
+    .phone-row {
+      display: flex; align-items: stretch;
+      min-height: 3.5rem;
+      background: rgba(20,20,20,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+    .phone-row:focus-within {
+      border-color: rgba(255,255,255,0.35);
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.18);
+    }
+    .phone-country {
+      position: relative;
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0 0.875rem 0 1rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      color: #fff; font-weight: 500; font-size: var(--font-m);
+      cursor: pointer;
+    }
+    .phone-country select {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; background: transparent;
+      color: #fff; border: none;
+    }
+    .phone-country select option { background: #1a1a1a; color: #fff; }
+    .phone-flag { font-size: 1.125rem; line-height: 1; }
+    .phone-chev { margin-left: 0.25rem; opacity: 0.5; }
+    .phone-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 0 1rem;
+      color: #fff; font-family: inherit; font-weight: 500; font-size: var(--font-m);
+      outline: none;
+    }
+    .reg-submit {
+      display: flex; align-items: center; justify-content: center; gap: 0.625rem;
+      width: 100%;
+      background: #fff; color: var(--black-200);
+      font-weight: 600; font-size: var(--font-l); letter-spacing: -0.01em;
+      height: 3.5rem; border-radius: 1rem; border: none; cursor: pointer;
+      margin-top: 0.25rem;
+      font-family: inherit;
+      transition: transform 200ms;
+    }
+    .reg-submit:hover { transform: scale(1.01); }
+    .reg-submit::before {
+      content: ''; width: 0.5rem; height: 0.5rem;
+      border-radius: 999px; background: var(--black-200); display: inline-block;
+    }
+    .reg-disclaimer {
+      margin: 0.5rem 0 0; text-align: center;
+      font-weight: 500; font-size: var(--font-xs);
+      line-height: 1.55;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* Generic section */
+    .section { position: relative; }
+    .section-inner {
+      padding-top: clamp(3rem, 6vw, 5rem);
+      padding-bottom: clamp(3rem, 6vw, 5rem);
+    }
+    .section-head { display: flex; flex-direction: column; gap: 0.75rem; }
+    .kicker {
+      font-weight: 500; font-size: var(--font-s);
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--neutral-40);
+    }
+    h2.section-h {
+      margin: 0; font-weight: 600;
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      line-height: 1; letter-spacing: -0.03em;
+    }
+
+    /* Why Now — timeline-style (axevil/about-us layout) */
+    .wn-head { display: flex; flex-direction: column; align-items: center; text-align: center; margin: 0 auto; gap: 1.5rem; max-width: 56rem; }
+    .wn-kicker {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-weight: 500; font-size: var(--font-s);
+      color: rgba(255,255,255,0.45);
+    }
+    .wn-kicker .num { opacity: 0.6; }
+    h2.wn-h {
+      margin: 0; font-weight: 600;
+      font-size: clamp(2.25rem, 5.5vw, 4.5rem);
+      line-height: 1.05; letter-spacing: -0.03em;
+    }
+    .wn-sub {
+      margin: 0; font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      font-size: clamp(1rem, 1.3vw, 1.125rem);
+      line-height: 1.5; max-width: 40rem;
+    }
+    .wn-timeline {
+      position: relative; margin: clamp(3rem, 6vw, 5rem) auto 0;
+    }
+    .wn-line {
+      position: absolute; left: 0; right: 0; top: 0.625rem; height: 1px;
+      background: rgba(255,255,255,0.12); pointer-events: none;
+    }
+    .wn-dots {
+      position: relative;
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: clamp(1.5rem, 3vw, 3rem);
+    }
+    .wn-dot {
+      position: relative;
+      width: 1.25rem; height: 1.25rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.45);
+      background: var(--bg-100);
+      display: grid; place-items: center;
+      transition: border-color 200ms;
+      cursor: default;
+    }
+    .wn-dot::after {
+      content: '';
+      width: 0.4375rem; height: 0.4375rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.85);
+      transition: background-color 200ms, box-shadow 200ms;
+    }
+    .wn-dot:hover { border-color: #7fe3e6; }
+    .wn-dot:hover::after {
+      background: #7fe3e6;
+      box-shadow: 0 0 6px rgba(127,227,230,0.55), 0 0 12px rgba(127,227,230,0.35);
+    }
+    .wn-cols {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: clamp(1.5rem, 3vw, 3rem);
+      row-gap: 2.5rem;
+      margin-top: 2rem;
+    }
+    .wn-col {
+      display: flex; flex-direction: column; gap: 0.875rem;
+      min-height: 18rem;
+    }
+    .wn-num {
+      margin: 0; font-weight: 600; color: #fff;
+      font-size: clamp(1.75rem, 2.8vw, 2.25rem);
+      line-height: 1.05; letter-spacing: -0.03em;
+    }
+    .wn-title {
+      margin: 0; font-weight: 600; color: #fff;
+      font-size: var(--font-l); line-height: 1.25; letter-spacing: -0.015em;
+    }
+    .wn-body {
+      margin: 0; font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      font-size: var(--font-s); line-height: 1.5;
+    }
+    .wn-index {
+      margin-top: auto; padding-top: 1.5rem;
+      font-weight: 500; color: rgba(255,255,255,0.25);
+      font-size: var(--font-l); letter-spacing: -0.01em;
+    }
+    @media (max-width: 64rem) {
+      .wn-dots, .wn-cols { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+      .wn-line { display: none; }
+    }
+    @media (max-width: 36rem) {
+      .wn-dots, .wn-cols { grid-template-columns: 1fr !important; }
+    }
+
+    /* Why Prometheus — same centered head as Why Now */
+    .wp-head { display: flex; flex-direction: column; align-items: center; text-align: center; margin: 0 auto; gap: 1.5rem; max-width: 56rem; }
+    /* 2x2 features grid with equal-height cards (grid-auto-rows: 1fr) */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
+      gap: 1rem;
+      margin-top: clamp(3rem, 6vw, 5rem);
+    }
+    .feature {
+      display: flex; flex-direction: column; gap: 1rem;
+      padding: clamp(1.75rem, 2.5vw, 2.5rem);
+      border-radius: 1.5rem; background: var(--black-300);
+      border: 1px solid rgba(255,255,255,0.05);
+      height: 100%;
+    }
+    .feature h3 {
+      margin: 0; font-weight: 600;
+      font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+      line-height: 1.2; letter-spacing: -0.015em;
+    }
+    .feature p {
+      margin: 0; font-weight: 500;
+      font-size: var(--font-m); line-height: 1.5;
+      color: rgba(255,255,255,0.55);
+    }
+    @media (max-width: 45rem) {
+      .features { grid-template-columns: 1fr; grid-auto-rows: auto; }
+    }
+
+    /* Agenda — centered head, icons instead of numbers, gear bg shaded */
+    .agenda-section { position: relative; overflow: clip; }
+    .agenda-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: right center;
+      opacity: 0.18; filter: blur(2px);
+      pointer-events: none; user-select: none;
+      z-index: 0;
+    }
+    .agenda-vignette {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: radial-gradient(60% 70% at 50% 50%, rgba(8,8,8,0.4), rgba(8,8,8,0.92) 90%);
+    }
+    .agenda-body { position: relative; z-index: 2; }
+    .agenda { display: grid; gap: 0.75rem; margin: clamp(3rem, 6vw, 5rem) auto 0; max-width: 60rem; }
+    .agenda-row {
+      display: grid; grid-template-columns: 3rem 1fr;
+      gap: 1.5rem; align-items: center;
+      padding: 1.25rem 1.5rem;
+      border-radius: 1.25rem;
+      background: rgba(17,17,17,0.7);
+      border: 1px solid rgba(255,255,255,0.05);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .agenda-ico {
+      width: 2.75rem; height: 2.75rem; border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.9);
+      display: grid; place-items: center;
+    }
+    .agenda-ico svg { width: 1.375rem; height: 1.375rem; }
+    .agenda-row p {
+      margin: 0; font-weight: 500;
+      font-size: clamp(1rem, 1.4vw, 1.125rem);
+      line-height: 1.5; color: rgba(255,255,255,0.9);
+    }
+
+    /* Final CTA — centered, animated cyan edge-glow bg from section-registration.jpg */
+    .final-section { position: relative; overflow: hidden; background: #000; }
+    .final-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      will-change: transform, opacity;
+      z-index: 0;
+    }
+    .final-bg-a { animation: final-breathe-a 16s ease-in-out infinite alternate; }
+    .final-bg-b {
+      opacity: 0.55; transform: scaleX(-1);
+      mix-blend-mode: screen;
+      animation: final-breathe-b 22s ease-in-out infinite alternate -8s;
+    }
+    @keyframes final-breathe-a {
+      0%   { transform: scale(1)    translate(0%, 0%); }
+      50%  { transform: scale(1.06) translate(-1.5%, 0.8%); }
+      100% { transform: scale(1.03) translate(1%, -0.6%); }
+    }
+    @keyframes final-breathe-b {
+      0%   { transform: scaleX(-1) scale(1.04) translate(1%, -0.5%); opacity: 0.4; }
+      50%  { transform: scaleX(-1) scale(1.08) translate(-1%, 0.8%); opacity: 0.65; }
+      100% { transform: scaleX(-1) scale(1.02) translate(0.5%, -0.3%); opacity: 0.5; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .final-bg { animation: none !important; }
+    }
+    .final-content {
+      position: relative; z-index: 3;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      margin: 0 auto; gap: 1.5rem; max-width: 52rem;
+    }
+    .final-content h2 {
+      margin: 0; font-weight: 600;
+      font-size: clamp(2.25rem, 5.5vw, 4.5rem);
+      line-height: 1.05; letter-spacing: -0.03em;
+    }
+    .final-content .lead {
+      margin: 0; font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      font-size: clamp(1rem, 1.4vw, 1.25rem);
+      line-height: 1.5; max-width: 40rem;
+    }
+    .btn-primary-final {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.625rem;
+      background: #fff; color: var(--black-200);
+      font-weight: 600; font-size: var(--font-l); letter-spacing: -0.01em;
+      height: 3.5rem; padding: 0 2rem; min-width: 20rem;
+      border-radius: 1rem;
+      margin-top: 0.5rem;
+      box-shadow: 0 18px 48px -12px rgba(127,227,230,0.35);
+      transition: transform 200ms;
+    }
+    .btn-primary-final:hover { transform: scale(1.01); }
+    .btn-primary-final::before {
+      content: ''; width: 0.5rem; height: 0.5rem;
+      border-radius: 999px; background: var(--black-200); display: inline-block;
+    }
+    .final-note {
+      margin: 0.25rem 0 0; font-weight: 500;
+      font-size: var(--font-s); color: rgba(255,255,255,0.55);
+    }
+
+    /* Footer */
+    footer.foot { border-top: 1px solid rgba(255,255,255,0.08); background: var(--black-100); }
+    .foot-inner { display: flex; flex-direction: column; gap: 2rem; padding-top: 2.5rem; padding-bottom: 3rem; }
+    .foot-top { display: flex; flex-direction: column; gap: 1.5rem; }
+    .foot-id { display: flex; flex-direction: column; gap: 0.5rem; }
+    .foot-meta { display: flex; flex-direction: column; gap: 0.125rem; font-weight: 500; font-size: var(--font-xs); color: rgba(255,255,255,0.4); }
+    .foot-meta .entity { color: rgba(255,255,255,0.6); }
+    .foot-meta a { color: rgba(255,255,255,0.6); text-decoration: underline; text-decoration-color: rgba(255,255,255,0.2); text-underline-offset: 2px; }
+    .foot-links { display: flex; flex-wrap: wrap; column-gap: 1.25rem; row-gap: 0.5rem; }
+    .foot-links a { font-weight: 500; font-size: var(--font-s); color: rgba(255,255,255,0.5); }
+    .foot-bottom {
+      display: flex; flex-direction: column; gap: 1rem;
+      padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .disclaimer { margin: 0; font-weight: 500; font-size: var(--font-xs); color: rgba(255,255,255,0.35); line-height: 1.55; max-width: 60rem; }
+    .copy { margin: 0; font-weight: 500; font-size: var(--font-xs); color: rgba(255,255,255,0.3); }
+    @media (min-width: 36rem) {
+      .foot-top { flex-direction: row; align-items: flex-start; justify-content: space-between; }
+      .foot-links { justify-content: flex-end; }
+    }
+
+    /* Sticky CTA */
+    .sticky-bar {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+      background: rgba(10,10,10,0.86);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+      transform: translateY(100%);
+      transition: transform 300ms ease;
+    }
+    .sticky-bar.visible { transform: translateY(0); }
+    .sticky-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding-top: 0.875rem; padding-bottom: 0.875rem;
+    }
+    .sticky-label { margin: 0; font-weight: 500; font-size: var(--font-s); color: rgba(255,255,255,0.65); }
+    .btn-sticky {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: #fff; color: var(--black-200);
+      font-weight: 600; font-size: var(--font-s); letter-spacing: -0.01em;
+      padding: 0.625rem 1.25rem; border-radius: 0.875rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 60rem) {
+      .stats { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 45rem) {
+      .features { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 36rem) {
+      .stats { grid-template-columns: 1fr; }
+      .sticky-label { display: none; }
+      .sticky-inner { justify-content: flex-end; }
+    }
+
+    /* Form validation errors */
+    .reg-error {
+      display: none;
+      margin: -0.25rem 0 0; padding-left: 0.25rem;
+      font-weight: 500; font-size: var(--font-xs); line-height: 1.4;
+      color: #f87171;
+    }
+    .reg-input.invalid, .phone-row.invalid { border-color: rgba(248,113,113,0.6); }
+    .reg-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .reg-submit:disabled:hover { transform: none; }
+
+    /* Form modals (success / error) */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 120;
+      display: none; align-items: center; justify-content: center;
+      padding: 1.25rem;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      width: 100%; max-width: 30rem;
+      display: flex; flex-direction: column; gap: 1.25rem;
+      background: var(--black-500);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 1.5rem;
+      padding: clamp(1.5rem, 3vw, 2rem);
+    }
+    .modal-title {
+      margin: 0; text-align: center; font-weight: 600;
+      font-size: clamp(1.375rem, 2.2vw, 1.625rem);
+      line-height: 1.15; letter-spacing: -0.02em;
+    }
+    .modal-text {
+      margin: 0; text-align: center; font-weight: 500;
+      color: rgba(255,255,255,0.7); font-size: var(--font-m); line-height: 1.5;
+    }
+    .modal-actions { display: flex; flex-direction: column; gap: 0.5rem; }
+    .modal-btn {
+      display: flex; align-items: center; justify-content: center;
+      height: 3.5rem; border-radius: 1rem;
+      font-family: inherit; font-weight: 600; font-size: var(--font-m);
+      cursor: pointer; transition: transform 200ms, background-color 150ms, color 150ms;
+    }
+    .modal-btn-primary { background: #fff; color: var(--black-200); border: none; }
+    .modal-btn-primary:hover { transform: scale(1.01); }
+    .modal-btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.15); }
+    .modal-btn-ghost:hover { background: rgba(255,255,255,0.05); color: #fff; }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8LRWKPS"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- Inline AXEVIL logo (used in nav + footer) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="axevil-logo" viewBox="0 0 155 24">
+        <path d="M54.6588 0H49.2405L43.5224 7.98486L37.7905 0H32.3343L40.8098 11.7589L32 24H37.4562L43.519 15.5329L49.5817 24H55L46.2246 11.7589" fill="#fff"/>
+        <path d="M68.6292 13.9857H79.9297V9.74181H68.6292V4.2579H81.8278V0H64V24H82V19.7561H68.6292" fill="#fff"/>
+        <path d="M128 0H123V24H128V0Z" fill="#fff"/>
+        <path d="M142.68 0H138V24H155V19.7542H142.68" fill="#fff"/>
+        <path d="M0 24H4.76212L8.38451 16.6245L12.0069 9.26646L17.3544 20.1936L19.2207 23.9721H24L12.0034 0L0 24Z" fill="#fff"/>
+        <path d="M105.605 7.33139L101.953 14.7012L96.6313 3.78451L94.7642 0H90L102.002 24L114 0H109.229L105.605 7.33139Z" fill="#fff"/>
+        <path d="M149.799 2.99599H150.201V0.516689H151V0H149V0.516689H149.799V3V2.99599Z" fill="#fff"/>
+        <path d="M154.527 0L153.498 2.06676L152.47 0H152V3H152.47V0.929239L153.313 2.68758H153.594L154.53 0.929239V2.99599H155V0H154.53H154.527Z" fill="#fff"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <nav class="topnav">
+    <div class="wrap-90 inner">
+      <a href="#" aria-label="AXEVIL Capital" class="logo-link">
+        <svg class="logo-svg"><use href="#axevil-logo"/></svg>
+      </a>
+
+      <div class="nav-links" id="nav-links">
+        <button class="nav-link" data-target="why-now">Почему сейчас</button>
+        <button class="nav-link" data-target="why-prometheus">Суть кейса</button>
+        <button class="nav-link" data-target="agenda">Вебинар</button>
+        <button class="nav-link" data-target="final">Регистрация</button>
+      </div>
+
+      <div class="nav-right">
+        <a href="#hero" class="btn-cta-nav" data-scroll-form>Записаться</a>
+        <button id="hamburger" class="hamburger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div id="mobile-menu" class="mobile-menu" role="navigation" aria-label="Mobile navigation">
+    <button class="mobile-link" data-target="why-now">Почему сейчас</button>
+    <button class="mobile-link" data-target="why-prometheus">Суть кейса</button>
+    <button class="mobile-link" data-target="agenda">Вебинар</button>
+    <button class="mobile-link" data-target="final">Регистрация</button>
+    <div class="mobile-cta-wrap">
+      <a class="mobile-cta" href="#hero" data-scroll-form>Записаться</a>
+    </div>
+  </div>
+
+  <div class="nav-spacer"></div>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <video
+      class="hero-bg-video"
+      src="/ostracized_remix_scene.mp4"
+      autoplay muted loop playsinline aria-hidden="true"
+    ></video>
+    <img
+      class="hero-bg-img"
+      src="/img/hero-bg.jpg"
+      alt=""
+      aria-hidden="true"
+      onerror="this.style.display='none'"
+    />
+    <div class="hero-fade" aria-hidden="true"></div>
+    <div class="wrap-1440 hero-inner">
+      <div class="hero-grid">
+
+        <div class="hero-left">
+          <div class="badge">
+            <span class="badge-dot" aria-hidden="true"></span>
+            ZOOM-ВСТРЕЧА · 9 ИЮНЯ · 19:00 МСК
+          </div>
+
+          <div class="hero-text">
+            <h1 class="text-grad">Project Prometheus —<br />AI Джеффа Безоса для физической экономики</h1>
+            <p class="hero-sub">Закрытая Zoom-встреча Axevil Capital. Разберём, почему перенос AI в реальный сектор может стать одной из крупнейших tech-революций десятилетия — и как на этом построен новый инвестиционный кейс.</p>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h2>Зарегистрироваться на вебинар</h2>
+          <p class="hero-card-sub">LLM-модели раскрывают потенциал рынка AI только на 1%. Приходите обсудить, как новая компания основателя Amazon и Blue Origin может раскрыть 99% за ближайшие 3 года.</p>
+
+          <form class="reg-form" id="reg-form" novalidate>
+            <input class="reg-input" type="text"  id="rf-name"  name="name"  placeholder="Имя"   autocomplete="name" />
+            <p class="reg-error" id="err-name"></p>
+            <input class="reg-input" type="email" id="rf-email" name="email" placeholder="Email" autocomplete="email" inputmode="email" />
+            <p class="reg-error" id="err-email"></p>
+
+            <div class="phone-row" id="phone-row">
+              <label class="phone-country">
+                <span class="phone-flag" id="ph-flag">🇺🇸</span>
+                <span id="ph-dial">+1</span>
+                <svg class="phone-chev" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                  <path d="M1 1l4 4 4-4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <select id="rf-country" aria-label="Код страны" onchange="
+                  var opt = this.options[this.selectedIndex];
+                  document.getElementById('ph-flag').textContent = opt.dataset.flag;
+                  document.getElementById('ph-dial').textContent = opt.dataset.dial;
+                ">
+                  <option value="US" data-flag="🇺🇸" data-dial="+1" selected>🇺🇸 US +1</option>
+                  <option value="RU" data-flag="🇷🇺" data-dial="+7">🇷🇺 RU +7</option>
+                  <option value="KZ" data-flag="🇰🇿" data-dial="+7">🇰🇿 KZ +7</option>
+                  <option value="BY" data-flag="🇧🇾" data-dial="+375">🇧🇾 BY +375</option>
+                  <option value="UA" data-flag="🇺🇦" data-dial="+380">🇺🇦 UA +380</option>
+                  <option value="GE" data-flag="🇬🇪" data-dial="+995">🇬🇪 GE +995</option>
+                  <option value="AM" data-flag="🇦🇲" data-dial="+374">🇦🇲 AM +374</option>
+                  <option value="AZ" data-flag="🇦🇿" data-dial="+994">🇦🇿 AZ +994</option>
+                  <option value="AE" data-flag="🇦🇪" data-dial="+971">🇦🇪 AE +971</option>
+                  <option value="GB" data-flag="🇬🇧" data-dial="+44">🇬🇧 GB +44</option>
+                  <option value="DE" data-flag="🇩🇪" data-dial="+49">🇩🇪 DE +49</option>
+                  <option value="FR" data-flag="🇫🇷" data-dial="+33">🇫🇷 FR +33</option>
+                  <option value="ES" data-flag="🇪🇸" data-dial="+34">🇪🇸 ES +34</option>
+                  <option value="IT" data-flag="🇮🇹" data-dial="+39">🇮🇹 IT +39</option>
+                  <option value="PL" data-flag="🇵🇱" data-dial="+48">🇵🇱 PL +48</option>
+                  <option value="TR" data-flag="🇹🇷" data-dial="+90">🇹🇷 TR +90</option>
+                  <option value="CY" data-flag="🇨🇾" data-dial="+357">🇨🇾 CY +357</option>
+                  <option value="CH" data-flag="🇨🇭" data-dial="+41">🇨🇭 CH +41</option>
+                  <option value="NL" data-flag="🇳🇱" data-dial="+31">🇳🇱 NL +31</option>
+                  <option value="PT" data-flag="🇵🇹" data-dial="+351">🇵🇹 PT +351</option>
+                </select>
+              </label>
+              <input class="phone-input" type="tel" id="rf-phone" name="phone" autocomplete="tel" inputmode="tel" />
+            </div>
+            <p class="reg-error" id="err-phone"></p>
+
+            <button class="reg-submit" type="submit" id="rf-submit"><span id="rf-submit-label">Зарегистрироваться</span></button>
+
+            <p class="reg-disclaimer">Регистрируясь, вы соглашаетесь получать запись вебинара и материалы Axevil Capital. Отписаться можно в любой момент.</p>
+          </form>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Now — timeline style -->
+  <section class="section" id="why-now">
+    <div class="wrap-1440" style="padding-top: clamp(5rem, 10vw, 9rem); padding-bottom: clamp(5rem, 10vw, 9rem);">
+      <div class="wn-head">
+        <div class="wn-kicker">
+          <span class="num">1.0</span>
+          <span>Почему сейчас</span>
+        </div>
+        <h2 class="wn-h text-grad">Рынок только открывается</h2>
+        <p class="wn-sub">Сегодняшний AI работает с текстом. Project Prometheus открывает следующую категорию — AI для физического мира. Рынок огромный, конкуренция пока ниже, окно входа ещё открыто.</p>
+      </div>
+
+      <div class="wn-timeline">
+        <div class="wn-line" aria-hidden="true"></div>
+        <div class="wn-dots">
+          <span class="wn-dot" aria-hidden="true"></span>
+          <span class="wn-dot" aria-hidden="true"></span>
+          <span class="wn-dot" aria-hidden="true"></span>
+          <span class="wn-dot" aria-hidden="true"></span>
+        </div>
+        <div class="wn-cols">
+          <article class="wn-col">
+            <h3 class="wn-num">1%</h3>
+            <p class="wn-title">LLM — только начало</p>
+            <p class="wn-body">Основной потенциал рынка искусственного интеллекта — в реальном секторе: электроника, автопром, аэрокосмос, фармацевтика и тяжёлая промышленность.</p>
+            <span class="wn-index">1.0</span>
+          </article>
+          <article class="wn-col">
+            <h3 class="wn-num">$14 трлн</h3>
+            <p class="wn-title">Рынок, который захватывает Project Prometheus</p>
+            <p class="wn-body">Компания строит AI для проектирования любых физических объектов — от молекул лекарства до ракетных двигателей.</p>
+            <span class="wn-index">2.0</span>
+          </article>
+          <article class="wn-col">
+            <h3 class="wn-num">$50 млрд</h3>
+            <p class="wn-title">Инженерный софт под угрозой</p>
+            <p class="wn-body">ANSYS, Dassault и Synopsys доминируют, но работают на архитектуре XX века.</p>
+            <span class="wn-index">3.0</span>
+          </article>
+          <article class="wn-col">
+            <h3 class="wn-num">3–5 лет</h3>
+            <p class="wn-title">Окно возможностей</p>
+            <p class="wn-body">Пока AI-рынок занят LLM, Prometheus может занять новый сегмент первым.</p>
+            <span class="wn-index">4.0</span>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Prometheus — centered head + equal-height 2x2 grid -->
+  <section class="section" id="why-prometheus">
+    <div class="wrap-1440" style="padding-top: clamp(5rem, 10vw, 9rem); padding-bottom: clamp(5rem, 10vw, 9rem);">
+      <div class="wp-head">
+        <div class="wn-kicker">
+          <span class="num">2.0</span>
+          <span>Суть кейса</span>
+        </div>
+        <h2 class="wn-h text-grad">Почему Prometheus выделяется</h2>
+        <p class="wn-sub">Четыре структурных преимущества компании, которых нет у других AI-игроков на этом рынке.</p>
+      </div>
+      <div class="features">
+        <article class="feature">
+          <h3>Универсальный AI-инженер</h3>
+          <p>Одна система для электроники, автопрома, аэрокосмоса, фармы и тяжёлой промышленности — вместо набора узких инструментов.</p>
+        </article>
+        <article class="feature">
+          <h3>Не роботы, а API</h3>
+          <p>Prometheus не перестраивает заводы. Он подключается к уже существующим процессам и работает поверх действующей инфраструктуры.</p>
+        </article>
+        <article class="feature">
+          <h3>Данные и полигоны Безоса</h3>
+          <p>Amazon, Blue Origin и AWS дают компании инженерные данные, live-среды и вычислительную базу, которые почти невозможно быстро повторить.</p>
+        </article>
+        <article class="feature">
+          <h3>Главный бенефициар реиндустриализации США</h3>
+          <p>США возвращают производство домой и усиливают конкуренцию с Китаем в чипах и критической инфраструктуре, поддерживая отрасль через программы вроде CHIPS Act. В этом контексте Prometheus — главный поставщик ключевой технологии для новой индустриализации.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agenda — centered head, icons, shaded gear bg -->
+  <section id="agenda" class="section agenda-section">
+    <img class="agenda-bg" src="/img/hero-bg.jpg" alt="" aria-hidden="true" onerror="this.style.display='none'" />
+    <div class="agenda-vignette" aria-hidden="true"></div>
+    <div class="wrap-1440 agenda-body" style="padding-top: clamp(5rem, 10vw, 9rem); padding-bottom: clamp(5rem, 10vw, 9rem);">
+      <div class="wp-head">
+        <div class="wn-kicker">
+          <span class="num">3.0</span>
+          <span>Вебинар</span>
+        </div>
+        <h2 class="wn-h text-grad">Что разберём на встрече</h2>
+        <p class="wn-sub">Пять блоков по существу: масштаб рынка, технологическая логика, конкурентные преимущества, монетизация и условия входа.</p>
+      </div>
+      <div class="agenda">
+        <div class="agenda-row">
+          <div class="agenda-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/>
+            </svg>
+          </div>
+          <p>Масштаб революции: как физический AI изменит глобальную экономику.</p>
+        </div>
+        <div class="agenda-row">
+          <div class="agenda-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M10 14L4 20"/><path d="M14 4l-2 2"/><path d="M20 10l-2 2"/><path d="M16 2l1.5 1.5"/><path d="M20.5 6.5L22 8"/>
+              <rect x="9" y="5" width="10" height="10" rx="2" transform="rotate(45 14 10)"/>
+            </svg>
+          </div>
+          <p>Почему Prometheus принципиально не строит роботов.</p>
+        </div>
+        <div class="agenda-row">
+          <div class="agenda-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3l8 3v6c0 4.5-3.5 8-8 9-4.5-1-8-4.5-8-9V6l8-3z"/><path d="M9 12l2.2 2.2L15 10.5"/>
+            </svg>
+          </div>
+          <p>За счёт чего новая компания Безоса недосягаема для конкурентов.</p>
+        </div>
+        <div class="agenda-row">
+          <div class="agenda-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/>
+            </svg>
+          </div>
+          <p>Бизнес-модель и путь монетизации до 2027 года.</p>
+        </div>
+        <div class="agenda-row">
+          <div class="agenda-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="8" cy="15" r="4"/><path d="M10.85 12.15L21 2"/><path d="M16 7l3 3"/><path d="M18 5l3 3"/>
+            </svg>
+          </div>
+          <p>Условия входа для инвесторов Axevil Capital.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA — animated cyan edge-glow bg from section-registration.jpg -->
+  <section id="final" class="section final-section">
+    <img class="final-bg final-bg-a" src="/img/section-registration.jpg" alt="" aria-hidden="true" onerror="this.style.display='none'" />
+    <img class="final-bg final-bg-b" src="/img/section-registration.jpg" alt="" aria-hidden="true" onerror="this.style.display='none'" />
+
+    <div class="wrap-1440" style="padding-top: clamp(6rem, 12vw, 11rem); padding-bottom: clamp(6rem, 12vw, 11rem); position: relative; z-index: 3;">
+      <div class="final-content">
+        <div class="wn-kicker">
+          <span class="num">4.0</span>
+          <span>Регистрация</span>
+        </div>
+        <h2 class="text-grad">Это момент рождения новой категории AI</h2>
+        <p class="lead">Зарегистрируйтесь на Zoom-встречу, чтобы понять масштаб идеи, логику нового бизнеса Джеффа Безоса и инвестиционный кейс Project Prometheus.</p>
+        <a class="btn-primary-final" href="#hero" data-scroll-form>Зарегистрироваться на вебинар</a>
+        <p class="final-note">Запись будет доступна всем зарегистрированным участникам.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="foot">
+    <div class="wrap-1440 foot-inner">
+      <div class="foot-top">
+        <div class="foot-id">
+          <a href="#" aria-label="AXEVIL Capital">
+            <svg class="logo-svg"><use href="#axevil-logo"/></svg>
+          </a>
+          <div class="foot-meta">
+            <span class="entity">Axevil Capital, LLC</span>
+            <span>Контакт: <a href="mailto:info@axevil.com">info@axevil.com</a></span>
+          </div>
+        </div>
+        <nav class="foot-links" aria-label="Legal">
+          <a href="/legal/ru/privacy.html">Privacy Policy</a>
+          <a href="/legal/ru/cookies.html">Cookie Policy</a>
+          <a href="/legal/ru/terms.html">Terms of Use</a>
+          <a href="mailto:info@axevil.com">Контакты</a>
+        </nav>
+      </div>
+      <div class="foot-bottom">
+        <p class="disclaimer">Axevil Capital, LLC — компания, зарегистрированная в США (Delaware, #6832739) со статусом Exempt Reporting Adviser (ERA), регулируется U.S. Securities and Exchange Commission (SEC #802-126907). Только для профессиональных инвесторов, управляющих капиталом, family offices и аккредитованных инвесторов. Информация на сайте и вебинаре носит общий информационно-образовательный характер и не является инвестиционной, юридической, налоговой или иной профессиональной консультацией, предложением или приглашением к покупке/продаже ценных бумаг. Инвестиции в private markets неликвидны, долгосрочны и сопряжены с высоким риском; прошлая доходность не гарантирует будущей.</p>
+        <p class="copy">© 2021–2026 Axevil Capital, LLC. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky CTA -->
+  <div class="sticky-bar" id="sticky">
+    <div class="wrap-1440 sticky-inner">
+      <p class="sticky-label">Project Prometheus · Zoom · 9 июня · 19:00 МСК</p>
+      <a href="#hero" class="btn-sticky" data-scroll-form>Регистрация</a>
+    </div>
+  </div>
+
+  <!-- Form modals -->
+  <div class="modal-overlay" id="success-modal" role="dialog" aria-modal="true" aria-labelledby="success-title">
+    <div class="modal-card">
+      <h3 class="modal-title" id="success-title">Чтобы завершить регистрацию, откройте наш Telegram-бот</h3>
+      <p class="modal-text">Бонусом — отчёт о ключевых событиях рынка частных компаний Pre-IPO Insider от аналитической команды Axevil.</p>
+      <div class="modal-actions">
+        <a class="modal-btn modal-btn-primary" id="success-cta" href="https://t.me/axevil_events_bot" target="_blank" rel="noopener noreferrer">Получить отчёт в Telegram</a>
+        <button type="button" class="modal-btn modal-btn-ghost" data-close-modal>Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="error-modal" role="dialog" aria-modal="true" aria-labelledby="error-title">
+    <div class="modal-card">
+      <h3 class="modal-title" id="error-title">Ошибка отправки</h3>
+      <p class="modal-text">Не удалось отправить форму. Попробуйте ещё раз.</p>
+      <div class="modal-actions">
+        <button type="button" class="modal-btn modal-btn-primary" data-close-modal>Попробовать снова</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Nav: smooth scroll to section + active link tracking + hamburger menu
+    (function () {
+      var NAV_OFFSET = 64;
+      function scrollToId(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var top = Math.max(0, el.getBoundingClientRect().top + window.scrollY - NAV_OFFSET);
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+      // Click handlers
+      document.querySelectorAll('.nav-link, .mobile-link').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var id = btn.getAttribute('data-target');
+          scrollToId(id);
+          closeMenu();
+        });
+      });
+      // Hamburger toggle
+      var hamburger = document.getElementById('hamburger');
+      var menu = document.getElementById('mobile-menu');
+      function openMenu() { hamburger.classList.add('open'); menu.classList.add('open'); hamburger.setAttribute('aria-expanded', 'true'); }
+      function closeMenu() { hamburger.classList.remove('open'); menu.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); }
+      hamburger.addEventListener('click', function () {
+        if (menu.classList.contains('open')) closeMenu(); else openMenu();
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+      // Active-section observer
+      var sections = ['why-now', 'why-prometheus', 'agenda', 'final']
+        .map(function (id) { return document.getElementById(id); })
+        .filter(Boolean);
+      if (sections.length && 'IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function (entries) {
+          var visible = entries.filter(function (e) { return e.isIntersecting; })
+                               .sort(function (a, b) { return b.intersectionRatio - a.intersectionRatio; });
+          if (!visible[0]) return;
+          var activeId = visible[0].target.id;
+          document.querySelectorAll('.nav-link').forEach(function (btn) {
+            btn.classList.toggle('active', btn.getAttribute('data-target') === activeId);
+          });
+        }, { rootMargin: '-30% 0px -60% 0px', threshold: [0, 0.5, 1] });
+        sections.forEach(function (s) { obs.observe(s); });
+      }
+    })();
+
+    // Sticky CTA visibility
+    (function () {
+      var sticky = document.getElementById('sticky');
+      var hero = document.getElementById('hero');
+      var fin = document.getElementById('final');
+      function check() {
+        if (!hero) return;
+        var heroBottom = hero.getBoundingClientRect().bottom;
+        var finalTop = fin ? fin.getBoundingClientRect().top : Infinity;
+        var show = heroBottom < 0 && finalTop > window.innerHeight;
+        sticky.classList.toggle('visible', show);
+      }
+      window.addEventListener('scroll', check, { passive: true });
+      check();
+    })();
+
+    // Hanging-prepositions fix (висячие предлоги):
+    // walk every text node in <body> and glue short prefix words to the next
+    // word with a non-breaking space. Also glues em-dash to the previous word.
+    (function () {
+      var SHORT = ['в','во','на','за','по','под','над','при','без','для',
+        'у','с','со','к','ко','из','от','до','про','через',
+        'между','около','среди','против',
+        'и','а','но','или','либо','что','как','чтобы','если',
+        'когда','пока','хотя','не','ни','же','ли','бы'];
+      var SHORT_RE = new RegExp('(^|\\s)(' + SHORT.join('|') + ')\\s', 'gi');
+      function fix(s) {
+        var out = s;
+        for (var i = 0; i < 2; i++) out = out.replace(SHORT_RE, '$1$2 ');
+        out = out.replace(/\s—\s/g, ' — ');
+        return out;
+      }
+      var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+      var node;
+      while ((node = walker.nextNode())) {
+        if (!node.nodeValue || !node.nodeValue.trim()) continue;
+        var parent = node.parentNode;
+        if (!parent) continue;
+        var tag = parent.nodeName;
+        if (tag === 'SCRIPT' || tag === 'STYLE') continue;
+        var v = fix(node.nodeValue);
+        if (v !== node.nodeValue) node.nodeValue = v;
+      }
+    })();
+  </script>
+
+  <!-- Registration form: validation, lead capture (spreadsheet-form-writer), GTM analytics -->
+  <script>
+  (function () {
+    // ── Project Prometheus webinar — easily editable identifiers ──────────
+    // Naming mirrors the June 4 landing: campaign_name = webinar_<DD_MM_YYYY>,
+    // form_id/page are the shared generic values, content_name = webinar title.
+    var ENDPOINT = 'https://api.axevil.io/api/spreadsheet-form-writer/form-project-prometheus-webinar';
+    var CAMPAIGN_NAME = 'webinar_09_06_2026';
+    var FORM_ID = 'landing-webinar';
+    var PAGE_SLUG = 'webinar';
+    var CONTENT_NAME = 'Project Prometheus Webinar';
+    var TG_BASE = 'https://t.me/axevil_events_bot';
+    var TG_START_PREFIX = 'mkt_webl_';
+
+    // ── GTM dataLayer ────────────────────────────────────────────────────
+    function push(event, params) {
+      window.dataLayer = window.dataLayer || [];
+      var o = { event: event };
+      if (params) { for (var k in params) { if (params.hasOwnProperty(k)) o[k] = params[k]; } }
+      window.dataLayer.push(o);
+    }
+
+    // ── Tracking context (mirror of src/lib/tracking.ts) ─────────────────
+    var GOOGLE_KEYS = ['gclid', 'gbraid', 'wbraid'];
+    function getCookie(name) {
+      var m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()\[\]\\\/+^])/g, '\\$1') + '=([^;]*)'));
+      return m ? decodeURIComponent(m[1]) : null;
+    }
+    function setCookie(name, value, days) {
+      var exp = new Date(Date.now() + days * 864e5).toUTCString();
+      document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + exp + '; path=/; SameSite=Lax';
+    }
+    function urlParam(name) {
+      try { return new URLSearchParams(window.location.search).get(name); } catch (e) { return null; }
+    }
+    (function captureOnLoad() {
+      try {
+        for (var i = 0; i < GOOGLE_KEYS.length; i++) {
+          var k = GOOGLE_KEYS[i], v = urlParam(k);
+          if (!v || getCookie('_ax_' + k)) continue;
+          setCookie('_ax_' + k, v, 90);
+        }
+        var fbclid = urlParam('fbclid');
+        if (fbclid && !getCookie('_fbc')) setCookie('_fbc', 'fb.1.' + Date.now() + '.' + fbclid, 90);
+      } catch (e) {}
+    })();
+    function trackingContext() {
+      return {
+        gclid: urlParam('gclid') || getCookie('_ax_gclid'),
+        gbraid: urlParam('gbraid') || getCookie('_ax_gbraid'),
+        wbraid: urlParam('wbraid') || getCookie('_ax_wbraid'),
+        fbclid: urlParam('fbclid'),
+        fbc: getCookie('_fbc'),
+        fbp: getCookie('_fbp'),
+        page_url: window.location.href,
+        page_path: window.location.pathname,
+        referrer: document.referrer || null,
+        user_agent: navigator.userAgent
+      };
+    }
+    function utmParams() {
+      var p;
+      try { p = new URLSearchParams(window.location.search); } catch (e) { p = { get: function () { return null; } }; }
+      return {
+        utm_source: p.get('utm_source') || '',
+        utm_medium: p.get('utm_medium') || '',
+        utm_campaign: p.get('utm_campaign') || '',
+        utm_content: p.get('utm_content') || '',
+        utm_term: p.get('utm_term') || ''
+      };
+    }
+
+    // ── Elements ─────────────────────────────────────────────────────────
+    var form = document.getElementById('reg-form');
+    if (!form) return;
+    var nameEl = document.getElementById('rf-name');
+    var emailEl = document.getElementById('rf-email');
+    var countryEl = document.getElementById('rf-country');
+    var phoneEl = document.getElementById('rf-phone');
+    var phoneRow = document.getElementById('phone-row');
+    var submitEl = document.getElementById('rf-submit');
+    var submitLabel = document.getElementById('rf-submit-label');
+
+    // ── Validation ───────────────────────────────────────────────────────
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var NAME_RE = /^\p{L}+(?:\s+\p{L}+)*$/u;
+    function dialDigits() {
+      var o = countryEl.options[countryEl.selectedIndex];
+      return ((o && o.dataset.dial) || '+1').replace(/\D/g, '');
+    }
+    function nationalDigits() { return phoneEl.value.replace(/\D/g, ''); }
+    function e164() { return '+' + dialDigits() + nationalDigits(); }
+    // Same validation engine as the June 4 landing (libphonenumber-js, min metadata).
+    // Falls back to a length heuristic only if the bundle failed to load.
+    function isValidPhone() {
+      var lpn = window.libphonenumber;
+      if (lpn && typeof lpn.isValidPhoneNumber === 'function') {
+        try { return lpn.isValidPhoneNumber(e164()); } catch (e) { return false; }
+      }
+      var nd = nationalDigits();
+      return nd.length >= 6 && (dialDigits() + nd).length <= 15;
+    }
+    // Telegram pairing token = E.164 digits without '+' (mirrors June 4's getTelegramPhoneToken).
+    function telegramPhoneToken() {
+      var digits = dialDigits() + nationalDigits();
+      if (!nationalDigits()) return '';
+      var lpn = window.libphonenumber;
+      if (lpn && typeof lpn.parsePhoneNumber === 'function') {
+        try {
+          var parsed = lpn.parsePhoneNumber(e164());
+          if (parsed && parsed.isValid()) return parsed.number.replace('+', '');
+        } catch (e) {}
+      }
+      return digits;
+    }
+    function setError(id, msg) {
+      var p = document.getElementById(id);
+      if (p) { p.textContent = msg || ''; p.style.display = msg ? 'block' : 'none'; }
+    }
+    function validate() {
+      var errs = {};
+      var nm = nameEl.value.trim();
+      if (!nm) errs.name = 'Обязательное поле';
+      else if (!NAME_RE.test(nm)) errs.name = 'Используйте только буквы';
+      var em = emailEl.value.trim();
+      if (!em) errs.email = 'Обязательное поле';
+      else if (!EMAIL_RE.test(em)) errs.email = 'Некорректный email';
+      if (!nationalDigits()) errs.phone = 'Обязательное поле';
+      else if (!isValidPhone()) errs.phone = 'Некорректный номер для выбранной страны';
+      return errs;
+    }
+    function showErrors(errs) {
+      setError('err-name', errs.name); nameEl.classList.toggle('invalid', !!errs.name);
+      setError('err-email', errs.email); emailEl.classList.toggle('invalid', !!errs.email);
+      setError('err-phone', errs.phone); phoneRow.classList.toggle('invalid', !!errs.phone);
+    }
+
+    // ── form_view / form_start events ────────────────────────────────────
+    var viewFired = false;
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        for (var i = 0; i < entries.length; i++) {
+          if (entries[i].isIntersecting && !viewFired) { viewFired = true; push('form_view'); io.disconnect(); break; }
+        }
+      }, { threshold: 0.3 });
+      io.observe(form);
+    }
+    var started = false, attempted = false;
+    form.addEventListener('input', function () { if (!started) { started = true; push('form_start'); } });
+    [nameEl, emailEl, phoneEl].forEach(function (el) {
+      el.addEventListener('input', function () { if (attempted) showErrors(validate()); });
+    });
+    countryEl.addEventListener('change', function () { if (attempted) showErrors(validate()); });
+
+    function resetCountryDisplay() {
+      var o = countryEl.options[countryEl.selectedIndex];
+      var flag = document.getElementById('ph-flag'), dl = document.getElementById('ph-dial');
+      if (o && flag) flag.textContent = o.dataset.flag;
+      if (o && dl) dl.textContent = o.dataset.dial;
+    }
+
+    // ── Submit ───────────────────────────────────────────────────────────
+    var pending = false;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (pending) return;
+      attempted = true;
+      var errs = validate();
+      if (Object.keys(errs).length) {
+        showErrors(errs);
+        Object.keys(errs).forEach(function (f) { push('form_error', { field: f }); });
+        return;
+      }
+      showErrors({});
+      pending = true;
+      submitEl.disabled = true;
+      if (submitLabel) submitLabel.textContent = 'Отправляем…';
+
+      var leadId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : (String(Date.now()) + Math.random().toString(16).slice(2));
+      var tc = trackingContext();
+      var utm = utmParams();
+      var phone = e164();
+      var payload = { data: {
+        id: leadId,
+        name: nameEl.value.trim(),
+        email: emailEl.value.trim(),
+        phone: phone,
+        phone_country: (countryEl.value || '').toLowerCase(),
+        company: '', role: '', telegram_username: '',
+        'job title': '', 'lead profile (about)': '',
+        page: PAGE_SLUG,
+        ts: new Date().toISOString(),
+        lead_event_id: leadId,
+        form_id: FORM_ID,
+        lead_funnel: 'web',
+        campaign_name: CAMPAIGN_NAME,
+        gclid: tc.gclid, gbraid: tc.gbraid, wbraid: tc.wbraid,
+        fbclid: tc.fbclid, fbc: tc.fbc, fbp: tc.fbp,
+        page_url: tc.page_url, page_path: tc.page_path,
+        referrer: tc.referrer, user_agent: tc.user_agent
+      }};
+      for (var uk in utm) { if (utm.hasOwnProperty(uk)) payload.data[uk] = utm[uk]; }
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (r) { return r.text().then(function (t) { return { ok: r.ok, status: r.status, body: t }; }); })
+        .then(function (res) {
+          console.log('[PrometheusForm] response', res);
+          if (!res.ok) throw new Error('Submit failed with status ' + res.status);
+          push('form_submit', { email: emailEl.value.trim() });
+          push('lead_submit', {
+            lead_event_id: leadId,
+            email: emailEl.value.trim(),
+            phone: phone,
+            content_name: CONTENT_NAME,
+            value: 1,
+            currency: 'USD'
+          });
+          var token = telegramPhoneToken();
+          openSuccess(token ? (TG_BASE + '?start=' + TG_START_PREFIX + token) : TG_BASE);
+          form.reset();
+          resetCountryDisplay();
+          started = false; attempted = false; showErrors({});
+        })
+        .catch(function (err) {
+          console.warn('[PrometheusForm] error', err);
+          push('form_error', { field: 'submit' });
+          openError();
+        })
+        .then(function () {
+          pending = false;
+          submitEl.disabled = false;
+          if (submitLabel) submitLabel.textContent = 'Зарегистрироваться';
+        });
+    });
+
+    // ── Modals ───────────────────────────────────────────────────────────
+    var successModal = document.getElementById('success-modal');
+    var errorModal = document.getElementById('error-modal');
+    var successCta = document.getElementById('success-cta');
+    function lockScroll(lock) { document.body.style.overflow = lock ? 'hidden' : ''; }
+    function openSuccess(link) { if (successCta) successCta.href = link; successModal.classList.add('open'); lockScroll(true); }
+    function openError() { errorModal.classList.add('open'); lockScroll(true); }
+    function closeModals() { successModal.classList.remove('open'); errorModal.classList.remove('open'); lockScroll(false); }
+    document.querySelectorAll('[data-close-modal]').forEach(function (b) { b.addEventListener('click', closeModals); });
+    [successModal, errorModal].forEach(function (m) {
+      if (m) m.addEventListener('click', function (e) { if (e.target === m) closeModals(); });
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModals(); });
+
+    // ── CTA buttons → scroll to the single (hero) registration form ──────
+    function scrollToForm(e) {
+      if (e) e.preventDefault();
+      var menu = document.getElementById('mobile-menu');
+      var hb = document.getElementById('hamburger');
+      if (menu) menu.classList.remove('open');
+      if (hb) { hb.classList.remove('open'); hb.setAttribute('aria-expanded', 'false'); }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (nameEl) setTimeout(function () {
+        try { nameEl.focus({ preventScroll: true }); } catch (e2) { nameEl.focus(); }
+      }, 450);
+    }
+    document.querySelectorAll('[data-scroll-form]').forEach(function (el) {
+      el.addEventListener('click', scrollToForm);
+    });
+
+    // ── Scroll depth events ──────────────────────────────────────────────
+    (function () {
+      var fired = {}, th = [25, 50, 75, 100];
+      window.addEventListener('scroll', function () {
+        var scrolled = window.scrollY + window.innerHeight;
+        var total = document.documentElement.scrollHeight;
+        var pct = Math.floor(scrolled / total * 100);
+        for (var i = 0; i < th.length; i++) {
+          if (!fired[th[i]] && pct >= th[i]) { fired[th[i]] = 1; push('scroll_' + th[i]); }
+        }
+      }, { passive: true });
+    })();
+  })();
+  </script>
+
+</body>
+</html>

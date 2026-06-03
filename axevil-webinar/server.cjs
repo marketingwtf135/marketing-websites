@@ -4,7 +4,18 @@ const http = require('http')
 
 const PORT = parseInt(process.env.PORT || '4173')
 const DIST = path.join(__dirname, 'dist')
-const WEBINAR_PATH = '/webinar/2026-06-04'
+
+// Default landing — also the redirect target for unknown paths.
+const DEFAULT_WEBINAR_PATH = '/webinar/2026-06-04'
+
+// Registry of webinar landings on this single deploy.
+// Key   = public URL path.
+// Value = HTML file to serve, relative to dist/.
+// Add a new entry here (plus its built HTML in dist/) to publish another webinar.
+const WEBINARS = {
+  '/webinar/2026-06-04': 'index.html',
+  '/webinar/2026-06-09': 'webinar/2026-06-09/index.html',
+}
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -37,24 +48,29 @@ http.createServer((req, res) => {
   // Serve static assets (JS, CSS, images, fonts, etc.) from dist/
   if (ext) {
     const filePath = path.join(DIST, urlPath)
-    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+    // Guard against path traversal outside dist/.
+    if (filePath.startsWith(DIST) && fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
       res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' })
       fs.createReadStream(filePath).pipe(res)
       return
     }
   }
 
-  // Serve index.html only at the webinar path
-  if (urlPath === WEBINAR_PATH) {
-    const index = path.join(DIST, 'index.html')
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-    fs.createReadStream(index).pipe(res)
-    return
+  // Serve the matching webinar landing.
+  const page = WEBINARS[urlPath]
+  if (page) {
+    const file = path.join(DIST, page)
+    if (fs.existsSync(file)) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      fs.createReadStream(file).pipe(res)
+      return
+    }
   }
 
-  // Redirect everything else to the webinar path
-  res.writeHead(301, { Location: WEBINAR_PATH })
+  // Redirect everything else to the default webinar landing.
+  res.writeHead(301, { Location: DEFAULT_WEBINAR_PATH })
   res.end()
 }).listen(PORT, '0.0.0.0', () => {
-  console.log(`Axevil Webinar → m.axevil.com${WEBINAR_PATH}`)
+  console.log('Axevil Webinars → m.axevil.app')
+  Object.keys(WEBINARS).forEach(p => console.log(`  • ${p}`))
 })
