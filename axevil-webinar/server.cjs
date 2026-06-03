@@ -68,7 +68,9 @@ http.createServer((req, res) => {
   }
 
   // Redirect everything else to the default webinar landing.
-  res.writeHead(301, { Location: DEFAULT_WEBINAR_PATH })
+  // Use 302 (temporary) + no-store so browsers/CDNs never *permanently* cache a
+  // fallback redirect for a path that may later become a real webinar page.
+  res.writeHead(302, { Location: DEFAULT_WEBINAR_PATH, 'Cache-Control': 'no-store' })
   res.end()
 }).listen(PORT, '0.0.0.0', () => {
   console.log('Axevil Webinars → m.axevil.app')
