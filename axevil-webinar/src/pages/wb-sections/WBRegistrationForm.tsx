@@ -362,14 +362,11 @@ export default function WBRegistrationForm({ className = '', disclaimerAlign = '
       },
     }
     try {
-      console.log('[WBForm] spreadsheet-form-writer payload', payload)
       const response = await fetch(FORM_API_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       })
-      const responseText = await response.text()
-      console.log('[WBForm] spreadsheet-form-writer response', { status: response.status, ok: response.ok, body: responseText })
       if (!response.ok) {
         throw new Error(`Submit failed with status ${response.status}`)
       }
