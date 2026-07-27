@@ -305,6 +305,27 @@ export default function PS4Methodology() {
               ))}
             </div>
           </div>
+
+          {/* Price anchor — the competitor logos establish the category, this puts a
+              number on it (client feedback 2026-07-23: "логотипы конкурентов сильный
+              ход, добавить price anchor"). Without it the row reads as "we read the
+              same sources", not as "you would pay $30k+ for this". */}
+          <p
+            style={{
+              fontFamily: 'Inter Tight, sans-serif',
+              fontSize: 'clamp(1.125rem, 1.5vw, 1.375rem)',
+              fontWeight: 600,
+              lineHeight: 1.3,
+              letterSpacing: '-0.02em',
+              color: '#ffffff',
+              textAlign: 'center',
+              maxWidth: '44rem',
+              margin: 0,
+            }}
+          >
+            Эти подписки стоят $30k+/год.{' '}
+            <span style={{ color: '#4DBA79' }}>Наш отчёт — бесплатно.</span>
+          </p>
         </div>
       </motion.div>
     </section>

@@ -1,10 +1,15 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
+/* `meta` is the one-line spec under each title — client feedback 2026-07-23: the two
+   cards never said how they differ from each other ("непонятно чем еженедельный
+   отличается от квартального"), so a reader could not tell what they were signing up
+   for. Format and volume, stated plainly, right under the name. */
 const CARDS = [
   {
     key: 'report',
     title: 'Pre-IPO Insider Q1 2026',
+    meta: 'Квартальный · 51 страница · 15 компаний',
     desc: 'Квартальный отчёт с итогами по частному рынку на Q1 2026: динамика индекса, IPO-pipeline, секторы вне AI.',
     badgeIcon: '/img/Fast.svg',
     badgeText: 'Получите сразу после заполнения формы',
@@ -13,6 +18,7 @@ const CARDS = [
   {
     key: 'digest',
     title: 'Еженедельный дайджест',
+    meta: 'Еженедельный · 8 апдейтов · 6 минут чтения',
     desc: 'Каждый вторник: новости частных компаний, сигналы вторичного рынка, динамика переоценок, комментарии аналитиков.',
     badgeIcon: '/img/Security.svg',
     badgeText: 'Бесплатно. Отписка одной кнопкой',
@@ -102,6 +108,9 @@ export default function PS5StayCurrent() {
                 <h3 style={{ fontFamily: '"Inter Tight", sans-serif', fontWeight: 600, fontStyle: 'normal', fontSize: 'clamp(1.5rem, 2vw, 2.25rem)', lineHeight: 1.1, letterSpacing: '-0.02em', color: '#ffffff', margin: 0, WebkitFontSmoothing: 'antialiased' }}>
                   {card.title}
                 </h3>
+                <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: 'clamp(0.8125rem, 1vw, 0.9375rem)', lineHeight: 1.3, letterSpacing: '-0.01em', color: '#4DBA79', margin: 0, fontVariantNumeric: 'tabular-nums' }}>
+                  {card.meta}
+                </p>
                 <p style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: 'clamp(0.875rem, 1.2vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.02em', color: '#bcbcbc', maxWidth: '24rem', margin: 0 }}>
                   {card.desc}
                 </p>

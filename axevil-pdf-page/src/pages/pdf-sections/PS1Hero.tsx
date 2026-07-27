@@ -1,8 +1,22 @@
 import { useScroll, useTransform, motion } from 'framer-motion'
-import PDFCtaButton from '../../components/PDFCtaButton'
+import PDFLeadForm from '../../components/PDFLeadForm'
 
 // Stagger animation helper — badge → h1 → p → btn, +0.05s each
 const E = [0.4, 0, 0.2, 1] as const
+
+/** Freshness stamp. One constant so the hero, the badge and the stat row can never
+ *  disagree about which edition this page is selling — bump it with the report. */
+const EDITION = 'Q1 2026'
+
+/** The hero's proof, in numbers (client feedback 2026-07-23: "абстракция «один отчёт
+ *  вместо десятка» не убеждает без цифр... нужна конкретика: 51 стр, топ-15 компаний,
+ *  обогнали Nasdaq в 7 раз"). Figures are the client's own, verbatim. */
+const HERO_STATS: { value: string; label: string }[] = [
+  { value: '51',      label: 'страница разбора' },
+  { value: 'Топ-15',  label: 'частных компаний' },
+  { value: '×7',      label: 'к доходности Nasdaq' },
+  { value: EDITION,   label: 'свежий выпуск' },
+]
 function fadeUp(delay: number) {
   return {
     initial: { opacity: 0, y: 16 },
@@ -19,7 +33,9 @@ export default function PS1Hero() {
     <section
       id="hero"
       style={{
-        height: '100svh',
+        // min- rather than a fixed height: the hero now carries a stat row and a
+        // two-field form, which on a short laptop viewport would otherwise be clipped.
+        minHeight: '100svh',
         background: '#010101',
         position: 'relative',
         overflow: 'hidden',
@@ -51,7 +67,7 @@ export default function PS1Hero() {
       <div
         className="nl-wrapper"
         style={{
-          height: 'calc(100svh - 4.25rem)',
+          minHeight: 'calc(100svh - 4.25rem)',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
@@ -63,6 +79,7 @@ export default function PS1Hero() {
       >
         {/* Top content — each element fades up with 0.05s stagger */}
         <div
+          className="pdf-hero-top"
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -73,6 +90,7 @@ export default function PS1Hero() {
         >
           {/* Badge block */}
           <div
+            className="pdf-hero-head"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -89,14 +107,15 @@ export default function PS1Hero() {
                 style={{ width: '0.625rem', height: '0.625rem', background: '#4DBA79' }}
                 aria-hidden="true"
               />
-              <p className="font-inter-tight font-medium text-white whitespace-nowrap"
+              <p className="font-inter-tight font-medium text-white text-center sm:whitespace-nowrap"
                 style={{ fontSize: '0.875rem', lineHeight: 1.3 }}>
-                PRE-IPO INSIDER · Q4&#39;25 — Q1&#39;26 · 51 страница
+                PRE-IPO INSIDER · {EDITION} · обновлён к выходу SpaceX на IPO
               </p>
             </motion.div>
 
             {/* H1 + subtitle */}
             <div
+              className="pdf-hero-copy"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -124,9 +143,9 @@ export default function PS1Hero() {
                   margin: 0,
                 }}
               >
-                Pre-IPO Insider.
+                51 страница о рынке,
                 <br />
-                Один отчёт вместо десятка источников
+                который обогнал Nasdaq в 7 раз
               </motion.h1>
 
               {/* Subtitle — delay 0.2s */}
@@ -144,15 +163,52 @@ export default function PS1Hero() {
                   margin: 0,
                 }}
               >
-                Главное на рынке частных компаний по итогам Q1 2026: динамика индекса,
-                крупнейшие переоценки и раунды, кандидаты на IPO и многое другое.
+                Pre-IPO Insider — квартальный разбор частного рынка от инвест-команды Axevil:
+                топ-15 компаний, динамика индекса, крупнейшие переоценки и кандидаты на IPO.
               </motion.p>
             </div>
+
+            {/* Proof row — delay 0.22s. The numbers do the convincing before the form
+                asks for anything (client feedback 2026-07-23). */}
+            <motion.ul
+              {...fadeUp(0.22)}
+              className="hero-stats"
+              style={{
+                display: 'flex', flexWrap: 'wrap', justifyContent: 'center',
+                gap: 'clamp(1rem, 3vw, 2.5rem)', listStyle: 'none', padding: 0, margin: 0,
+                width: '100%', maxWidth: '38.75rem',
+              }}
+            >
+              {HERO_STATS.map((s) => (
+                <li key={s.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.125rem' }}>
+                  <span
+                    style={{
+                      fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
+                      fontSize: 'clamp(1.25rem, 2vw, 1.75rem)', lineHeight: 1.1,
+                      letterSpacing: '-0.02em', color: 'white', fontVariantNumeric: 'tabular-nums',
+                    }}
+                  >
+                    {s.value}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: 'Inter Tight, sans-serif', fontWeight: 500,
+                      fontSize: 'clamp(0.75rem, 1vw, 0.875rem)', lineHeight: 1.3,
+                      letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.5)', whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {s.label}
+                  </span>
+                </li>
+              ))}
+            </motion.ul>
           </div>
 
-          {/* CTA — delay 0.25s */}
-          <motion.div {...fadeUp(0.25)}>
-            <PDFCtaButton>Скачать PDF</PDFCtaButton>
+          {/* Lead form — delay 0.25s. Was a "Скачать PDF" button that only scrolled to
+              the form at the foot of the page: an extra click and a drop-off point
+              (client feedback 2026-07-23). */}
+          <motion.div {...fadeUp(0.25)} style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <PDFLeadForm />
           </motion.div>
         </div>
 

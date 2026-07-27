@@ -56,6 +56,41 @@ export default function PS3Preview() {
               Динамика индекса топ-20 частных компаний по сравнению с NASDAQ на фоне торговых войн и конфликта Трампа с главой ФРС.
             </p>
           </div>
+
+          {/* Insight + CTA — the left column ran out of content below the paragraph and
+              the only call to action hung off the card on the right (client feedback
+              2026-07-23: "пустое пространство слева = потерянный CTA"). The headline's
+              own claim, stated as a number, now sits next to the button that acts on it. */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '0.5rem' }}>
+            <div
+              style={{
+                display: 'flex', alignItems: 'baseline', gap: '0.875rem',
+                background: '#111', borderRadius: '1.25rem',
+                padding: 'clamp(1.125rem, 2vw, 1.5rem)',
+                maxWidth: '36.25rem',
+              }}
+            >
+              <span style={{
+                fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
+                fontSize: 'clamp(2rem, 3.2vw, 3rem)', lineHeight: 1,
+                letterSpacing: '-0.03em', color: 'white', flexShrink: 0,
+                fontVariantNumeric: 'tabular-nums',
+              }}>
+                ×7
+              </span>
+              <span style={{
+                fontFamily: 'Inter Tight, sans-serif', fontWeight: 500,
+                fontSize: 'clamp(0.9375rem, 1.2vw, 1.125rem)', lineHeight: 1.3,
+                letterSpacing: '-0.02em', color: '#bcbcbc',
+              }}>
+                Топ-20 частных компаний обогнали Nasdaq в 7 раз — весь разбор в отчёте
+              </span>
+            </div>
+
+            <PDFCtaButton location="preview" className="w-full sm:w-auto sm:self-start">
+              Получить бесплатный отчёт на 51 страницу
+            </PDFCtaButton>
+          </div>
         </motion.div>
 
         {/* RIGHT: card */}
@@ -121,12 +156,9 @@ export default function PS3Preview() {
             }}
           />
 
-          {/* CTA button (z=11) */}
-          <div style={{ position: 'relative', zIndex: 11, display: 'flex', justifyContent: 'center' }}>
-            <PDFCtaButton className="w-full sm:w-auto">
-              Скачать полную версию PDF
-            </PDFCtaButton>
-          </div>
+          {/* The card's own CTA moved to the left column next to the heading (client
+              feedback 2026-07-23) — one call to action per section, and it now sits in
+              the half of the layout that was empty. */}
         </motion.div>
       </div>
     </section>

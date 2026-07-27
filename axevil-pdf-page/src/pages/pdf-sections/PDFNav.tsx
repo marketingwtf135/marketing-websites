@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { analytics } from '../../lib/analytics'
 import PDFCtaButton from '../../components/PDFCtaButton'
 
 function scrollTo(id: string) {
@@ -73,7 +74,7 @@ export default function PDFNav() {
 
           {/* Desktop: CTA */}
           <div className="ml-auto hidden lg:flex">
-            <button type="button" onClick={() => scrollTo('pdf-form')}
+            <button type="button" onClick={() => { analytics.ctaClick('nav'); scrollTo('pdf-form') }}
               className="flex items-center gap-2 font-inter-tight font-semibold text-[#202020] bg-white rounded-2xl hover:opacity-90 transition-opacity shrink-0 cta-button-glow"
               style={{ height: 40, paddingLeft: 16, paddingRight: 16, paddingTop: 13, paddingBottom: 16, fontSize: 16, fontWeight: 600, lineHeight: '110%', border: 'none', cursor: 'pointer' }}>
               <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
@@ -135,6 +136,7 @@ export default function PDFNav() {
               </div>
               <div className="mt-auto pt-6">
                 <PDFCtaButton
+                  location="nav_mobile"
                   onClick={() => { scrollTo('pdf-form'); setMenuOpen(false) }}
                   style={{ width: '100%' }}
                 >

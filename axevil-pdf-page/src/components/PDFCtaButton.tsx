@@ -1,4 +1,5 @@
 import type { ReactNode, CSSProperties } from 'react'
+import { analytics } from '../lib/analytics'
 
 interface PDFCtaButtonProps {
   children: ReactNode
@@ -7,6 +8,8 @@ interface PDFCtaButtonProps {
   type?: 'button' | 'submit'
   onClick?: () => void
   scrollTo?: string
+  /** Funnel label for `cta_click`. Submit buttons report from their own form instead. */
+  location?: string
 }
 
 export default function PDFCtaButton({
@@ -16,8 +19,10 @@ export default function PDFCtaButton({
   type = 'button',
   onClick,
   scrollTo = 'pdf-form',
+  location = 'cta',
 }: PDFCtaButtonProps) {
   function handleClick() {
+    if (type !== 'submit') analytics.ctaClick(location)
     onClick?.()
     if (type !== 'submit') {
       document.getElementById(scrollTo)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
