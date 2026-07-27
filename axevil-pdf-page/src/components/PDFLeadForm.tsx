@@ -181,6 +181,8 @@ export default function PDFLeadForm({
             fontFamily: '"Inter Tight", sans-serif',
             cursor: 'pointer',
             width: '100%',
+            maxWidth: '30rem',
+            margin: '0 auto',
           }}
         >
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>

@@ -138,7 +138,7 @@ export default function PS1Hero() {
                   WebkitBackgroundClip: 'text',
                   backgroundClip: 'text',
                   width: '100%',
-                  maxWidth: '38.75rem',
+                  maxWidth: '50rem',
                   textAlign: 'center',
                   margin: 0,
                 }}

@@ -64,15 +64,15 @@ export default function PS3Preview() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginTop: '0.5rem' }}>
             <div
               style={{
-                display: 'flex', alignItems: 'baseline', gap: '0.875rem',
-                background: '#111', borderRadius: '1.25rem',
-                padding: 'clamp(1.125rem, 2vw, 1.5rem)',
-                maxWidth: '36.25rem',
+                display: 'flex', alignItems: 'baseline', gap: '0.625rem',
+                background: '#111', borderRadius: '1rem',
+                padding: 'clamp(0.75rem, 1.3vw, 1rem)',
+                maxWidth: '30rem',
               }}
             >
               <span style={{
                 fontFamily: 'Inter Tight, sans-serif', fontWeight: 600,
-                fontSize: 'clamp(2rem, 3.2vw, 3rem)', lineHeight: 1,
+                fontSize: 'clamp(1.5rem, 2.2vw, 2rem)', lineHeight: 1,
                 letterSpacing: '-0.03em', color: 'white', flexShrink: 0,
                 fontVariantNumeric: 'tabular-nums',
               }}>
@@ -80,7 +80,7 @@ export default function PS3Preview() {
               </span>
               <span style={{
                 fontFamily: 'Inter Tight, sans-serif', fontWeight: 500,
-                fontSize: 'clamp(0.9375rem, 1.2vw, 1.125rem)', lineHeight: 1.3,
+                fontSize: 'clamp(0.8125rem, 1vw, 0.9375rem)', lineHeight: 1.3,
                 letterSpacing: '-0.02em', color: '#bcbcbc',
               }}>
                 Топ-20 частных компаний обогнали Nasdaq в 7 раз — весь разбор в отчёте

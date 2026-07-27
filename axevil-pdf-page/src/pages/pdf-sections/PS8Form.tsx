@@ -105,8 +105,8 @@ export default function PS8Form() {
             <h2
               className="font-inter-tight font-semibold text-transparent bg-clip-text"
               style={{
-                fontSize: 'clamp(2.25rem, 4.4vw, 4rem)', lineHeight: 1,
-                letterSpacing: '-0.02em', overflow: 'visible',
+                fontSize: 'clamp(2.25rem, 4.4vw, 4rem)', lineHeight: 1.15,
+                letterSpacing: '-0.02em', overflow: 'visible', paddingBottom: '0.15em',
                 backgroundImage: 'linear-gradient(94deg, #A2A2A2 15.77%, #FFF 49.29%, #A2A2A2 82.81%)',
               }}
             >
