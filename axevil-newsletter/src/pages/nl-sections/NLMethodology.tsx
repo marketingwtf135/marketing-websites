@@ -6,14 +6,15 @@ import NLLeadForm from './NLLeadForm'
 import { LAST_ISSUE } from './NLHero'
 
 /**
- * "Так выглядит один выпуск" — the preview, enlarged, with the ask right beside it.
+ * "Так выглядит один выпуск" — the preview, enlarged, with the ask above it.
  *
  * Was a small centred letter card floating on the rock background with no way to act on
  * it (client feedback 2026-07-23: "preview мелкий и без CTA рядом. Увеличить + справа CTA
  * «Прочитать выпуск целиком», email + телефон inline или полный выпуск после subscribe").
- * The letter is now the left column at up to 1.4× its old scale, clipped at the fold with
- * a fade so it reads as "continues below", and the right column carries the offer and the
- * same short form as the hero.
+ * First pass put the letter and the ask side by side (letter left, ask right); client
+ * feedback 2026-07-27 asked for a vertical stack instead, text above the photo. The
+ * letter renders at up to 1.4× its old scale, clipped at the fold with a fade so it
+ * reads as "continues below", underneath the offer + the same short form as the hero.
  */
 export default function NLMethodology() {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -83,16 +84,12 @@ export default function NLMethodology() {
               />
             </div>
 
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-10 w-full">
-              {/* Letter — one render per breakpoint, the component sizes in px */}
-              <div className="flex justify-center lg:justify-start w-full" style={clip}>
-                <div className="lg:hidden shrink-0"><NLLetterPreview scale={0.845} /></div>
-                <div className="hidden lg:block xl:hidden shrink-0"><NLLetterPreview scale={1.05} /></div>
-                <div className="hidden xl:block shrink-0"><NLLetterPreview scale={1.4} /></div>
-              </div>
-
+            {/* Vertical stack — text first, letter preview below (client feedback
+                2026-07-27: "по вертикали выравнивание и текст над фото, а не наоборот";
+                was a 2-col grid with the letter on the left and the ask on the right). */}
+            <div className="relative z-10 flex flex-col items-center gap-8 lg:gap-10 w-full">
               {/* The ask */}
-              <div className="flex flex-col items-start gap-4 w-full">
+              <div className="flex flex-col items-center text-center gap-4 w-full">
                 <p className="font-inter-tight font-medium"
                   style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--white-400)' }}>
                   Выпуск №47 · {LAST_ISSUE.date} · {LAST_ISSUE.updates} · {LAST_ISSUE.reading}
@@ -110,11 +107,18 @@ export default function NLMethodology() {
 
                 <NLLeadForm
                   source="preview"
-                  align="left"
+                  align="center"
                   label="Прочитать выпуск целиком"
                   note="Полный выпуск приходит сразу после подписки. Отписка одной кнопкой."
                   className="max-w-[30rem]"
                 />
+              </div>
+
+              {/* Letter — one render per breakpoint, the component sizes in px */}
+              <div className="flex justify-center w-full" style={clip}>
+                <div className="lg:hidden shrink-0"><NLLetterPreview scale={0.845} /></div>
+                <div className="hidden lg:block xl:hidden shrink-0"><NLLetterPreview scale={1.05} /></div>
+                <div className="hidden xl:block shrink-0"><NLLetterPreview scale={1.4} /></div>
               </div>
             </div>
           </div>
