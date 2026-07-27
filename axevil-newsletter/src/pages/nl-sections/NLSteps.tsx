@@ -1,7 +1,12 @@
-﻿const STEPS = [
-  { num: '1.0', title: 'Подписываетесь', body: 'Email + имя + AUM bracket (optional). 30 секунд на форму.' },
-  { num: '2.0', title: 'Welcome-выпуск', body: 'Вы получите последний отправленный выпуск сразу после подписки.' },
-  { num: '3.0', title: 'Каждый вторник — выпуск', body: 'События недели + рейтинги + sector deep-dive + инвест-идеи.' },
+﻿/**
+ * Three steps, each with the time it costs (client feedback 2026-07-23: "отличный ход,
+ * оставить. Добавить время: «email (10 сек) → подтвердить (30 сек) → первый выпуск…»").
+ * The cadence stays вторник, as everywhere else on the page — see the report note.
+ */
+const STEPS = [
+  { num: '1.0', time: '10 секунд', title: 'Оставляете email', body: 'Email и — по желанию — телефон. Имя, должность и AUM можно указать позже, в форме внизу страницы.' },
+  { num: '2.0', time: '30 секунд', title: 'Подтверждаете подписку', body: 'Письмо с подтверждением приходит сразу. Один клик — и адрес в списке.' },
+  { num: '3.0', time: 'сразу после подтверждения', title: 'Первый выпуск', body: 'Последний вышедший выпуск приходит сразу, дальше — каждый вторник в 9:00.' },
 ]
 
 export default function NLSteps() {
@@ -36,10 +41,17 @@ export default function NLSteps() {
               className="flex flex-col p-4 sm:p-6 rounded-[24px] overflow-hidden w-full"
               style={{ background: 'var(--black-300)', maxWidth: 710, gap: 'clamp(24px, 3.3vw, 48px)' }}
             >
-              <p className="font-inter-tight font-medium whitespace-nowrap shrink-0"
-                style={{ fontSize: 'clamp(14px, 1.1vw, 18px)', lineHeight: 1.35, letterSpacing: '-0.02em', color: 'var(--black-800)' }}>
-                {step.num}
-              </p>
+              {/* Number + how long this step takes */}
+              <div className="flex items-center justify-between gap-3 shrink-0 w-full">
+                <p className="font-inter-tight font-medium whitespace-nowrap"
+                  style={{ fontSize: 'clamp(14px, 1.1vw, 18px)', lineHeight: 1.35, letterSpacing: '-0.02em', color: 'var(--black-800)' }}>
+                  {step.num}
+                </p>
+                <p className="font-inter-tight font-semibold whitespace-nowrap rounded-full px-3 py-1"
+                  style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, letterSpacing: '-0.01em', color: 'var(--status-open)', background: 'rgba(77,186,121,0.08)' }}>
+                  {step.time}
+                </p>
+              </div>
               <div className="flex flex-col gap-4 items-start">
                 <h3 className="font-inter-tight font-semibold text-white"
                   style={{ fontSize: 'clamp(1.25rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', width: '100%' }}>

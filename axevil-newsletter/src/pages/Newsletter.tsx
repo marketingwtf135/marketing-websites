@@ -1,6 +1,6 @@
 ﻿import { useEffect } from 'react'
 import FadeIn from '../components/FadeIn'
-import { initScrollDepth } from '../lib/analytics'
+import { analytics, initScrollDepth } from '../lib/analytics'
 import NLNav from './nl-sections/NLNav'
 import NLHero from './nl-sections/NLHero'
 import NLAudience from './nl-sections/NLAudience'
@@ -14,7 +14,8 @@ import NLFooter from './nl-sections/NLFooter'
 
 export default function Newsletter() {
   useEffect(() => {
-    initScrollDepth()
+    analytics.pageView()
+    return initScrollDepth()
   }, [])
 
   return (

@@ -4,18 +4,52 @@ declare global {
   }
 }
 
+/**
+ * dataLayer event contract — shared verbatim with the PDF landing
+ * (`axevil-pdf-page/src/lib/analytics.ts`). Both files must stay identical so one GTM
+ * container and one A/B report can read either landing without a per-page mapping
+ * (client feedback 2026-07-23: "аналитика на оба ленда... без этого A/B не запустим").
+ *
+ * Events:
+ *   page_view          — once per load, carries `page`
+ *   cta_click          — any CTA press, carries `location` (hero / nav / contents / …)
+ *   form_view          — a form scrolled into view
+ *   form_start         — first keystroke in a form
+ *   form_submit        — validated submit, carries `time_to_conversion_sec`
+ *   form_error         — per invalid field
+ *   scroll_25/50/75/100
+ *   final_section_view — the closing subscribe block reached (the funnel's last step
+ *                        before conversion; separate from scroll_100 which fires on the
+ *                        footer and is polluted by fast scrollers)
+ */
+
+/** Page landing timestamp — the zero point for time-to-conversion. */
+const LOADED_AT = Date.now()
+
+/** Which landing this build is. Kept explicit so the two pages never collide in GTM. */
+const PAGE = 'newsletter'
+
 function push(event: string, params?: Record<string, unknown>) {
   if (typeof window === 'undefined') return
   window.dataLayer = window.dataLayer || []
-  window.dataLayer.push({ event, ...params })
+  window.dataLayer.push({ event, page: PAGE, ...params })
+}
+
+/** Seconds since load, one decimal — the "время до конверсии" metric. */
+export function secondsSinceLoad() {
+  return Math.round((Date.now() - LOADED_AT) / 100) / 10
 }
 
 export const analytics = {
+  pageView:   () => push('page_view'),
+  ctaClick:   (location: string) => push('cta_click', { location }),
   scrollDepth: (pct: 25 | 50 | 75 | 100) => push(`scroll_${pct}`),
-  formView:   () => push('form_view'),
-  formStart:  () => push('form_start'),
-  formSubmit: (params?: Record<string, unknown>) => push('form_submit', params),
-  formError:  (field: string) => push('form_error', { field }),
+  finalReached: () => push('final_section_view', { time_on_page_sec: secondsSinceLoad() }),
+  formView:   (location = 'final') => push('form_view', { location }),
+  formStart:  (location = 'final') => push('form_start', { location, time_to_start_sec: secondsSinceLoad() }),
+  formSubmit: (params?: Record<string, unknown>) =>
+    push('form_submit', { location: 'final', ...params, time_to_conversion_sec: secondsSinceLoad() }),
+  formError:  (field: string, location = 'final') => push('form_error', { field, location }),
 }
 
 export function initScrollDepth() {
