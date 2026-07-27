@@ -114,12 +114,10 @@ export default function NLMethodology() {
                 />
               </div>
 
-              {/* Letter — one render per breakpoint, the component sizes in px. Pulled up
-                  to overlap the rock photo instead of sitting in plain flow below it
-                  (client feedback 2026-07-27: "это должно быть поверх фото и опуститься
-                  слегка ниже") — negative margin overlaps it onto the photo, kept modest
-                  ("слегка") rather than the old fully-floating-on-background treatment. */}
-              <div className="flex justify-center w-full" style={{ ...clip, marginTop: 'clamp(-3rem, -4vw, -1.5rem)' }}>
+              {/* Letter — one render per breakpoint, the component sizes in px. Client
+                  2026-07-27 follow-up: not an overlap — just more room above it, gap
+                  spacing-4 (4rem), lower than the ask block rather than pulled onto it. */}
+              <div className="flex justify-center w-full" style={{ ...clip, marginTop: '4rem' }}>
                 <div className="lg:hidden shrink-0"><NLLetterPreview scale={0.845} /></div>
                 <div className="hidden lg:block xl:hidden shrink-0"><NLLetterPreview scale={1.05} /></div>
                 <div className="hidden xl:block shrink-0"><NLLetterPreview scale={1.4} /></div>
