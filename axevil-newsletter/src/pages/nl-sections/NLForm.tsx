@@ -1,6 +1,7 @@
 ﻿import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { analytics } from '../../lib/analytics'
+import { asset } from '../../lib/asset'
 import { submitSubscription } from '../../lib/subscribe'
 import OwnButton from './OwnButton'
 
@@ -163,7 +164,7 @@ export default function NLForm() {
     >
       {/* Shine background — right-0 top-0, 100% width per Figma 784-13986 */}
       <div className="absolute right-0 top-0 w-full h-full pointer-events-none" aria-hidden>
-        <img src="/img/newsletter/newsletter-shine-bg.png"
+        <img src={asset('/img/newsletter/newsletter-shine-bg.png')}
           onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0' }}
           alt="" className="w-full h-full object-cover object-right-top" loading="lazy" />
       </div>

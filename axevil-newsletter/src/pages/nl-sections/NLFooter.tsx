@@ -1,4 +1,6 @@
-﻿const footerLogo = '/img/newsletter/footer-logo.svg'
+﻿import { asset } from '../../lib/asset'
+
+const footerLogo = asset('/img/newsletter/footer-logo.svg')
 
 const LINKS = ['Privacy', 'Terms', 'Cookie policy', 'Contacts']
 

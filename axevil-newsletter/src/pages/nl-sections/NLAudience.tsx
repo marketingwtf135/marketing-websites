@@ -1,3 +1,5 @@
+import { asset } from '../../lib/asset'
+
 /**
  * Three roles, one concrete job each.
  *
@@ -11,21 +13,21 @@
 const CARDS = [
   {
     num: '1.0',
-    icon: '/img/newsletter/big-icon-analytics.svg',
+    icon: asset('/img/newsletter/big-icon-analytics.svg'),
     title: 'Wealth-менеджеры',
     useCase: 'Еженедельный апдейт для клиентских звонков',
     body: 'Во вторник утром у вас на руках лидерборд secondary, открывшиеся тендер-оферы и новые раунды — готовая повестка на неделю клиентских разговоров.',
   },
   {
     num: '2.0',
-    icon: '/img/newsletter/big-icon-portfolio.svg',
+    icon: asset('/img/newsletter/big-icon-portfolio.svg'),
     title: 'Family offices',
     useCase: 'Мониторинг pre-IPO без штата аналитиков',
     body: '200+ частных компаний в систематическом покрытии: переоценки, раунды, смена мультипликаторов. Слежение за рынком, под которое не нужно нанимать отдельную команду.',
   },
   {
     num: '3.0',
-    icon: '/img/newsletter/big-icon-persons.svg',
+    icon: asset('/img/newsletter/big-icon-persons.svg'),
     title: 'Private bankers',
     useCase: 'Аргументарий для upsell-а pre-IPO обёрток',
     body: 'Цифры, сделки и контекст, на которые можно ссылаться в разговоре о структурных решениях: что изменилось за неделю и почему это повод вернуться к клиенту.',

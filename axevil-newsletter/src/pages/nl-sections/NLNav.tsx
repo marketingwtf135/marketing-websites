@@ -1,6 +1,7 @@
 ﻿import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { analytics } from '../../lib/analytics'
+import { asset } from '../../lib/asset'
 import MailIcon from './MailIcon'
 import OwnButton from './OwnButton'
 
@@ -66,7 +67,7 @@ export default function NLNav() {
         <div className="container-px mx-auto w-full max-w-[1440px] h-full flex items-center justify-between">
           {/* Logo */}
           <a href="#" aria-label="AXEVIL Capital" className="shrink-0">
-            <img src="/img/newsletter/logo.svg" alt="AXEVIL Capital" className="shrink-0 block"
+            <img src={asset('/img/newsletter/logo.svg')} alt="AXEVIL Capital" className="shrink-0 block"
               style={{ width: 'clamp(116px, 10.8vw, 155px)', height: 'clamp(18px, 1.7vw, 24px)' }} />
           </a>
 

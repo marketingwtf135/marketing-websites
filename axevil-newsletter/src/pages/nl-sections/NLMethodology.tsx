@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { useScroll, useTransform, motion } from 'framer-motion'
+import { asset } from '../../lib/asset'
 import NLLetterPreview from './NLLetterPreview'
 import NLLeadForm from './NLLeadForm'
 import { LAST_ISSUE } from './NLHero'
@@ -69,7 +70,7 @@ export default function NLMethodology() {
               style={{ borderRadius: 'clamp(24px, 2.2vw, 32px)' }}>
               <div className="absolute inset-0" style={{ background: 'var(--black-300)', borderRadius: 'clamp(24px, 2.2vw, 32px)' }} />
               <motion.img
-                src="/img/newsletter/hero-bg-rock.png"
+                src={asset('/img/newsletter/hero-bg-rock.png')}
                 alt=""
                 className="absolute max-w-none object-cover"
                 style={{

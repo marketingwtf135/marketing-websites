@@ -1,8 +1,9 @@
 import { useScroll, useTransform, motion } from 'framer-motion'
+import { asset } from '../../lib/asset'
 import NLLetterPreview from './NLLetterPreview'
 import NLLeadForm from './NLLeadForm'
 
-const heroBg = '/img/newsletter/hero-bg.png'
+const heroBg = asset('/img/newsletter/hero-bg.png')
 
 /**
  * Freshness stamp under the hero form (client feedback 2026-07-23: "под формой маркер:
