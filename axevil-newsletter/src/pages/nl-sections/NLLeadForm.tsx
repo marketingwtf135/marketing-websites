@@ -119,7 +119,7 @@ export default function NLLeadForm({
       onSubmit={handleSubmit}
       noValidate
       className={`flex flex-col gap-3 w-full ${className}`}
-      style={{ maxWidth: align === 'center' ? '38.75rem' : undefined }}
+      style={{ maxWidth: align === 'center' ? '30rem' : undefined }}
     >
       <div className="flex flex-col gap-2 w-full">
         {/* Two fields side by side from sm up; stacked on a phone where each would be
