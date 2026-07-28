@@ -180,9 +180,10 @@ export default function PDFLeadForm({
             color: '#202020',
             fontFamily: '"Inter Tight", sans-serif',
             cursor: 'pointer',
+            // Fills the form, i.e. exactly the width of the two fields above it (client
+            // feedback 2026-07-28). Was capped at 30rem and centred, which left it visibly
+            // narrower than the row it belongs to.
             width: '100%',
-            maxWidth: '30rem',
-            margin: '0 auto',
           }}
         >
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
