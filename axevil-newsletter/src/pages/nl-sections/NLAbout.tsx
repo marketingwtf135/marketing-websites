@@ -1,10 +1,19 @@
 ﻿import { asset } from '../../lib/asset'
 
+/**
+ * Platform figures — the single source of truth for the page.
+ *
+ * These four were drifting: the block said «1,000+ Клиентов» while the closing form said
+ * «1200+ wealth-менеджеров», and the portfolio/partner counts disagreed with the spec.
+ * Values and wording now follow the ТЗ proof line verbatim («$150M AUM · 1 000+ инвесторов
+ * · 33 портфельные компании · 150+ WM-партнёров»), so there is one set of numbers to bump
+ * when they change. Thousands are separated with a non-breaking space, not a comma.
+ */
 const STATS = [
-  { value: '$150M',  label: 'AUM' },
-  { value: '1,000+', label: 'Клиентов' },
-  { value: '35',     label: 'Компаний в портфеле' },
-  { value: '100+',   label: 'Партнёров' },
+  { value: '$150M', label: 'AUM' },
+  { value: '1 000+', label: 'Инвесторов' },
+  { value: '33', label: 'Портфельные компании' },
+  { value: '150+', label: 'WM-партнёров' },
 ]
 
 export default function NLAbout() {
@@ -34,7 +43,7 @@ export default function NLAbout() {
         <div className="flex flex-col gap-[1.5rem] items-center">
           <div className="flex gap-[0.5rem] font-inter-tight font-medium items-center justify-center whitespace-nowrap"
             style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.36px' }}>
-            <span style={{ color: 'var(--black-800)' }}>6.0</span>
+            <span style={{ color: 'var(--black-800)' }}>7.0</span>
             <span style={{ color: 'var(--black-900)' }}>О платформе</span>
           </div>
           <div className="flex flex-col gap-[1rem] items-center">

@@ -6,7 +6,7 @@
 const STEPS = [
   { num: '1.0', time: '10 секунд', title: 'Оставляете email', body: 'Email и — по желанию — телефон. Имя, должность и AUM можно указать позже, в форме внизу страницы.' },
   { num: '2.0', time: '30 секунд', title: 'Подтверждаете подписку', body: 'Письмо с подтверждением приходит сразу. Один клик — и адрес в списке.' },
-  { num: '3.0', time: 'сразу после подтверждения', title: 'Первый выпуск', body: 'Последний вышедший выпуск приходит сразу, дальше — каждый вторник в 9:00.' },
+  { num: '3.0', time: 'сразу после подтверждения', title: 'Первый выпуск', body: 'Последний вышедший выпуск приходит сразу, дальше — каждый вторник в 9:00 CET.' },
 ]
 
 export default function NLSteps() {
@@ -67,7 +67,7 @@ export default function NLSteps() {
           {/* Footer note — 10px mobile, 12px desktop */}
           <p className="font-inter-tight font-medium text-center whitespace-nowrap"
             style={{ fontSize: 'clamp(10px, 0.83vw, 12px)', lineHeight: 1.3, color: 'var(--white-400)' }}>
-            Полный выпуск на почте каждый вторник в 9:00
+            Полный выпуск на почте каждый вторник в 9:00 CET
           </p>
         </div>
       </div>

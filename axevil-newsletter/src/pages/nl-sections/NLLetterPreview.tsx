@@ -142,7 +142,7 @@ export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
                   className="font-inter-tight font-medium text-center whitespace-nowrap"
                   style={{ fontSize: s(8.6), lineHeight: 1.3, color: 'var(--white-300)', letterSpacing: -s(0.172) }}
                 >
-                  Каждый вторник в 9 часов полный выпуск на почте
+                  Каждый вторник в 9:00 CET полный выпуск на почте
                 </p>
               </div>
             </div>

@@ -48,8 +48,8 @@ const INPUT_STYLE: React.CSSProperties = {
 
 export default function NLLeadForm({
   source,
-  label = 'Получать дайджест',
-  note = 'Бесплатно. Отписка одной кнопкой в любом письме.',
+  label = 'Подписаться на дайджест',
+  note = 'Отписка одной кнопкой в любом письме.',
   align = 'center',
   className = '',
 }: NLLeadFormProps) {

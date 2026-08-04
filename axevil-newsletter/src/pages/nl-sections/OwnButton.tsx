@@ -15,7 +15,7 @@ interface OwnButtonProps {
  */
 export default function OwnButton({
   onClick, type = 'button', disabled = false,
-  label = 'Подписаться', color = '#202020', fullWidth = false,
+  label = 'Подписаться на дайджест', color = '#202020', fullWidth = false,
 }: OwnButtonProps) {
   return (
     <button
