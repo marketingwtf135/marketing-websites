@@ -13,6 +13,7 @@ import NLFaq from './nl-sections/NLFaq'
 import NLAbout from './nl-sections/NLAbout'
 import NLForm from './nl-sections/NLForm'
 import NLFooter from './nl-sections/NLFooter'
+import NLCookieBanner from './nl-sections/NLCookieBanner'
 
 export default function Newsletter() {
   useEffect(() => {
@@ -36,6 +37,7 @@ export default function Newsletter() {
       <FadeIn><NLAbout /></FadeIn>
       <NLForm />
       <NLFooter />
+      <NLCookieBanner />
     </main>
   )
 }
