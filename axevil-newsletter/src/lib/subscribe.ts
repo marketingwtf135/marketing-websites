@@ -1,3 +1,4 @@
+import { getCountryCode } from './geo'
 import { getUtmParams } from './useUtm'
 
 /**
@@ -19,6 +20,8 @@ export interface SubscribePayload {
   position?: string
   company?: string
   aum?: string
+  /** ISO-код страны по IP — подставляется автоматически, посетитель его не вводит. */
+  country?: string
 }
 
 /**
@@ -34,6 +37,9 @@ export async function submitSubscription(payload: SubscribePayload): Promise<boo
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        // Страна ставится здесь, а не в каждой форме: точек входа три, и все три
+        // должны приезжать в список одинаковыми.
+        country: getCountryCode(),
         ...payload,
         ...getUtmParams(),
         page: 'newsletter',

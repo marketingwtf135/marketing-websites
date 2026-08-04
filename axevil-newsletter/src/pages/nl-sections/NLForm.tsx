@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { analytics } from '../../lib/analytics'
 import { asset } from '../../lib/asset'
+import { initGeoCountry } from '../../lib/geo'
 import { submitSubscription } from '../../lib/subscribe'
 import OwnButton from './OwnButton'
 
@@ -110,8 +111,16 @@ export default function NLForm() {
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
   const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  /** Скрытое поле «Страна (auto IP)» из ТЗ — заполняется само, посетитель его не видит. */
+  const [country, setCountry] = useState('')
   const hasStarted = useRef(false)
   const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    let alive = true
+    initGeoCountry().then(code => { if (alive && code) setCountry(code) })
+    return () => { alive = false }
+  }, [])
 
   useEffect(() => {
     const el = sectionRef.current
@@ -180,7 +189,7 @@ export default function NLForm() {
         <div className="flex flex-col gap-[1rem] items-center justify-center w-full max-w-[600px] mb-10">
           <div className="flex gap-2 font-inter-tight font-medium items-center justify-center whitespace-nowrap"
             style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.36px' }}>
-            <span style={{ color: 'var(--black-800)' }}>7.0</span>
+            <span style={{ color: 'var(--black-800)' }}>8.0</span>
             <span style={{ color: 'var(--black-900)' }}>Подписка на дайджест</span>
           </div>
           <div className="flex flex-col gap-4 items-center text-center">
@@ -190,7 +199,7 @@ export default function NLForm() {
             </h2>
             <p className="font-inter-tight font-medium"
               style={{ fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)", lineHeight: 1.35, color: "rgba(255,255,255,0.5)", letterSpacing: "-0.36px", maxWidth: "31.25rem" }}>
-              Welcome-выпуск + инструменты — в почте через 60 секунд. Бесплатно. Отписка в 1 клик
+              Welcome-выпуск + инструменты — в почте через 60 секунд. Отписка в один клик
             </p>
           </div>
 
@@ -203,6 +212,7 @@ export default function NLForm() {
             <SuccessState />
           ) : (
             <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-[0.5rem] w-full">
+              <input type="hidden" name="country" value={country} readOnly />
               <Field error={errors.email} input={
                 <input type="email" required autoComplete="email" inputMode="email"
                   placeholder="your@email.com" value={form.email}
@@ -234,11 +244,11 @@ export default function NLForm() {
                 </div>
               </div>
 
-              <OwnButton type="submit" disabled={loading} label={loading ? 'Отправка…' : 'Подписаться'} />
+              <OwnButton type="submit" disabled={loading} label={loading ? 'Отправка…' : 'Подписаться на дайджест'} />
 
               <p className="font-inter-tight font-medium text-center w-full"
                 style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--white-400)', mixBlendMode: 'difference' }}>
-                Бесплатно. Отписаться — одной кнопкой в любом письме. Подписываясь, соглашаетесь с обработкой данных
+                Отписаться — одной кнопкой в любом письме. Подписываясь, соглашаетесь с обработкой данных
               </p>
             </form>
           )}
