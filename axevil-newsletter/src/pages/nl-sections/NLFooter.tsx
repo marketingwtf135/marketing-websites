@@ -2,7 +2,21 @@
 
 const footerLogo = asset('/img/newsletter/footer-logo.svg')
 
-const LINKS = ['Privacy', 'Terms', 'Cookie policy', 'Contacts']
+/**
+ * Footer links used to be four labels on `href="#"` — they looked like a legal footer and
+ * did nothing but jump the page to the top.
+ *
+ * The Russian legal pages already existed in the webinar project; they are copied into
+ * `public/legal/` here and every path inside them rewritten relative, so they survive the
+ * site's nested base (`/pdf/pre-ipo-insider/`). The hrefs below go through `asset()` for
+ * the same reason. `Contacts` points at the address the legal pages themselves publish.
+ */
+const LINKS: { label: string; href: string }[] = [
+  { label: 'Privacy',       href: asset('/legal/ru/privacy.html') },
+  { label: 'Terms',         href: asset('/legal/ru/terms.html') },
+  { label: 'Cookie policy', href: asset('/legal/ru/cookies.html') },
+  { label: 'Contacts',      href: 'mailto:info@axevil.com' },
+]
 
 export default function NLFooter() {
   return (
@@ -31,14 +45,14 @@ export default function NLFooter() {
           style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--black-800)', whiteSpace: 'nowrap' }}
         >
           <div className="flex gap-5 items-center overflow-hidden">
-            {LINKS.map(link => (
+            {LINKS.map(({ label, href }) => (
               <a
-                key={link}
-                href="#"
+                key={label}
+                href={href}
                 className="hover:text-white/50 transition-colors"
                 style={{ color: 'var(--black-800)' }}
               >
-                {link}
+                {label}
               </a>
             ))}
           </div>
