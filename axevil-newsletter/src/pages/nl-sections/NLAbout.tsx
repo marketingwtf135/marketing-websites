@@ -1,20 +1,5 @@
 ﻿import { asset } from '../../lib/asset'
-
-/**
- * Platform figures — the single source of truth for the page.
- *
- * These four were drifting: the block said «1,000+ Клиентов» while the closing form said
- * «1200+ wealth-менеджеров», and the portfolio/partner counts disagreed with the spec.
- * Values and wording now follow the ТЗ proof line verbatim («$150M AUM · 1 000+ инвесторов
- * · 33 портфельные компании · 150+ WM-партнёров»), so there is one set of numbers to bump
- * when they change. Thousands are separated with a non-breaking space, not a comma.
- */
-const STATS = [
-  { value: '$150M', label: 'AUM' },
-  { value: '1 000+', label: 'Инвесторов' },
-  { value: '33', label: 'Портфельные компании' },
-  { value: '150+', label: 'WM-партнёров' },
-]
+import { FIGURES } from '../../lib/figures'
 
 export default function NLAbout() {
   return (
@@ -61,7 +46,7 @@ export default function NLAbout() {
         {/* Stats + platform screenshot */}
         <div className="flex flex-col gap-[1rem] w-full">
           <div className="flex flex-col sm:flex-row gap-[0.5rem] w-full">
-            {STATS.map(stat => (
+            {FIGURES.map(stat => (
               <div key={stat.value}
                 className="flex flex-col gap-[0.25rem] p-[1rem] rounded-[1.25rem] flex-1"
                 style={{ background: 'var(--black-500)' }}>

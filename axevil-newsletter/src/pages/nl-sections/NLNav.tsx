@@ -13,6 +13,40 @@ function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 }
 
+/**
+ * Какой раздел сейчас на экране — для подсветки пункта меню.
+ *
+ * Раньше подсветка была привязана к порядковому номеру (`i === 0`), то есть «Состав
+ * выпуска» выглядел активным всегда, даже когда читатель дошёл до футера. Теперь пункт
+ * подсвечивается только когда его раздел действительно виден.
+ *
+ * Полоса наблюдения сдвинута вниз на высоту шапки (72px) и сужена до верхней половины
+ * экрана: иначе при прокрутке два раздела одновременно попадают в кадр и подсветка
+ * мигает между ними.
+ */
+function useActiveSection(ids: string[]) {
+  const [active, setActive] = useState<string | null>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+        if (visible.length) setActive(visible[0].target.id)
+      },
+      { rootMargin: '-72px 0px -50% 0px', threshold: 0 }
+    )
+    const nodes = ids
+      .map(id => document.getElementById(id))
+      .filter((n): n is HTMLElement => Boolean(n))
+    nodes.forEach(n => observer.observe(n))
+    return () => observer.disconnect()
+  }, [ids.join(',')])
+
+  return active
+}
+
 function useNavVisible() {
   const [visible, setVisible] = useState(true)
   const lastY = useRef(0)
@@ -30,15 +64,24 @@ function useNavVisible() {
   return visible
 }
 
+/**
+ * «Методология» переименована в «Пример выпуска»: на мобильной вёрстке сам раздел так и
+ * назывался, а в меню и на десктопе стояла «Методология» — с телефона человек жал одно и
+ * попадал в другое. Выбрано название раздела, а не меню: в ТЗ этот блок тоже называется
+ * «Превью выпуска (sample)», и оно честнее описывает, что внутри.
+ */
 const NAV_LINKS = [
-  { label: 'Состав выпуска',   id: 'nl-contents'    },
-  { label: 'Методология',      id: 'nl-methodology'  },
+  { label: 'Состав выпуска',   id: 'nl-contents'     },
+  { label: 'Пример выпуска',   id: 'nl-methodology'  },
   { label: 'Как это работает', id: 'nl-steps'        },
   { label: 'О платформе',      id: 'nl-about'        },
 ]
 
+const NAV_IDS = NAV_LINKS.map(l => l.id)
+
 export default function NLNav() {
   const visible = useNavVisible()
+  const activeId = useActiveSection(NAV_IDS)
   const [menuOpen, setMenuOpen] = useState(false)
 
   function handleNavLink(id: string) {
@@ -66,20 +109,30 @@ export default function NLNav() {
       >
         <div className="container-px mx-auto w-full max-w-[1440px] h-full flex items-center justify-between">
           {/* Logo */}
-          <a href="#" aria-label="AXEVIL Capital" className="shrink-0">
+          {/* Было `href="#"` — клик дописывал решётку в адрес и дёргал страницу вверх. */}
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            aria-label="AXEVIL Capital — наверх"
+            className="shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+          >
             <img src={asset('/img/newsletter/logo.svg')} alt="AXEVIL Capital" className="shrink-0 block"
               style={{ width: 'clamp(116px, 10.8vw, 155px)', height: 'clamp(18px, 1.7vw, 24px)' }} />
-          </a>
+          </button>
 
           {/* Desktop: centered nav */}
           <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-1 h-8">
-            {NAV_LINKS.map(({ label, id }, i) => (
-              <button key={id} type="button" onClick={() => scrollTo(id)}
-                className="flex items-center justify-center px-4 py-2 rounded-[160px] font-inter-tight font-medium text-white text-center whitespace-nowrap transition-colors"
-                style={{ fontSize: 'var(--font-s)', lineHeight: 'normal', background: i === 0 ? 'rgba(255,255,255,0.05)' : 'transparent', opacity: i === 0 ? 1 : 0.8 }}>
-                {label}
-              </button>
-            ))}
+            {NAV_LINKS.map(({ label, id }) => {
+              const isActive = id === activeId
+              return (
+                <button key={id} type="button" onClick={() => scrollTo(id)}
+                  aria-current={isActive ? 'true' : undefined}
+                  className="flex items-center justify-center px-4 py-2 rounded-[160px] font-inter-tight font-medium text-white text-center whitespace-nowrap transition-colors"
+                  style={{ fontSize: 'var(--font-s)', lineHeight: 'normal', background: isActive ? 'rgba(255,255,255,0.05)' : 'transparent', opacity: isActive ? 1 : 0.8 }}>
+                  {label}
+                </button>
+              )
+            })}
           </div>
 
           {/* Desktop: CTA */}

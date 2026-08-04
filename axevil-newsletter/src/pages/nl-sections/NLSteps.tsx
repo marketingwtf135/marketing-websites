@@ -1,12 +1,14 @@
 ﻿/**
  * Three steps, each with the time it costs (client feedback 2026-07-23: "отличный ход,
  * оставить. Добавить время: «email (10 сек) → подтвердить (30 сек) → первый выпуск…»").
- * The cadence stays вторник, as everywhere else on the page — see the report note.
+ * Рассылка уходит по средам (Pavel, 2026-08-04). Времени на странице нет намеренно:
+ * «не всегда в одно и то же время отправляем» — обещать час, который может сдвинуться,
+ * хуже, чем не обещать его вовсе.
  */
 const STEPS = [
   { num: '1.0', time: '10 секунд', title: 'Оставляете email', body: 'Email и — по желанию — телефон. Имя, должность и AUM можно указать позже, в форме внизу страницы.' },
   { num: '2.0', time: '30 секунд', title: 'Подтверждаете подписку', body: 'Письмо с подтверждением приходит сразу. Один клик — и адрес в списке.' },
-  { num: '3.0', time: 'сразу после подтверждения', title: 'Первый выпуск', body: 'Последний вышедший выпуск приходит сразу, дальше — каждый вторник в 9:00 CET.' },
+  { num: '3.0', time: 'сразу после подтверждения', title: 'Первый выпуск', body: 'Последний вышедший выпуск приходит сразу, дальше — каждую среду.' },
 ]
 
 export default function NLSteps() {
@@ -30,7 +32,7 @@ export default function NLSteps() {
           </div>
           <p className="font-inter-tight font-medium text-center"
             style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.02em', maxWidth: 570 }}>
-            Отправим свежий выпуск рассылки сразу после подписки. Регулярные — каждый вторник.
+            Отправим свежий выпуск рассылки сразу после подписки. Регулярные — каждую среду.
           </p>
         </div>
 
@@ -67,7 +69,7 @@ export default function NLSteps() {
           {/* Footer note — 10px mobile, 12px desktop */}
           <p className="font-inter-tight font-medium text-center whitespace-nowrap"
             style={{ fontSize: 'clamp(10px, 0.83vw, 12px)', lineHeight: 1.3, color: 'var(--white-400)' }}>
-            Полный выпуск на почте каждый вторник в 9:00 CET
+            Полный выпуск на почте каждую среду
           </p>
         </div>
       </div>

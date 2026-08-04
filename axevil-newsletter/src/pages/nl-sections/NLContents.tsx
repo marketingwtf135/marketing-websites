@@ -67,7 +67,7 @@ export default function NLContents() {
           </h2>
           <p className="font-inter-tight font-medium"
             style={{ fontSize: DESC_SIZE, lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.02em', maxWidth: '35.625rem' }}>
-            Четыре раздела, которые приходят каждый вторник — ниже фрагменты из последнего выпуска.
+            Четыре раздела, которые приходят каждую среду — ниже фрагменты из последнего выпуска.
           </p>
         </div>
 

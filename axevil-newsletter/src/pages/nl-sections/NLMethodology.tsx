@@ -3,7 +3,7 @@ import { useScroll, useTransform, motion } from 'framer-motion'
 import { asset } from '../../lib/asset'
 import NLLetterPreview from './NLLetterPreview'
 import NLLeadForm from './NLLeadForm'
-import { LAST_ISSUE } from './NLHero'
+import { LAST_ISSUE } from '../../lib/lastIssue'
 
 /**
  * "Так выглядит один выпуск" — the preview, enlarged, with the ask above it.
@@ -39,9 +39,11 @@ export default function NLMethodology() {
             <div className="flex gap-2 font-inter-tight font-medium items-center justify-center whitespace-nowrap"
               style={{ fontSize: 'clamp(14px, 1.1vw, 18px)', lineHeight: 1.35, letterSpacing: '-0.36px' }}>
               <span style={{ color: 'var(--black-800)' }}>3.0</span>
-              {/* Mobile: "Пример выпуска", Desktop: "Методология" */}
-              <span className="sm:hidden" style={{ color: 'var(--black-900)' }}>Пример выпуска</span>
-              <span className="hidden sm:inline" style={{ color: 'var(--black-900)' }}>Методология</span>
+              {/* Название было разным на мобильной и десктопной вёрстке («Пример выпуска»
+                  против «Методологии»), а в меню стояло второе — с телефона человек жал
+                  «Методология» и попадал в раздел с другим заголовком. Оставлено одно на
+                  всех, оно же теперь в меню. */}
+              <span style={{ color: 'var(--black-900)' }}>Пример выпуска</span>
             </div>
             <h2 className="font-inter-tight font-semibold text-transparent bg-clip-text text-center"
               style={{
@@ -92,7 +94,7 @@ export default function NLMethodology() {
               <div className="flex flex-col items-center text-center gap-4 w-full">
                 <p className="font-inter-tight font-medium"
                   style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--white-400)' }}>
-                  Выпуск №47 · {LAST_ISSUE.date} · {LAST_ISSUE.updates} · {LAST_ISSUE.reading}
+                  Выпуск №{LAST_ISSUE.number} · {LAST_ISSUE.date} · {LAST_ISSUE.updates} · {LAST_ISSUE.reading}
                 </p>
 
                 <h3 className="font-inter-tight font-semibold text-white"
@@ -102,7 +104,7 @@ export default function NLMethodology() {
 
                 <p className="font-inter-tight font-medium"
                   style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.02em', maxWidth: '28rem' }}>
-                  Оставьте контакты — пришлём последний выпуск полностью, без сокращений, и подключим к рассылке по вторникам.
+                  Оставьте контакты — пришлём последний выпуск полностью, без сокращений, и подключим к рассылке по средам.
                 </p>
 
                 <NLLeadForm

@@ -1,21 +1,11 @@
 import { useScroll, useTransform, motion } from 'framer-motion'
 import { asset } from '../../lib/asset'
+import { FIGURES } from '../../lib/figures'
+import { LAST_ISSUE } from '../../lib/lastIssue'
 import NLLetterPreview from './NLLetterPreview'
 import NLLeadForm from './NLLeadForm'
 
 const heroBg = asset('/img/newsletter/hero-bg.png')
-
-/**
- * Freshness stamp under the hero form (client feedback 2026-07-23: "под формой маркер:
- * «Последний выпуск: 12 июля 2026, 8 апдейтов, 6 минут чтения»"). One constant so the
- * hero can never disagree with the issue actually sitting in the welcome email — bump it
- * with every send.
- */
-export const LAST_ISSUE = {
-  date: '12 июля 2026',
-  updates: '8 апдейтов',
-  reading: '6 минут чтения',
-}
 
 /** Reusable fade-up config for staggered hero elements */
 function fadeUp(delay: number) {
@@ -40,6 +30,30 @@ function LastIssueMarker({ className = '' }: { className?: string }) {
       <span>{LAST_ISSUE.updates}</span>
       <span aria-hidden>·</span>
       <span>{LAST_ISSUE.reading}</span>
+    </p>
+  )
+}
+
+/**
+ * Строка-доказательство под формой (ТЗ, Блок 1 — четвёртый элемент первого экрана после
+ * заголовка, подзаголовка и CTA).
+ *
+ * Те же цифры показаны в блоке «О платформе», но до него дочитывают единицы, а решение
+ * «оставлять ли адрес» принимается здесь. Значения берутся из общего модуля, поэтому два
+ * места на странице не могут разойтись.
+ */
+function ProofLine({ className = '' }: { className?: string }) {
+  return (
+    <p
+      className={`font-inter-tight font-medium flex flex-wrap items-center justify-center gap-x-2 gap-y-1 ${className}`}
+      style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--white-400)', letterSpacing: '-0.01em' }}
+    >
+      {FIGURES.map((f, i) => (
+        <span key={f.inline} className="flex items-center gap-x-2">
+          {i > 0 && <span aria-hidden style={{ color: 'var(--black-800)' }}>·</span>}
+          {f.inline}
+        </span>
+      ))}
     </p>
   )
 }
@@ -104,7 +118,7 @@ export default function NLHero() {
             <motion.p {...fadeUp(0.20)}
               className="font-inter-tight font-medium w-full"
               style={{ fontSize: 'var(--font-s)', lineHeight: 1.3, color: 'var(--white-400)', letterSpacing: '-0.28px' }}>
-              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждый вторник.
+              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждую среду.
             </motion.p>
           </div>
 
@@ -112,6 +126,7 @@ export default function NLHero() {
           <motion.div {...fadeUp(0.25)} className="w-full mt-[1.25rem] flex flex-col items-center gap-2">
             <NLLeadForm source="hero" note={null} />
             <LastIssueMarker className="text-center" />
+            <ProofLine className="text-center" />
           </motion.div>
         </div>
 
@@ -168,7 +183,7 @@ export default function NLHero() {
             <motion.p {...fadeUp(0.20)}
               className="font-inter-tight font-medium"
               style={{ fontSize: 'clamp(1rem,1.4vw,1.25rem)', lineHeight: 1.3, color: 'var(--white-400)', letterSpacing: '-0.02em', maxWidth: 600 }}>
-              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждый вторник.
+              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждую среду.
             </motion.p>
           </div>
 
@@ -177,6 +192,7 @@ export default function NLHero() {
           <motion.div {...fadeUp(0.25)} className="w-full flex flex-col items-center gap-3" style={{ maxWidth: '38.75rem' }}>
             <NLLeadForm source="hero" note={null} />
             <LastIssueMarker />
+            <ProofLine />
           </motion.div>
         </div>
 

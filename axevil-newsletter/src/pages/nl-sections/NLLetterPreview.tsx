@@ -1,4 +1,5 @@
 ﻿import { asset } from '../../lib/asset'
+import { LAST_ISSUE } from '../../lib/lastIssue'
 
 const letterLogo = asset('/img/newsletter/letter-logo.svg')
 
@@ -47,13 +48,13 @@ export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
                   className="font-inter-tight font-semibold text-white whitespace-nowrap shrink-0"
                   style={{ fontSize: s(7.525), lineHeight: 1.2, letterSpacing: -s(0.15) }}
                 >
-                  Axevil Digest · вып. №47
+                  Axevil Digest · вып. №{LAST_ISSUE.number}
                 </span>
                 <span
                   className="font-inter-tight font-medium shrink-0"
                   style={{ fontSize: s(8.6), lineHeight: 1.3, color: 'var(--white-300)', letterSpacing: -s(0.172) }}
                 >
-                  12.05.2026 · 09:00 CET
+                  {LAST_ISSUE.date}
                 </span>
               </div>
 
@@ -142,7 +143,7 @@ export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
                   className="font-inter-tight font-medium text-center whitespace-nowrap"
                   style={{ fontSize: s(8.6), lineHeight: 1.3, color: 'var(--white-300)', letterSpacing: -s(0.172) }}
                 >
-                  Каждый вторник в 9:00 CET полный выпуск на почте
+                  Каждую среду полный выпуск на почте
                 </p>
               </div>
             </div>

@@ -199,7 +199,7 @@ export default function NLForm() {
             </h2>
             <p className="font-inter-tight font-medium"
               style={{ fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)", lineHeight: 1.35, color: "rgba(255,255,255,0.5)", letterSpacing: "-0.36px", maxWidth: "31.25rem" }}>
-              Welcome-выпуск + инструменты — в почте через 60 секунд. Отписка в один клик
+              Последний выпуск — в почте через 60 секунд. Отписка в один клик
             </p>
           </div>
 
@@ -221,7 +221,7 @@ export default function NLForm() {
               } />
               <Field error={errors.name} input={
                 <input type="text" required autoComplete="given-name"
-                  placeholder="Александр |" value={form.name}
+                  placeholder="Александр" value={form.name}
                   onChange={e => { setForm(f => ({ ...f, name: e.target.value })); onInput() }}
                   className={inputClass(!!errors.name)} />
               } />
@@ -337,7 +337,7 @@ function SuccessState() {
         </h3>
         <p className="font-inter-tight font-medium"
           style={{ fontSize: 'clamp(0.8125rem, 1vw, 0.9375rem)', lineHeight: 1.5, color: 'rgba(255,255,255,0.4)' }}>
-          Welcome-выпуск придёт на почту в течение 60 секунд.
+          Последний выпуск придёт на почту в течение 60 секунд.
         </p>
       </div>
     </motion.div>
