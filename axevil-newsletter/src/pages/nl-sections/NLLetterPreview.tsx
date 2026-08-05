@@ -145,17 +145,10 @@ export default function NLLetterPreview({ scale = 1, bare = false }: { scale?: n
                 </div>
               </div>
 
-              <div
-                className="flex items-start justify-center w-full"
-                style={{ borderTop: `${s(0.538)}px solid #202020`, paddingTop: s(8.6) }}
-              >
-                <p
-                  className="font-inter-tight font-medium text-center whitespace-nowrap"
-                  style={{ fontSize: s(8.6), lineHeight: 1.3, color: 'var(--white-300)', letterSpacing: -s(0.172) }}
-                >
-                  Каждую среду полный выпуск на почте
-                </p>
-              </div>
+              {/* Здесь была подпись «Каждую среду полный выпуск на почте». Убрана: в сцене
+                  первого экрана низ письма закрывает ближний камень, и подпись читалась
+                  наполовину. Мысль не потеряна — про среду сказано и в подзаголовке первого
+                  экрана, и в маркере последнего выпуска под формой. */}
             </div>
           </div>
         </div>
