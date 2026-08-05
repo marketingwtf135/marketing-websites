@@ -190,7 +190,7 @@ export default function NLForm() {
           <div className="flex gap-2 font-inter-tight font-medium items-center justify-center whitespace-nowrap"
             style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.36px' }}>
             <span style={{ color: 'var(--black-800)' }}>8.0</span>
-            <span style={{ color: 'var(--black-900)' }}>Подписка на дайджест</span>
+            <span style={{ color: 'var(--black-900)' }}>Подписка на дайджест</span>
           </div>
           <div className="flex flex-col gap-4 items-center text-center">
             <h2 className="font-inter-tight font-semibold text-transparent bg-clip-text"
@@ -199,7 +199,7 @@ export default function NLForm() {
             </h2>
             <p className="font-inter-tight font-medium"
               style={{ fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)", lineHeight: 1.35, color: "rgba(255,255,255,0.5)", letterSpacing: "-0.36px", maxWidth: "31.25rem" }}>
-              Последний выпуск — в почте через 60 секунд. Отписка в один клик
+              Последний выпуск — в почте через 60 секунд. Отписка в один клик
             </p>
           </div>
 
@@ -244,11 +244,11 @@ export default function NLForm() {
                 </div>
               </div>
 
-              <OwnButton type="submit" disabled={loading} label={loading ? 'Отправка…' : 'Подписаться на дайджест'} />
+              <OwnButton type="submit" disabled={loading} label={loading ? 'Отправка…' : 'Подписаться на дайджест'} />
 
               <p className="font-inter-tight font-medium text-center w-full"
                 style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--white-400)', mixBlendMode: 'difference' }}>
-                Отписаться — одной кнопкой в любом письме. Подписываясь, соглашаетесь с обработкой данных
+                Отписаться — одной кнопкой в любом письме. Подписываясь, соглашаетесь с обработкой данных
               </p>
             </form>
           )}
@@ -337,7 +337,7 @@ function SuccessState() {
         </h3>
         <p className="font-inter-tight font-medium"
           style={{ fontSize: 'clamp(0.8125rem, 1vw, 0.9375rem)', lineHeight: 1.5, color: 'rgba(255,255,255,0.4)' }}>
-          Последний выпуск придёт на почту в течение 60 секунд.
+          Последний выпуск придёт на почту в течение 60 секунд.
         </p>
       </div>
     </motion.div>

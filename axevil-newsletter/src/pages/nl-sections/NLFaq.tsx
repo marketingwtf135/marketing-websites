@@ -18,18 +18,18 @@ import { useState } from 'react'
 const QUESTIONS = [
   {
     q: 'Какая цена?',
-    a: 'По инвайту для WM, family offices и accredited HNWI. Индивидуальные условия по запросу.',
+    a: 'По инвайту для WM, family offices и accredited HNWI. Индивидуальные условия по запросу.',
   },
   {
-    q: 'Что приходит сразу?',
-    a: 'Последний вышедший выпуск — он не публикуется в паблике. Дальше первый регулярный выпуск придёт в ближайшую среду.',
+    q: 'Что приходит сразу?',
+    a: 'Последний вышедший выпуск — он не публикуется в паблике. Дальше первый регулярный выпуск придёт в ближайшую среду.',
   },
   {
-    q: 'Как часто потом?',
-    a: 'Минимум 1 раз в неделю, по средам. Иногда дополнительный выпуск при крупном событии.',
+    q: 'Как часто потом?',
+    a: 'Минимум 1 раз в неделю, по средам. Иногда дополнительный выпуск при крупном событии.',
   },
   {
-    q: 'Чем отличается от PDF-лендинга?',
+    q: 'Чем отличается от PDF-лендинга?',
     a: 'PDF — разовая загрузка квартального отчёта. Дайджест — постоянный поток.',
   },
   {
@@ -38,7 +38,7 @@ const QUESTIONS = [
   },
   {
     q: 'Можно отписаться?',
-    a: 'Да, одним кликом в любом письме.',
+    a: 'Да, одним кликом в любом письме.',
   },
 ]
 
@@ -73,7 +73,7 @@ export default function NLFaq() {
             <div className="flex gap-2 font-inter-tight font-medium items-center justify-center whitespace-nowrap"
               style={{ fontSize: 'clamp(14px, 1.1vw, 18px)', lineHeight: 1.35, letterSpacing: '-0.02em' }}>
               <span style={{ color: 'var(--black-800)' }}>6.0</span>
-              <span style={{ color: 'var(--black-900)' }}>Вопросы и ответы</span>
+              <span style={{ color: 'var(--black-900)' }}>Вопросы и ответы</span>
             </div>
             <h2 className="font-inter-tight font-semibold text-transparent bg-clip-text text-center"
               style={{ fontSize: 'clamp(2.25rem, 4.4vw, 4rem)', lineHeight: 1, letterSpacing: '-0.02em', backgroundImage: 'linear-gradient(139.406deg, rgb(162,162,162) 15.766%, rgb(255,255,255) 49.286%, rgb(162,162,162) 82.806%)', maxWidth: 1000 }}>

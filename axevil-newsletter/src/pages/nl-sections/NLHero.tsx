@@ -331,14 +331,14 @@ export default function NLHero() {
             <motion.h1 {...fadeUp(0.15)}
               className="font-inter-tight font-semibold text-transparent bg-clip-text w-full"
               style={{ fontSize: 'clamp(1.75rem, 8vw, 2.25rem)', lineHeight: 1.05, letterSpacing: '-0.72px', backgroundImage: 'linear-gradient(103.344deg, rgb(162,162,162) 8.73%, rgb(255,255,255) 50.65%, rgb(162,162,162) 92.57%)' }}>
-              Дайджест частного рынка — раз в неделю на почту
+              Дайджест частного рынка — раз в неделю на почту
             </motion.h1>
 
             {/* Paragraph */}
             <motion.p {...fadeUp(0.20)}
               className="font-inter-tight font-medium w-full"
               style={{ fontSize: 'var(--font-s)', lineHeight: 1.3, color: 'var(--white-400)', letterSpacing: '-0.28px' }}>
-              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждую среду.
+              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждую среду.
             </motion.p>
           </div>
 
@@ -424,14 +424,14 @@ export default function NLHero() {
             <motion.h1 {...fadeUp(0.15)}
               className="font-inter-tight font-semibold text-transparent bg-clip-text"
               style={{ fontSize: 'clamp(1.875rem, 3.4vw, 3.5rem)', lineHeight: 1.02, letterSpacing: '-0.02em', backgroundImage: 'linear-gradient(116.594deg, rgb(162,162,162) 8.73%, rgb(255,255,255) 50.65%, rgb(162,162,162) 92.57%)' }}>
-              Дайджест частного рынка —<br />раз в неделю на почту
+              Дайджест частного рынка —<br />раз в неделю на почту
             </motion.h1>
 
             {/* Paragraph */}
             <motion.p {...fadeUp(0.20)}
               className="font-inter-tight font-medium"
               style={{ fontSize: 'clamp(1rem,1.4vw,1.25rem)', lineHeight: 1.35, color: 'var(--white-400)', letterSpacing: '-0.02em', maxWidth: '34rem' }}>
-              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждую среду.
+              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждую среду.
             </motion.p>
           </div>
 

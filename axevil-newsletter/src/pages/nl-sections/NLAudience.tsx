@@ -8,37 +8,49 @@ import { asset } from '../../lib/asset'
  * use-case per роль"). `useCase` is the client's own phrasing; `body` says how the issue
  * delivers it.
  *
- * Card icons — analytics → wealth manager, portfolio → family office, persons → banker.
+ * Иконки. Были big-icon-*.svg — плоские белые фигуры с серым градиентом: вектор, то есть
+ * технически резкие, но выглядели дёшево (Татьяна, 2026-08-05: «иконки плохого качества»).
+ * Заменены на фирменный набор из стекла на чёрном, который уже лежал в проекте и нигде не
+ * использовался. Соответствие по смыслу карточки: график с трендом — недельный апдейт для
+ * звонков, папка с отчётами — систематическое покрытие, слои документов — аргументарий.
+ *
+ * Оговорка по разрешению: у этих файлов 194-249 px, а карточка рисует иконку на 88-120 px,
+ * то есть на телефоне с тройной плотностью нужно ~264 px. На тёмном стекле с тонкими
+ * светлыми кромками недостача почти не читается, но если понадобится идеальная резкость —
+ * нужны выгрузки 2x/3x из макета.
  */
 const CARDS = [
   {
     num: '1.0',
-    icon: asset('/img/newsletter/big-icon-analytics.svg'),
+    icon: asset('/img/newsletter/icon-3d-graphic.png'),
     title: 'Wealth-менеджеры',
-    useCase: 'Еженедельный апдейт для клиентских звонков',
-    body: 'В среду утром у вас на руках лидерборд secondary, открывшиеся тендер-оферы и новые раунды — готовая повестка на неделю клиентских разговоров.',
+    useCase: 'Еженедельный апдейт для клиентских звонков',
+    body: 'В среду утром у вас на руках лидерборд secondary, открывшиеся тендер-оферы и новые раунды — готовая повестка на неделю клиентских разговоров.',
   },
   {
     num: '2.0',
-    icon: asset('/img/newsletter/big-icon-portfolio.svg'),
+    icon: asset('/img/newsletter/icon-3d-documents.png'),
     title: 'Family offices',
-    useCase: 'Мониторинг pre-IPO без штата аналитиков',
-    body: '200+ частных компаний в систематическом покрытии: переоценки, раунды, смена мультипликаторов. Слежение за рынком, под которое не нужно нанимать отдельную команду.',
+    useCase: 'Мониторинг pre-IPO без штата аналитиков',
+    body: '200+ частных компаний в систематическом покрытии: переоценки, раунды, смена мультипликаторов. Слежение за рынком, под которое не нужно нанимать отдельную команду.',
   },
   {
     num: '3.0',
-    icon: asset('/img/newsletter/big-icon-persons.svg'),
+    icon: asset('/img/newsletter/icon-3d-news.png'),
     title: 'Private bankers',
-    useCase: 'Аргументарий для upsell-а pre-IPO обёрток',
-    body: 'Цифры, сделки и контекст, на которые можно ссылаться в разговоре о структурных решениях: что изменилось за неделю и почему это повод вернуться к клиенту.',
+    useCase: 'Аргументарий для upsell-а pre-IPO обёрток',
+    body: 'Цифры, сделки и контекст, на которые можно ссылаться в разговоре о структурных решениях: что изменилось за неделю и почему это повод вернуться к клиенту.',
   },
 ]
 
 export default function NLAudience() {
   return (
     <section id="nl-audience" className="relative w-full bg-page-bg">
-      {/* Mobile: pt-section-y 120px. Desktop: 200px top, 100px bottom (Figma). */}
-      <div className="pt-section-y mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-0 pb-[3.75rem] sm:pb-[5rem] lg:pt-[12.5rem] lg:pb-[6.25rem]">
+      {/* Верхний отступ на мобильной вёрстке уменьшен со 120 до 64 px: между сценой первого
+          экрана и этой секцией набегало 166 px пустоты — 38 px хвоста самой сцены плюс 128 px
+          отступа. Стало около 110 px. На планшете и десктопе отступы прежние: там сцена
+          заканчивается иначе и такой пустоты не возникает. */}
+      <div className="pt-16 sm:pt-section-y mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-0 pb-[3.75rem] sm:pb-[5rem] lg:pt-[12.5rem] lg:pb-[6.25rem]">
 
         {/* Heading — has inner padding on desktop */}
         <div className="flex flex-col gap-6 items-center mb-10 sm:mb-12 lg:px-[80px]">
@@ -54,11 +66,11 @@ export default function NLAudience() {
               backgroundImage: 'linear-gradient(103.344deg, rgb(162,162,162) 15.766%, rgb(255,255,255) 49.286%, rgb(162,162,162) 82.806%)',
               whiteSpace: 'pre-line',
             }}>
-            {'Аналитика для тех, \nкто работает с частным рынком'}
+            {'Аналитика для тех, \nкто работает с частным рынком'}
           </h2>
           <p className="hidden md:block font-inter-tight font-medium text-center"
             style={{ fontSize: 'var(--font-l)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.36px', maxWidth: 580 }}>
-            Один и тот же выпуск закрывает три разные задачи — в зависимости от того, с какой стороны стола вы работаете с частным рынком.
+            Один и тот же выпуск закрывает три разные задачи — в зависимости от того, с какой стороны стола вы работаете с частным рынком.
           </p>
         </div>
 

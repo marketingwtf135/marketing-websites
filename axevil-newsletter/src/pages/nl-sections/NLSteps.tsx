@@ -6,8 +6,8 @@
  * хуже, чем не обещать его вовсе.
  */
 const STEPS = [
-  { num: '1.0', time: '10 секунд', title: 'Оставляете email', body: 'Email и — по желанию — телефон. Имя, должность и AUM можно указать позже, в форме внизу страницы.' },
-  { num: '2.0', time: '30 секунд', title: 'Подтверждаете подписку', body: 'Письмо с подтверждением приходит сразу. Один клик — и адрес в списке.' },
+  { num: '1.0', time: '10 секунд', title: 'Оставляете email', body: 'Email и — по желанию — телефон. Имя, должность и AUM можно указать позже, в форме внизу страницы.' },
+  { num: '2.0', time: '30 секунд', title: 'Подтверждаете подписку', body: 'Письмо с подтверждением приходит сразу. Один клик — и адрес в списке.' },
   { num: '3.0', time: 'сразу после подтверждения', title: 'Первый выпуск', body: 'Последний вышедший выпуск приходит сразу, дальше — каждую среду.' },
 ]
 
@@ -23,11 +23,11 @@ export default function NLSteps() {
             <div className="flex gap-2 font-inter-tight font-medium items-center justify-center whitespace-nowrap"
               style={{ fontSize: 'clamp(14px, 1.1vw, 18px)', lineHeight: 1.35, letterSpacing: '-0.02em' }}>
               <span style={{ color: 'var(--black-800)' }}>5.0</span>
-              <span style={{ color: 'var(--black-900)' }}>Как это работает</span>
+              <span style={{ color: 'var(--black-900)' }}>Как это работает</span>
             </div>
             <h2 className="font-inter-tight font-semibold text-transparent bg-clip-text text-center"
               style={{ fontSize: 'clamp(2.25rem, 4.4vw, 4rem)', lineHeight: 1, letterSpacing: '-0.02em', backgroundImage: 'linear-gradient(139.406deg, rgb(162,162,162) 15.766%, rgb(255,255,255) 49.286%, rgb(162,162,162) 82.806%)', maxWidth: 1000 }}>
-              3 шага до первого выпуска
+              3 шага до первого выпуска
             </h2>
           </div>
           <p className="font-inter-tight font-medium text-center"
@@ -69,7 +69,7 @@ export default function NLSteps() {
           {/* Footer note — 10px mobile, 12px desktop */}
           <p className="font-inter-tight font-medium text-center whitespace-nowrap"
             style={{ fontSize: 'clamp(10px, 0.83vw, 12px)', lineHeight: 1.3, color: 'var(--white-400)' }}>
-            Полный выпуск на почте каждую среду
+            Полный выпуск на почте каждую среду
           </p>
         </div>
       </div>

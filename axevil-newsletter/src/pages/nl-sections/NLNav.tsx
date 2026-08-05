@@ -87,8 +87,8 @@ function useNavVisible() {
 const NAV_LINKS = [
   { label: 'Состав выпуска',   id: 'nl-contents'     },
   { label: 'Пример выпуска',   id: 'nl-methodology'  },
-  { label: 'Как это работает', id: 'nl-steps'        },
-  { label: 'О платформе',      id: 'nl-about'        },
+  { label: 'Как это работает', id: 'nl-steps'        },
+  { label: 'О платформе',      id: 'nl-about'        },
 ]
 
 const NAV_IDS = NAV_LINKS.map(l => l.id)

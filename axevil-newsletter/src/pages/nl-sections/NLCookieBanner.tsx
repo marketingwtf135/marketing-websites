@@ -60,7 +60,7 @@ export default function NLCookieBanner() {
     <div
       className="fixed bottom-0 left-0 right-0 z-[60] sm:bottom-4 sm:left-4 sm:right-auto sm:max-w-[25rem]"
       role="dialog"
-      aria-label="Согласие на использование cookie"
+      aria-label="Согласие на использование cookie"
       style={{
         background: 'var(--black-300)',
         border: '1px solid rgba(255,255,255,0.1)',
@@ -72,7 +72,7 @@ export default function NLCookieBanner() {
         className="font-inter-tight font-medium mb-4"
         style={{ fontSize: 'var(--font-xs)', lineHeight: 1.5, color: 'var(--white-300)', letterSpacing: '-0.01em' }}
       >
-        Мы используем cookie для аналитики и корректной работы сайта. Нажимая «Принять», вы соглашаетесь с{' '}
+        Мы используем cookie для аналитики и корректной работы сайта. Нажимая «Принять», вы соглашаетесь с{' '}
         <a
           href={asset('/legal/ru/cookies.html')}
           className="underline underline-offset-2 transition-colors hover:text-white"

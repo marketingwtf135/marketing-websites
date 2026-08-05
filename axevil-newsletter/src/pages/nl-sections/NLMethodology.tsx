@@ -55,7 +55,7 @@ export default function NLMethodology() {
             </h2>
             <p className="font-inter-tight font-medium text-center"
               style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.36px', maxWidth: 540 }}>
-              Лидерборд secondary, открывшиеся тендер-оферы, новые раунды, 1 sector deep-dive — всё в одном письме.
+              Лидерборд secondary, открывшиеся тендер-оферы, новые раунды, 1 sector deep-dive — всё в одном письме.
             </p>
           </div>
 
@@ -104,7 +104,7 @@ export default function NLMethodology() {
 
                 <p className="font-inter-tight font-medium"
                   style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.02em', maxWidth: '28rem' }}>
-                  Оставьте контакты — пришлём последний выпуск полностью, без сокращений, и подключим к рассылке по средам.
+                  Оставьте контакты — пришлём последний выпуск полностью, без сокращений, и подключим к рассылке по средам.
                 </p>
 
                 <NLLeadForm

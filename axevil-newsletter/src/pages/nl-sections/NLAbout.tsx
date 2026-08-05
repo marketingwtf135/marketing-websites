@@ -29,7 +29,7 @@ export default function NLAbout() {
           <div className="flex gap-[0.5rem] font-inter-tight font-medium items-center justify-center whitespace-nowrap"
             style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.36px' }}>
             <span style={{ color: 'var(--black-800)' }}>7.0</span>
-            <span style={{ color: 'var(--black-900)' }}>О платформе</span>
+            <span style={{ color: 'var(--black-900)' }}>О платформе</span>
           </div>
           <div className="flex flex-col gap-[1rem] items-center">
             <h2 className="font-inter-tight font-semibold text-transparent bg-clip-text whitespace-nowrap"
@@ -38,7 +38,7 @@ export default function NLAbout() {
             </h2>
             <p className="font-inter-tight font-medium text-center"
               style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.36px', maxWidth: '35.625rem' }}>
-              Axevil — технологическая платформа, предоставляющая профессиональным инвесторам и управляющим капиталом прямой доступ к лучшим инвестиционным возможностям частного рынка.
+              Axevil — технологическая платформа, предоставляющая профессиональным инвесторам и управляющим капиталом прямой доступ к лучшим инвестиционным возможностям частного рынка.
             </p>
           </div>
         </div>

@@ -74,13 +74,13 @@ export default function NLLetterPreview({ scale = 1, bare = false }: { scale?: n
                   className="font-inter-tight font-semibold text-white w-full"
                   style={{ fontSize: s(19.35), lineHeight: 1.1 }}
                 >
-                  AI Infrastructure: новая $200B гонка за compute — кто впереди и куда смотрят LP
+                  AI Infrastructure: новая $200B гонка за compute — кто впереди и куда смотрят LP
                 </p>
                 <p
                   className="font-inter-tight font-medium w-full"
                   style={{ fontSize: s(9.675), lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: -s(0.1935) }}
                 >
-                  За последние 12 месяцев AI Infrastructure-сегмент привлёк $80+ млрд венчурного капитала — больше, чем все остальные вертикали вместе взятые.
+                  За последние 12 месяцев AI Infrastructure-сегмент привлёк $80+ млрд венчурного капитала — больше, чем все остальные вертикали вместе взятые.
                 </p>
               </div>
             </div>
@@ -91,13 +91,13 @@ export default function NLLetterPreview({ scale = 1, bare = false }: { scale?: n
                 className="font-inter-tight font-semibold text-white w-full"
                 style={{ fontSize: s(12.9), lineHeight: 1.1, letterSpacing: -s(0.258) }}
               >
-                Что это значит для портфеля:
+                Что это значит для портфеля:
               </p>
               <p
                 className="font-inter-tight font-medium w-full"
                 style={{ fontSize: s(8.6), lineHeight: 1.3, color: 'var(--white-300)', letterSpacing: -s(0.172) }}
               >
-                3 уровня экспозиции: GPU-производители (NVDA, AMD), neoclouds (CoreWeave, Lambda), модель-вертикаль (Anthropic, OpenAI). Каждый уровень — свой риск-профиль и горизонт.
+                3 уровня экспозиции: GPU-производители (NVDA, AMD), neoclouds (CoreWeave, Lambda), модель-вертикаль (Anthropic, OpenAI). Каждый уровень — свой риск-профиль и горизонт.
               </p>
             </div>
 
@@ -125,10 +125,10 @@ export default function NLLetterPreview({ scale = 1, bare = false }: { scale?: n
                   className="font-inter-tight font-semibold text-white w-full"
                   style={{ fontSize: s(12.9), lineHeight: 1.1, letterSpacing: -s(0.258) }}
                 >
-                  В этом выпуске
+                  В этом выпуске
                 </p>
                 <div className="grid w-full" style={{ gridTemplateColumns: '1fr 1fr', gap: s(4.3) }}>
-                  {['События недели', 'Рейтинги и лидеры', 'Тендер-оферы и окна входа', 'Новые инвест-идеи'].map(name => (
+                  {['События недели', 'Рейтинги и лидеры', 'Тендер-оферы и окна входа', 'Новые инвест-идеи'].map(name => (
                     <div
                       key={name}
                       className="flex items-center min-w-0"

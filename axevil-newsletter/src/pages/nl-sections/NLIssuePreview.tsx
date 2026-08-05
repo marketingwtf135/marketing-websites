@@ -90,22 +90,22 @@ const ROWS: Record<NLIssuePreviewProps['variant'], { name: string; meta: string;
     { name: 'Databricks',meta: 'M&A: покупка data-стартапа',    value: 'M&A', tone: 'neutral' },
   ],
   ratings: [
-    { name: 'Anduril',   meta: 'объём сделок ×2 к прошлой неделе', value: '+12.4%', tone: 'up' },
+    { name: 'Anduril',   meta: 'объём сделок ×2 к прошлой неделе', value: '+12.4%', tone: 'up' },
     { name: 'Figma',     meta: 'спред bid/ask сузился',            value: '+6.1%',  tone: 'up' },
-    { name: 'Canva',     meta: 'без изменений в объёме',           value: '−2.8%',  tone: 'down' },
-    { name: 'Klarna',    meta: 'давление на мультипликатор',       value: '−5.3%',  tone: 'down' },
+    { name: 'Canva',     meta: 'без изменений в объёме',           value: '−2.8%',  tone: 'down' },
+    { name: 'Klarna',    meta: 'давление на мультипликатор',       value: '−5.3%',  tone: 'down' },
   ],
   // Ни доходностей, ни мультипликаторов: только статус офера и срок — то, что дайджест
   // действительно сообщает.
   deals: [
-    { name: 'Figma',   meta: 'окно входа на secondary', value: 'открыто',    tone: 'up' },
-    { name: 'Anduril', meta: 'сбор заявок до 05.08',    value: 'офер открыт', tone: 'neutral' },
+    { name: 'Figma',   meta: 'окно входа на secondary', value: 'открыто',    tone: 'up' },
+    { name: 'Anduril', meta: 'сбор заявок до 05.08',    value: 'офер открыт', tone: 'neutral' },
     { name: 'Klarna',  meta: 'офер закрылся 22.07',     value: 'закрыт',     tone: 'down' },
   ],
   ideas: [
     { name: 'AI Infrastructure', meta: '3 уровня экспозиции: GPU → neoclouds → модели', value: 'идея №1', tone: 'neutral' },
     { name: 'Defense tech',      meta: 'переоценка сектора после контрактов',           value: 'идея №2', tone: 'neutral' },
-    { name: 'Fintech-вторичка',  meta: 'дисконты к последнему раунду 20–40%',           value: 'идея №3', tone: 'neutral' },
+    { name: 'Fintech-вторичка',  meta: 'дисконты к последнему раунду 20–40%',           value: 'идея №3', tone: 'neutral' },
   ],
 }
 
