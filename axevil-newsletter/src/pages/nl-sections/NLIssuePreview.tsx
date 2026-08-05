@@ -16,15 +16,25 @@
  */
 
 interface NLIssuePreviewProps {
-  variant: 'events' | 'ratings' | 'tools' | 'ideas'
+  variant: 'events' | 'ratings' | 'deals' | 'ideas'
   className?: string
   style?: React.CSSProperties
 }
 
+/**
+ * Вариант `tools` («Трекер портфеля») удалён 2026-08-05. Он показывал демо-портфель с
+ * «2.1× MOIC», трекер доходности с «24% IRR» и калькулятор входа — Павел подтвердил, что
+ * ничего из этого в продукте нет, а показанная доходность вдобавок противоречила
+ * редполитике и дисклеймеру в футере.
+ *
+ * На его месте `deals` — тендер-оферы и окна входа. Это не новое обещание: тендер-оферы
+ * названы в подзаголовке первого экрана и в блоке «Кому полезен дайджест» («открывшиеся
+ * тендер-оферы») ещё до правок, а в реальном макете Pulse есть раздел «Открытые сделки».
+ */
 const HEADERS: Record<NLIssuePreviewProps['variant'], string> = {
   events:  'События недели',
   ratings: 'Лидерборд secondary',
-  tools:   'Трекер портфеля',
+  deals:   'Открытые оферы',
   ideas:   'Инвест-идеи недели',
 }
 
@@ -72,7 +82,9 @@ function Row({ name, meta, value, tone }: { name: string; meta: string; value: s
 
 const ROWS: Record<NLIssuePreviewProps['variant'], { name: string; meta: string; value: string; tone: Tone }[]> = {
   events: [
-    { name: 'SpaceX',    meta: 'тендер-офер открыт до 29.07', value: 'приём заявок', tone: 'neutral' },
+    // Тендер-офер отсюда убран: он стал темой отдельной карточки 3.0, и один и тот же
+    // раздел не должен показываться в двух миниатюрах.
+    { name: 'SpaceX',    meta: 'переоценка после нового раунда', value: 'переоценка', tone: 'up' },
     { name: 'Anthropic', meta: 'новый раунд, вторичка сузилась', value: 'раунд', tone: 'up' },
     { name: 'Stripe',    meta: 'обратный выкуп сотрудников',   value: 'buyback', tone: 'neutral' },
     { name: 'Databricks',meta: 'M&A: покупка data-стартапа',    value: 'M&A', tone: 'neutral' },
@@ -83,10 +95,12 @@ const ROWS: Record<NLIssuePreviewProps['variant'], { name: string; meta: string;
     { name: 'Canva',     meta: 'без изменений в объёме',           value: '−2.8%',  tone: 'down' },
     { name: 'Klarna',    meta: 'давление на мультипликатор',       value: '−5.3%',  tone: 'down' },
   ],
-  tools: [
-    { name: 'Демо-портфель', meta: '6 позиций · pre-IPO', value: '2.1× MOIC', tone: 'up' },
-    { name: 'Трекер доходности', meta: 'горизонт 24 месяца',  value: '24% IRR',  tone: 'up' },
-    { name: 'Калькулятор входа', meta: 'вход от $10K',        value: 'обновлён', tone: 'neutral' },
+  // Ни доходностей, ни мультипликаторов: только статус офера и срок — то, что дайджест
+  // действительно сообщает.
+  deals: [
+    { name: 'Figma',   meta: 'окно входа на secondary', value: 'открыто',    tone: 'up' },
+    { name: 'Anduril', meta: 'сбор заявок до 05.08',    value: 'офер открыт', tone: 'neutral' },
+    { name: 'Klarna',  meta: 'офер закрылся 22.07',     value: 'закрыт',     tone: 'down' },
   ],
   ideas: [
     { name: 'AI Infrastructure', meta: '3 уровня экспозиции: GPU → neoclouds → модели', value: 'идея №1', tone: 'neutral' },

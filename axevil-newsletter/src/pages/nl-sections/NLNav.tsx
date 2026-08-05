@@ -41,7 +41,21 @@ function useActiveSection(ids: string[]) {
       .map(id => document.getElementById(id))
       .filter((n): n is HTMLElement => Boolean(n))
     nodes.forEach(n => observer.observe(n))
-    return () => observer.disconnect()
+
+    // Первый экран не входит в наблюдаемые разделы, поэтому наверху странице ни один пункт
+    // не соответствует тому, что видно. Наблюдатель сам это не сбросит: он срабатывает
+    // только на пересечениях и у самого верха оставлял подсвеченным последний раздел, в
+    // котором читатель был. Отдельный сброс у верхней границы.
+    function clearAtTop() {
+      if (window.scrollY < 120) setActive(null)
+    }
+    clearAtTop()
+    window.addEventListener('scroll', clearAtTop, { passive: true })
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', clearAtTop)
+    }
   }, [ids.join(',')])
 
   return active

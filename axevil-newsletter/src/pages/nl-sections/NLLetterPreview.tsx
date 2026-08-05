@@ -93,42 +93,42 @@ export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
 
             {/* Calc card + footer */}
             <div className="flex flex-col items-start w-full" style={{ gap: s(25.8) }}>
+              {/* Здесь был блок «Calc доходности pre-IPO» с плашками «$10K вход»,
+                  «2.4× проектируемый MOIC» и «28% IRR (24m horizon)».
+
+                  Убран по двум причинам сразу. Такого калькулятора в продукте нет — Павел
+                  подтвердил это прямо (2026-08-04), и обещания инструментов уже сняты с
+                  формы, FAQ и «Состава выпуска». А проектируемая доходность вдобавок
+                  противоречила и Tone of voice из ТЗ («без обещаний доходностей»), и
+                  дисклеймеру, который мы сами поставили в футер: «прошлая доходность не
+                  гарантирует будущих результатов». Блок стоял на первом экране — то есть
+                  страница спорила сама с собой в самом видном месте.
+
+                  На его месте — состав выпуска теми же четырьмя названиями, что и в
+                  секции «Что в каждом выпуске». Ничего нового не обещаем, только
+                  повторяем уже сказанное на странице. */}
               <div
                 className="flex flex-col items-start w-full"
                 style={{ background: 'var(--black-400)', padding: s(12.9), borderRadius: s(8.6), gap: s(12.9) }}
               >
-                <div className="flex flex-col items-start w-full" style={{ gap: s(8.6) }}>
-                  <p
-                    className="font-inter-tight font-semibold text-white w-full"
-                    style={{ fontSize: s(12.9), lineHeight: 1.1, letterSpacing: -s(0.258) }}
-                  >
-                    Calc доходности pre-IPO
-                  </p>
-                  <p
-                    className="font-inter-tight font-medium w-full"
-                    style={{ fontSize: s(8.6), lineHeight: 1.3, color: 'var(--white-300)', letterSpacing: -s(0.172) }}
-                  >
-                    3 уровня экспозиции: GPU, neoclouds, модель-вертикаль. Каждый уровень — свой риск-профиль.
-                  </p>
-                </div>
-                <div className="flex items-start w-full" style={{ gap: s(4.3) }}>
-                  {[['$10K','Вход на secondary'],['2.4×','Проектируемый MOIC'],['28%','IRR (24m horizon)']].map(([val, label]) => (
+                <p
+                  className="font-inter-tight font-semibold text-white w-full"
+                  style={{ fontSize: s(12.9), lineHeight: 1.1, letterSpacing: -s(0.258) }}
+                >
+                  В этом выпуске
+                </p>
+                <div className="grid w-full" style={{ gridTemplateColumns: '1fr 1fr', gap: s(4.3) }}>
+                  {['События недели', 'Рейтинги и лидеры', 'Тендер-оферы и окна входа', 'Новые инвест-идеи'].map(name => (
                     <div
-                      key={val}
-                      className="flex flex-col flex-1 items-start min-w-0"
-                      style={{ background: 'var(--black-600)', padding: s(8.6), borderRadius: s(8.6), gap: s(4.3) }}
+                      key={name}
+                      className="flex items-center min-w-0"
+                      style={{ background: 'var(--black-600)', padding: s(8.6), borderRadius: s(8.6) }}
                     >
                       <span
-                        className="font-inter-tight font-semibold text-white whitespace-nowrap"
-                        style={{ fontSize: s(10.75), lineHeight: 1.3, letterSpacing: -s(0.215) }}
+                        className="font-inter-tight font-medium text-white"
+                        style={{ fontSize: s(8.6), lineHeight: 1.25, letterSpacing: -s(0.172) }}
                       >
-                        {val}
-                      </span>
-                      <span
-                        className="font-inter-tight font-medium"
-                        style={{ fontSize: s(7.525), lineHeight: 1.3, color: 'var(--white-400)' }}
-                      >
-                        {label}
+                        {name}
                       </span>
                     </div>
                   ))}
