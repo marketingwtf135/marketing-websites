@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { useScroll, useTransform, motion } from 'framer-motion'
 import { asset } from '../../lib/asset'
 import { FIGURES } from '../../lib/figures'
@@ -50,11 +51,14 @@ function ProofLine({ className = '' }: { className?: string }) {
       className={`font-inter-tight font-medium flex flex-wrap items-center gap-x-2 gap-y-1 ${className}`}
       style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--white-400)', letterSpacing: '-0.01em' }}
     >
+      {/* Разделитель — самостоятельный элемент, а не часть следующего показателя. Когда
+          строка переносится (на 1024 она не влезает в одну), точка остаётся в конце
+          предыдущей строки, а не открывает новую. */}
       {FIGURES.map((f, i) => (
-        <span key={f.inline} className="flex items-center gap-x-2">
+        <Fragment key={f.inline}>
           {i > 0 && <span aria-hidden style={{ color: 'var(--black-800)' }}>·</span>}
-          {f.inline}
-        </span>
+          <span className="whitespace-nowrap">{f.inline}</span>
+        </Fragment>
       ))}
     </p>
   )
@@ -205,11 +209,15 @@ export default function NLHero() {
           </motion.div>
 
           <div className="flex flex-col items-start gap-6 text-left w-full">
-            {/* Heading — ширину задаёт колонка, отдельный maxWidth больше не нужен */}
+            {/* Heading — ширину задаёт колонка, отдельный maxWidth больше не нужен.
+                Перенос после тире проставлен вручную: браузер сам ломал строку после «раз
+                в», и предлог оставался висеть в конце первой строки. Мобильный заголовок
+                отдельный (см. блок выше), поэтому здесь достаточно обычного <br> без
+                адаптивных классов. */}
             <motion.h1 {...fadeUp(0.15)}
               className="font-inter-tight font-semibold text-transparent bg-clip-text"
-              style={{ fontSize: 'clamp(2.25rem, 3.4vw, 3.5rem)', lineHeight: 1.02, letterSpacing: '-0.02em', backgroundImage: 'linear-gradient(116.594deg, rgb(162,162,162) 8.73%, rgb(255,255,255) 50.65%, rgb(162,162,162) 92.57%)' }}>
-              Дайджест частного рынка — раз в неделю на почту
+              style={{ fontSize: 'clamp(1.875rem, 3.4vw, 3.5rem)', lineHeight: 1.02, letterSpacing: '-0.02em', backgroundImage: 'linear-gradient(116.594deg, rgb(162,162,162) 8.73%, rgb(255,255,255) 50.65%, rgb(162,162,162) 92.57%)' }}>
+              Дайджест частного рынка —<br />раз в неделю на почту
             </motion.h1>
 
             {/* Paragraph */}
@@ -230,17 +238,18 @@ export default function NLHero() {
         </div>
 
         {/* Макет письма — правая колонка.
-            scale 1 вместо прежних 1.188: при 1.188 письмо шириной 471 px не влезало в
-            правую колонку на 1024 (там на неё остаётся ~430 px). Один масштаб на все
-            разрешения вместо машинерии с адаптивным — письму больше не с чем конкурировать
-            за место, оно стоит в своей колонке. */}
+            Масштаб подобран по самому узкому десктопу. Правая колонка не сжимается
+            (shrink-0), поэтому чем крупнее письмо, тем меньше остаётся левой: на 1024 при
+            1.12 ей достаётся ~450 px, и форма всё ещё держит email с телефоном в одном
+            ряду. Прежние 1.188 столько не оставляли. Один масштаб на все разрешения —
+            письму больше не с чем конкурировать за место, оно стоит в своей колонке. */}
         <motion.div
           className="shrink-0"
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.45, ease: [0.4, 0, 0.2, 1] }}
         >
-          <NLLetterPreview scale={1} />
+          <NLLetterPreview scale={1.12} />
         </motion.div>
       </div>
     </section>
