@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useScroll, useTransform, motion } from 'framer-motion'
 import { asset } from '../../lib/asset'
-import NLLetterPreview from './NLLetterPreview'
+import NLDevice from './NLDevice'
 import NLLeadForm from './NLLeadForm'
 import { LAST_ISSUE } from '../../lib/lastIssue'
 
@@ -55,7 +55,11 @@ export default function NLMethodology() {
             </h2>
             <p className="font-inter-tight font-medium text-center"
               style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.36px', maxWidth: 540 }}>
-              Лидерборд secondary, открывшиеся тендер-оферы, новые раунды, 1 sector deep-dive — всё в одном письме.
+              {/* Было «1 sector deep-dive» — остаток от ТЗ. Павел сказал, что sector deep-dive
+                  не будет в каждом письме, и в «Составе выпуска» его уже нет; здесь упоминание
+                  осталось от прошлой чистки. Заменено на раздел, который есть всегда. */}
+              Лидерборд secondary, открывшиеся тендер-оферы, новые раунды,
+              новые инвест-идеи — всё в одном письме.
             </p>
           </div>
 
@@ -116,13 +120,15 @@ export default function NLMethodology() {
                 />
               </div>
 
-              {/* Letter — one render per breakpoint, the component sizes in px. Client
-                  2026-07-27 follow-up: not an overlap — just more room above it, gap
-                  spacing-4 (4rem), lower than the ask block rather than pulled onto it. */}
+              {/* Планшет с письмом. Раньше здесь было письмо в собственной рамке из padding
+                  и border, по три фиксированных масштаба на breakpoint. Теперь тот же мокап,
+                  что на первом экране, а письмо внутри подстраивается под экран само —
+                  поэтому хватает одной ширины на clamp вместо трёх вариантов.
+                  Ширины подобраны под прежние размеры письма: 293 px на мобильном, 485 px на
+                  широком экране, плюс поправка на рамку (экран занимает 90.26% планшета).
+                  Client 2026-07-27: отступ сверху 4rem, письмо ниже блока с призывом. */}
               <div className="flex justify-center w-full" style={{ ...clip, marginTop: '4rem' }}>
-                <div className="lg:hidden shrink-0"><NLLetterPreview scale={0.845} /></div>
-                <div className="hidden lg:block xl:hidden shrink-0"><NLLetterPreview scale={1.05} /></div>
-                <div className="hidden xl:block shrink-0"><NLLetterPreview scale={1.4} /></div>
+                <NLDevice style={{ width: 'clamp(325px, 36vw, 537px)' }} />
               </div>
             </div>
           </div>
