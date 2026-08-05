@@ -16,11 +16,13 @@ function fadeUp(delay: number) {
   }
 }
 
-/** Last-issue marker — dot · date · updates · reading time. */
+/** Last-issue marker — dot · date · updates · reading time.
+ *  Выравнивание задаётся снаружи: в мобильной вёрстке по центру, в десктопной колонке
+ *  по левому краю. */
 function LastIssueMarker({ className = '' }: { className?: string }) {
   return (
     <p
-      className={`font-inter-tight font-medium flex flex-wrap items-center justify-center gap-x-2 gap-y-1 ${className}`}
+      className={`font-inter-tight font-medium flex flex-wrap items-center gap-x-2 gap-y-1 ${className}`}
       style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--white-400)', letterSpacing: '-0.01em' }}
     >
       <span className="shrink-0 block rounded-full" aria-hidden
@@ -45,7 +47,7 @@ function LastIssueMarker({ className = '' }: { className?: string }) {
 function ProofLine({ className = '' }: { className?: string }) {
   return (
     <p
-      className={`font-inter-tight font-medium flex flex-wrap items-center justify-center gap-x-2 gap-y-1 ${className}`}
+      className={`font-inter-tight font-medium flex flex-wrap items-center gap-x-2 gap-y-1 ${className}`}
       style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--white-400)', letterSpacing: '-0.01em' }}
     >
       {FIGURES.map((f, i) => (
@@ -86,6 +88,22 @@ export default function NLHero() {
         </motion.div>
       </motion.div>
 
+      {/* ── Затемняющая подложка под текст ──
+          Фон первого экрана — фотография камня, и её яркость по кадру гуляет. Пока текст
+          стоял по центру, он попадал на тёмную часть; после перевёрстки в две колонки
+          мелкие строки под формой легли на светлый склон и перестали читаться — «150+
+          WM-партнёров» просто исчезало. Поднимать цвет текста бессмысленно: он бы начал
+          спорить с заголовком и всё равно проигрывал бы самым светлым пятнам.
+
+          Поэтому не трогаем ни фото, ни цвета, а гасим фон под текстом. На десктопе
+          градиент идёт слева направо: густой там, где колонка с формой, и полностью
+          прозрачный там, где стоит письмо. На мобильной вёрстке текст по центру, поэтому
+          там градиент вертикальный. */}
+      <div className="absolute inset-0 pointer-events-none lg:hidden" aria-hidden
+        style={{ background: 'linear-gradient(to bottom, rgba(10,10,10,0.86) 0%, rgba(10,10,10,0.62) 45%, rgba(10,10,10,0.15) 80%, rgba(10,10,10,0) 100%)' }} />
+      <div className="absolute inset-0 pointer-events-none hidden lg:block" aria-hidden
+        style={{ background: 'linear-gradient(96deg, rgba(10,10,10,0.94) 0%, rgba(10,10,10,0.88) 30%, rgba(10,10,10,0.55) 52%, rgba(10,10,10,0.12) 70%, rgba(10,10,10,0) 82%)' }} />
+
       {/* ── MOBILE (< lg) ──
           Headline → form → marker must all sit inside the first screen at 375 (client
           feedback 2026-07-23: "hero + форма в один экран на 375px без прокрутки").
@@ -125,8 +143,8 @@ export default function NLHero() {
           {/* Lead form + freshness marker */}
           <motion.div {...fadeUp(0.25)} className="w-full mt-[1.25rem] flex flex-col items-center gap-2">
             <NLLeadForm source="hero" note={null} />
-            <LastIssueMarker className="text-center" />
-            <ProofLine className="text-center" />
+            <LastIssueMarker className="justify-center text-center" />
+            <ProofLine className="justify-center text-center" />
           </motion.div>
         </div>
 
@@ -148,19 +166,34 @@ export default function NLHero() {
         </motion.div>
       </div>
 
-      {/* ── DESKTOP (lg+) ── */}
-      <div className="hidden lg:flex relative mx-auto w-full flex-col items-center"
+      {/* ── DESKTOP (lg+) ──
+          Две колонки: слева текст и форма, справа макет письма.
+
+          Раньше это была одна центрированная колонка, а письмо висело отдельно —
+          `position: absolute`, прижатое к нижнему краю. Вырванное из потока, оно не могло
+          ничего подвинуть, и подвинуть его тоже было нельзя: любой текст, выросший хоть на
+          строку, оказывался под ним. К августу перекрытие было на всех десктопных
+          разрешениях — от 79 px на 16-дюймовом макбуке до 392 px на ноутбуке 1366×768, и
+          форма на первом экране становилась нерабочей.
+
+          Теперь колонки — flex-соседи в потоке. Перекрытие невозможно геометрически: если
+          левой колонке нужно больше высоты, контейнер растёт, а не наезжает сам на себя.
+
+          Ширины намеренно неравные. Правая — ровно под письмо (396 px при scale 1,
+          shrink-0), левая забирает весь остаток. На 1440 это даёт ей ~820 px, то есть
+          заголовок почти не теряет в размере против прежних 858 px по центру; на 1024 —
+          ~470 px, и форма всё ещё кладёт email с телефоном в один ряд (её порог — 640 px
+          на всю форму, а не на колонку). */}
+      <div className="hidden lg:flex relative mx-auto w-full flex-row items-center"
         style={{
           maxWidth: 1440,
-          // The hero carries a two-row form now; a short laptop viewport would otherwise
-          // let the bottom-anchored letter preview run into the copy.
           minHeight: 'max(calc(100svh - 72px), 45rem)',
-          paddingTop: 40, paddingBottom: 0,
+          paddingTop: 40, paddingBottom: 40,
           paddingLeft: 'clamp(40px, 5.5vw, 80px)', paddingRight: 'clamp(40px, 5.5vw, 80px)',
-          gap: 64,
+          gap: 'clamp(40px, 4vw, 64px)',
         }}>
 
-        <div className="flex flex-col items-center gap-8 w-full">
+        <div className="flex flex-1 min-w-0 flex-col items-start gap-8">
           {/* Badge */}
           <motion.div {...fadeUp(0.1)}
             className="flex items-center gap-2 px-4 py-3 rounded-full"
@@ -171,39 +204,43 @@ export default function NLHero() {
             </p>
           </motion.div>
 
-          <div className="flex flex-col items-center gap-6 text-center">
-            {/* Heading */}
+          <div className="flex flex-col items-start gap-6 text-left w-full">
+            {/* Heading — ширину задаёт колонка, отдельный maxWidth больше не нужен */}
             <motion.h1 {...fadeUp(0.15)}
               className="font-inter-tight font-semibold text-transparent bg-clip-text"
-              style={{ fontSize: 'clamp(2.5rem, 4.4vw, 4rem)', lineHeight: 1, letterSpacing: '-0.02em', backgroundImage: 'linear-gradient(116.594deg, rgb(162,162,162) 8.73%, rgb(255,255,255) 50.65%, rgb(162,162,162) 92.57%)', maxWidth: 858 }}>
+              style={{ fontSize: 'clamp(2.25rem, 3.4vw, 3.5rem)', lineHeight: 1.02, letterSpacing: '-0.02em', backgroundImage: 'linear-gradient(116.594deg, rgb(162,162,162) 8.73%, rgb(255,255,255) 50.65%, rgb(162,162,162) 92.57%)' }}>
               Дайджест частного рынка — раз в неделю на почту
             </motion.h1>
 
             {/* Paragraph */}
             <motion.p {...fadeUp(0.20)}
               className="font-inter-tight font-medium"
-              style={{ fontSize: 'clamp(1rem,1.4vw,1.25rem)', lineHeight: 1.3, color: 'var(--white-400)', letterSpacing: '-0.02em', maxWidth: 600 }}>
+              style={{ fontSize: 'clamp(1rem,1.4vw,1.25rem)', lineHeight: 1.35, color: 'var(--white-400)', letterSpacing: '-0.02em', maxWidth: '34rem' }}>
               Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждую среду.
             </motion.p>
           </div>
 
           {/* Lead form — was a button that only scrolled to the closing block, an extra
               click and a drop-off point (client feedback 2026-07-23) */}
-          <motion.div {...fadeUp(0.25)} className="w-full flex flex-col items-center gap-3" style={{ maxWidth: '38.75rem' }}>
+          <motion.div {...fadeUp(0.25)} className="w-full flex flex-col items-start gap-3" style={{ maxWidth: '38.75rem' }}>
             <NLLeadForm source="hero" note={null} />
-            <LastIssueMarker />
-            <ProofLine />
+            <LastIssueMarker className="justify-start" />
+            <ProofLine className="justify-start" />
           </motion.div>
         </div>
 
-        {/* Letter preview */}
+        {/* Макет письма — правая колонка.
+            scale 1 вместо прежних 1.188: при 1.188 письмо шириной 471 px не влезало в
+            правую колонку на 1024 (там на неё остаётся ~430 px). Один масштаб на все
+            разрешения вместо машинерии с адаптивным — письму больше не с чем конкурировать
+            за место, оно стоит в своей колонке. */}
         <motion.div
-          className="absolute bottom-[-44px] left-1/2 -translate-x-1/2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          className="shrink-0"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.45, ease: [0.4, 0, 0.2, 1] }}
         >
-          <NLLetterPreview scale={1.188} />
+          <NLLetterPreview scale={1} />
         </motion.div>
       </div>
     </section>

@@ -33,7 +33,7 @@ export interface Figure {
 
 export const FIGURES: Figure[] = [
   { value: '$200M+', label: 'AUM', inline: '$200M+ AUM' },
-  { value: '1 000+', label: 'Инвесторов', inline: '1 000+ инвесторов' },
+  { value: '1 000+', label: 'Инвесторов', inline: '1 000+ инвесторов' },
   { value: '35', label: 'Портфельные компании', inline: '35 портфельных компаний' },
   { value: '150+', label: 'WM-партнёров', inline: '150+ WM-партнёров' },
 ]
