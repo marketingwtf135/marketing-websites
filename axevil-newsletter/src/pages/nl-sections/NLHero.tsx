@@ -1,15 +1,16 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
-import { useScroll, useTransform, motion, type MotionValue } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { asset } from '../../lib/asset'
 import { FIGURES } from '../../lib/figures'
 import { LAST_ISSUE } from '../../lib/lastIssue'
 import NLLetterPreview, { LETTER_BASE_WIDTH } from './NLLetterPreview'
 import NLLeadForm from './NLLeadForm'
 
-const heroBg = asset('/img/newsletter/hero-bg.png')
 const heroScene = asset('/img/newsletter/hero-scene.webp')
 const heroRockFront = asset('/img/newsletter/hero-rock-front.webp')
 const heroLight = asset('/img/newsletter/hero-light.webp')
+const heroSceneM = asset('/img/newsletter/hero-scene-m.webp')
+const heroRockFrontM = asset('/img/newsletter/hero-rock-front-m.webp')
 
 /** Reusable fade-up config for staggered hero elements */
 function fadeUp(delay: number) {
@@ -123,43 +124,116 @@ const IPAD_MARGIN = 24
  */
 const ROCK = { left: 1.599, top: 69.595, width: 98.401, height: 30.405 }
 
-/** Фон для мобильной вёрстки: там макета нет, остаётся прежняя фотография с параллаксом. */
-function MobileStone({ bgY }: { bgY: MotionValue<string> }) {
+/**
+ * Письмо, вставленное в экран планшета на сцене.
+ *
+ * Общий компонент для десктопа и мобильной вёрстки: сцены разные, а задача одна — посадить
+ * письмо ровно в экран и отмасштабировать под него.
+ *
+ * Масштаб компонент считает сам, замеряя свою ширину. Задать его в CSS нельзя: внутренности
+ * письма свёрстаны в пикселях (scale × базовые значения), а чтобы получить из ширины
+ * безразмерный множитель, надо поделить длину на длину — calc так не умеет.
+ *
+ * @param screen — область экрана планшета в долях от кадра сцены
+ * @param light  — слой лучей поверх письма; на мобильной сцене его нет
+ */
+function ScreenLetter({ screen, light }: { screen: { left: number; top: number; width: number; height: number }; light?: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [letterScale, setLetterScale] = useState(0)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => {
+      setLetterScale(entry.contentRect.width / LETTER_BASE_WIDTH)
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
   return (
-    <div className="absolute inset-0 pointer-events-none lg:hidden" aria-hidden>
-      <motion.div
-        className="absolute"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.35, ease: [0.4, 0, 0.2, 1] }}
-        style={{ top: 'calc(-15% + 150px)', left: 0, right: 0, bottom: '-15%' }}
-      >
-        <motion.div className="absolute inset-0" style={{ y: bgY }}>
-          <img src={heroBg} alt="" className="absolute max-w-none"
-            style={{ height: '100%', left: '-188.07%', top: '16.41%', width: '476.13%' }}
-            loading="eager" />
-        </motion.div>
-      </motion.div>
-    </div>
+    <motion.div
+      ref={ref}
+      className="absolute overflow-hidden"
+      style={{
+        left: `${screen.left}%`, top: `${screen.top}%`,
+        width: `${screen.width}%`, height: `${screen.height}%`,
+        // Фон в цвет поверхности письма. Пропорции письма и экрана совпадают не идеально
+        // (0.710 против 0.699), поэтому по ширине письмо садится точно, а по высоте не
+        // достаёт до низа экрана нескольких пикселей. Без заливки в щели просвечивала бы
+        // серая заглушка экрана из макета.
+        background: 'var(--black-500)',
+      }}
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+      transition={{ duration: 0.7, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
+    >
+      {letterScale > 0 && (
+        // width: max-content, иначе обёртка растягивается на всю ширину экрана и после
+        // масштабирования выходит за него. Сама она ничего не рисует, но по её габаритам
+        // легко ошибиться при замерах — я на этом один раз попалась.
+        <div style={{ width: 'max-content', transform: `scale(${letterScale})`, transformOrigin: 'top left' }}>
+          <NLLetterPreview scale={1} bare />
+        </div>
+      )}
+
+      {/* Лучи света поверх письма.
+          В макете слой «Свет 1» лежит выше всего, но в сцену-картинку он запечён под письмом,
+          поэтому на экран планшета лучи не попадали. Здесь тот же слой ложится вторым, уже
+          над письмом.
+
+          Режим screen, а не прозрачность: слой пришёл из Figma полностью непрозрачным — это
+          лучи на чёрном фоне, и его подмешивают режимом наложения, а не альфой. При screen
+          чёрное не даёт ничего, а светлое высветляет — ровно как в макете.
+
+          Картинка размером во всю сцену, поэтому её положение задано в долях от экрана:
+          внутри экрана сцена шире в 100/screen.width раза и сдвинута влево на
+          screen.left/screen.width. Обрезает всё сам экран своим overflow — снаружи лучи уже
+          есть в сцене, и второй раз накладывать их там не нужно. */}
+      {light && (
+        <img
+          src={light} alt="" aria-hidden loading="eager"
+          className="absolute pointer-events-none max-w-none"
+          style={{
+            left: `${-screen.left / screen.width * 100}%`,
+            top: `${-screen.top / screen.height * 100}%`,
+            width: `${100 / screen.width * 100}%`,
+            height: `${100 / screen.height * 100}%`,
+            mixBlendMode: 'screen',
+          }}
+        />
+      )}
+    </motion.div>
   )
 }
 
-export default function NLHero() {
-  const { scrollY } = useScroll()
-  const bgY = useTransform(scrollY, [0, 800], ['0%', '-12%'])
+/**
+ * Мобильная сцена — из отдельного макета (Figma AI-TASKS, узел 2811:880).
+ *
+ * Кадр макета 440×1315, но нижним слоем в нём лежит скриншот текущего сайта — он там как
+ * подложка, чтобы было видно, как сцена стыкуется с текстом. В сцену его брать нельзя,
+ * поэтому кадр обрезан сверху по y=600: выше камней там чистая чернота (яркость 7 из 255),
+ * скриншот не просвечивает, и стык с нашим текстом не виден. Остаётся 440×715.
+ *
+ * Сцена стоит в потоке под текстом, а не фоном за ним: в макете планшет начинается ниже
+ * формы, и накладывать его на текст нельзя. Прежний фон-фотография с параллаксом и
+ * затемнением убраны — в макете за текстом просто тёмный фон.
+ */
+const SCENE_M = { width: 440, height: 715 }
 
+/** Экран планшета в мобильном макете — доля от кадра сцены. */
+const SCREEN_M = { left: 18.356, top: 12.471, width: 61.249, height: 53.900 }
+
+/** Передний камень в мобильном макете — доля от кадра сцены. */
+const ROCK_M = { top: 59.842, height: 33.811 }
+
+export default function NLHero() {
   /**
-   * Геометрия сцены считается здесь, а не в CSS, по трём причинам.
+   * Геометрия десктопной сцены считается здесь, а не в CSS, по двум причинам.
    *
-   * Первая: масштаб письма. Внутренности письма свёрстаны в пикселях (scale × базовые
-   * значения), поэтому в блок, заданный процентами, оно само не впишется. CSS тут не
-   * поможет — чтобы получить из ширины безразмерный множитель, надо поделить длину на
-   * длину, а calc так не умеет.
-   *
-   * Вторая: сцену надо подставить по правилу object-cover, но при этом знать, насколько её
+   * Первая: сцену надо подставить по правилу object-cover, но при этом знать, насколько её
    * обрезало — иначе не разместить письмо в экране планшета по процентам из макета.
    *
-   * Третья, и она решает главную проблему: при простом кроп-по-центру планшет уезжает за
+   * Вторая, и она решает главную проблему: при простом кроп-по-центру планшет уезжает за
    * правый край. На 1024×792 сцена растягивается по высоте до 1404 px, лишние 380 срезаются
    * пополам, и правый край планшета оказывается на 1080 при ширине окна 1024 — обрезан на
    * 56 px вместе с частью письма. Поэтому сцена сдвигается влево ровно настолько, чтобы
@@ -167,7 +241,7 @@ export default function NLHero() {
    * остаётся центрированным, как в макете.
    */
   const clipRef = useRef<HTMLDivElement>(null)
-  const [scene, setScene] = useState({ width: 0, left: 0, letterScale: 0 })
+  const [scene, setScene] = useState({ width: 0, left: 0 })
 
   useEffect(() => {
     const el = clipRef.current
@@ -186,7 +260,7 @@ export default function NLHero() {
       // сдвигаем только влево и не дальше, чем до правого края сцены — иначе справа щель
       const left = Math.max(W - width, centred - Math.max(0, overhang))
 
-      setScene({ width, left, letterScale: (width * SCREEN.width / 100) / LETTER_BASE_WIDTH })
+      setScene({ width, left })
     })
     ro.observe(el)
     return () => ro.disconnect()
@@ -195,12 +269,6 @@ export default function NLHero() {
   return (
     <section className="relative w-full overflow-hidden" style={{ background: 'var(--black-100)', paddingTop: '72px' }}>
 
-      <MobileStone bgY={bgY} />
-
-      {/* Затемнение под текст — только для мобильной вёрстки. На десктопе оно уже внутри
-          сцены из макета (слой «Затемнение»), поэтому второй раз не нужно. */}
-      <div className="absolute inset-0 pointer-events-none lg:hidden" aria-hidden
-        style={{ background: 'linear-gradient(to bottom, rgba(10,10,10,0.86) 0%, rgba(10,10,10,0.62) 45%, rgba(10,10,10,0.15) 80%, rgba(10,10,10,0) 100%)' }} />
 
       {/* ── СЦЕНА ИЗ МАКЕТА (lg+) ──
           Контейнер только обрезает, размеры сцены считаются от него в единицах контейнера. */}
@@ -222,56 +290,7 @@ export default function NLHero() {
             transition={{ duration: 0.9, delay: 0.25, ease: [0.4, 0, 0.2, 1] }}
           />
 
-          {/* Письмо в экране планшета */}
-          <motion.div
-            className="absolute overflow-hidden"
-            style={{
-              left: `${SCREEN.left}%`, top: `${SCREEN.top}%`,
-              width: `${SCREEN.width}%`, height: `${SCREEN.height}%`,
-              // Фон в цвет поверхности письма. Пропорции письма и экрана совпадают не
-              // идеально (0.710 против 0.699), поэтому по ширине письмо садится точно, а по
-              // высоте не достаёт до низа экрана нескольких пикселей. Без этой заливки в
-              // щели просвечивала бы серая заглушка экрана из макета.
-              background: 'var(--black-500)',
-            }}
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
-          >
-            {scene.letterScale > 0 && (
-              // width: max-content, иначе обёртка растягивается на всю ширину экрана и после
-              // масштабирования выходит за него. Сама она ничего не рисует, но по её
-              // габаритам легко ошибиться при замерах — я на этом один раз попалась.
-              <div style={{ width: 'max-content', transform: `scale(${scene.letterScale})`, transformOrigin: 'top left' }}>
-                <NLLetterPreview scale={1} bare />
-              </div>
-            )}
-
-            {/* Лучи света поверх письма.
-                В макете слой «Свет 1» лежит выше всего, но в сцену-картинку он запечён под
-                письмом, поэтому на экран планшета лучи не попадали. Здесь тот же слой ложится
-                вторым, уже над письмом.
-
-                Режим screen, а не прозрачность: слой пришёл из Figma полностью непрозрачным —
-                это лучи на чёрном фоне, и его подмешивают режимом наложения, а не альфой.
-                При screen чёрное не даёт ничего, а светлое высветляет — ровно как в макете.
-
-                Картинка размером во всю сцену, поэтому её положение задано в долях от экрана
-                планшета: экран занимает 22.577% ширины кадра и начинается на 66.674%, значит
-                внутри экрана сцена шире в 100/22.577 раза и сдвинута на 66.674/22.577 влево.
-                Обрезает всё сам экран своим overflow — снаружи лучи уже есть в сцене, и
-                второй раз накладывать их там не нужно. */}
-            <img
-              src={heroLight} alt="" aria-hidden loading="eager"
-              className="absolute pointer-events-none max-w-none"
-              style={{
-                left: `${-SCREEN.left / SCREEN.width * 100}%`,
-                top: `${-SCREEN.top / SCREEN.height * 100}%`,
-                width: `${100 / SCREEN.width * 100}%`,
-                height: `${100 / SCREEN.height * 100}%`,
-                mixBlendMode: 'screen',
-              }}
-            />
-          </motion.div>
+          <ScreenLetter screen={SCREEN} light={heroLight} />
 
           {/* Ближний камень поверх письма */}
           <motion.img
@@ -295,9 +314,9 @@ export default function NLHero() {
           on a tall phone and quietly shrinks on a short one instead of pushing the form
           below the fold. */}
       <div className="lg:hidden relative w-full flex flex-col items-center overflow-hidden"
-        style={{ minHeight: 'calc(100svh - 72px)', padding: '1.5rem 1rem 0' }}>
+        style={{ padding: '1.5rem 0 0' }}>
 
-        <div className="flex flex-col items-center w-full shrink-0">
+        <div className="flex flex-col items-center w-full shrink-0 px-4">
           {/* Badge */}
           <motion.div {...fadeUp(0.1)} className="flex items-center gap-2 px-3 py-2 rounded-full shrink-0 mb-[0.75rem]"
             style={{ background: 'rgba(77,186,121,0.05)', border: '1px solid rgba(77,186,121,0.15)' }}>
@@ -323,30 +342,43 @@ export default function NLHero() {
             </motion.p>
           </div>
 
-          {/* Lead form + freshness marker */}
-          <motion.div {...fadeUp(0.25)} className="w-full mt-[1.25rem] flex flex-col items-center gap-2">
+          {/* Lead form + freshness marker.
+              Между кнопкой и строками под ней отдельный отступ 1.25rem: раньше всю группу
+              держал общий gap-2, и дата выпуска прилипала к кнопке. Между самими строками
+              зазор остался маленьким — они читаются как один блок. */}
+          <motion.div {...fadeUp(0.25)} className="w-full mt-[1.25rem] flex flex-col items-center">
             <NLLeadForm source="hero" note={null} />
-            <LastIssueMarker className="justify-center text-center" />
-            <ProofLine className="justify-center text-center" />
+            <div className="flex flex-col items-center gap-1.5 mt-[1.25rem]">
+              <LastIssueMarker className="justify-center text-center" />
+              <ProofLine className="justify-center text-center" />
+            </div>
           </motion.div>
         </div>
 
-        {/* Letter preview — fills the leftover screen, clipped and faded at the fold */}
-        <motion.div
-          className="w-full flex justify-center mt-4"
-          style={{
-            flex: '1 1 0', minHeight: 0, overflow: 'hidden',
-            maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.45, ease: [0.4, 0, 0.2, 1] }}
-        >
-          <div className="shrink-0 self-start">
-            <NLLetterPreview scale={0.864} />
-          </div>
-        </motion.div>
+        {/* ── СЦЕНА ИЗ МОБИЛЬНОГО МАКЕТА ──
+            Стоит в потоке под текстом, а не фоном за ним: в макете планшет начинается ниже
+            формы. Высоту задаёт сама картинка (width: 100% + натуральные пропорции), поэтому
+            первый экран получается выше окна — планшет виден наполовину и открывается при
+            небольшой прокрутке, как в макете. */}
+        <div className="relative w-full mt-[1.5rem]">
+          <motion.img
+            src={heroSceneM} alt="" aria-hidden loading="eager"
+            className="block w-full pointer-events-none"
+            width={SCENE_M.width} height={SCENE_M.height}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          />
+
+          <ScreenLetter screen={SCREEN_M} />
+
+          <motion.img
+            src={heroRockFrontM} alt="" aria-hidden loading="eager"
+            className="absolute left-0 w-full pointer-events-none"
+            style={{ top: `${ROCK_M.top}%`, height: `${ROCK_M.height}%` }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ duration: 0.9, delay: 0.35, ease: [0.4, 0, 0.2, 1] }}
+          />
+        </div>
       </div>
 
       {/* ── DESKTOP (lg+) ──
