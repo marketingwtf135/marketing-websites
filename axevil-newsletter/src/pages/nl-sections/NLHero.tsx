@@ -1,12 +1,14 @@
-import { Fragment } from 'react'
-import { useScroll, useTransform, motion } from 'framer-motion'
+import { Fragment, useEffect, useRef, useState } from 'react'
+import { useScroll, useTransform, motion, type MotionValue } from 'framer-motion'
 import { asset } from '../../lib/asset'
 import { FIGURES } from '../../lib/figures'
 import { LAST_ISSUE } from '../../lib/lastIssue'
-import NLLetterPreview from './NLLetterPreview'
+import NLLetterPreview, { LETTER_BASE_WIDTH } from './NLLetterPreview'
 import NLLeadForm from './NLLeadForm'
 
 const heroBg = asset('/img/newsletter/hero-bg.png')
+const heroScene = asset('/img/newsletter/hero-scene.webp')
+const heroRockFront = asset('/img/newsletter/hero-rock-front.webp')
 
 /** Reusable fade-up config for staggered hero elements */
 function fadeUp(delay: number) {
@@ -64,49 +66,187 @@ function ProofLine({ className = '' }: { className?: string }) {
   )
 }
 
-export default function NLHero() {
-  const { scrollY } = useScroll()
-  const bgY = useTransform(scrollY, [0, 800], ['0%', '-12%'])
+/**
+ * Сцена первого экрана — из макета, который прислала Татьяна (Figma AI-TASKS, узел 2805:742).
+ *
+ * До этого сцена собиралась кодом: рамка планшета рисовалась CSS-градиентами, а перекрытие
+ * камнем изображалось второй копией фона с градиентной маской. Работало, но маску камня
+ * приходилось подгонять по замерам яркости фотографии, и она всё равно оставалась прямой
+ * полосой вместо силуэта. В макете и планшет настоящий, и камень обведён вручную — поэтому
+ * весь самодельный слой выброшен, а сцена взята картинкой.
+ *
+ * Слои и порядок:
+ *   1. hero-scene.webp   — фон, камни, планшет, затемнение слева. Всё, кроме содержимого экрана.
+ *   2. письмо            — живой компонент, вставлен в экран планшета.
+ *   3. hero-rock-front.webp — ближний камень, лежит поверх письма и подрезает его снизу.
+ *
+ * Координаты взяты из макета, а не на глаз. В мокапе планшета есть слой «Image HERE» —
+ * это область экрана: x 2126.89, y 347.54, 720.21×1029.92 в кадре 3190×1800, то есть
+ * 66.674% / 19.308% / 22.577% / 57.218%. Соотношение сторон экрана 0.6993 практически
+ * совпадает с письмом (370.5 / 529 = 0.700), поэтому письмо встаёт без искажений.
+ *
+ * Положение переднего камня найдено поиском совмещения: слой из Figma выгрузился без
+ * прозрачности (сверху от гряды просто чёрное), альфа восстановлена по силуэту, а смещение
+ * подобрано так, чтобы наложение камня на сцену её не меняло — средняя разница вышла 7.65
+ * из 255, то есть пиксели совпали. Отсюда 1.066% / 68.472% / 98.887% / 31.389%.
+ *
+ * Сцена подставляется по правилу object-cover, но сам `object-fit: cover` тут не годится:
+ * письмо надо позиционировать в процентах от картинки, а cover прячет, насколько её
+ * обрезало. Поэтому размер и сдвиг сцены считаются явно — см. ResizeObserver ниже.
+ */
+const SCENE_W = 3190
+const SCENE_H = 1800
+const SCENE_RATIO = SCENE_W / SCENE_H
 
+/** Экран планшета в макете — доля от кадра сцены. */
+const SCREEN = { left: 66.674, top: 19.308, width: 22.577, height: 57.218 }
+
+/** Корпус планшета целиком — по нему проверяем, что он не уехал за правый край. */
+const IPAD = { left: 65.456, width: 25.014 }
+
+/** Минимальный зазор от правого края окна до планшета, px. */
+const IPAD_MARGIN = 24
+
+/** Передний камень — доля от кадра сцены. */
+const ROCK = { left: 1.066, top: 68.472, width: 98.887, height: 31.389 }
+
+/** Фон для мобильной вёрстки: там макета нет, остаётся прежняя фотография с параллаксом. */
+function MobileStone({ bgY }: { bgY: MotionValue<string> }) {
   return (
-    <section className="relative w-full overflow-hidden" style={{ background: 'var(--black-100)', paddingTop: '72px' }}>
-
-      {/* ── Background stone — outer wrapper animates entry, inner handles parallax ── */}
+    <div className="absolute inset-0 pointer-events-none lg:hidden" aria-hidden>
       <motion.div
-        className="absolute pointer-events-none"
-        aria-hidden
+        className="absolute"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.35, ease: [0.4, 0, 0.2, 1] }}
         style={{ top: 'calc(-15% + 150px)', left: 0, right: 0, bottom: '-15%' }}
       >
         <motion.div className="absolute inset-0" style={{ y: bgY }}>
-          {/* Mobile */}
-          <img src={heroBg} alt="" className="absolute max-w-none lg:hidden"
+          <img src={heroBg} alt="" className="absolute max-w-none"
             style={{ height: '100%', left: '-188.07%', top: '16.41%', width: '476.13%' }}
-            loading="eager" />
-          {/* Desktop */}
-          <img src={heroBg} alt="" className="absolute max-w-none hidden lg:block w-full h-full object-cover"
-            style={{ inset: 0 }}
             loading="eager" />
         </motion.div>
       </motion.div>
+    </div>
+  )
+}
 
-      {/* ── Затемняющая подложка под текст ──
-          Фон первого экрана — фотография камня, и её яркость по кадру гуляет. Пока текст
-          стоял по центру, он попадал на тёмную часть; после перевёрстки в две колонки
-          мелкие строки под формой легли на светлый склон и перестали читаться — «150+
-          WM-партнёров» просто исчезало. Поднимать цвет текста бессмысленно: он бы начал
-          спорить с заголовком и всё равно проигрывал бы самым светлым пятнам.
+export default function NLHero() {
+  const { scrollY } = useScroll()
+  const bgY = useTransform(scrollY, [0, 800], ['0%', '-12%'])
 
-          Поэтому не трогаем ни фото, ни цвета, а гасим фон под текстом. На десктопе
-          градиент идёт слева направо: густой там, где колонка с формой, и полностью
-          прозрачный там, где стоит письмо. На мобильной вёрстке текст по центру, поэтому
-          там градиент вертикальный. */}
+  /**
+   * Геометрия сцены считается здесь, а не в CSS, по трём причинам.
+   *
+   * Первая: масштаб письма. Внутренности письма свёрстаны в пикселях (scale × базовые
+   * значения), поэтому в блок, заданный процентами, оно само не впишется. CSS тут не
+   * поможет — чтобы получить из ширины безразмерный множитель, надо поделить длину на
+   * длину, а calc так не умеет.
+   *
+   * Вторая: сцену надо подставить по правилу object-cover, но при этом знать, насколько её
+   * обрезало — иначе не разместить письмо в экране планшета по процентам из макета.
+   *
+   * Третья, и она решает главную проблему: при простом кроп-по-центру планшет уезжает за
+   * правый край. На 1024×792 сцена растягивается по высоте до 1404 px, лишние 380 срезаются
+   * пополам, и правый край планшета оказывается на 1080 при ширине окна 1024 — обрезан на
+   * 56 px вместе с частью письма. Поэтому сцена сдвигается влево ровно настолько, чтобы
+   * планшет уместился, и ни пикселем больше: на широких экранах сдвиг нулевой и кадр
+   * остаётся центрированным, как в макете.
+   */
+  const clipRef = useRef<HTMLDivElement>(null)
+  const [scene, setScene] = useState({ width: 0, left: 0, letterScale: 0 })
+
+  useEffect(() => {
+    const el = clipRef.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => {
+      const { width: W, height: H } = entry.contentRect
+      if (!W || !H) return
+
+      // object-cover: сцена накрывает контейнер целиком
+      const width = Math.max(W, H * SCENE_RATIO)
+
+      // по центру, но с гарантией, что правый край планшета остаётся в кадре
+      const centred = (W - width) / 2
+      const iPadRightFrac = (IPAD.left + IPAD.width) / 100
+      const overhang = centred + width * iPadRightFrac - (W - IPAD_MARGIN)
+      // сдвигаем только влево и не дальше, чем до правого края сцены — иначе справа щель
+      const left = Math.max(W - width, centred - Math.max(0, overhang))
+
+      setScene({ width, left, letterScale: (width * SCREEN.width / 100) / LETTER_BASE_WIDTH })
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
+  return (
+    <section className="relative w-full overflow-hidden" style={{ background: 'var(--black-100)', paddingTop: '72px' }}>
+
+      <MobileStone bgY={bgY} />
+
+      {/* Затемнение под текст — только для мобильной вёрстки. На десктопе оно уже внутри
+          сцены из макета (слой «Затемнение»), поэтому второй раз не нужно. */}
       <div className="absolute inset-0 pointer-events-none lg:hidden" aria-hidden
         style={{ background: 'linear-gradient(to bottom, rgba(10,10,10,0.86) 0%, rgba(10,10,10,0.62) 45%, rgba(10,10,10,0.15) 80%, rgba(10,10,10,0) 100%)' }} />
-      <div className="absolute inset-0 pointer-events-none hidden lg:block" aria-hidden
-        style={{ background: 'linear-gradient(96deg, rgba(10,10,10,0.94) 0%, rgba(10,10,10,0.88) 30%, rgba(10,10,10,0.55) 52%, rgba(10,10,10,0.12) 70%, rgba(10,10,10,0) 82%)' }} />
+
+      {/* ── СЦЕНА ИЗ МАКЕТА (lg+) ──
+          Контейнер только обрезает, размеры сцены считаются от него в единицах контейнера. */}
+      <div ref={clipRef} className="absolute inset-0 overflow-hidden hidden lg:block">
+        <div
+          className="absolute top-1/2"
+          style={{
+            left: scene.left,
+            width: scene.width,
+            aspectRatio: `${SCENE_W} / ${SCENE_H}`,
+            transform: 'translateY(-50%)',
+            visibility: scene.width ? 'visible' : 'hidden',
+          }}
+        >
+          <motion.img
+            src={heroScene} alt="" aria-hidden loading="eager"
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ duration: 0.9, delay: 0.25, ease: [0.4, 0, 0.2, 1] }}
+          />
+
+          {/* Письмо в экране планшета */}
+          <motion.div
+            className="absolute overflow-hidden"
+            style={{
+              left: `${SCREEN.left}%`, top: `${SCREEN.top}%`,
+              width: `${SCREEN.width}%`, height: `${SCREEN.height}%`,
+              // Фон в цвет поверхности письма. Пропорции письма и экрана совпадают не
+              // идеально (0.710 против 0.699), поэтому по ширине письмо садится точно, а по
+              // высоте не достаёт до низа экрана нескольких пикселей. Без этой заливки в
+              // щели просвечивала бы серая заглушка экрана из макета.
+              background: 'var(--black-500)',
+            }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          >
+            {scene.letterScale > 0 && (
+              // width: max-content, иначе обёртка растягивается на всю ширину экрана и после
+              // масштабирования выходит за него. Сама она ничего не рисует, но по её
+              // габаритам легко ошибиться при замерах — я на этом один раз попалась.
+              <div style={{ width: 'max-content', transform: `scale(${scene.letterScale})`, transformOrigin: 'top left' }}>
+                <NLLetterPreview scale={1} bare />
+              </div>
+            )}
+          </motion.div>
+
+          {/* Ближний камень поверх письма */}
+          <motion.img
+            src={heroRockFront} alt="" aria-hidden loading="eager"
+            className="absolute pointer-events-none"
+            style={{
+              left: `${ROCK.left}%`, top: `${ROCK.top}%`,
+              width: `${ROCK.width}%`, height: `${ROCK.height}%`,
+            }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
+          />
+        </div>
+      </div>
 
       {/* ── MOBILE (< lg) ──
           Headline → form → marker must all sit inside the first screen at 375 (client
@@ -171,33 +311,29 @@ export default function NLHero() {
       </div>
 
       {/* ── DESKTOP (lg+) ──
-          Две колонки: слева текст и форма, справа макет письма.
+          Только текст и форма. Планшет теперь часть сцены-картинки, поэтому вторая колонка
+          не нужна: вместо неё справа зарезервировано место отступом.
 
-          Раньше это была одна центрированная колонка, а письмо висело отдельно —
-          `position: absolute`, прижатое к нижнему краю. Вырванное из потока, оно не могло
-          ничего подвинуть, и подвинуть его тоже было нельзя: любой текст, выросший хоть на
-          строку, оказывался под ним. К августу перекрытие было на всех десктопных
-          разрешениях — от 79 px на 16-дюймовом макбуке до 392 px на ноутбуке 1366×768, и
-          форма на первом экране становилась нерабочей.
+          История, ради которой это всё переделывалось: сначала макет письма висел на
+          `position: absolute`, прижатый к низу, и наезжал на форму на всех десктопных
+          разрешениях — от 79 px на 16-дюймовом макбуке до 392 px на 1366×768. Потом стал
+          второй колонкой в потоке, и перекрытие стало невозможным геометрически. Теперь
+          планшет ушёл в картинку, но принцип сохранён: колонка с текстом и область планшета
+          не могут пересечься, потому что первая ограничена отступом справа.
 
-          Теперь колонки — flex-соседи в потоке. Перекрытие невозможно геометрически: если
-          левой колонке нужно больше высоты, контейнер растёт, а не наезжает сам на себя.
-
-          Ширины намеренно неравные. Правая — ровно под письмо (396 px при scale 1,
-          shrink-0), левая забирает весь остаток. На 1440 это даёт ей ~820 px, то есть
-          заголовок почти не теряет в размере против прежних 858 px по центру; на 1024 —
-          ~470 px, и форма всё ещё кладёт email с телефоном в один ряд (её порог — 640 px
-          на всю форму, а не на колонку). */}
-      <div className="hidden lg:flex relative mx-auto w-full flex-row items-center"
+          38% отступа — с запасом. Сцена подставляется по object-cover, и при разных
+          пропорциях экрана планшет гуляет по горизонтали: левый край его корпуса приходится
+          на 65.5% ширины при широком экране и на 69.3% при высоком. Текст, ограниченный
+          62%, не достаёт до него ни в одном случае. */}
+      <div className="hidden lg:flex relative mx-auto w-full flex-col items-start justify-center"
         style={{
           maxWidth: 1440,
           minHeight: 'max(calc(100svh - 72px), 45rem)',
           paddingTop: 40, paddingBottom: 40,
-          paddingLeft: 'clamp(40px, 5.5vw, 80px)', paddingRight: 'clamp(40px, 5.5vw, 80px)',
-          gap: 'clamp(40px, 4vw, 64px)',
+          paddingLeft: 'clamp(40px, 5.5vw, 80px)', paddingRight: '38%',
         }}>
 
-        <div className="flex flex-1 min-w-0 flex-col items-start gap-8">
+        <div className="flex w-full min-w-0 flex-col items-start gap-8">
           {/* Badge */}
           <motion.div {...fadeUp(0.1)}
             className="flex items-center gap-2 px-4 py-3 rounded-full"
@@ -237,21 +373,8 @@ export default function NLHero() {
           </motion.div>
         </div>
 
-        {/* Макет письма — правая колонка.
-            Масштаб подобран по самому узкому десктопу. Правая колонка не сжимается
-            (shrink-0), поэтому чем крупнее письмо, тем меньше остаётся левой: на 1024 при
-            1.12 ей достаётся ~450 px, и форма всё ещё держит email с телефоном в одном
-            ряду. Прежние 1.188 столько не оставляли. Один масштаб на все разрешения —
-            письму больше не с чем конкурировать за место, оно стоит в своей колонке. */}
-        <motion.div
-          className="shrink-0"
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.45, ease: [0.4, 0, 0.2, 1] }}
-        >
-          <NLLetterPreview scale={1.12} />
-        </motion.div>
       </div>
+
     </section>
   )
 }

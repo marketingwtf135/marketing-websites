@@ -3,31 +3,41 @@ import { LAST_ISSUE } from '../../lib/lastIssue'
 
 const letterLogo = asset('/img/newsletter/letter-logo.svg')
 
+/**
+ * Ширина письма при scale = 1 в режиме bare.
+ *
+ * Ровно значение `width` внутреннего блока, без добавления отступов: в проекте глобально
+ * действует `box-sizing: border-box`, поэтому padding уже внутри этой ширины. Сначала я
+ * прибавила 12+12 сверху и получила 370.5 — письмо вставало в экран планшета на 6.5% уже,
+ * чем нужно, с ровной щелью справа.
+ *
+ * Экспортируется, чтобы hero считал масштаб под экран из макета от этого числа и не хранил
+ * свою копию, которая разъедется при первой правке вёрстки письма.
+ */
+export const LETTER_BASE_WIDTH = 346.5
+
 /** Reusable newsletter letter preview card.
  *  scale=1.0 → base (320px inner, mobile/desktop hero)
  *  scale=1.188 → methodology section (411px inner)
  */
-export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
+/**
+ * @param bare — убрать собственную внешнюю рамку письма. Нужно, когда письмо вставляется в
+ * NLDeviceFrame: там уже есть корпус и скруглённый экран, и вторая рамка вокруг письма
+ * читалась бы как рамка в рамке. Скругление тоже снимается — экран обрезает содержимое сам.
+ */
+export default function NLLetterPreview({ scale = 1, bare = false }: { scale?: number; bare?: boolean }) {
   const s = (v: number) => v * scale
 
-  return (
+  const surface = (
     <div
       className="flex items-center"
       style={{
+        background: 'var(--black-500)',
         padding: s(12),
-        borderRadius: s(32),
-        border: `${s(1)}px solid #202020`,
+        borderRadius: bare ? 0 : s(24),
+        width: s(346.5),
       }}
     >
-      <div
-        className="flex items-center"
-        style={{
-          background: 'var(--black-500)',
-          padding: s(12),
-          borderRadius: s(24),
-          width: s(346.5),
-        }}
-      >
         <div className="flex flex-col items-start w-full" style={{ gap: s(34.4) }}>
           {/* Logo */}
           <img
@@ -150,6 +160,20 @@ export default function NLLetterPreview({ scale = 1 }: { scale?: number }) {
           </div>
         </div>
       </div>
+  )
+
+  if (bare) return surface
+
+  return (
+    <div
+      className="flex items-center"
+      style={{
+        padding: s(12),
+        borderRadius: s(32),
+        border: `${s(1)}px solid #202020`,
+      }}
+    >
+      {surface}
     </div>
   )
 }
