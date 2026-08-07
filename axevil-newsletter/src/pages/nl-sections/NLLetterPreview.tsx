@@ -1,4 +1,6 @@
-﻿const letterLogo = '/img/newsletter/letter-logo.svg'
+﻿import { asset } from '../../lib/asset'
+
+const letterLogo = asset('/img/newsletter/letter-logo.svg')
 
 /** Reusable newsletter letter preview card.
  *  scale=1.0 → base (320px inner, mobile/desktop hero)

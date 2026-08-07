@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import FadeIn from '../components/FadeIn'
+import { analytics, initScrollDepth } from '../lib/analytics'
 import PDFNav from './pdf-sections/PDFNav'
 import PS1Hero from './pdf-sections/PS1Hero'
 import PS2KeyQuestions from './pdf-sections/PS2KeyQuestions'
@@ -11,6 +13,11 @@ import PS8Form from './pdf-sections/PS8Form'
 import PS9Footer from './pdf-sections/PS9Footer'
 
 export default function InsiderPage() {
+  useEffect(() => {
+    analytics.pageView()
+    return initScrollDepth()
+  }, [])
+
   return (
     <main className="bg-page-bg overflow-x-clip">
       <PDFNav />

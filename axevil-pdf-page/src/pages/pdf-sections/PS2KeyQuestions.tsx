@@ -1,24 +1,33 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
+/* Three questions the report actually answers, phrased as the reader would ask them
+   (client feedback 2026-07-23: "три общих заголовка заменить на конкретные вопросы из
+   отчёта"). The old titles described topics — "Есть ли венчурная жизнь вне AI?",
+   "что ждать в 2026?" — which read as chapter names, not as something a visitor came
+   here wanting to know. Icons follow their new question. */
+// Icon paths flattened out of "Bold/<Category Name>/<File Name>.svg" — those folder/file
+// names had spaces, a comma and an ampersand, which 404'd on Railway prod (URL-encoded
+// request path never matched the on-disk name, even though the Vite dev server tolerated
+// it fine). Same root cause as PS4Methodology's competitor logos (client 2026-07-27).
 const CARDS = [
   {
     num: '1.0',
-    icon: '/img/Bold/Map & Location/Global.svg',
-    title: 'Есть ли венчурная жизнь вне AI? Где формируются следующие единороги?',
-    desc: '7 секторов с реальной динамикой и потенциалом за пределами искусственного интеллекта.',
+    icon: '/img/icon-rocket.svg',
+    title: 'Какие компании выйдут на IPO в 2026',
+    desc: 'Pipeline из 15+ единорогов с датами, оценками и статусом подготовки — потенциально крупнейшие размещения в истории рынка.',
   },
   {
     num: '2.0',
-    icon: '/img/Bold/Business, Statistic/Chat Square 2.svg',
-    title: '2025 год: частный рынок +148% vs Nasdaq +20%, что ждать в 2026?',
-    desc: 'Как частный рынок реагирует на макроэкономическую нестабильность, почему именно частные компании становятся приоритетом для smart money.',
+    icon: '/img/icon-chat-square.svg',
+    title: 'Куда идут оценки после SpaceX',
+    desc: 'Как размещение на $1,8 трлн переставило планку для всего частного рынка: переоценки, вторичка и разрыв между раундом и биржей.',
   },
   {
     num: '3.0',
-    icon: '/img/Bold/Astronomy/Rocket.svg',
-    title: 'Календарь IPO 2026: кандидаты на размещение',
-    desc: 'Pipeline из 15+ единорогов, потенциально крупнейшие IPO в истории рынка.',
+    icon: '/img/icon-global.svg',
+    title: 'Где ошибаются wealth-менеджеры в pre-IPO',
+    desc: 'Типичные промахи при входе в частные сделки: структура доступа, ликвидность, сроки локапа и цена, которую платят за спешку.',
   },
 ]
 

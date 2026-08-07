@@ -1,10 +1,19 @@
-﻿import { scrollToNLForm } from './NLNav'
+﻿import { analytics } from '../../lib/analytics'
+import { scrollToNLForm } from './NLNav'
 import OwnButton from './OwnButton'
 
+/**
+ * Three reasons, stated as what the reader gets — not as what the product contains.
+ *
+ * The cards used to describe the digest ("события которые меняют картину рынка",
+ * "готовый брифинг") instead of the benefit (client feedback 2026-07-23: "заменить на
+ * выгоды"). Titles are the client's three lines verbatim; the stat box under each keeps
+ * the number → source discipline the section promises.
+ */
 const CARDS = [
-  { num: '1.0', title: 'События которые меняют картину рынка — раз в неделю', body: 'Переоценки, тендер-оферы, рейтинги secondary, новые раунды — то, что не покрывается публичной прессой.', statBig: '200+ компаний', statSub: 'в систематическом покрытии · weekly update' },
-  { num: '2.0', title: 'Готовый брифинг\nвместо ручной сборки', body: '5 минут чтения, и вы видите картину рынка за неделю.', statBig: '~3.5 ч / неделю', statSub: 'экономия по опросу WM-партнёров' },
-  { num: '3.0', title: 'Без скрытых условий,\nотписка в 1 клик', body: 'Эта подписка — наш способ познакомить вас с экспертизой Axevil. Не понравится — одна кнопка в любом из писем.', statBig: '0 ₽ · 1 клик', statSub: 'бесплатно · отписка одной кнопкой' },
+  { num: '1.0', title: 'Экономит 3 часа\nмониторинга в неделю', body: 'Переоценки, тендер-оферы, рейтинги secondary и новые раунды уже собраны и разобраны. 5 минут чтения вместо вечера в источниках.', statBig: '~3 часа / неделю', statSub: 'экономия по опросу WM-партнёров' },
+  { num: '2.0', title: 'Аргументы для\nклиентских разговоров', body: 'Цифры и сделки недели, на которые можно сослаться в звонке: что изменилось, у кого, на сколько и почему это важно клиенту.', statBig: '200+ компаний', statSub: 'в систематическом покрытии · weekly update' },
+  { num: '3.0', title: 'Первым узнаёте\nо сделках Axevil', body: 'Новые аллокации и открывшиеся окна входа анонсируются подписчикам рассылки раньше, чем где-либо ещё.', statBig: 'До публичного анонса', statSub: 'подписчики видят сделки первыми' },
 ]
 
 export default function NLReasons() {
@@ -75,7 +84,7 @@ export default function NLReasons() {
             ))}
           </div>
 
-          <OwnButton onClick={scrollToNLForm} />
+          <OwnButton onClick={() => { analytics.ctaClick('reasons'); scrollToNLForm() }} />
         </div>
       </div>
     </section>

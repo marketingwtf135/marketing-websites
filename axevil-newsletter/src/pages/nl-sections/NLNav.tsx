@@ -1,5 +1,7 @@
 ﻿import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { analytics } from '../../lib/analytics'
+import { asset } from '../../lib/asset'
 import MailIcon from './MailIcon'
 import OwnButton from './OwnButton'
 
@@ -65,7 +67,7 @@ export default function NLNav() {
         <div className="container-px mx-auto w-full max-w-[1440px] h-full flex items-center justify-between">
           {/* Logo */}
           <a href="#" aria-label="AXEVIL Capital" className="shrink-0">
-            <img src="/img/newsletter/logo.svg" alt="AXEVIL Capital" className="shrink-0 block"
+            <img src={asset('/img/newsletter/logo.svg')} alt="AXEVIL Capital" className="shrink-0 block"
               style={{ width: 'clamp(116px, 10.8vw, 155px)', height: 'clamp(18px, 1.7vw, 24px)' }} />
           </a>
 
@@ -82,7 +84,7 @@ export default function NLNav() {
 
           {/* Desktop: CTA */}
           <div className="ml-auto hidden lg:flex">
-            <button type="button" onClick={scrollToNLForm}
+            <button type="button" onClick={() => { analytics.ctaClick('nav'); scrollToNLForm() }}
               className="flex items-center gap-2 font-inter-tight font-semibold text-black-600 bg-white rounded-2xl hover:opacity-90 transition-opacity shrink-0"
               style={{ height: 40, paddingLeft: 16, paddingRight: 16, paddingTop: 13, paddingBottom: 16, fontSize: 'var(--font-m)', fontWeight: 600, lineHeight: '110%', letterSpacing: '-1px' }}>
               <MailIcon />
@@ -141,7 +143,7 @@ export default function NLNav() {
               </div>
               {/* gap auto — button pushed to bottom */}
               <div className="mt-auto pt-6">
-                <OwnButton onClick={() => { scrollToNLForm(); setMenuOpen(false) }} label="Подписаться" fullWidth />
+                <OwnButton onClick={() => { analytics.ctaClick('nav_mobile'); scrollToNLForm(); setMenuOpen(false) }} label="Подписаться" fullWidth />
               </div>
             </div>
           </motion.div>

@@ -1,24 +1,31 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
+/* Use-cases, not audience segments — client feedback 2026-07-23: "три пункта в столбик
+   читаются вяло, переписать под use-case". Each card now leads with the job the reader
+   does with the report; who they are became a label above it, and the old segment quote
+   stays underneath as the supporting detail. */
 const CARDS = [
   {
     num: '1.0',
-    icon: '/img/big-icon-analytics.svg',
-    title: 'Family offices',
-    quote: '«Как изменилась динамика частного рынка за последний год, чего ждать от макро в 2026, в каких отраслях имеет смысл искать новые возможности?»',
-  },
-  {
-    num: '2.0',
     icon: '/img/big-icon-persons.svg',
-    title: 'Независимые финансовые советники',
+    role: 'Независимые финансовые советники',
+    title: 'Показать клиенту, куда вкладываете',
     quote: '«Можно ли инвестировать в SpaceX в преддверии IPO, на какие компании стоит обратить внимание — готовая карта рынка для разговора с клиентами»',
   },
   {
-    num: '3.0',
+    num: '2.0',
     icon: '/img/big-icon-portfolio.svg',
-    title: 'Управляющие капиталом и инвест-банкиры',
+    role: 'Управляющие капиталом и инвест-банкиры',
+    title: 'Подтвердить экспертизу при найме',
     quote: '«Как реальная оценка соотносится с ценами на secondary, какие сектора недооценены, как структурировать доступ к лучшим компаниям?»',
+  },
+  {
+    num: '3.0',
+    icon: '/img/big-icon-analytics.svg',
+    role: 'Family offices',
+    title: 'Отправить в чат Family Office',
+    quote: '«Как изменилась динамика частного рынка за последний год, чего ждать от макро в 2026, в каких отраслях имеет смысл искать новые возможности?»',
   },
 ]
 
@@ -74,7 +81,10 @@ export default function PS6WhoFor() {
                 </span>
               </div>
               {/* Text */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <span style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 500, fontSize: 'clamp(0.75rem, 0.95vw, 0.875rem)', lineHeight: 1.3, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#9b9b9b' }}>
+                  {card.role}
+                </span>
                 <h3 style={{ fontFamily: 'Inter Tight, sans-serif', fontWeight: 600, fontSize: 'clamp(1.25rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', color: 'white', margin: 0 }}>
                   {card.title}
                 </h3>

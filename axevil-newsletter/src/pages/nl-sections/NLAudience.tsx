@@ -1,22 +1,36 @@
-﻿/** Card icons — swapped: portfolio→card1, analytics→card2, persons→card3 */
+import { asset } from '../../lib/asset'
+
+/**
+ * Three roles, one concrete job each.
+ *
+ * The cards used to carry a generic "какие компании растут…" quote per role — true of
+ * everyone, useful to no one (client feedback 2026-07-23: "описания общие. Конкретный
+ * use-case per роль"). `useCase` is the client's own phrasing; `body` says how the issue
+ * delivers it.
+ *
+ * Card icons — analytics → wealth manager, portfolio → family office, persons → banker.
+ */
 const CARDS = [
   {
     num: '1.0',
-    icon: '/img/newsletter/big-icon-portfolio.svg',
-    title: 'Family Offices',
-    quote: '«Какие компании растут и падают на secondary на этой неделе, где ловить точку входа и стоит ли пересматривать позиции в watch-list?»',
+    icon: asset('/img/newsletter/big-icon-analytics.svg'),
+    title: 'Wealth-менеджеры',
+    useCase: 'Еженедельный апдейт для клиентских звонков',
+    body: 'Во вторник утром у вас на руках лидерборд secondary, открывшиеся тендер-оферы и новые раунды — готовая повестка на неделю клиентских разговоров.',
   },
   {
     num: '2.0',
-    icon: '/img/newsletter/big-icon-analytics.svg',
-    title: 'Независимые финансовые советники',
-    quote: '«О чём говорить с клиентами на этой неделе, какие компании добавить в инвест-предложения, какие тендер-оферы открылись — готовая карта рынка для клиентского звонка.»',
+    icon: asset('/img/newsletter/big-icon-portfolio.svg'),
+    title: 'Family offices',
+    useCase: 'Мониторинг pre-IPO без штата аналитиков',
+    body: '200+ частных компаний в систематическом покрытии: переоценки, раунды, смена мультипликаторов. Слежение за рынком, под которое не нужно нанимать отдельную команду.',
   },
   {
     num: '3.0',
-    icon: '/img/newsletter/big-icon-persons.svg',
-    title: 'Управляющие капиталом\nи инвест-банкиры',
-    quote: '«Как реальная оценка соотносится с ценами на secondary, какие сектора переоцениваются, как открывшиеся раунды и тендер-оферы меняют структуру рынка?»',
+    icon: asset('/img/newsletter/big-icon-persons.svg'),
+    title: 'Private bankers',
+    useCase: 'Аргументарий для upsell-а pre-IPO обёрток',
+    body: 'Цифры, сделки и контекст, на которые можно ссылаться в разговоре о структурных решениях: что изменилось за неделю и почему это повод вернуться к клиенту.',
   },
 ]
 
@@ -44,16 +58,16 @@ export default function NLAudience() {
           </h2>
           <p className="hidden md:block font-inter-tight font-medium text-center"
             style={{ fontSize: 'var(--font-l)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.36px', maxWidth: 580 }}>
-            Регулярно освещаем ключевые события рынка частных компаний — переоценки, рейтинги, тендер-оферы, раунды. Чтобы вы могли использовать эту информацию в своей работе.
+            Один и тот же выпуск закрывает три разные задачи — в зависимости от того, с какой стороны стола вы работаете с частным рынком.
           </p>
         </div>
 
         {/* Cards — stacked on mobile, row on sm+, full 1440px on lg */}
-        <div className="flex flex-col sm:flex-row gap-4 items-start overflow-hidden w-full lg:px-0">
+        <div className="flex flex-col sm:flex-row gap-4 items-stretch overflow-hidden w-full lg:px-0">
           {CARDS.map((card) => (
             <div key={card.num}
               className="flex flex-col items-center overflow-hidden rounded-[24px] flex-1 min-w-0"
-              style={{ background: 'var(--black-300)', minHeight: 'clamp(280px, 31.25vw, 450px)', paddingTop: 24, paddingBottom: 24, paddingLeft: 24, paddingRight: 24, gap: 48 }}
+              style={{ background: 'var(--black-300)', minHeight: 'clamp(280px, 31.25vw, 450px)', paddingTop: 24, paddingBottom: 24, paddingLeft: 24, paddingRight: 24, gap: 32 }}
             >
               {/* Number — centered */}
               <p className="font-inter-tight font-medium text-center whitespace-nowrap shrink-0 w-full"
@@ -65,15 +79,22 @@ export default function NLAudience() {
               <img src={card.icon} alt="" loading="lazy" className="shrink-0 block"
                 style={{ width: 'clamp(88px, 8.3vw, 120px)', height: 'clamp(88px, 8.3vw, 120px)' }} />
 
-              {/* Title + quote — centered */}
-              <div className="flex flex-col items-center justify-center flex-1 min-h-0 w-full gap-4">
+              {/* Role → the job it does → how it is delivered */}
+              <div className="flex flex-col items-center justify-center flex-1 min-h-0 w-full gap-3">
                 <h3 className="font-inter-tight font-semibold text-white text-center whitespace-pre-line w-full"
                   style={{ fontSize: 'clamp(1.25rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
                   {card.title}
                 </h3>
+
+                {/* The use-case sits in a chip so it reads as the card's promise, not as body copy */}
+                <p className="font-inter-tight font-semibold text-white text-center w-full rounded-2xl px-4 py-3"
+                  style={{ fontSize: 'clamp(0.9375rem, 1.1vw, 1.0625rem)', lineHeight: 1.25, letterSpacing: '-0.02em', background: 'var(--black-600)' }}>
+                  {card.useCase}
+                </p>
+
                 <p className="font-inter-tight font-medium text-center w-full"
                   style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.3, color: 'rgba(255,255,255,0.55)', letterSpacing: '-0.02em' }}>
-                  {card.quote}
+                  {card.body}
                 </p>
               </div>
             </div>

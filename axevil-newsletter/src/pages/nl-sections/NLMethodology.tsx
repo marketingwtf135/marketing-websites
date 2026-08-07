@@ -1,11 +1,33 @@
-﻿import { useRef } from 'react'
+import { useRef } from 'react'
 import { useScroll, useTransform, motion } from 'framer-motion'
+import { asset } from '../../lib/asset'
 import NLLetterPreview from './NLLetterPreview'
+import NLLeadForm from './NLLeadForm'
+import { LAST_ISSUE } from './NLHero'
 
+/**
+ * "Так выглядит один выпуск" — the preview, enlarged, with the ask above it.
+ *
+ * Was a small centred letter card floating on the rock background with no way to act on
+ * it (client feedback 2026-07-23: "preview мелкий и без CTA рядом. Увеличить + справа CTA
+ * «Прочитать выпуск целиком», email + телефон inline или полный выпуск после subscribe").
+ * First pass put the letter and the ask side by side (letter left, ask right); client
+ * feedback 2026-07-27 asked for a vertical stack instead, text above the photo. The
+ * letter renders at up to 1.4× its old scale, clipped at the fold with a fade so it
+ * reads as "continues below", underneath the offer + the same short form as the hero.
+ */
 export default function NLMethodology() {
   const cardRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: cardRef, offset: ['start end', 'end start'] })
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '-20%'])
+
+  /** The letter is fixed-width per scale, so each breakpoint renders its own size. */
+  const clip: React.CSSProperties = {
+    maxHeight: 'clamp(21rem, 40vw, 34rem)',
+    overflow: 'hidden',
+    maskImage: 'linear-gradient(to bottom, black 78%, transparent 100%)',
+    WebkitMaskImage: 'linear-gradient(to bottom, black 78%, transparent 100%)',
+  }
 
   return (
     <section id="nl-methodology" className="relative w-full bg-page-bg">
@@ -35,14 +57,13 @@ export default function NLMethodology() {
             </p>
           </div>
 
-          {/* Dark card — full width */}
+          {/* Dark card — letter on the left, the ask on the right */}
           <div
             ref={cardRef}
-            className="relative w-full flex items-end justify-center overflow-hidden"
+            className="relative w-full overflow-hidden"
             style={{
               borderRadius: 'clamp(24px, 2.2vw, 32px)',
-              paddingTop: 'clamp(40px, 4.4vw, 64px)',
-              minHeight: 'clamp(480px, 55vw, 800px)',
+              padding: 'clamp(1.5rem, 3vw, 3.5rem)',
             }}
           >
             {/* Parallax rock background */}
@@ -50,7 +71,7 @@ export default function NLMethodology() {
               style={{ borderRadius: 'clamp(24px, 2.2vw, 32px)' }}>
               <div className="absolute inset-0" style={{ background: 'var(--black-300)', borderRadius: 'clamp(24px, 2.2vw, 32px)' }} />
               <motion.img
-                src="/img/newsletter/hero-bg-rock.png"
+                src={asset('/img/newsletter/hero-bg-rock.png')}
                 alt=""
                 className="absolute max-w-none object-cover"
                 style={{
@@ -63,14 +84,44 @@ export default function NLMethodology() {
               />
             </div>
 
-            {/* Letter preview — scale 0.845 mobile (280px), 1.188 desktop */}
-            <div className="absolute left-1/2 z-10 sm:hidden"
-              style={{ top: 140, transform: 'translateX(-50%)' }}>
-              <NLLetterPreview scale={0.845} />
-            </div>
-            <div className="absolute left-1/2 z-10 hidden sm:block"
-              style={{ bottom: 0, transform: 'translateX(-50%) translateY(60px)' }}>
-              <NLLetterPreview scale={1.188} />
+            {/* Vertical stack — text first, letter preview below (client feedback
+                2026-07-27: "по вертикали выравнивание и текст над фото, а не наоборот";
+                was a 2-col grid with the letter on the left and the ask on the right). */}
+            <div className="relative z-10 flex flex-col items-center gap-8 lg:gap-10 w-full">
+              {/* The ask */}
+              <div className="flex flex-col items-center text-center gap-4 w-full">
+                <p className="font-inter-tight font-medium"
+                  style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--white-400)' }}>
+                  Выпуск №47 · {LAST_ISSUE.date} · {LAST_ISSUE.updates} · {LAST_ISSUE.reading}
+                </p>
+
+                <h3 className="font-inter-tight font-semibold text-white"
+                  style={{ fontSize: 'clamp(1.5rem, 2.4vw, 2.25rem)', lineHeight: 1.05, letterSpacing: '-0.02em' }}>
+                  Прочитать выпуск целиком
+                </h3>
+
+                <p className="font-inter-tight font-medium"
+                  style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.02em', maxWidth: '28rem' }}>
+                  Оставьте контакты — пришлём последний выпуск полностью, без сокращений, и подключим к рассылке по вторникам.
+                </p>
+
+                <NLLeadForm
+                  source="preview"
+                  align="center"
+                  label="Прочитать выпуск целиком"
+                  note="Полный выпуск приходит сразу после подписки. Отписка одной кнопкой."
+                  className="max-w-[30rem]"
+                />
+              </div>
+
+              {/* Letter — one render per breakpoint, the component sizes in px. Client
+                  2026-07-27 follow-up: not an overlap — just more room above it, gap
+                  spacing-4 (4rem), lower than the ask block rather than pulled onto it. */}
+              <div className="flex justify-center w-full" style={{ ...clip, marginTop: '4rem' }}>
+                <div className="lg:hidden shrink-0"><NLLetterPreview scale={0.845} /></div>
+                <div className="hidden lg:block xl:hidden shrink-0"><NLLetterPreview scale={1.05} /></div>
+                <div className="hidden xl:block shrink-0"><NLLetterPreview scale={1.4} /></div>
+              </div>
             </div>
           </div>
         </div>

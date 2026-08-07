@@ -3,12 +3,16 @@ import { useRef } from 'react'
 
 const AUTHOR_PHOTO = '/img/image-speaker.png'
 
+// Filenames were spaces/Cyrillic (e.g. "Без названия 1.png") — fine for the Vite dev
+// server, but Railway prod 404'd on them: the URL-encoded request path never matched
+// the on-disk name, so 4 of 5 logos silently failed to load (client 2026-07-27:
+// "проблема с фото на pre-ipo-insider, они не подгружаются"). Renamed to plain ASCII.
 const LOGOS = [
   { name: 'Crunchbase', src: '/img/crunchbase-logo.png' },
-  { name: 'PitchBook',  src: '/img/Без названия 1.png' },
-  { name: 'PREQIN',     src: '/img/Preqin-logo_1 1.png' },
-  { name: 'S&P Global', src: '/img/sandp-1 1.png' },
-  { name: 'NVCA',       src: '/img/logo 1.png' },
+  { name: 'PitchBook',  src: '/img/pitchbook-logo.png' },
+  { name: 'PREQIN',     src: '/img/preqin-logo.png' },
+  { name: 'S&P Global', src: '/img/sandp-logo.png' },
+  { name: 'NVCA',       src: '/img/nvca-logo.png' },
 ]
 
 export default function PS4Methodology() {
@@ -305,6 +309,26 @@ export default function PS4Methodology() {
               ))}
             </div>
           </div>
+
+          {/* Price anchor — the competitor logos establish the category, this puts a
+              number on it (client feedback 2026-07-23: "логотипы конкурентов сильный
+              ход, добавить price anchor"). Without it the row reads as "we read the
+              same sources", not as "you would pay $30k+ for this". */}
+          <p
+            style={{
+              fontFamily: 'Inter Tight, sans-serif',
+              fontSize: 'clamp(1.125rem, 1.5vw, 1.375rem)',
+              fontWeight: 600,
+              lineHeight: 1.3,
+              letterSpacing: '-0.02em',
+              color: '#ffffff',
+              textAlign: 'center',
+              maxWidth: '44rem',
+              margin: 0,
+            }}
+          >
+            Эти подписки стоят $30k+/год. Наш отчёт — бесплатно.
+          </p>
         </div>
       </motion.div>
     </section>

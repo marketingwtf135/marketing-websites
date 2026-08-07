@@ -311,3 +311,26 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Visually-hidden label text — the short lead forms label their inputs for assistive
+   tech while the visible affordance stays the placeholder. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Moved from an inline <style> in index.html — that block was tripping a documented
+   Windows-only Vite bug (htmlInlineProxyPlugin case-sensitivity, vitejs/vite#16324):
+   `vite build` failed with "No matching HTML proxy module found" whenever config.root's
+   on-disk casing differed from the invoking shell's cwd casing. Plain CSS bundles fine
+   either way. */
+html { scrollbar-width: thin; scrollbar-color: #606060 #1A1A1A; }
+::-webkit-scrollbar { width: 6px !important; height: 6px !important; }
+::-webkit-scrollbar-track { background: #1A1A1A !important; border-radius: 10px !important; }
+::-webkit-scrollbar-thumb { background: #606060 !important; border-radius: 10px !important; border: 2px solid #1A1A1A !important; }
+::-webkit-scrollbar-thumb:hover { background: #404040 !important; }

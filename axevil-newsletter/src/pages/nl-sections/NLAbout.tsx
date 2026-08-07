@@ -1,4 +1,6 @@
-﻿const STATS = [
+﻿import { asset } from '../../lib/asset'
+
+const STATS = [
   { value: '$150M',  label: 'AUM' },
   { value: '1,000+', label: 'Клиентов' },
   { value: '35',     label: 'Компаний в портфеле' },
@@ -68,7 +70,7 @@ export default function NLAbout() {
 
           {/* Platform screenshot — hidden on mobile */}
           <img
-            src="/img/newsletter/newsletter-interface-big.png"
+            src={asset('/img/newsletter/newsletter-interface-big.png')}
             alt="Axevil Capital — интерфейс платформы"
             className="hidden sm:block w-full rounded-[1.5rem]"
             loading="lazy"

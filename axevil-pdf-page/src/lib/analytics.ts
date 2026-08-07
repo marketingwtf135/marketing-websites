@@ -5,29 +5,28 @@ declare global {
 }
 
 /**
- * dataLayer event contract — shared verbatim with the PDF landing
- * (`axevil-pdf-page/src/lib/analytics.ts`). Both files must stay identical so one GTM
- * container and one A/B report can read either landing without a per-page mapping
- * (client feedback 2026-07-23: "аналитика на оба ленда... без этого A/B не запустим").
+ * dataLayer event contract — shared verbatim with the newsletter landing
+ * (`axevil-newsletter/src/lib/analytics.ts`), only `PAGE` differs. Both files must stay
+ * identical so one GTM container and one A/B report can read either landing without a
+ * per-page mapping (client feedback 2026-07-23: "аналитика на оба ленда: клик hero,
+ * submit формы, скролл до финала, время до конверсии. Без этого A/B не запустим").
  *
  * Events:
  *   page_view          — once per load, carries `page`
- *   cta_click          — any CTA press, carries `location` (hero / nav / contents / …)
+ *   cta_click          — any CTA press, carries `location` (hero / nav / preview / …)
  *   form_view          — a form scrolled into view
  *   form_start         — first keystroke in a form
  *   form_submit        — validated submit, carries `time_to_conversion_sec`
  *   form_error         — per invalid field
  *   scroll_25/50/75/100
- *   final_section_view — the closing subscribe block reached (the funnel's last step
- *                        before conversion; separate from scroll_100 which fires on the
- *                        footer and is polluted by fast scrollers)
+ *   final_section_view — the closing download block reached
  */
 
 /** Page landing timestamp — the zero point for time-to-conversion. */
 const LOADED_AT = Date.now()
 
 /** Which landing this build is. Kept explicit so the two pages never collide in GTM. */
-const PAGE = 'newsletter'
+const PAGE = 'pdf_insider'
 
 function push(event: string, params?: Record<string, unknown>) {
   if (typeof window === 'undefined') return

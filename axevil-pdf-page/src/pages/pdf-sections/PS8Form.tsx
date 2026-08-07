@@ -1,5 +1,6 @@
-import { useState, useRef, type FormEvent } from 'react'
+import { useState, useRef, useEffect, type FormEvent } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { analytics } from '../../lib/analytics'
 import PDFCtaButton from '../../components/PDFCtaButton'
 
 interface FormState {
@@ -8,6 +9,13 @@ interface FormState {
   digest: boolean
 }
 
+/** Track record shown beside the form (client figures, 2026-07-23). */
+const FORM_STATS: { value: string; label: string }[] = [
+  { value: '$150M', label: 'под управлением' },
+  { value: '1000+', label: 'инвесторов' },
+  { value: '7',     label: 'экзитов' },
+]
+
 export default function PS8Form() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, amount: 0.1 })
@@ -15,6 +23,18 @@ export default function PS8Form() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<{ name?: string; email?: string }>({})
+  const hasStarted = useRef(false)
+
+  // The funnel's last step reached ("скролл до финала") + the form in view.
+  useEffect(() => {
+    if (!inView) return
+    analytics.finalReached()
+    analytics.formView('final')
+  }, [inView])
+
+  function onInput() {
+    if (!hasStarted.current) { hasStarted.current = true; analytics.formStart('final') }
+  }
 
   function validate() {
     const e: { name?: string; email?: string } = {}
@@ -26,10 +46,16 @@ export default function PS8Form() {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
+    analytics.ctaClick('final_submit')
     const errs = validate()
-    if (Object.keys(errs).length) { setErrors(errs); return }
+    if (Object.keys(errs).length) {
+      setErrors(errs)
+      Object.keys(errs).forEach(f => analytics.formError(f, 'final'))
+      return
+    }
     setErrors({})
     setLoading(true)
+    analytics.formSubmit({ location: 'final', digest: form.digest })
     // TODO: wire to real endpoint
     setTimeout(() => {
       setLoading(false)
@@ -79,8 +105,8 @@ export default function PS8Form() {
             <h2
               className="font-inter-tight font-semibold text-transparent bg-clip-text"
               style={{
-                fontSize: 'clamp(2.25rem, 4.4vw, 4rem)', lineHeight: 1,
-                letterSpacing: '-0.02em', overflow: 'visible',
+                fontSize: 'clamp(2.25rem, 4.4vw, 4rem)', lineHeight: 1.15,
+                letterSpacing: '-0.02em', overflow: 'visible', paddingBottom: '0.15em',
                 backgroundImage: 'linear-gradient(94deg, #A2A2A2 15.77%, #FFF 49.29%, #A2A2A2 82.81%)',
               }}
             >
@@ -93,6 +119,42 @@ export default function PS8Form() {
               Линк придёт на email в течение минуты.
             </p>
           </div>
+
+          {/* Track record + the unsubscribe promise (client feedback 2026-07-23: "рядом
+              цифры и «отправим один раз, отпишетесь одним кликом»"). The form was the
+              last thing on the page with nothing standing behind it — these answer
+              "who is asking" and "what happens to my address" at the moment of typing. */}
+          <ul
+            style={{
+              display: 'flex', flexWrap: 'wrap', justifyContent: 'center',
+              gap: 'clamp(1.25rem, 4vw, 2.75rem)', listStyle: 'none', padding: 0,
+              margin: '0.5rem 0 0', width: '100%',
+            }}
+          >
+            {FORM_STATS.map((s) => (
+              <li key={s.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.125rem' }}>
+                <span
+                  className="font-inter-tight font-semibold text-white"
+                  style={{ fontSize: 'clamp(1.25rem, 2vw, 1.75rem)', lineHeight: 1.1, letterSpacing: '-0.02em', fontVariantNumeric: 'tabular-nums' }}
+                >
+                  {s.value}
+                </span>
+                <span
+                  className="font-inter-tight font-medium"
+                  style={{ fontSize: 'clamp(0.75rem, 1vw, 0.875rem)', lineHeight: 1.3, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.5)', whiteSpace: 'nowrap' }}
+                >
+                  {s.label}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <p
+            className="font-inter-tight font-medium text-center"
+            style={{ fontSize: '0.8125rem', lineHeight: 1.35, letterSpacing: '-0.02em', color: 'rgba(255,255,255,0.4)', margin: 0 }}
+          >
+            Отправим один раз, отпишетесь одним кликом.
+          </p>
         </div>
 
         {/* Form */}
@@ -119,7 +181,7 @@ export default function PS8Form() {
                     type="text"
                     placeholder="Alexander"
                     value={form.name}
-                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                    onChange={e => { setForm(f => ({ ...f, name: e.target.value })); onInput() }}
                     className="w-full bg-transparent font-inter-tight font-medium text-white placeholder:text-[rgba(255,255,255,0.35)] text-[16px] focus:outline-none"
                   />
                 </div>
@@ -135,7 +197,7 @@ export default function PS8Form() {
                     type="email"
                     placeholder="your@email.com"
                     value={form.email}
-                    onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                    onChange={e => { setForm(f => ({ ...f, email: e.target.value })); onInput() }}
                     className="w-full bg-transparent font-inter-tight font-medium text-white placeholder:text-[rgba(255,255,255,0.35)] text-[16px] focus:outline-none"
                   />
                 </div>

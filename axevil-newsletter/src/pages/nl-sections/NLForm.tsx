@@ -1,10 +1,27 @@
 ﻿import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { analytics } from '../../lib/analytics'
-import { getUtmParams } from '../../lib/useUtm'
+import { asset } from '../../lib/asset'
+import { submitSubscription } from '../../lib/subscribe'
 import OwnButton from './OwnButton'
 
-const NEWSLETTER_WEBHOOK = 'https://your-webhook-url.com/newsletter' // TODO: replace
+/**
+ * Social proof beside the closing form (client feedback 2026-07-23: "форма ок. Добавить
+ * social proof: «1200+ wealth-менеджеров уже подписаны» + logo-band институций").
+ * The count is the client's figure.
+ */
+const SUBSCRIBER_COUNT = '1200+ wealth-менеджеров уже подписаны'
+
+/**
+ * Institution logo band. Empty until the client supplies cleared logo files — we do not
+ * put institution names on the page that we cannot evidence. Drop `{src, alt}` entries in
+ * and the band renders logos instead of the audience-mix fallback below; no other change
+ * is needed.
+ */
+const INSTITUTION_LOGOS: { src: string; alt: string }[] = []
+
+/** What the list is made of — true, checkable, and enough of a signal without logos. */
+const SUBSCRIBER_MIX = ['Family offices', 'Private banks', 'Независимые advisors', 'Инвест-бутики']
 
 const AUM_OPTIONS = [
   { value: '<1m',     label: '< $1M' },
@@ -99,8 +116,10 @@ export default function NLForm() {
   useEffect(() => {
     const el = sectionRef.current
     if (!el) return
+    // Two signals, one observer: the funnel's last step reached ("скролл до финала"),
+    // and the form itself in view.
     const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { analytics.formView(); obs.disconnect() } },
+      ([e]) => { if (e.isIntersecting) { analytics.finalReached(); analytics.formView('final'); obs.disconnect() } },
       { threshold: 0.3 }
     )
     obs.observe(el)
@@ -108,7 +127,7 @@ export default function NLForm() {
   }, [])
 
   function onInput() {
-    if (!hasStarted.current) { hasStarted.current = true; analytics.formStart() }
+    if (!hasStarted.current) { hasStarted.current = true; analytics.formStart('final') }
   }
 
   function validate() {
@@ -122,26 +141,15 @@ export default function NLForm() {
   async function handleSubmit(ev: React.FormEvent) {
     ev.preventDefault()
     const errs = validate()
-    if (Object.keys(errs).length) { setErrors(errs); Object.keys(errs).forEach(f => analytics.formError(f)); return }
+    if (Object.keys(errs).length) { setErrors(errs); Object.keys(errs).forEach(f => analytics.formError(f, 'final')); return }
     setErrors({})
     setLoading(true)
-    const utm = getUtmParams()
-    try {
-      const controller = new AbortController()
-      const timer = setTimeout(() => controller.abort(), 5000)
-      await fetch(NEWSLETTER_WEBHOOK, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, ...utm, page: 'newsletter', ts: new Date().toISOString() }),
-        signal: controller.signal,
-      })
-      clearTimeout(timer)
-      analytics.formSubmit({ email: form.email })
-      setSubmitted(true)
-    } catch {
-      analytics.formError('submit')
-      setSubmitted(true) // show success even on network error (webhook may be placeholder)
-    }
-    finally { setLoading(false) }
+    analytics.ctaClick('final_submit')
+    const ok = await submitSubscription({ ...form, source: 'final' })
+    if (!ok) analytics.formError('submit', 'final') // webhook may still be the placeholder
+    analytics.formSubmit({ location: 'final', has_aum: !!form.aum })
+    setSubmitted(true) // success either way — a placeholder endpoint is not the visitor's problem
+    setLoading(false)
   }
 
   return (
@@ -156,7 +164,7 @@ export default function NLForm() {
     >
       {/* Shine background — right-0 top-0, 100% width per Figma 784-13986 */}
       <div className="absolute right-0 top-0 w-full h-full pointer-events-none" aria-hidden>
-        <img src="/img/newsletter/newsletter-shine-bg.png"
+        <img src={asset('/img/newsletter/newsletter-shine-bg.png')}
           onError={(e) => { (e.target as HTMLImageElement).style.opacity = '0' }}
           alt="" className="w-full h-full object-cover object-right-top" loading="lazy" />
       </div>
@@ -185,6 +193,8 @@ export default function NLForm() {
               Welcome-выпуск + инструменты — в почте через 60 секунд. Бесплатно. Отписка в 1 клик
             </p>
           </div>
+
+          <SocialProof />
         </div>
 
         {/* Form */}
@@ -235,6 +245,40 @@ export default function NLForm() {
         </div>
       </motion.div>
     </section>
+  )
+}
+
+/** Subscriber count + who they are — the reassurance that sits above the fields. */
+function SocialProof() {
+  return (
+    <div className="flex flex-col items-center gap-3 w-full">
+      <p className="font-inter-tight font-semibold text-white flex items-center gap-2 text-center"
+        style={{ fontSize: 'clamp(0.9375rem, 1.1vw, 1.0625rem)', lineHeight: 1.3, letterSpacing: '-0.02em' }}>
+        <span className="badge-pulse shrink-0 block rounded-full" aria-hidden
+          style={{ width: '0.5rem', height: '0.5rem', background: 'var(--status-open)' }} />
+        {SUBSCRIBER_COUNT}
+      </p>
+
+      {INSTITUTION_LOGOS.length > 0 ? (
+        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+          {INSTITUTION_LOGOS.map(logo => (
+            <img key={logo.src} src={logo.src} alt={logo.alt} loading="lazy"
+              className="block shrink-0 opacity-60"
+              style={{ height: 'clamp(1.25rem, 1.8vw, 1.75rem)', width: 'auto' }} />
+          ))}
+        </div>
+      ) : (
+        <ul className="flex flex-wrap items-center justify-center gap-2 list-none p-0 m-0">
+          {SUBSCRIBER_MIX.map(item => (
+            <li key={item}
+              className="font-inter-tight font-medium whitespace-nowrap rounded-full px-3 py-1.5"
+              style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--white-300)', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.06)' }}>
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   )
 }
 
