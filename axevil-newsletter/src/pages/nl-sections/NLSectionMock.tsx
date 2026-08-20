@@ -81,17 +81,21 @@ function SectorsMock() {
   ]
   return (
     // justify-between растягивает шесть строк на всю высоту плашки: раньше они жались к
-    // середине, а сверху и снизу оставалась пустота. px-2 отодвигает подписи от края.
-    <div className="flex flex-col justify-between h-full w-full px-2 py-1">
+    // середине, а сверху и снизу оставалась пустота. px-2 отодвигает подписи от края,
+    // py-4 не даёт крайним строкам прилипать к верхней и нижней границе плашки.
+    <div className="flex flex-col justify-between h-full w-full px-2 py-4">
       {rows.map(([name, w]) => (
         <div key={name} className="group flex items-center gap-3 w-full">
           <span className="shrink-0 truncate"
-            style={{ width: '40%', fontSize: 'clamp(0.75rem, 0.9vw, 0.9375rem)', color: 'var(--white-400)' }}>
+            // Колонка подписей уже, чем была (40%): полосы за счёт этого начинаются левее и
+            // становятся длиннее. Нижняя граница clamp не даёт «AI-инфраструктуре»
+            // обрезаться на узком экране, где 30% дали бы всего 88 px.
+            style={{ width: 'clamp(7.5rem, 30%, 13rem)', fontSize: 'clamp(0.75rem, 0.9vw, 0.9375rem)', color: 'var(--white-400)' }}>
             {name}
           </span>
           <span
             className="block rounded-full bg-white/20 transition-colors duration-200 group-hover:bg-white"
-            style={{ width: w, height: 14 }}
+            style={{ width: w, height: 18 }}
             aria-hidden
           />
         </div>
