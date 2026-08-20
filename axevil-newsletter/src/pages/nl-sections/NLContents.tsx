@@ -112,7 +112,7 @@ export default function NLContents() {
                 {/* Номер стоит внутри заголовка, а не отдельной колонкой справа */}
                 <h3 className="font-inter-tight font-semibold text-white w-full"
                   style={{ fontSize: 'clamp(1.25rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
-                  <span style={{ color: 'var(--black-800)' }}>{card.num}</span>{' '}{card.title}
+                  <span style={{ color: 'var(--black-800)', marginRight: '0.25em' }}>{card.num}</span>{' '}{card.title}
                 </h3>
 
                 {/* Body */}
@@ -126,7 +126,7 @@ export default function NLContents() {
                 {/* The section as it looks in the letter */}
                 <NLSectionMock
                   variant={card.variant}
-                  className={card.wide ? 'w-full sm:flex-1 sm:min-w-0' : 'w-full flex-1'}
+                  className={card.wide ? 'w-full mt-2 sm:mt-0 sm:flex-1 sm:min-w-0' : 'w-full flex-1 mt-2'}
                 />
               </div>
             ))}
