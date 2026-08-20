@@ -73,38 +73,60 @@ export default function NLAudience() {
               новости компаний, — и прятать её от мобильных посетителей незачем. */}
           <p className="font-inter-tight font-medium text-center"
             style={{ fontSize: 'var(--font-l)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.36px', maxWidth: 580 }}>
-            Каждую среду — динамика Axevil Pre-IPO Index, срез заявок на вторичном рынке
-            и новости частных компаний. Один выпуск закрывает разные задачи по портфелю.
+            Каждую среду — динамика Axevil Pre-IPO Index,<br className="hidden md:inline" />
+            {' '}срез заявок на вторичном рынке и новости частных компаний.<br className="hidden md:inline" />
+            {' '}Один выпуск закрывает разные задачи по портфелю.
           </p>
         </div>
 
         {/* Cards — stacked on mobile, row on sm+, full 1440px on lg */}
-        <div className="flex flex-col sm:flex-row gap-4 items-stretch overflow-hidden w-full lg:px-0">
+        {/* Строки карточек выровнены между собой через subgrid: заголовки, плашки и текст
+            стоят на одной линии, даже когда длина текста разная. Раньше содержимое было
+            отцентровано по вертикали внутри каждой карточки, и всё расползалось.
+            На телефоне карточки идут столбцом обычным flex — сеточные свойства там неактивны.
+            Промежуток между строками единый (12 px), а увеличенные отступы после номера и
+            иконки добраны их собственными margin: subgrid не умеет разные gap по строкам. */}
+        <div
+          className="flex flex-col sm:grid gap-4 items-stretch w-full lg:px-0"
+          style={{
+            gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+            gridTemplateRows: 'repeat(5, auto)',
+            columnGap: 16,
+            rowGap: 12,
+          }}
+        >
           {CARDS.map((card) => (
             <div key={card.num}
-              className="flex flex-col items-center overflow-hidden rounded-[24px] flex-1 min-w-0"
-              style={{ background: 'var(--black-300)', minHeight: 'clamp(280px, 31.25vw, 450px)', paddingTop: 24, paddingBottom: 24, paddingLeft: 24, paddingRight: 24, gap: 32 }}
+              className="flex flex-col items-center overflow-hidden rounded-[24px] min-w-0 sm:grid"
+              style={{
+                background: 'var(--black-300)',
+                paddingTop: 24, paddingBottom: 24, paddingLeft: 20, paddingRight: 20,
+                gap: 12,
+                gridRow: 'span 5', gridTemplateRows: 'subgrid',
+                // alignItems: start — иначе короткий текст центрируется внутри своей строки
+                // сетки, и низ третьей карточки уезжал на 10 px относительно соседей.
+                justifyItems: 'center', alignItems: 'start', alignContent: 'start',
+              }}
             >
               {/* Number — centered */}
               <p className="font-inter-tight font-medium text-center whitespace-nowrap shrink-0 w-full"
-                style={{ fontSize: 'var(--font-l)', lineHeight: 1.35, letterSpacing: '-0.36px', color: 'var(--black-700)' }}>
+                style={{ fontSize: 'var(--font-l)', lineHeight: 1.35, letterSpacing: '-0.36px', color: 'var(--black-700)', marginBottom: 20 }}>
                 {card.num}
               </p>
 
               {/* Icon */}
               <img src={card.icon} alt="" loading="lazy" className="shrink-0 block"
-                style={{ width: 'clamp(88px, 8.3vw, 120px)', height: 'clamp(88px, 8.3vw, 120px)' }} />
+                style={{ width: 'clamp(88px, 8.3vw, 120px)', height: 'clamp(88px, 8.3vw, 120px)', marginBottom: 20 }} />
 
               {/* Role → the job it does → how it is delivered */}
-              <div className="flex flex-col items-center justify-center flex-1 min-h-0 w-full gap-3">
                 <h3 className="font-inter-tight font-semibold text-white text-center whitespace-pre-line w-full"
                   style={{ fontSize: 'clamp(1.25rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
                   {card.title}
                 </h3>
 
                 {/* The use-case sits in a chip so it reads as the card's promise, not as body copy */}
-                <p className="font-inter-tight font-semibold text-white text-center w-full rounded-2xl px-4 py-3"
-                  style={{ fontSize: 'clamp(0.9375rem, 1.1vw, 1.0625rem)', lineHeight: 1.25, letterSpacing: '-0.02em', background: 'var(--black-600)' }}>
+                <p className="font-inter-tight font-semibold text-white text-center w-full rounded-2xl"
+                  style={{ fontSize: 'clamp(0.875rem, 1vw, 1rem)', lineHeight: 1.3, letterSpacing: '-0.02em', background: 'var(--black-600)', padding: '0.875rem 1.25rem' }}>
                   {card.useCase}
                 </p>
 
@@ -112,7 +134,6 @@ export default function NLAudience() {
                   style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1rem)', lineHeight: 1.3, color: 'rgba(255,255,255,0.55)', letterSpacing: '-0.02em' }}>
                   {card.body}
                 </p>
-              </div>
             </div>
           ))}
         </div>
