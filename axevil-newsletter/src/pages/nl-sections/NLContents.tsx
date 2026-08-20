@@ -6,6 +6,10 @@ import OwnButton from './OwnButton'
 // Unified description size (matches NLAbout and whole page)
 const DESC_SIZE = 'clamp(0.875rem, 1.25vw, 1.125rem)'
 
+/** Текст под заголовком карточки — на ступень мельче общего: карточек пять, и при общем
+ *  размере блок читался как сплошная стена. */
+const CARD_TEXT_SIZE = 'clamp(0.8125rem, 1.05vw, 1rem)'
+
 /**
  * Пять разделов выпуска, каждый показан схемой того, как он устроен.
  *
@@ -21,7 +25,13 @@ const CARDS = [
   {
     num: '1.0',
     title: 'Axevil Pre-IPO Index',
-    text: 'Собственный индекс частного рынка и его динамика в сравнении с публичным. Точка отсчёта, по которой видно движение рынка целиком, а не отдельной компании.',
+    text: (
+      <>
+        Собственный индекс частного рынка и его динамика в сравнении<br className="hidden md:inline" />
+        {' '}с публичным. Точка отсчёта, по которой видно движение рынка целиком,<br className="hidden md:inline" />
+        {' '}а не отдельной компании.
+      </>
+    ),
     variant: 'index' as const,
   },
   {
@@ -76,7 +86,8 @@ export default function NLContents() {
           </h2>
           <p className="font-inter-tight font-medium"
             style={{ fontSize: DESC_SIZE, lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.02em', maxWidth: '35.625rem' }}>
-            Пять разделов каждую неделю. Ниже — фрагменты выпуска от 19 августа.
+            Пять разделов каждую неделю.<br />
+            Ниже — фрагменты выпуска от 19 августа.
           </p>
         </div>
 
@@ -98,20 +109,15 @@ export default function NLContents() {
                 {/* В широкой карточке текст и схема стоят рядом, иначе схема из четырёх
                     строк растягивается на 1440 px и выглядит пустой. */}
                 <div className={`flex flex-col gap-[0.75rem]${card.wide ? ' sm:flex-1 sm:min-w-0' : ''}`}>
-                <div className="flex items-start justify-between gap-4 w-full">
-                  <h3 className="font-inter-tight font-semibold text-white"
-                    style={{ fontSize: 'clamp(1.25rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
-                    {card.title}
-                  </h3>
-                  <p className="font-inter-tight font-medium whitespace-nowrap shrink-0"
-                    style={{ fontSize: DESC_SIZE, lineHeight: 1.35, letterSpacing: '-0.02em', color: 'var(--black-800)' }}>
-                    {card.num}
-                  </p>
-                </div>
+                {/* Номер стоит внутри заголовка, а не отдельной колонкой справа */}
+                <h3 className="font-inter-tight font-semibold text-white w-full"
+                  style={{ fontSize: 'clamp(1.25rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
+                  <span style={{ color: 'var(--black-800)' }}>{card.num}</span>{' '}{card.title}
+                </h3>
 
                 {/* Body */}
                 <p className="font-inter-tight font-medium w-full"
-                  style={{ fontSize: DESC_SIZE, lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.02em' }}>
+                  style={{ fontSize: CARD_TEXT_SIZE, lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.02em' }}>
                   {card.text}
                 </p>
 

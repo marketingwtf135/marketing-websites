@@ -30,21 +30,36 @@ function Legend({ color, children }: { color: string; children: React.ReactNode 
 
 /** 1.0 — две линии на пустой сетке, без значений по осям. */
 function IndexMock() {
+  // Точки линии Axevil переиспользуются дважды: сама линия и заливка под ней, поэтому
+  // держим их одним списком — иначе при правке формы легко разъехаться.
+  const AXEVIL = '0,68 60,54 120,58 180,36 240,30 300,20'
   return (
     <div className="flex flex-col gap-2.5 w-full">
-      <div className="flex items-center gap-4" style={{ fontSize: '0.625rem', color: 'var(--white-400)' }}>
+      <div className="flex items-center gap-4" style={{ fontSize: '0.75rem', color: 'var(--white-400)' }}>
         <Legend color="rgba(255,255,255,0.85)">Axevil Pre-IPO Index</Legend>
         <Legend color="rgba(255,255,255,0.30)">Nasdaq 100</Legend>
       </div>
       <svg viewBox="0 0 300 92" className="w-full" style={{ height: 'auto' }} aria-hidden>
+        <defs>
+          <linearGradient id="nl-index-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.20)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+          </linearGradient>
+        </defs>
+
+        {/* Сетка: только горизонтали и внутренние вертикали — боковые убраны, линии тоньше */}
         {[0, 1, 2, 3].map(i => (
-          <line key={i} x1="0" x2="300" y1={8 + i * 26} y2={8 + i * 26} stroke={LINE} strokeWidth="1" />
+          <line key={`h${i}`} x1="0" x2="300" y1={8 + i * 26} y2={8 + i * 26} stroke={LINE} strokeWidth="0.5" />
         ))}
-        {[0, 1, 2, 3, 4].map(i => (
-          <line key={i} x1={i * 75} x2={i * 75} y1="8" y2="86" stroke={LINE} strokeWidth="1" />
+        {[1, 2, 3].map(i => (
+          <line key={`v${i}`} x1={i * 75} x2={i * 75} y1="8" y2="86" stroke={LINE} strokeWidth="0.5" />
         ))}
+
+        {/* Заливка под линией Axevil, уходящая в прозрачность */}
+        <polygon points={`${AXEVIL} 300,86 0,86`} fill="url(#nl-index-fill)" />
+
         {/* Axevil выше, линии сближаются и расходятся — без привязки к значениям */}
-        <polyline points="0,68 60,54 120,58 180,36 240,30 300,20"
+        <polyline points={AXEVIL}
           fill="none" stroke="rgba(255,255,255,0.85)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         <polyline points="0,74 60,66 120,56 180,62 240,52 300,50"
           fill="none" stroke="rgba(255,255,255,0.28)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
