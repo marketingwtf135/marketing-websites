@@ -2,6 +2,7 @@ import { useRef, useState, type FormEvent } from 'react'
 import { analytics } from '../../lib/analytics'
 import { submitSubscription } from '../../lib/subscribe'
 import OwnButton from './OwnButton'
+import NLPhoneField from './NLPhoneField'
 
 /**
  * Short subscribe form — email + phone on one row, submit underneath.
@@ -24,10 +25,13 @@ interface NLLeadFormProps {
   note?: string | null
   /** Centre the note and cap the width (hero) vs. left-aligned in a column (preview). */
   align?: 'center' | 'left'
+  /** Предел ширины формы. В hero шире, чтобы подсказка «Телефон (необязательно)»
+   *  помещалась рядом с email; в узких блоках остаётся прежние 30rem. */
+  maxWidth?: string
   className?: string
 }
 
-const FIELD_HEIGHT = 'clamp(3.25rem, 4.5vw, 3.75rem)'
+const FIELD_HEIGHT = 'var(--nl-field-h)'
 
 const INPUT_STYLE: React.CSSProperties = {
   fontFamily: '"Inter Tight", sans-serif',
@@ -51,6 +55,7 @@ export default function NLLeadForm({
   label = 'Подписаться на дайджест',
   note = 'Отписка одной кнопкой в любом письме.',
   align = 'center',
+  maxWidth = '30rem',
   className = '',
 }: NLLeadFormProps) {
   const [name, setName] = useState('')
@@ -75,7 +80,9 @@ export default function NLLeadForm({
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errs.email = 'Неверный формат email'
     // Phone stays optional on purpose: every required field is another reason to leave,
     // and the address alone is enough to deliver the digest.
-    if (phone.trim() && !/^[+\d][\d\s()\-]{6,}$/.test(phone)) errs.phone = 'Неверный формат телефона'
+    // В поле всегда лежит код страны, поэтому «заполнено» — это восемь и больше цифр.
+    const digits = phone.replace(/\D/g, '')
+    if (digits.length > 0 && digits.length < 8) errs.phone = 'Неверный формат телефона'
     if (Object.keys(errs).length) {
       setErrors(errs)
       Object.keys(errs).forEach(f => analytics.formError(f, source))
@@ -84,9 +91,9 @@ export default function NLLeadForm({
 
     setErrors({})
     setLoading(true)
-    const ok = await submitSubscription({ email, name: name.trim(), phone: phone.trim() || undefined, source })
+    const ok = await submitSubscription({ email, name: name.trim(), phone: phone.replace(/\D/g, '').length >= 8 ? phone : undefined, source })
     if (!ok) analytics.formError('submit', source)
-    analytics.formSubmit({ location: source, has_phone: !!phone.trim() })
+    analytics.formSubmit({ location: source, has_phone: phone.replace(/\D/g, '').length >= 8 })
     setLoading(false)
     setSubmitted(true)
   }
@@ -121,12 +128,14 @@ export default function NLLeadForm({
       onSubmit={handleSubmit}
       noValidate
       className={`flex flex-col gap-3 w-full ${className}`}
-      style={{ maxWidth: align === 'center' ? '30rem' : undefined }}
+      style={{ maxWidth: align === 'center' ? maxWidth : undefined }}
     >
       <div className="flex flex-col gap-2 w-full">
-        {/* Имя → email → телефон, друг под другом. Раньше email и телефон стояли в ряд
-            от sm и выше, но с добавлением имени ряд из трёх полей стал бы слишком тесным,
-            а Павел (2026-08-06) просил единообразную форму из трёх строк. */}
+        {/* Имя во всю ширину, под ним email и телефон в ряд — раскладка взята с лендинга
+            Pre-IPO Insider (axevil.com/promo/pdf-report) по просьбе Татьяны: так форма
+            занимает на строку меньше. На телефоне ряд распадается в столбец — вдвоём email
+            и поле с выбором страны там не помещаются: у селектора одна только кнопка
+            занимает около 116 px. */}
         <label className="w-full">
           <span className="sr-only">Имя</span>
           <input
@@ -138,28 +147,28 @@ export default function NLLeadForm({
             style={{ ...INPUT_STYLE, borderColor: errors.name ? 'rgba(239,68,68,0.5)' : 'transparent' }}
           />
         </label>
-        <label className="w-full">
-          <span className="sr-only">Email</span>
-          <input
-            type="email" inputMode="email" autoComplete="email" placeholder="Ваш email"
-            value={email}
-            onChange={e => { setEmail(e.target.value); onInput() }}
-            aria-invalid={!!errors.email}
-            className="placeholder:text-[rgba(255,255,255,0.35)]"
-            style={{ ...INPUT_STYLE, borderColor: errors.email ? 'rgba(239,68,68,0.5)' : 'transparent' }}
-          />
-        </label>
-        <label className="w-full">
-          <span className="sr-only">Телефон</span>
-          <input
-            type="tel" inputMode="tel" autoComplete="tel" placeholder="Телефон (необязательно)"
-            value={phone}
-            onChange={e => { setPhone(e.target.value); onInput() }}
-            aria-invalid={!!errors.phone}
-            className="placeholder:text-[rgba(255,255,255,0.35)]"
-            style={{ ...INPUT_STYLE, borderColor: errors.phone ? 'rgba(239,68,68,0.5)' : 'transparent' }}
-          />
-        </label>
+
+        <div className="flex flex-col sm:flex-row gap-2 w-full">
+          <label className="min-w-0" style={{ flex: '1 1 0' }}>
+            <span className="sr-only">Email</span>
+            <input
+              type="email" inputMode="email" autoComplete="email" placeholder="Ваш email"
+              value={email}
+              onChange={e => { setEmail(e.target.value); onInput() }}
+              aria-invalid={!!errors.email}
+              className="placeholder:text-[rgba(255,255,255,0.35)]"
+              style={{ ...INPUT_STYLE, borderColor: errors.email ? 'rgba(239,68,68,0.5)' : 'transparent' }}
+            />
+          </label>
+          <div className="min-w-0" style={{ flex: '1.6 1 0' }} onFocusCapture={onInput}>
+            <NLPhoneField
+              value={phone}
+              onChange={setPhone}
+              invalid={!!errors.phone}
+              fieldStyle={INPUT_STYLE}
+            />
+          </div>
+        </div>
 
         {(errors.name || errors.email || errors.phone) && (
           <p role="alert" className="font-inter-tight font-medium"

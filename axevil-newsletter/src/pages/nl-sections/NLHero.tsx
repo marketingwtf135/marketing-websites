@@ -182,7 +182,10 @@ export default function NLHero() {
           on a tall phone and quietly shrinks on a short one instead of pushing the form
           below the fold. */}
       <div className="lg:hidden relative w-full flex flex-col items-center overflow-hidden"
-        style={{ padding: '1.5rem 0 0' }}>
+        // 1.25rem вместо 1.5: перенос перед «Каждую неделю» добавил подзаголовку
+        // четвёртую строку, и на iPhone SE (320×568) кнопка формы вылезала за экран на
+        // 3 px. Требование «первый экран без прокрутки» держится с 23 июля.
+        style={{ padding: '1.25rem 0 0' }}>
 
         <div className="flex flex-col items-center w-full shrink-0 px-4">
           {/* Badge */}
@@ -206,7 +209,7 @@ export default function NLHero() {
             <motion.p {...fadeUp(0.20)}
               className="font-inter-tight font-medium w-full"
               style={{ fontSize: 'var(--font-s)', lineHeight: 1.3, color: 'var(--white-400)', letterSpacing: '-0.28px' }}>
-              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждую неделю.
+              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды.<br />Каждую неделю.
             </motion.p>
           </div>
 
@@ -214,8 +217,8 @@ export default function NLHero() {
               Между кнопкой и строками под ней отдельный отступ 1.25rem: раньше всю группу
               держал общий gap-2, и дата выпуска прилипала к кнопке. Между самими строками
               зазор остался маленьким — они читаются как один блок. */}
-          <motion.div {...fadeUp(0.25)} className="w-full mt-[1.25rem] flex flex-col items-center">
-            <NLLeadForm source="hero" note={null} />
+          <motion.div {...fadeUp(0.25)} className="w-full mt-4 flex flex-col items-center">
+            <NLLeadForm source="hero" note={null} maxWidth="34rem" />
             <div className="flex flex-col items-center gap-1.5 mt-[1.25rem]">
             </div>
           </motion.div>
@@ -297,14 +300,14 @@ export default function NLHero() {
             <motion.p {...fadeUp(0.20)}
               className="font-inter-tight font-medium"
               style={{ fontSize: 'clamp(1rem,1.4vw,1.25rem)', lineHeight: 1.35, color: 'var(--white-400)', letterSpacing: '-0.02em', maxWidth: '34rem' }}>
-              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждую неделю.
+              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды.<br />Каждую неделю.
             </motion.p>
           </div>
 
           {/* Lead form — was a button that only scrolled to the closing block, an extra
               click and a drop-off point (client feedback 2026-07-23) */}
           <motion.div {...fadeUp(0.25)} className="w-full flex flex-col items-start gap-3" style={{ maxWidth: '38.75rem' }}>
-            <NLLeadForm source="hero" note={null} />
+            <NLLeadForm source="hero" note={null} maxWidth="34rem" />
           </motion.div>
         </div>
 
