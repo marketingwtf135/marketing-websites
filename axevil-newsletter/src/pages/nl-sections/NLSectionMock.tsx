@@ -34,7 +34,7 @@ function IndexMock() {
   // держим их одним списком — иначе при правке формы легко разъехаться.
   const AXEVIL = '0,68 60,54 120,58 180,36 240,30 300,20'
   return (
-    <div className="flex flex-col gap-2.5 w-full">
+    <div className="flex flex-col justify-center gap-2.5 w-full">
       <div className="flex items-center gap-4" style={{ fontSize: '0.75rem', color: 'var(--white-400)' }}>
         <Legend color="rgba(255,255,255,0.85)">Axevil Pre-IPO Index</Legend>
         <Legend color="rgba(255,255,255,0.30)">Nasdaq 100</Legend>
@@ -80,11 +80,20 @@ function SectorsMock() {
     ['Космос', '15%'],
   ]
   return (
-    <div className="flex flex-col gap-[0.55rem] w-full">
+    // justify-between растягивает шесть строк на всю высоту плашки: раньше они жались к
+    // середине, а сверху и снизу оставалась пустота. px-2 отодвигает подписи от края.
+    <div className="flex flex-col justify-between h-full w-full px-2 py-1">
       {rows.map(([name, w]) => (
-        <div key={name} className="flex items-center gap-2 w-full">
-          <span className="shrink-0 truncate" style={{ width: '42%', fontSize: '0.625rem', color: 'var(--white-400)' }}>{name}</span>
-          <span className="block rounded-full" style={{ width: w, height: 9, background: 'rgba(255,255,255,0.22)' }} aria-hidden />
+        <div key={name} className="group flex items-center gap-3 w-full">
+          <span className="shrink-0 truncate"
+            style={{ width: '40%', fontSize: 'clamp(0.75rem, 0.9vw, 0.9375rem)', color: 'var(--white-400)' }}>
+            {name}
+          </span>
+          <span
+            className="block rounded-full bg-white/20 transition-colors duration-200 group-hover:bg-white"
+            style={{ width: w, height: 14 }}
+            aria-hidden
+          />
         </div>
       ))}
     </div>
@@ -94,7 +103,7 @@ function SectorsMock() {
 /** 3.0 — встречные шкалы покупки и продажи, под ними две строки-заглушки. */
 function SupplyMock() {
   return (
-    <div className="flex flex-col gap-3 w-full">
+    <div className="flex flex-col justify-center gap-3 w-full">
       <div className="flex items-center justify-between" style={{ fontSize: '0.5625rem', color: 'var(--white-400)' }}>
         <span>покупка</span><span>продажа</span>
       </div>
@@ -127,7 +136,7 @@ function BalanceMock() {
     </div>
   )
   return (
-    <div className="flex gap-4 w-full">
+    <div className="flex items-center gap-4 w-full">
       {col('только покупка', 'var(--status-open)')}
       {col('только продажа', '#e05b5b')}
     </div>
@@ -143,7 +152,7 @@ function NewsMock() {
     ['40%', 'лицензия'],
   ]
   return (
-    <div className="flex flex-col gap-[0.45rem] w-full">
+    <div className="flex flex-col justify-center gap-[0.45rem] w-full">
       {rows.map(([w, tag]) => (
         <div key={tag} className="flex items-center gap-2.5 w-full">
           <span className="block rounded-full shrink-0" style={{ width: 16, height: 16, background: 'rgba(255,255,255,0.13)' }} aria-hidden />
@@ -170,7 +179,7 @@ export default function NLSectionMock({ variant, className = '' }: { variant: Va
   const Mock = MOCKS[variant]
   return (
     <div
-      className={`flex items-center ${className}`}
+      className={`flex items-stretch ${className}`}
       aria-hidden
       style={{
         background: 'var(--black-400)',
