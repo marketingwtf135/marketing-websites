@@ -1,55 +1,53 @@
 import { analytics } from '../../lib/analytics'
 import { scrollToNLForm } from './NLNav'
-import NLIssuePreview from './NLIssuePreview'
+import NLSectionMock from './NLSectionMock'
 import OwnButton from './OwnButton'
 
 // Unified description size (matches NLAbout and whole page)
 const DESC_SIZE = 'clamp(0.875rem, 1.25vw, 1.125rem)'
 
 /**
- * Four sections of an issue, each shown as the section itself.
+ * Пять разделов выпуска, каждый показан схемой того, как он устроен.
  *
- * Was: title + body + a decorative 3D icon bleeding out of the card corner. The icons
- * were abstract and interchangeable (client feedback 2026-07-23: "заменить на реальные
- * скриншоты разделов из последнего выпуска") — the card now carries a miniature of the
- * section as it arrives in the inbox. See NLIssuePreview for the swap-in-real-screenshots
- * note.
+ * Состав и тексты — от Павла (2026-08-06). До этого здесь было четыре раздела, придуманных
+ * ещё на этапе ТЗ, и один из них обещал инструменты, которых в продукте нет. Теперь разделы
+ * совпадают с реальным Private Markets Pulse: индекс, карта заявок, спрос и предложение,
+ * баланс сторон, новости и раунды.
  *
- * Карточка 3.0 была «Инструменты для управляющих капиталом» — трекер доходности и
- * демо-портфель. Павел подтвердил (2026-08-04), что ничего из этого в продукте нет, и
- * обещания инструментов уже убраны из формы и FAQ; карточка осталась бы единственным
- * местом, где мы их всё ещё обещаем. На её месте тендер-оферы: раздел не выдуман, он
- * назван в подзаголовке первого экрана и в «Кому полезен дайджест» ещё до правок.
- *
- * Полное переписывание секции по реальному выпуску Private Market Pulse отложено:
- * решено пока держать состав, который уже на сайте.
+ * Схемы намеренно без данных — см. NLSectionMock. Прежние миниатюры показывали
+ * правдоподобные, но выдуманные значения; здесь показывать нечего, кроме формы раздела.
  */
 const CARDS = [
   {
     num: '1.0',
-    title: 'События недели',
-    // Тендер-оферы убраны из перечисления: им отдана отдельная карточка 3.0, и упоминать
-    // их в двух местах значило бы описывать один раздел дважды.
-    text: 'Переоценки, новые раунды, M&A. Короткий контекстный разбор: что произошло, как это меняет картину сектора.',
-    variant: 'events' as const,
+    title: 'Axevil Pre-IPO Index',
+    text: 'Собственный индекс частного рынка и его динамика в сравнении с публичным. Точка отсчёта, по которой видно движение рынка целиком, а не отдельной компании.',
+    variant: 'index' as const,
   },
   {
     num: '2.0',
-    title: 'Рейтинги и лидеры',
-    text: 'Топ роста и топ падения на secondary за неделю. Кто переоценился вверх, кто вниз, на сколько, с каким объёмом сделок.',
-    variant: 'ratings' as const,
+    title: 'Карта заявок по секторам',
+    text: 'Как распределён недельный объём заявок между секторами — где концентрируется интерес инвесторов и куда он смещается.',
+    variant: 'sectors' as const,
   },
   {
     num: '3.0',
-    title: 'Тендер-оферы и окна входа',
-    text: 'Какие оферы открылись и до какой даты принимают заявки, где появилось окно входа на secondary, что уже закрылось.',
-    variant: 'deals' as const,
+    title: 'Спрос и предложение на вторичке',
+    text: 'Объём заявок недели с разбивкой на покупку и продажу и имена, которые ведут обе стороны. Видно, куда идут деньги и где нарастает навес.',
+    variant: 'supply' as const,
   },
   {
     num: '4.0',
-    title: 'Новые инвест-идеи',
-    text: '2–3 идеи от команды Axevil. Что появилось в pipeline, почему сейчас, на что обратить внимание.',
-    variant: 'ideas' as const,
+    title: 'Баланс покупателей и продавцов',
+    text: 'Компании, по которым за неделю заявки шли только в одну сторону. Односторонний спрос и односторонний выход быстрее всего показывают смену отношения к имени.',
+    variant: 'balance' as const,
+  },
+  {
+    num: '5.0',
+    title: 'Новости и крупнейшие раунды',
+    text: 'Отчётность и выручка, новые раунды, M&A, лицензии и релизы у частных компаний. Плюс крупнейшие раунды недели по размеру чека.',
+    variant: 'news' as const,
+    wide: true,
   },
 ]
 
@@ -78,19 +76,28 @@ export default function NLContents() {
           </h2>
           <p className="font-inter-tight font-medium"
             style={{ fontSize: DESC_SIZE, lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.02em', maxWidth: '35.625rem' }}>
-            Четыре раздела, которые приходят каждую среду — ниже фрагменты из последнего выпуска.
+            Пять разделов каждую неделю. Ниже — фрагменты выпуска от 19 августа.
           </p>
         </div>
 
-        {/* 2×2 grid */}
+        {/* 2×2, пятая карточка во всю ширину */}
         <div className="flex flex-col gap-[1.5rem] items-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-[1rem] w-full">
             {CARDS.map((card) => (
               <div key={card.num}
-                className="relative flex flex-col p-[1rem] sm:p-[1.5rem] rounded-[1.5rem] overflow-hidden"
-                style={{ background: 'var(--black-300)', minHeight: 'clamp(18.75rem, 24vw, 22.5rem)', gap: '0.75rem' }}
+                className={`relative flex flex-col p-[1rem] sm:p-[1.5rem] rounded-[1.5rem] overflow-hidden${
+                  card.wide ? ' sm:col-span-2 sm:flex-row sm:items-center sm:gap-8' : ''}`}
+                style={{
+                  background: 'var(--black-300)',
+                  // Широкой карточке высота не нужна: её схема короткая, и общий минимум
+                  // оставлял внизу дыру. У остальных минимум чуть снижен по той же причине.
+                  minHeight: card.wide ? undefined : 'clamp(17rem, 21vw, 20rem)',
+                  gap: '0.75rem',
+                }}
               >
-                {/* Title + number on one row — the preview needs the vertical space */}
+                {/* В широкой карточке текст и схема стоят рядом, иначе схема из четырёх
+                    строк растягивается на 1440 px и выглядит пустой. */}
+                <div className={`flex flex-col gap-[0.75rem]${card.wide ? ' sm:flex-1 sm:min-w-0' : ''}`}>
                 <div className="flex items-start justify-between gap-4 w-full">
                   <h3 className="font-inter-tight font-semibold text-white"
                     style={{ fontSize: 'clamp(1.25rem, 1.67vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em' }}>
@@ -108,8 +115,13 @@ export default function NLContents() {
                   {card.text}
                 </p>
 
+                </div>
+
                 {/* The section as it looks in the letter */}
-                <NLIssuePreview variant={card.variant} className="mt-auto w-full" />
+                <NLSectionMock
+                  variant={card.variant}
+                  className={card.wide ? 'w-full sm:flex-1 sm:min-w-0' : 'w-full flex-1'}
+                />
               </div>
             ))}
           </div>

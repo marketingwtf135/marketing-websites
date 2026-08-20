@@ -74,8 +74,8 @@ export default function NLAudience() {
           <p className="font-inter-tight font-medium text-center"
             style={{ fontSize: 'var(--font-l)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.36px', maxWidth: 580 }}>
             Каждую среду — динамика Axevil Pre-IPO Index,<br className="hidden md:inline" />
-            {' '}срез заявок на вторичном рынке и новости частных компаний.<br className="hidden md:inline" />
-            {' '}Один выпуск закрывает разные задачи по портфелю.
+            {' '}срез заявок на вторичном рынке и новости частных компаний.<br className="hidden md:inline" />
+            {' '}Один выпуск закрывает разные задачи по портфелю.
           </p>
         </div>
 
