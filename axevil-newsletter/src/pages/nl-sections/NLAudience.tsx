@@ -68,7 +68,10 @@ export default function NLAudience() {
             }}>
             {'Аналитика для тех, \nкто работает с частным рынком'}
           </h2>
-          <p className="hidden md:block font-inter-tight font-medium text-center"
+          {/* Подзаголовок показывается и на телефоне. Скрытым он был с самой первой версии
+              проекта, без чьей-то просьбы; теперь в нём конкретика — индекс, срез заявок,
+              новости компаний, — и прятать её от мобильных посетителей незачем. */}
+          <p className="font-inter-tight font-medium text-center"
             style={{ fontSize: 'var(--font-l)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.36px', maxWidth: 580 }}>
             Каждую среду — динамика Axevil Pre-IPO Index, срез заявок на вторичном рынке
             и новости частных компаний. Один выпуск закрывает разные задачи по портфелю.
