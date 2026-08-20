@@ -1,8 +1,6 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { asset } from '../../lib/asset'
-import { FIGURES } from '../../lib/figures'
-import { LAST_ISSUE } from '../../lib/lastIssue'
 import ScreenLetter from './NLScreenLetter'
 import NLLeadForm from './NLLeadForm'
 
@@ -19,53 +17,6 @@ function fadeUp(delay: number) {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.55, delay, ease: [0.4, 0, 0.2, 1] as const },
   }
-}
-
-/** Last-issue marker — dot · date · updates · reading time.
- *  Выравнивание задаётся снаружи: в мобильной вёрстке по центру, в десктопной колонке
- *  по левому краю. */
-function LastIssueMarker({ className = '' }: { className?: string }) {
-  return (
-    <p
-      className={`font-inter-tight font-medium flex flex-wrap items-center gap-x-2 gap-y-1 ${className}`}
-      style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--white-400)', letterSpacing: '-0.01em' }}
-    >
-      <span className="shrink-0 block rounded-full" aria-hidden
-        style={{ width: '0.375rem', height: '0.375rem', background: 'var(--status-open)' }} />
-      <span style={{ color: 'var(--white-300)' }}>Последний выпуск: {LAST_ISSUE.date}</span>
-      <span aria-hidden>·</span>
-      <span>{LAST_ISSUE.updates}</span>
-      <span aria-hidden>·</span>
-      <span>{LAST_ISSUE.reading}</span>
-    </p>
-  )
-}
-
-/**
- * Строка-доказательство под формой (ТЗ, Блок 1 — четвёртый элемент первого экрана после
- * заголовка, подзаголовка и CTA).
- *
- * Те же цифры показаны в блоке «О платформе», но до него дочитывают единицы, а решение
- * «оставлять ли адрес» принимается здесь. Значения берутся из общего модуля, поэтому два
- * места на странице не могут разойтись.
- */
-function ProofLine({ className = '' }: { className?: string }) {
-  return (
-    <p
-      className={`font-inter-tight font-medium flex flex-wrap items-center gap-x-2 gap-y-1 ${className}`}
-      style={{ fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--white-400)', letterSpacing: '-0.01em' }}
-    >
-      {/* Разделитель — самостоятельный элемент, а не часть следующего показателя. Когда
-          строка переносится (на 1024 она не влезает в одну), точка остаётся в конце
-          предыдущей строки, а не открывает новую. */}
-      {FIGURES.map((f, i) => (
-        <Fragment key={f.inline}>
-          {i > 0 && <span aria-hidden style={{ color: 'var(--black-800)' }}>·</span>}
-          <span className="whitespace-nowrap">{f.inline}</span>
-        </Fragment>
-      ))}
-    </p>
-  )
 }
 
 /**
@@ -187,7 +138,6 @@ export default function NLHero() {
   return (
     <section className="relative w-full overflow-hidden" style={{ background: 'var(--black-100)', paddingTop: '72px' }}>
 
-
       {/* ── СЦЕНА ИЗ МАКЕТА (lg+) ──
           Контейнер только обрезает, размеры сцены считаются от него в единицах контейнера. */}
       <div ref={clipRef} className="absolute inset-0 overflow-hidden hidden lg:block">
@@ -256,7 +206,7 @@ export default function NLHero() {
             <motion.p {...fadeUp(0.20)}
               className="font-inter-tight font-medium w-full"
               style={{ fontSize: 'var(--font-s)', lineHeight: 1.3, color: 'var(--white-400)', letterSpacing: '-0.28px' }}>
-              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждую среду.
+              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждую неделю.
             </motion.p>
           </div>
 
@@ -267,8 +217,6 @@ export default function NLHero() {
           <motion.div {...fadeUp(0.25)} className="w-full mt-[1.25rem] flex flex-col items-center">
             <NLLeadForm source="hero" note={null} />
             <div className="flex flex-col items-center gap-1.5 mt-[1.25rem]">
-              <LastIssueMarker className="justify-center text-center" />
-              <ProofLine className="justify-center text-center" />
             </div>
           </motion.div>
         </div>
@@ -349,7 +297,7 @@ export default function NLHero() {
             <motion.p {...fadeUp(0.20)}
               className="font-inter-tight font-medium"
               style={{ fontSize: 'clamp(1rem,1.4vw,1.25rem)', lineHeight: 1.35, color: 'var(--white-400)', letterSpacing: '-0.02em', maxWidth: '34rem' }}>
-              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждую среду.
+              Крупнейшие переоценки, лидеры роста и падения на secondary, тендер-оферы, новые раунды. Каждую неделю.
             </motion.p>
           </div>
 
@@ -357,8 +305,6 @@ export default function NLHero() {
               click and a drop-off point (client feedback 2026-07-23) */}
           <motion.div {...fadeUp(0.25)} className="w-full flex flex-col items-start gap-3" style={{ maxWidth: '38.75rem' }}>
             <NLLeadForm source="hero" note={null} />
-            <LastIssueMarker className="justify-start" />
-            <ProofLine className="justify-start" />
           </motion.div>
         </div>
 

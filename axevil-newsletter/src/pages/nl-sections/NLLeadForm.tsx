@@ -53,9 +53,10 @@ export default function NLLeadForm({
   align = 'center',
   className = '',
 }: NLLeadFormProps) {
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
-  const [errors, setErrors] = useState<{ email?: string; phone?: string }>({})
+  const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string }>({})
   const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const started = useRef(false)
@@ -68,7 +69,8 @@ export default function NLLeadForm({
     e.preventDefault()
     analytics.ctaClick(`${source}_submit`)
 
-    const errs: { email?: string; phone?: string } = {}
+    const errs: { name?: string; email?: string; phone?: string } = {}
+    if (!name.trim()) errs.name = 'Введите имя'
     if (!email.trim()) errs.email = 'Введите email'
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errs.email = 'Неверный формат email'
     // Phone stays optional on purpose: every required field is another reason to leave,
@@ -82,7 +84,7 @@ export default function NLLeadForm({
 
     setErrors({})
     setLoading(true)
-    const ok = await submitSubscription({ email, phone: phone.trim() || undefined, source })
+    const ok = await submitSubscription({ email, name: name.trim(), phone: phone.trim() || undefined, source })
     if (!ok) analytics.formError('submit', source)
     analytics.formSubmit({ location: source, has_phone: !!phone.trim() })
     setLoading(false)
@@ -122,37 +124,47 @@ export default function NLLeadForm({
       style={{ maxWidth: align === 'center' ? '30rem' : undefined }}
     >
       <div className="flex flex-col gap-2 w-full">
-        {/* Two fields side by side from sm up; stacked on a phone where each would be
-            too narrow to read its own placeholder. */}
-        <div className="flex flex-col sm:flex-row gap-2 w-full">
-          <label className="flex-1 min-w-0">
-            <span className="sr-only">Email</span>
-            <input
-              type="email" inputMode="email" autoComplete="email" placeholder="Ваш email"
-              value={email}
-              onChange={e => { setEmail(e.target.value); onInput() }}
-              aria-invalid={!!errors.email}
-              className="placeholder:text-[rgba(255,255,255,0.35)]"
-              style={{ ...INPUT_STYLE, borderColor: errors.email ? 'rgba(239,68,68,0.5)' : 'transparent' }}
-            />
-          </label>
-          <label className="flex-1 min-w-0">
-            <span className="sr-only">Телефон</span>
-            <input
-              type="tel" inputMode="tel" autoComplete="tel" placeholder="Телефон (необязательно)"
-              value={phone}
-              onChange={e => { setPhone(e.target.value); onInput() }}
-              aria-invalid={!!errors.phone}
-              className="placeholder:text-[rgba(255,255,255,0.35)]"
-              style={{ ...INPUT_STYLE, borderColor: errors.phone ? 'rgba(239,68,68,0.5)' : 'transparent' }}
-            />
-          </label>
-        </div>
+        {/* Имя → email → телефон, друг под другом. Раньше email и телефон стояли в ряд
+            от sm и выше, но с добавлением имени ряд из трёх полей стал бы слишком тесным,
+            а Павел (2026-08-06) просил единообразную форму из трёх строк. */}
+        <label className="w-full">
+          <span className="sr-only">Имя</span>
+          <input
+            type="text" autoComplete="given-name" placeholder="Имя"
+            value={name}
+            onChange={e => { setName(e.target.value); onInput() }}
+            aria-invalid={!!errors.name}
+            className="placeholder:text-[rgba(255,255,255,0.35)]"
+            style={{ ...INPUT_STYLE, borderColor: errors.name ? 'rgba(239,68,68,0.5)' : 'transparent' }}
+          />
+        </label>
+        <label className="w-full">
+          <span className="sr-only">Email</span>
+          <input
+            type="email" inputMode="email" autoComplete="email" placeholder="Ваш email"
+            value={email}
+            onChange={e => { setEmail(e.target.value); onInput() }}
+            aria-invalid={!!errors.email}
+            className="placeholder:text-[rgba(255,255,255,0.35)]"
+            style={{ ...INPUT_STYLE, borderColor: errors.email ? 'rgba(239,68,68,0.5)' : 'transparent' }}
+          />
+        </label>
+        <label className="w-full">
+          <span className="sr-only">Телефон</span>
+          <input
+            type="tel" inputMode="tel" autoComplete="tel" placeholder="Телефон (необязательно)"
+            value={phone}
+            onChange={e => { setPhone(e.target.value); onInput() }}
+            aria-invalid={!!errors.phone}
+            className="placeholder:text-[rgba(255,255,255,0.35)]"
+            style={{ ...INPUT_STYLE, borderColor: errors.phone ? 'rgba(239,68,68,0.5)' : 'transparent' }}
+          />
+        </label>
 
-        {(errors.email || errors.phone) && (
+        {(errors.name || errors.email || errors.phone) && (
           <p role="alert" className="font-inter-tight font-medium"
             style={{ fontSize: 'var(--font-s)', lineHeight: 1.3, letterSpacing: '-0.02em', color: '#ef4444' }}>
-            {errors.email ?? errors.phone}
+            {errors.name ?? errors.email ?? errors.phone}
           </p>
         )}
 
