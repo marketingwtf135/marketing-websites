@@ -106,20 +106,23 @@ function SectorsMock() {
 
 /** 3.0 — встречные шкалы покупки и продажи, под ними две строки-заглушки. */
 function SupplyMock() {
+  // Подписи крупнее и с прописной — как в остальных схемах после правок 2026-08-06.
+  const label = { fontSize: 'clamp(0.75rem, 0.9vw, 0.9375rem)', color: 'var(--white-400)' }
   return (
     <div className="flex flex-col justify-center gap-3 w-full">
-      <div className="flex items-center justify-between" style={{ fontSize: '0.5625rem', color: 'var(--white-400)' }}>
-        <span>покупка</span><span>продажа</span>
+      <div className="flex items-center justify-between" style={label}>
+        <span>Покупка</span><span>Продажа</span>
       </div>
+      {/* Встречная шкала: сторона покупки белая, сторона продажи приглушена */}
       <div className="flex items-center w-full" style={{ gap: 2 }}>
-        <span className="block rounded-l-full" style={{ width: '46%', height: 10, background: 'rgba(255,255,255,0.30)' }} aria-hidden />
-        <span className="block rounded-r-full" style={{ width: '54%', height: 10, background: 'rgba(255,255,255,0.14)' }} aria-hidden />
+        <span className="block rounded-l-full" style={{ width: '46%', height: 18, background: 'rgba(255,255,255,0.92)' }} aria-hidden />
+        <span className="block rounded-r-full" style={{ width: '54%', height: 18, background: 'rgba(255,255,255,0.14)' }} aria-hidden />
       </div>
-      {[['лидер спроса', '38%'], ['крупнейший навес', '30%']].map(([label, w]) => (
-        <div key={label} className="flex items-center justify-between gap-2 w-full"
-          style={{ borderTop: `1px solid ${LINE}`, paddingTop: '0.4rem' }}>
-          <span className="shrink-0" style={{ fontSize: '0.5625rem', color: 'var(--white-400)' }}>{label}</span>
-          <Bar w={w} />
+      {[['Лидер спроса', '38%'], ['Крупнейший навес', '30%']].map(([text, w]) => (
+        <div key={text} className="flex items-center justify-between gap-3 w-full"
+          style={{ borderTop: `1px solid ${LINE}`, paddingTop: '0.5rem' }}>
+          <span className="shrink-0" style={label}>{text}</span>
+          <Bar w={w} h={8} />
         </div>
       ))}
     </div>
