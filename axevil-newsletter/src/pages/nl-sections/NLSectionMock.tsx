@@ -131,21 +131,27 @@ function SupplyMock() {
 
 /** 4.0 — две колонки односторонних заявок. */
 function BalanceMock() {
-  const col = (title: string, tone: string) => (
-    <div className="flex flex-col gap-[0.4rem] flex-1 min-w-0">
-      <span style={{ fontSize: '0.5625rem', color: 'var(--white-400)' }}>{title}</span>
-      {['76%', '58%', '66%'].map((w, i) => (
-        <span key={i} className="flex items-center gap-1.5">
-          <span className="block rounded-full shrink-0" style={{ width: 3, height: 12, background: tone }} aria-hidden />
-          <Bar w={w} />
+  const col = (title: string, tone: string, widths: string[]) => (
+    // justify-between разносит заголовок и три строки по всей высоте плашки: раньше они
+    // собирались посередине, а сверху и снизу оставалась пустота.
+    <div className="flex flex-col justify-between h-full flex-1 min-w-0 gap-3">
+      <span style={{ fontSize: 'clamp(0.75rem, 0.9vw, 0.9375rem)', color: 'var(--white-400)' }}>{title}</span>
+      {widths.map((w, i) => (
+        <span key={i} className="group flex items-center gap-2">
+          <span className="block rounded-full shrink-0" style={{ width: 3, height: 16, background: tone }} aria-hidden />
+          <span
+            className="block rounded-full bg-white/20 transition-colors duration-200 group-hover:bg-white"
+            style={{ width: w, height: 12 }}
+            aria-hidden
+          />
         </span>
       ))}
     </div>
   )
   return (
-    <div className="flex items-center gap-4 w-full">
-      {col('только покупка', 'var(--status-open)')}
-      {col('только продажа', '#e05b5b')}
+    <div className="flex h-full w-full gap-5 px-2 py-4">
+      {col('Только покупка', 'var(--status-open)', ['76%', '58%', '66%'])}
+      {col('Только продажа', '#e05b5b', ['70%', '52%', '62%'])}
     </div>
   )
 }
