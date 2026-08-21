@@ -7,8 +7,6 @@ import NLHero from './nl-sections/NLHero'
 import NLAudience from './nl-sections/NLAudience'
 import NLContents from './nl-sections/NLContents'
 import NLReasons from './nl-sections/NLReasons'
-import NLSteps from './nl-sections/NLSteps'
-import NLFaq from './nl-sections/NLFaq'
 import NLAbout from './nl-sections/NLAbout'
 import NLForm from './nl-sections/NLForm'
 import NLFooter from './nl-sections/NLFooter'
@@ -34,8 +32,10 @@ export default function Newsletter() {
           одной строкой: импорт NLMethodology и <FadeIn><NLMethodology /></FadeIn> здесь,
           плюс пункт «Пример выпуска» в меню и сдвиг нумерации разделов обратно. */}
       <FadeIn><NLReasons /></FadeIn>
-      <FadeIn><NLSteps /></FadeIn>
-      <FadeIn><NLFaq /></FadeIn>
+      {/* «3 шага до первого выпуска» и «Частые вопросы» временно сняты (Татьяна,
+          2026-08-21) — как и «Так выглядит один выпуск» выше. Код обеих секций на месте,
+          вернуть можно импортом NLSteps / NLFaq и строкой здесь; заодно понадобится
+          вернуть пункт «Как это работает» в меню и сдвинуть нумерацию разделов. */}
       <FadeIn><NLAbout /></FadeIn>
       <NLForm />
       <NLFooter />
