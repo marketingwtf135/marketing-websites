@@ -1,6 +1,8 @@
 ﻿import { asset } from '../../lib/asset'
 import { FIGURES } from '../../lib/figures'
 
+const texture = asset('/img/newsletter/bg-texture.webp')
+
 export default function NLAbout() {
   return (
     /*
@@ -43,43 +45,24 @@ export default function NLAbout() {
           </div>
         </div>
 
-        {/* Композиция устройств и показатели — взяты с лендинга Pre-IPO Insider
-            (axevil.com/promo/pdf-report/v1) по просьбе Татьяны (2026-08-21).
+        {/* Блок взят с лендинга Pre-IPO Insider (axevil.com/promo/pdf-report/v1) —
+            Татьяна попросила продублировать его целиком (2026-08-21).
 
-            Было: плоский скриншот интерфейса шириной во весь блок и плитки со статистикой
-            над ним. Стало как на том лендинге — планшет с телефоном внахлёст, показатели
-            под ними.
+            Устройство блока там такое: одна панель с overflow, внутри неё слоями идут
+            градиент, текстура, сами устройства и плашки с показателями. Плашки лежат
+            внутри панели абсолютом снизу, а не под ней — в первой версии я вынесла их
+            наружу, и они уехали далеко вниз.
 
-            Позиции и размеры сняты с эталона, а не подобраны: планшет left 44% / top 8% и
-            ширина clamp(34rem, 55.5vw, 50rem), телефон left 64% / top 22% и
-            clamp(11rem, 18.5vw, 16.6875rem). Пропорция области — 1383×799 оттуда же.
-
-            Картинки скачаны с того же лендинга: в нашей копии проекта их нет, она старше
-            задеплоенной версии. */}
-        <div className="flex flex-col gap-[1.5rem] w-full">
-          {/* Устройства скрыты на телефоне: композиция рассчитана на широкий кадр, на 375
-              планшет с телефоном превращаются в нечитаемую мелочь. */}
-          <div className="relative hidden sm:block w-full" style={{ aspectRatio: '1383 / 799' }} aria-hidden>
-            <img
-              src={asset('/img/newsletter/tablet-ecosystem.webp')}
-              alt=""
-              className="absolute -translate-x-1/2 h-auto"
-              style={{ left: '44%', top: '8%', width: 'clamp(34rem, 55.5vw, 50rem)' }}
-              loading="lazy"
-            />
-            <img
-              src={asset('/img/newsletter/phone-ecosystem.webp')}
-              alt=""
-              className="absolute h-auto"
-              style={{ left: '64%', top: '22%', width: 'clamp(11rem, 18.5vw, 16.6875rem)', zIndex: 2 }}
-              loading="lazy"
-            />
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-[0.5rem] w-full">
+            Все значения сняты с эталона: панель 1383×799 со скруглением 24, градиент
+            и текстура — как в его инлайн-стилях, устройства и плашки — по тем же
+            координатам. Текстура и картинки скачаны оттуда же. */}
+        <div className="flex flex-col gap-[1rem] w-full">
+          {/* Телефон: панель с устройствами не показываем — композиция рассчитана на
+              широкий кадр. Показатели остаются, столбиком. Так же сделано на эталоне. */}
+          <div className="flex flex-col sm:hidden gap-[0.5rem] w-full">
             {FIGURES.map(stat => (
               <div key={stat.value}
-                className="flex flex-col gap-[0.25rem] p-[1rem] rounded-[1.25rem] flex-1"
+                className="flex flex-col gap-[0.25rem] p-[1rem] rounded-[1rem]"
                 style={{ background: 'var(--black-500)' }}>
                 <span className="font-inter-tight font-semibold text-white"
                   style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.25rem)', letterSpacing: '-0.03em', lineHeight: 1.2 }}>
@@ -91,6 +74,55 @@ export default function NLAbout() {
                 </span>
               </div>
             ))}
+          </div>
+
+          <div className="relative hidden sm:block w-full overflow-hidden"
+            style={{ aspectRatio: '1383 / 799', borderRadius: 24 }}>
+
+            {/* Слой 1 — градиент от светлого верха к чёрному низу */}
+            <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden
+              style={{ backgroundImage: 'linear-gradient(rgb(123, 128, 134) 0%, rgb(36, 36, 36) 38.083%, rgb(5, 5, 5) 76.167%), linear-gradient(90deg, rgb(17, 17, 17) 0%, rgb(17, 17, 17) 100%)' }} />
+
+            {/* Слой 2 — зерно поверх градиента, режимом overlay */}
+            <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden
+              style={{
+                backgroundImage: `url(${texture})`,
+                backgroundSize: '64rem 64rem',
+                backgroundPosition: 'left top',
+                mixBlendMode: 'overlay',
+                opacity: 0.35,
+              }} />
+
+            {/* Слой 3 — устройства */}
+            <div className="absolute inset-0 z-[1]" aria-hidden>
+              <img src={asset('/img/newsletter/tablet-ecosystem.webp')} alt=""
+                className="absolute -translate-x-1/2 h-auto"
+                style={{ left: '44%', top: '8%', width: 'clamp(34rem, 55.5vw, 50rem)' }}
+                loading="lazy" />
+              <img src={asset('/img/newsletter/phone-ecosystem.webp')} alt=""
+                className="absolute h-auto"
+                style={{ left: '64%', top: '22%', width: 'clamp(11rem, 18.5vw, 16.6875rem)', zIndex: 2 }}
+                loading="lazy" />
+            </div>
+
+            {/* Слой 4 — показатели внутри панели, прижаты к её низу */}
+            <div className="absolute z-[2] flex gap-[0.5rem]"
+              style={{ left: '2.5rem', right: '2.5rem', bottom: '2.5rem' }}>
+              {FIGURES.map(stat => (
+                <div key={stat.value}
+                  className="flex flex-col gap-[0.25rem] p-[1rem] rounded-[1rem] flex-1 min-w-0"
+                  style={{ background: 'var(--black-500)' }}>
+                  <span className="font-inter-tight font-semibold text-white"
+                    style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.25rem)', letterSpacing: '-0.03em', lineHeight: 1.2 }}>
+                    {stat.value}
+                  </span>
+                  <span className="font-inter-tight font-medium"
+                    style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: 'var(--white-400)', letterSpacing: '-0.02em' }}>
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
