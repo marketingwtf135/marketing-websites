@@ -87,7 +87,11 @@ function SectorsMock() {
     // justify-between растягивает шесть строк на всю высоту плашки: раньше они жались к
     // середине, а сверху и снизу оставалась пустота. px-2 отодвигает подписи от края,
     // py-4 не даёт крайним строкам прилипать к верхней и нижней границе плашки.
-    <div className="flex flex-col justify-between h-full w-full px-2 py-4">
+    // gap-1.5 — минимальный зазор между полосами. justify-between раздаёт только тот
+    // запас, который остался: на телефоне схема сжимается до 140 px, запаса нет, и шесть
+    // полос по 18 px вставали вплотную — читались как одно пятно (Татьяна, 2026-08-21).
+    // На десктопе места больше, и justify-between по-прежнему разносит строки шире зазора.
+    <div className="flex flex-col justify-between gap-1.5 h-full w-full px-2 py-4">
       {rows.map(([name, w]) => (
         <div key={name} className="group flex items-center gap-3 w-full">
           <span className="shrink-0 truncate"
@@ -97,11 +101,18 @@ function SectorsMock() {
             style={{ width: 'clamp(7.5rem, 30%, 13rem)', fontSize: 'clamp(0.75rem, 0.9vw, 0.9375rem)', color: 'var(--white-400)' }}>
             {name}
           </span>
-          <span
-            className="block rounded-full bg-white/20 transition-colors duration-200 group-hover:bg-white"
-            style={{ width: w, height: 18 }}
-            aria-hidden
-          />
+          {/* Дорожка нужна, чтобы проценты считались от свободного места, а не от всей
+              строки. Раньше полоса лежала прямо во flex-строке рядом с подписью, и её
+              ширина в процентах бралась от полной ширины строки: 86% не помещались и
+              полоса ужималась до доступного, 64% почти дотягивались туда же — две верхние
+              строки рисовались одинаковой длины, и распределение читалось неверно. */}
+          <span className="flex-1 min-w-0">
+            <span
+              className="block rounded-full bg-white/20 transition-colors duration-200 group-hover:bg-white"
+              style={{ width: w, height: 18 }}
+              aria-hidden
+            />
+          </span>
         </div>
       ))}
     </div>

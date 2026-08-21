@@ -97,15 +97,22 @@ export default function NLAudience() {
         >
           {CARDS.map((card) => (
             <div key={card.num}
-              className="flex flex-col items-center overflow-hidden rounded-[24px] min-w-0 sm:grid"
+              className="flex flex-col items-center overflow-hidden rounded-[24px] min-w-0 sm:grid sm:justify-items-center sm:items-start sm:content-start"
               style={{
                 background: 'var(--black-300)',
                 paddingTop: 24, paddingBottom: 24, paddingLeft: 20, paddingRight: 20,
                 gap: 12,
                 gridRow: 'span 5', gridTemplateRows: 'subgrid',
-                // alignItems: start — иначе короткий текст центрируется внутри своей строки
-                // сетки, и низ третьей карточки уезжал на 10 px относительно соседей.
-                justifyItems: 'center', alignItems: 'start', alignContent: 'start',
+                // Выравнивание сетки (justify-items / align-items / align-content) вынесено
+                // в классы с префиксом sm: и раньше стояло здесь инлайном. Инлайн не знает
+                // брейкпоинтов и действовал в том числе на телефоне, где карточка — обычный
+                // flex-столбец: там align-items управляет поперечной осью, то есть
+                // горизонталью, и `start` перебивал класс items-center. Всё, что шире
+                // содержимого, спасал свой w-full, а иконка его не имеет — она и уезжала
+                // к левому краю (Татьяна, 2026-08-21).
+                //
+                // Само `items-start` на десктопе нужно: иначе короткий текст центрируется
+                // внутри своей строки сетки, и низ третьей карточки уезжал на 10 px.
               }}
             >
               {/* Number — centered */}
@@ -115,8 +122,11 @@ export default function NLAudience() {
               </p>
 
               {/* Icon */}
-              <img src={card.icon} alt="" loading="lazy" className="shrink-0 block"
-                style={{ width: 'clamp(88px, 8.3vw, 120px)', height: 'clamp(88px, 8.3vw, 120px)', marginBottom: 20 }} />
+              {/* Размер задаётся высотой, ширина считается сама: файлы иконок не квадратные
+                  (248×219, 200×213, 194×211), и прежний жёсткий квадрат сплющивал каждую
+                  по-своему — первую на 13% по ширине, остальные растягивал. */}
+              <img src={card.icon} alt="" loading="lazy" className="shrink-0 block w-auto"
+                style={{ height: 'clamp(88px, 8.3vw, 120px)', marginBottom: 20 }} />
 
               {/* Role → the job it does → how it is delivered */}
                 <h3 className="font-inter-tight font-semibold text-white text-center whitespace-pre-line w-full"
