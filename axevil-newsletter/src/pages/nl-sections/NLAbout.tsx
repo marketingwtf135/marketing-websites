@@ -43,8 +43,39 @@ export default function NLAbout() {
           </div>
         </div>
 
-        {/* Stats + platform screenshot */}
-        <div className="flex flex-col gap-[1rem] w-full">
+        {/* Композиция устройств и показатели — взяты с лендинга Pre-IPO Insider
+            (axevil.com/promo/pdf-report/v1) по просьбе Татьяны (2026-08-21).
+
+            Было: плоский скриншот интерфейса шириной во весь блок и плитки со статистикой
+            над ним. Стало как на том лендинге — планшет с телефоном внахлёст, показатели
+            под ними.
+
+            Позиции и размеры сняты с эталона, а не подобраны: планшет left 44% / top 8% и
+            ширина clamp(34rem, 55.5vw, 50rem), телефон left 64% / top 22% и
+            clamp(11rem, 18.5vw, 16.6875rem). Пропорция области — 1383×799 оттуда же.
+
+            Картинки скачаны с того же лендинга: в нашей копии проекта их нет, она старше
+            задеплоенной версии. */}
+        <div className="flex flex-col gap-[1.5rem] w-full">
+          {/* Устройства скрыты на телефоне: композиция рассчитана на широкий кадр, на 375
+              планшет с телефоном превращаются в нечитаемую мелочь. */}
+          <div className="relative hidden sm:block w-full" style={{ aspectRatio: '1383 / 799' }} aria-hidden>
+            <img
+              src={asset('/img/newsletter/tablet-ecosystem.webp')}
+              alt=""
+              className="absolute -translate-x-1/2 h-auto"
+              style={{ left: '44%', top: '8%', width: 'clamp(34rem, 55.5vw, 50rem)' }}
+              loading="lazy"
+            />
+            <img
+              src={asset('/img/newsletter/phone-ecosystem.webp')}
+              alt=""
+              className="absolute h-auto"
+              style={{ left: '64%', top: '22%', width: 'clamp(11rem, 18.5vw, 16.6875rem)', zIndex: 2 }}
+              loading="lazy"
+            />
+          </div>
+
           <div className="flex flex-col sm:flex-row gap-[0.5rem] w-full">
             {FIGURES.map(stat => (
               <div key={stat.value}
@@ -61,17 +92,6 @@ export default function NLAbout() {
               </div>
             ))}
           </div>
-
-          {/* Platform screenshot — hidden on mobile */}
-          <img
-            src={asset('/img/newsletter/newsletter-interface-big.png')}
-            alt="Axevil Capital — интерфейс платформы"
-            className="hidden sm:block w-full rounded-[1.5rem]"
-            loading="lazy"
-            width={1180}
-            height={603}
-            style={{ maxWidth: '100%' }}
-          />
         </div>
       </div>
     </section>
