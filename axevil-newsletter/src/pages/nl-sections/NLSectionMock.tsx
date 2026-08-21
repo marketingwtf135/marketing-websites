@@ -159,19 +159,24 @@ function BalanceMock() {
 /** 5.0 — строки новостей: кружок вместо логотипа, заглушка и тег категории. */
 function NewsMock() {
   const rows: [string, string][] = [
-    ['58%', 'выручка'],
-    ['46%', 'раунд'],
-    ['62%', 'M&A'],
-    ['40%', 'лицензия'],
+    ['72%', 'выручка'],
+    ['58%', 'раунд'],
+    ['76%', 'M&A'],
+    ['52%', 'лицензия'],
   ]
   return (
-    <div className="flex flex-col justify-center gap-[0.45rem] w-full">
+    <div className="flex flex-col justify-center gap-[0.7rem] w-full px-2 py-2">
       {rows.map(([w, tag]) => (
-        <div key={tag} className="flex items-center gap-2.5 w-full">
-          <span className="block rounded-full shrink-0" style={{ width: 16, height: 16, background: 'rgba(255,255,255,0.13)' }} aria-hidden />
-          <Bar w={w} />
+        <div key={tag} className="flex items-center gap-3 w-full">
+          <span className="block rounded-full shrink-0" style={{ width: 22, height: 22, background: 'rgba(255,255,255,0.13)' }} aria-hidden />
+          <Bar w={w} h={10} />
           <span className="ml-auto shrink-0 rounded-full whitespace-nowrap"
-            style={{ fontSize: '0.5625rem', color: 'var(--white-300)', background: 'rgba(255,255,255,0.06)', padding: '0.15rem 0.5rem' }}>
+            style={{
+              fontSize: 'clamp(0.6875rem, 0.8vw, 0.8125rem)',
+              color: 'var(--white-300)',
+              background: 'rgba(255,255,255,0.06)',
+              padding: '0.2rem 0.6rem',
+            }}>
             {tag}
           </span>
         </div>
