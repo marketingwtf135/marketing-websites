@@ -3,22 +3,32 @@ import { scrollToNLForm } from './NLNav'
 import OwnButton from './OwnButton'
 
 /**
- * Three reasons, stated as what the reader gets — not as what the product contains.
+ * Три причины подписаться — что читатель получает, а не что лежит внутри продукта.
  *
- * The cards used to describe the digest ("события которые меняют картину рынка",
- * "готовый брифинг") instead of the benefit (client feedback 2026-07-23: "заменить на
- * выгоды"). Titles are the client's three lines verbatim; the stat box under each keeps
- * the number → source discipline the section promises.
+ * Тексты от Павла через Татьяну (2026-08-21). Прежние формулировки были из ТЗ и описывали
+ * пользу вообще; новые говорят про источник данных, полноту картины и динамику.
  *
- * Источник у первой карточки — из ТЗ (Блок 5.2, «Опрос Axevil 147 WM, май 2026»); Павел
- * подтвердил добавление источников 2026-08-04. У второй и третьей источника нет ни в ТЗ,
- * ни где-либо ещё: откуда «200+ компаний в покрытии» и чем подтверждается «первым узнаёте
- * о сделках» — спрошено, до ответа подписи оставлены описательными.
+ * Плашки с цифрой и источником под каждым описанием убраны той же правкой. Заодно закрылся
+ * давний вопрос: источник был только у первой карточки («Опрос Axevil, 147 WM, май 2026»),
+ * для двух других его не существовало ни в ТЗ, ни где-либо ещё, а подзаголовок обещал
+ * формулу «польза → цифра → источник», которую блок не держал.
  */
 const CARDS = [
-  { num: '1.0', title: 'Экономит 3 часа\nмониторинга в неделю', body: 'Переоценки, тендер-оферы, рейтинги secondary и новые раунды уже собраны и разобраны. 5 минут чтения вместо вечера в источниках.', statBig: '~3 часа / неделю', statSub: 'Опрос Axevil, 147 WM, май 2026' },
-  { num: '2.0', title: 'Аргументы для\nклиентских разговоров', body: 'Цифры и сделки недели, на которые можно сослаться в звонке: что изменилось, у кого, на сколько и почему это важно клиенту.', statBig: '200+ компаний', statSub: 'в систематическом покрытии · weekly update' },
-  { num: '3.0', title: 'Первым узнаёте\nо сделках Axevil', body: 'Новые аллокации и открывшиеся окна входа анонсируются подписчикам рассылки раньше, чем где-либо ещё.', statBig: 'До публичного анонса', statSub: 'подписчики видят сделки первыми' },
+  {
+    num: '1.0',
+    title: 'Данные, а не пересказ новостей',
+    body: 'Основа выпуска — поток заявок на покупку и продажу, который проходит через вторичные рынки. Объёмы, стороны сделок и имена в таком срезе не публикуются в открытых источниках.',
+  },
+  {
+    num: '2.0',
+    title: 'Весь частный рынок в одном документе',
+    body: 'Индекс, распределение заявок по секторам, вторичный рынок, новости и раунды — в одном письме. Вместо ленты источников и десятка вкладок.',
+  },
+  {
+    num: '3.0',
+    title: 'Динамика от недели к неделе',
+    body: '200+ компаний в покрытии. Динамику видно не в одной точке, а в тренде: где интерес нарастает, а где разворачивается.',
+  },
 ]
 
 export default function NLReasons() {
@@ -41,11 +51,7 @@ export default function NLReasons() {
           </div>
           <p className="font-inter-tight font-medium text-center"
             style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.02em', maxWidth: 570 }}>
-            {/* Было «Только польза → цифра → источник». Источник есть у одной карточки из
-                трёх — для двух других его не существует ни в ТЗ, ни где-либо ещё, и решено
-                не выдумывать. Подзаголовок обещал формулу, которую блок не держит, поэтому
-                обещание источника снято; запрет на обещания доходностей оставлен. */}
-            Без обещаний доходностей. Только конкретная польза и цифры.
+            Не обзор новостей: агрегированные рыночные данные и внутренняя аналитика платформы.
           </p>
         </div>
 
@@ -64,8 +70,7 @@ export default function NLReasons() {
                 </p>
 
                 {/* Content */}
-                <div className="flex flex-col items-start justify-between flex-1 gap-4">
-                  <div className="flex flex-col gap-2 items-start">
+                <div className="flex flex-col items-start flex-1 gap-2">
                     <h3 className="font-inter-tight font-semibold text-white whitespace-pre-line"
                       style={{ fontSize: 'clamp(1.25rem, 1.4vw, 1.5rem)', lineHeight: 1.1, letterSpacing: '-0.02em', width: '100%' }}>
                       {card.title}
@@ -74,20 +79,6 @@ export default function NLReasons() {
                       style={{ fontSize: 'clamp(0.875rem, 0.97vw, 1.125rem)', lineHeight: 1.35, color: 'var(--white-300)', letterSpacing: '-0.02em', width: '100%' }}>
                       {card.body}
                     </p>
-                  </div>
-
-                  {/* Stat box — mobile: p-[16px] */}
-                  <div className="flex flex-col gap-2 items-start p-4 rounded-2xl w-full shrink-0"
-                    style={{ background: 'var(--black-600)' }}>
-                    <p className="font-inter-tight font-semibold text-white whitespace-nowrap"
-                      style={{ fontSize: 'clamp(1rem, 1.25vw, 1.25rem)', lineHeight: 1.3, letterSpacing: '-0.02em' }}>
-                      {card.statBig}
-                    </p>
-                    <p className="font-inter-tight font-medium whitespace-nowrap"
-                      style={{ fontSize: 'clamp(12px, 0.97vw, 14px)', lineHeight: 1.3, color: 'var(--white-400)' }}>
-                      {card.statSub}
-                    </p>
-                  </div>
                 </div>
               </div>
             ))}

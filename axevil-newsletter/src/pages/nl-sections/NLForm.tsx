@@ -76,7 +76,7 @@ export default function NLForm() {
             </h2>
             <p className="font-inter-tight font-medium"
               style={{ fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)", lineHeight: 1.35, color: "rgba(255,255,255,0.5)", letterSpacing: "-0.36px", maxWidth: "31.25rem" }}>
-              Свежий выпуск — в почте после подписки
+              Свежий выпуск — в почте после подписки
             </p>
           </div>
 
@@ -102,7 +102,7 @@ export default function NLForm() {
         <NLLeadForm
           source="final"
           maxWidth="34rem"
-          note="Отписаться — одной кнопкой в любом письме. Подписываясь, соглашаетесь с обработкой данных"
+          note="Отписаться — одной кнопкой в любом письме. Подписываясь, соглашаетесь с обработкой данных"
         />
       </motion.div>
     </section>
