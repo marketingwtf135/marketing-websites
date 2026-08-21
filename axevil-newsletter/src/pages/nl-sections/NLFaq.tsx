@@ -72,7 +72,7 @@ export default function NLFaq() {
           <div className="flex flex-col gap-4 sm:gap-8 items-center">
             <div className="flex gap-2 font-inter-tight font-medium items-center justify-center whitespace-nowrap"
               style={{ fontSize: 'clamp(14px, 1.1vw, 18px)', lineHeight: 1.35, letterSpacing: '-0.02em' }}>
-              <span style={{ color: 'var(--black-800)' }}>6.0</span>
+              <span style={{ color: 'var(--black-800)' }}>5.0</span>
               <span style={{ color: 'var(--black-900)' }}>Вопросы и ответы</span>
             </div>
             <h2 className="font-inter-tight font-semibold text-transparent bg-clip-text text-center"

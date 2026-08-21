@@ -28,7 +28,7 @@ export default function NLAbout() {
         <div className="flex flex-col gap-[1.5rem] items-center">
           <div className="flex gap-[0.5rem] font-inter-tight font-medium items-center justify-center whitespace-nowrap"
             style={{ fontSize: 'clamp(0.875rem, 1.1vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.36px' }}>
-            <span style={{ color: 'var(--black-800)' }}>7.0</span>
+            <span style={{ color: 'var(--black-800)' }}>6.0</span>
             <span style={{ color: 'var(--black-900)' }}>О платформе</span>
           </div>
           <div className="flex flex-col gap-[1rem] items-center">

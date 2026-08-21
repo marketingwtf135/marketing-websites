@@ -6,7 +6,6 @@ import NLNav from './nl-sections/NLNav'
 import NLHero from './nl-sections/NLHero'
 import NLAudience from './nl-sections/NLAudience'
 import NLContents from './nl-sections/NLContents'
-import NLMethodology from './nl-sections/NLMethodology'
 import NLReasons from './nl-sections/NLReasons'
 import NLSteps from './nl-sections/NLSteps'
 import NLFaq from './nl-sections/NLFaq'
@@ -30,7 +29,10 @@ export default function Newsletter() {
       <NLHero />
       <FadeIn><NLAudience /></FadeIn>
       <FadeIn><NLContents /></FadeIn>
-      <FadeIn><NLMethodology /></FadeIn>
+      {/* Блок «Так выглядит один выпуск» временно снят со страницы (Татьяна, 2026-08-21).
+          Код секции, компонент планшета и его рамка оставлены в проекте — вернуть можно
+          одной строкой: импорт NLMethodology и <FadeIn><NLMethodology /></FadeIn> здесь,
+          плюс пункт «Пример выпуска» в меню и сдвиг нумерации разделов обратно. */}
       <FadeIn><NLReasons /></FadeIn>
       <FadeIn><NLSteps /></FadeIn>
       <FadeIn><NLFaq /></FadeIn>

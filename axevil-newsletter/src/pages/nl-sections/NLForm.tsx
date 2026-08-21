@@ -189,7 +189,7 @@ export default function NLForm() {
         <div className="flex flex-col gap-[1rem] items-center justify-center w-full max-w-[600px] mb-10">
           <div className="flex gap-2 font-inter-tight font-medium items-center justify-center whitespace-nowrap"
             style={{ fontSize: 'clamp(0.875rem, 1.25vw, 1.125rem)', lineHeight: 1.35, letterSpacing: '-0.36px' }}>
-            <span style={{ color: 'var(--black-800)' }}>8.0</span>
+            <span style={{ color: 'var(--black-800)' }}>7.0</span>
             <span style={{ color: 'var(--black-900)' }}>Подписка на дайджест</span>
           </div>
           <div className="flex flex-col gap-4 items-center text-center">
