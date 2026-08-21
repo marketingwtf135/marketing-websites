@@ -12,7 +12,11 @@
 type Variant = 'index' | 'sectors' | 'supply' | 'balance' | 'news'
 
 const LINE = 'rgba(255,255,255,0.07)'
-const SKELETON = 'rgba(255,255,255,0.10)'
+/** Единый серый для всех заглушек: столбиков, строк и кружков во всех пяти схемах.
+ *  Раньше их было четыре разных (0.10, 0.13, 0.14, 0.20), и схемы выглядели пёстро.
+ *  Значение совпадает с классом bg-white/20, который нужен в схемах с наведением —
+ *  через inline-стиль group-hover не работает, поэтому там цвет задан классом. */
+const SKELETON = 'rgba(255,255,255,0.20)'
 
 /** Прямоугольник-заглушка вместо текста, который в письме будет настоящим. */
 function Bar({ w, h = 6, tone = SKELETON }: { w: string; h?: number; tone?: string }) {
@@ -116,7 +120,7 @@ function SupplyMock() {
       {/* Встречная шкала: сторона покупки белая, сторона продажи приглушена */}
       <div className="flex items-center w-full" style={{ gap: 2 }}>
         <span className="block rounded-l-full" style={{ width: '46%', height: 18, background: 'rgba(255,255,255,0.92)' }} aria-hidden />
-        <span className="block rounded-r-full" style={{ width: '54%', height: 18, background: 'rgba(255,255,255,0.14)' }} aria-hidden />
+        <span className="block rounded-r-full" style={{ width: '54%', height: 18, background: SKELETON }} aria-hidden />
       </div>
       {[['Лидер спроса', '38%'], ['Крупнейший навес', '30%']].map(([text, w]) => (
         <div key={text} className="flex items-center justify-between gap-3 w-full"
@@ -168,7 +172,7 @@ function NewsMock() {
     <div className="flex flex-col justify-center gap-[0.7rem] w-full px-2 py-2">
       {rows.map(([w, tag]) => (
         <div key={tag} className="flex items-center gap-3 w-full">
-          <span className="block rounded-full shrink-0" style={{ width: 22, height: 22, background: 'rgba(255,255,255,0.13)' }} aria-hidden />
+          <span className="block rounded-full shrink-0" style={{ width: 22, height: 22, background: SKELETON }} aria-hidden />
           <Bar w={w} h={10} />
           <span className="ml-auto shrink-0 rounded-full whitespace-nowrap"
             style={{
