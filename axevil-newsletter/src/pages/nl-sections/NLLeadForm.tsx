@@ -22,7 +22,7 @@ interface NLLeadFormProps {
   /** Submit label. */
   label?: string
   /** Reassurance under the fields. Pass null to drop it. */
-  note?: string | null
+  note?: React.ReactNode
   /** Centre the note and cap the width (hero) vs. left-aligned in a column (preview). */
   align?: 'center' | 'left'
   /** Предел ширины формы. В hero шире, чтобы подсказка «Телефон (необязательно)»
@@ -183,7 +183,9 @@ export default function NLLeadForm({
       {note && (
         <p className="font-inter-tight font-medium"
           style={{
-            fontSize: 'var(--font-xs)', lineHeight: 1.3, color: 'var(--white-400)',
+            // Белый, а не приглушённый серый: подпись стоит на светлеющем книзу фоне
+            // блока подписки и на --white-400 сливалась с ним.
+            fontSize: 'var(--font-xs)', lineHeight: 1.4, color: 'var(--white-100)',
             textAlign: align === 'center' ? 'center' : 'left',
           }}>
           {note}
